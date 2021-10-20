@@ -129,10 +129,12 @@ document.querySelector("#timeCase")
         // these will be kept short term for testing
       case event.key == "ArrowUp":
         el_disp.innerHTML = event.key;
+        setTimeout(function () {  document.activeElement.select(); }, 10);
         break;
 
       case event.key == "ArrowDown":
         el_disp.innerHTML = event.key;
+        setTimeout(function () { document.activeElement.select(); }, 10);
         break;
 
       case /^([0-9]?)$/.test(event.key):
@@ -232,8 +234,8 @@ setInputFilter(document.getElementById("sMS"), function(value) {
 
 // for setting selection
 
-document.querySelector("#sH").addEventListener("focus", function() { this.select(); });
-document.querySelector("#sM").addEventListener("focus", function() { this.select(); });
-document.querySelector("#sS").addEventListener("focus", function() { this.select(); });
-document.querySelector("#sMS").addEventListener("focus", function() { this.select(); });
+document.querySelector("#sH").addEventListener("click", function() { this.select(); });
+document.querySelector("#sM").addEventListener("click", function() { this.select(); });
+document.querySelector("#sS").addEventListener("click", function() { this.select(); });
+document.querySelector("#sMS").addEventListener("click", function() { this.select(); });
  
