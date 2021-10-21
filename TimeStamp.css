@@ -1,7 +1,13 @@
 /* https://stackoverflow.com/questions/9333044/how-to-hide-blinking-cursor-in-input-text */
 
-input{
+
+#timeCase {
+  width: 250px;
+  
+}
+#timeCase input{
   caret-color: transparent;
+ width: 5%;
 }
 
 
@@ -17,3 +23,21 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+
+/*https://stackoverflow.com/questions/3397113/how-to-remove-focus-border-outline-around-text-input-boxes-chrome*/
+
+#timeCase *:focus {
+    outline: none;
+}
+input{
+  border:none;
+}
+
+input[type="number"], textarea {
+
+  background-color : #ACCEF7; 
+
+}
+
+::-moz-selection { color: white;  background: #ACCEF7; }
+::selection      { color: white;  background: #ACCEF7; } 
