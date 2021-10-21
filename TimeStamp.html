@@ -9,14 +9,54 @@
 
     </div>
   </div>
+  <br>
+  <br>
   <form id="timeCase">
-    <div>
+    <div id="border">
       <input type="number" name="startHours" id="sH" data-tp="1" min="-1" max="100" placeholder="HH">:
       <input type="number" name="startMinutes" id="sM" data-tp="2" min="-1" max="60" placeholder="MM">:
       <input type="number" name="startSeconds" id="sS" data-tp="3" min="-1" max="60" placeholder="SS">.
       <input type="number" name="startMilliSecs" id="sMS" data-tp="4" min="-10" max="1010" step="10" placeholder="mmm">
+      <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" data-prefix="far" data-icon="clock" class="svg-inline--fa fa-clock fa-w-16" role="img" viewBox="0 0 10000 10000"><path fill="currentColor" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"/></svg>
       <p>
-        note that up and down arrows cannot 0 millisecs: now it can but it's fiddly only gets to 0 with down arrow!!
+        <div>
+          <ul>
+            <div>
+
+              The timepoint is:
+              <div id="timePoint">00:00:00.000</div>
+
+              <div>
+                The event.key is: <div id="keyHolder">
+
+                </div>
+              </div>
+
+            </div>
+            <br>
+            <br>
+            <h2>
+            Style:
+            </h2>
+            <ul>
+            <li>
+              border around timeCase when any of the input number s are active
+            </li>
+            <li>
+              clock icon (inactive)
+            </li>
+            <li>
+              'selection' style on active specific for each input 
+            </li>
+            </ul>
+            <h2>
+              Wrap Up:
+            </h2>
+            <ul>
+              <li>some buggy behaviour, may be jsfiddle so move manual *haphazard* testing to gitpod</li>
+              <li>benefits over time input: takes pasted values</li>
+            </ul>
+            note that up and down arrows cannot 0 millisecs: now it can but it's fiddly only gets to 0 with down arrow!!
       </p>
       <p>
         number entry is next, then maybe remove up and down arrows and add a clock logo with dropdown.
@@ -25,75 +65,61 @@
     </div>
   </form>
 </div>
-<div>
-  <ul>
-    <div>
 
-      The timepoint is:
-      <div id="timePoint">00:00:00.000</div>
-      <div>
-        The event.key is: <div id="keyHolder">
+<br>
 
-        </div>
-      </div>
+<li>
+  https://stackoverflow.com/a/2896642/2455159 switch true case regex 1)arrow direction 2) number https://keycode.info/ event.key = number
+</li>
+</ul>
 
-    </div>
-    <br>
-    <br>
-    <br>
+<input id="${this.id}_timeEnd" type="time" class="plyr__controls__item plyr__control" step="0.01" value="00:00:00.000">
 
-    <li>
-      https://stackoverflow.com/a/2896642/2455159 switch true case regex 1)arrow direction 2) number https://keycode.info/ event.key = number
-    </li>
-  </ul>
+<p>
+  Maybe try a 3x minutes or 3x hour strategy: NO doesn't work:
+</p>
+<input id="timeEnd" type="time" class="plyr__controls__item plyr__control" step="" value="">
+<input type='time' step="3600">
+<p>
+  Problem is with iOS, osx safari and Chrome, so dev of the control is worthwhile.
+  The role of WSWG will be that browsers don't 'crash it out', somehow mis-handle the input, ex treating it like a time input.
+</p>
+<p>
+  User message: This works better with Chrome browser, if using Safari your browser has changed the input type. You can continue with HH:MM:SS.mmm format
+</p>
 
-  <input id="${this.id}_timeEnd" type="time" class="plyr__controls__item plyr__control" step="0.01" value="00:00:00.000">
+<h3>
+  Starter Number input with filter nothing-99:
 
-  <p>
-    Maybe try a 3x minutes or 3x hour strategy: NO doesn't work:
-  </p>
-  <input id="timeEnd" type="time" class="plyr__controls__item plyr__control" step="" value="">
-  <input type='time' step="3600">
-  <p>
-    Problem is with iOS, osx safari and Chrome, so dev of the control is worthwhile.
-    The role of WSWG will be that browsers don't 'crash it out', somehow mis-handle the input, ex treating it like a time input.
-  </p>
-  <p>
-    User message: This works better with Chrome browser, if using Safari your browser has changed the input type. You can continue with HH:MM:SS.mmm format
-  </p>
+</h3>
+<input type="number" name="startHours" id="starter" min="0" max="99" placeholder="HH">
+<br>
+<br>
+<h3>
+  Will need to add validation start with mdn
 
-  <h3>
-    Starter Number input with filter nothing-99:
-
-  </h3>
-  <input type="number" name="startHours" id="starter" min="0" max="99" placeholder="HH">
-  <br>
-  <br>
-  <h3>
-    Will need to add validation start with mdn
-
-  </h3>
-  <h4>
-    Features missing:
-  </h4>
-  <ul>
-    <li>focus on next input after two digits</li>
-    <li>leading 0 and focus on next input for values 6-9</li>
-    <li>use a 66666666666 functional test</li>
-  </ul>
-  <p>
-    List 2: Think something like this will help https://stackoverflow.com/questions/5597060/detecting-arrow-key-presses-in-javascript
-  </p>
-  <ul>
-    <li>update to input number from input text re setSelectionRange</li>
-    <li>After all 6s, selction of box and typing a single number should result in 0#, ex. clear previous value</li>
-    <li>left and right arrows should swith boxes</li>
-    <li>up and down arrows should change value without causing auto box switch</li>
-    <li>probably easiest if update to 5 different setInputFilters keyup etc, then four arrow directions</li>
-    <li>test on ios and osx</li>
-    <li>this may help with the dropdowns: https://dev.to/epavanello/input-type-time-polyfill-for-ie-safari-etc-4ka1</li>
-    <li> or pass e into existing fuctions see https://developer.mozilla.org/en-US/docs/Web/API/Document/keyup_event</li>
-  </ul>
+</h3>
+<h4>
+  Features missing:
+</h4>
+<ul>
+  <li>focus on next input after two digits</li>
+  <li>leading 0 and focus on next input for values 6-9</li>
+  <li>use a 66666666666 functional test</li>
+</ul>
+<p>
+  List 2: Think something like this will help https://stackoverflow.com/questions/5597060/detecting-arrow-key-presses-in-javascript
+</p>
+<ul>
+  <li>update to input number from input text re setSelectionRange</li>
+  <li>After all 6s, selction of box and typing a single number should result in 0#, ex. clear previous value</li>
+  <li>left and right arrows should swith boxes</li>
+  <li>up and down arrows should change value without causing auto box switch</li>
+  <li>probably easiest if update to 5 different setInputFilters keyup etc, then four arrow directions</li>
+  <li>test on ios and osx</li>
+  <li>this may help with the dropdowns: https://dev.to/epavanello/input-type-time-polyfill-for-ie-safari-etc-4ka1</li>
+  <li> or pass e into existing fuctions see https://developer.mozilla.org/en-US/docs/Web/API/Document/keyup_event</li>
+</ul>
 
 
 
