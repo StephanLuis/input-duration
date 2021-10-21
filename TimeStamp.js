@@ -178,6 +178,8 @@ setInputFilter(document.getElementById("sH"), function(value) {
 
   if (value.length === 2) {
     document.getElementById("sM").focus();
+    
+    // document.getElementById("sM").select()
   }
 
   return newV;
@@ -188,7 +190,7 @@ setInputFilter(document.getElementById("sH"), function(value) {
 setInputFilter(document.getElementById("sM"), function(value) {
 
 
-  var newV = /^([0-9]?|[1-5][0-9]?)$/.test(value);
+  var newV = /^([0-9]?|[0-5][0-9]?)$/.test(value);
 
   console.log("value: " + value);
 
@@ -203,7 +205,7 @@ setInputFilter(document.getElementById("sM"), function(value) {
 setInputFilter(document.getElementById("sS"), function(value) {
 
   
-  var newV = /^([0-9]?|[1-5][0-9]?)$/.test(value);
+  var newV = /^([0-9]?|[0-5][0-9]?)$/.test(value);
 
   console.log("value: " + value);
 
