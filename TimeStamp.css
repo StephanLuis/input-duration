@@ -10,6 +10,32 @@
  width: 5%;
 }
 
+#border{
+  display: inline-flex;
+  flex-direction: row;
+  max-width: 300px;
+  padding: 10px;
+  margin: 20px;
+  background-color: blue;
+}
+
+#border .D2, #border .D3 {
+ 
+  height: 17px;
+  background-color: red;
+  margin: 2px;
+}
+
+#border .D2 {
+  width: 23px;
+}
+
+#border .D3{
+  width: 35px;
+}
+
+
+
 
 /*https://www.w3schools.com/howto/howto_css_hide_arrow_number.asp*/
 /* Chrome, Safari, Edge, Opera */

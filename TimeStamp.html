@@ -1,180 +1,243 @@
-<h2 id="S">
-  Stephan's
-</h2>
+<!DOCTYPE html>
+<html lang="en">
 
-<div>
-  <input id="timeEnd" type="time" class="plyr__controls__item plyr__control" step="0.01" value="00:00:00.000" onchange="myFunction()">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="TimeStamp.css">
+</head>
+
+<body>
+  <h1 id="S">
+    Time Point/ TimeStamp Control!
+  </h1>
+  <br>
+  <br>
+  <h2>Original</h2>
   <div>
-    The value of the input type='time' is: <div id='itv'>
+    <input id="timeEnd" type="time" class="plyr__controls__item plyr__control" step="0.01" value="00:00:00.000"
+      onchange="myFunction()">
+    <div>
+      The value of the input type='time' is: <div id='itv'>
 
+      </div>
     </div>
-  </div>
-  <br>
-  <br>
-  <form id="timeCase">
-    <div id="border">
-      <input type="number" name="startHours" id="sH" data-tp="1" min="-1" max="100" placeholder="HH">:
-      <input type="number" name="startMinutes" id="sM" data-tp="2" min="-1" max="60" placeholder="MM">:
-      <input type="number" name="startSeconds" id="sS" data-tp="3" min="-1" max="60" placeholder="SS">.
-      <input type="number" name="startMilliSecs" id="sMS" data-tp="4" min="-10" max="1010" step="10" placeholder="mmm">
-      <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" data-prefix="far" data-icon="clock" class="svg-inline--fa fa-clock fa-w-16" role="img" viewBox="0 0 10000 10000"><path fill="currentColor" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"/></svg>
-      <p>
+    <br>
+    <br>
+    <h2>Polyfill</h2>
+    <form id="timeCase">
+      <div id="border">
+        <input type="number" class="D2" name="startHours" id="sH" data-tp="1" min="-1" max="100" placeholder="HH">:
+        <input type="number" class="D2" name="startMinutes" id="sM" data-tp="2" min="-1" max="60" placeholder="MM">:
+        <input type="number" class="D2" name="startSeconds" id="sS" data-tp="3" min="-1" max="60" placeholder="SS">.
+        <input type="number" class="D3" name="startMilliSecs" id="sMS" data-tp="4" min="-10" max="1010" step="10"
+          placeholder="mmm">
+        <svg xmlns="http://www.w3.org/2000/svg" width="25px" height="25px" version="1.1" viewBox="0 0 5 5">
+          <g transform="translate(-.0051364 .025687)">
+            <path d="m2.4353 1.0694v1.2033" style="fill:none;stroke-linecap:round;stroke-width:.3;stroke:#000" />
+            <path d="m2.0637 2.8142-0.53327 0.25828"
+              style="fill:none;stroke-linecap:round;stroke-width:.3;stroke:#000" />
+            <g transform="matrix(.069476 0 0 .075702 -3.4905 -1.9619)" style="stroke-width:15.168">
+              <g style="stroke-width:15.168" />
+            </g>
+            <path d="m3.8158 3.1738h0.86415" style="fill:none;stroke-linecap:round;stroke-width:.6;stroke:#000" />
+            <path
+              d="m1.0016 0.4062-0.07884 0.066075c0.09681 0.13278 0.19366 0.2656 0.29052 0.3984l0.078701-0.066225c-0.096858-0.13279-0.19358-0.26547-0.29039-0.39825zm-0.84758 1.2154-0.02749 0.10323c0.15101 0.046326 0.30203 0.092592 0.45309 0.13889l0.027489-0.10323c-0.15105-0.046298-0.30209-0.092569-0.45309-0.13889zm0.42239 1.3446c-0.14755 0.057876-0.2951 0.11568-0.44263 0.1735l0.034188 0.10099c0.14753-0.057829 0.29507-0.11577 0.44263-0.17365zm2.8497 0.99143-0.078701 0.066225c0.096858 0.13279 0.19358 0.26562 0.29039 0.3984l0.07884-0.066225c-0.09681-0.13279-0.19366-0.2656-0.29052-0.3984zm-2.2147 0.00344c-0.087685 0.13995-0.17534 0.27979-0.26304 0.41968l0.082888 0.060082c0.087698-0.13989 0.17549-0.27987 0.26318-0.41982zm1.1585 0.40005-0.10005 0.00389c0.00566 0.16856 0.011394 0.33716 0.017024 0.50568l0.099911-0.00389c-0.00563-0.16852-0.011213-0.33711-0.016884-0.50567z"
+              style="color-rendering:auto;color:#000000;dominant-baseline:auto;font-feature-settings:normal;font-variant-alternates:normal;font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal;font-variant-position:normal;font-variation-settings:normal;image-rendering:auto;inline-size:0;isolation:auto;mix-blend-mode:normal;shape-margin:0;shape-padding:0;shape-rendering:auto;solid-color:#000000;stop-color:#000000;stroke-linecap:round;stroke-miterlimit:5.1;stroke-width:.2;stroke:#000;text-decoration-color:#000000;text-decoration-line:none;text-decoration-style:solid;text-indent:0;text-orientation:mixed;text-transform:none;white-space:normal" />
+            <path
+              d="m4.6548 2.2406a0.41707 0.41707 0 0 1-0.43002 0.34141 0.41707 0.41707 0 0 1-0.39573-0.38062 0.41707 0.41707 0 0 1 0.32442-0.44298 0.41707 0.41707 0 0 1 0.4823 0.26241"
+              style="fill:none;stroke-linecap:square;stroke-linejoin:bevel;stroke-width:.3;stroke:#000" />
+            <path
+              d="m2.6913 2.7176a0.28343 0.2793 0 0 1-0.34474 0.18142 0.28343 0.2793 0 0 1-0.20089-0.33035 0.28343 0.2793 0 0 1 0.32491-0.21402 0.28343 0.2793 0 0 1 0.23296 0.30923"
+              style="fill:none;stroke-linecap:square;stroke-linejoin:bevel;stroke-width:.2;stroke:#000" />
+            <path transform="matrix(-.94894 -.31547 .31316 -.9497 0 0)"
+              d="m-1.8757 0.26095a1.6901 1.3142 0 0 1-1.4282 0.30523 1.6901 1.3142 0 0 1-1.189-0.68684"
+              style="fill:none;stroke-linecap:square;stroke-linejoin:bevel;stroke-width:.6;stroke:#000" />
+          </g>
+        </svg>
+      </div>
+    </form>
+    <p>
+    <div>
+      <ul>
         <div>
-          <ul>
-            <div>
 
-              The timepoint is:
-              <div id="timePoint">00:00:00.000</div>
+          The timepoint is:
+          <div id="timePoint">00:00:00.000</div>
 
-              <div>
-                The event.key is: <div id="keyHolder">
-
-                </div>
-              </div>
+          <div>
+            The event.key is: <div id="keyHolder">
 
             </div>
-            <br>
-            <br>
-            <h2>
-            Style:
-            </h2>
-            <ul>
-            <li>
-              border around timeCase when any of the input number s are active
-            </li>
-            <li>
-              clock icon (inactive)
-            </li>
-            <li>
-              'selection' style on active specific for each input 
-            </li>
-            </ul>
-            <h2>
-              Wrap Up:
-            </h2>
-            <ul>
-              <li>some buggy behaviour, may be jsfiddle so move manual *haphazard* testing to gitpod</li>
-              <li>benefits over time input: takes pasted values</li>
-            </ul>
-            note that up and down arrows cannot 0 millisecs: now it can but it's fiddly only gets to 0 with down arrow!!
-      </p>
-      <p>
-        number entry is next, then maybe remove up and down arrows and add a clock logo with dropdown.
-      </p>
-      <span class="validity"></span>
+          </div>
+
+        </div>
+        <br>
+        <br>
+        <h2>
+          Style:
+        </h2>
+        <ul>
+          <li>font for HH MM etc is too big, the numbers (correct size) are smaller</li>
+          <li>
+            border around timeCase when any of the input number s are active
+          </li>
+          <li>
+            clock icon (inactive)
+          </li>
+          <li>
+            'selection' style on active specific for each input
+          </li>
+        </ul>
+        <h2>Bugs!:</h2>
+        <ul>
+          <li>
+            in H, M, and seconds container, up arrow from 59 goes to 0 not 00. Arrow down from 1 is fine.
+          </li>
+        </ul>
+        <h2>
+          Wrap Up:
+        </h2>
+        <ul>
+          <li>some buggy behaviour, may be jsfiddle so move manual *haphazard* testing to gitpod</li>
+          <li>benefits over time input: takes pasted values</li>
+        </ul>
+        note that up and down arrows cannot 0 millisecs: now it can but it's fiddly only gets to 0 with down arrow!!
+        </p>
+        <p>
+          number entry is next, then maybe remove up and down arrows and add a clock logo with dropdown.
+        </p>
+        <span class="validity"></span>
+
     </div>
+
+    <br>
+
+    <li>
+      https://stackoverflow.com/a/2896642/2455159 switch true case regex 1)arrow direction 2) number
+      https://keycode.info/
+      event.key = number
+    </li>
+    </ul>
+
+    <input id="${this.id}_timeEnd" type="time" class="plyr__controls__item plyr__control" step="0.01"
+      value="00:00:00.000">
+
+    <p>
+      Maybe try a 3x minutes or 3x hour strategy: NO doesn't work:
+    </p>
+    <input id="timeEnd" type="time" class="plyr__controls__item plyr__control" step="" value="">
+    <input type='time' step="3600">
+    <p>
+      Problem is with iOS, osx safari and Chrome, so dev of the control is worthwhile.
+      The role of WSWG will be that browsers don't 'crash it out', somehow mis-handle the input, ex treating it like a
+      time input.
+    </p>
+    <p>
+      User message: This works better with Chrome browser, if using Safari your browser has changed the input type. You
+      can continue with HH:MM:SS.mmm format
+    </p>
+
+    <h3>
+      Starter Number input with filter nothing-99:
+
+    </h3>
+    <input type="number" name="startHours" id="starter" min="0" max="99" placeholder="HH">
+    <br>
+    <br>
+    <h3>
+      Will need to add validation start with mdn
+
+    </h3>
+    <h4>
+      Features missing:
+    </h4>
+    <ul>
+      <li>focus on next input after two digits</li>
+      <li>leading 0 and focus on next input for values 6-9</li>
+      <li>use a 66666666666 functional test</li>
+    </ul>
+    <p>
+      List 2: Think something like this will help
+      https://stackoverflow.com/questions/5597060/detecting-arrow-key-presses-in-javascript
+    </p>
+    <ul>
+      <li>update to input number from input text re setSelectionRange</li>
+      <li>After all 6s, selction of box and typing a single number should result in 0#, ex. clear previous value</li>
+      <li>left and right arrows should swith boxes</li>
+      <li>up and down arrows should change value without causing auto box switch</li>
+      <li>probably easiest if update to 5 different setInputFilters keyup etc, then four arrow directions</li>
+      <li>test on ios and osx</li>
+      <li>this may help with the dropdowns: https://dev.to/epavanello/input-type-time-polyfill-for-ie-safari-etc-4ka1
+      </li>
+      <li> or pass e into existing fuctions see https://developer.mozilla.org/en-US/docs/Web/API/Document/keyup_event
+      </li>
+    </ul>
+
+
+
+
+
+  </div>
+
+
+  <form>
+    <label></label><input id="" type="number" min="1" max="59" step="1"
+      onchange="if(parseInt(this.value,10)<10)this.value='0'+this.value;" />
   </form>
-</div>
 
-<br>
-
-<li>
-  https://stackoverflow.com/a/2896642/2455159 switch true case regex 1)arrow direction 2) number https://keycode.info/ event.key = number
-</li>
-</ul>
-
-<input id="${this.id}_timeEnd" type="time" class="plyr__controls__item plyr__control" step="0.01" value="00:00:00.000">
-
-<p>
-  Maybe try a 3x minutes or 3x hour strategy: NO doesn't work:
-</p>
-<input id="timeEnd" type="time" class="plyr__controls__item plyr__control" step="" value="">
-<input type='time' step="3600">
-<p>
-  Problem is with iOS, osx safari and Chrome, so dev of the control is worthwhile.
-  The role of WSWG will be that browsers don't 'crash it out', somehow mis-handle the input, ex treating it like a time input.
-</p>
-<p>
-  User message: This works better with Chrome browser, if using Safari your browser has changed the input type. You can continue with HH:MM:SS.mmm format
-</p>
-
-<h3>
-  Starter Number input with filter nothing-99:
-
-</h3>
-<input type="number" name="startHours" id="starter" min="0" max="99" placeholder="HH">
-<br>
-<br>
-<h3>
-  Will need to add validation start with mdn
-
-</h3>
-<h4>
-  Features missing:
-</h4>
-<ul>
-  <li>focus on next input after two digits</li>
-  <li>leading 0 and focus on next input for values 6-9</li>
-  <li>use a 66666666666 functional test</li>
-</ul>
-<p>
-  List 2: Think something like this will help https://stackoverflow.com/questions/5597060/detecting-arrow-key-presses-in-javascript
-</p>
-<ul>
-  <li>update to input number from input text re setSelectionRange</li>
-  <li>After all 6s, selction of box and typing a single number should result in 0#, ex. clear previous value</li>
-  <li>left and right arrows should swith boxes</li>
-  <li>up and down arrows should change value without causing auto box switch</li>
-  <li>probably easiest if update to 5 different setInputFilters keyup etc, then four arrow directions</li>
-  <li>test on ios and osx</li>
-  <li>this may help with the dropdowns: https://dev.to/epavanello/input-type-time-polyfill-for-ie-safari-etc-4ka1</li>
-  <li> or pass e into existing fuctions see https://developer.mozilla.org/en-US/docs/Web/API/Document/keyup_event</li>
-</ul>
+  <h2>
+    Strategy 2
+  </h2>
+  <ul>
+    <li>
+      count keystroke events once 2 change to next input box, next might be difficult.
+    </li>
+    <li>
+      on input event: if ?regex? = 99 / or 59 then set to 0 if 0 set to 99 or 59, avoid infinate loop (somehow).
+    </li>
+  </ul>
 
 
+  <h2>JavaScript input filter showcase</h2>
+  <p>Supports Copy+Paste, Drag+Drop, keyboard shortcuts, context menu operations, non-typeable keys, the caret position,
+    different keyboard layouts, and <a href="https://caniuse.com/#feat=input-event" target="_blank">all browsers since
+      IE
+      9</a>.</p>
+  <p>There is also a <a href="https://jsfiddle.net/emkey08/tvx5e7q3" target="_blank">jQuery version</a> of this.</p>
+  <table>
+    <tr>
+      <td>Integer</td>
+      <td><input id="intTextBox"></td>
+    </tr>
+    <tr>
+      <td>Integer &gt;= 0</td>
+      <td><input id="uintTextBox"></td>
+    </tr>
+    <tr>
+      <td>Integer &gt;= 0 and &lt;= 500</td>
+      <td><input id="intLimitTextBox"></td>
+    </tr>
+    <tr>
+      <td>Float (use . or , as decimal separator)</td>
+      <td><input id="floatTextBox"></td>
+    </tr>
+    <tr>
+      <td>Currency (at most two decimal places)</td>
+      <td><input id="currencyTextBox"></td>
+    </tr>
+    <tr>
+      <td>A-Z only</td>
+      <td><input id="latinTextBox"></td>
+    </tr>
+    <tr>
+      <td>Hexadecimal</td>
+      <td><input id="hexTextBox"></td>
+    </tr>
+  </table>
+  <script src="./TimeStamp.js"></script>
+</body>
 
-
-
-</div>
-
-
-<form>
-  <label></label><input id="" type="number" min="1" max="59" step="1" onchange="if(parseInt(this.value,10)<10)this.value='0'+this.value;" />
-</form>
-
-<h2>
-  Strategy 2
-</h2>
-<ul>
-  <li>
-    count keystroke events once 2 change to next input box, next might be difficult.
-  </li>
-  <li>
-    on input event: if ?regex? = 99 / or 59 then set to 0 if 0 set to 99 or 59, avoid infinate loop (somehow).
-  </li>
-</ul>
-
-
-<h2>JavaScript input filter showcase</h2>
-<p>Supports Copy+Paste, Drag+Drop, keyboard shortcuts, context menu operations, non-typeable keys, the caret position, different keyboard layouts, and <a href="https://caniuse.com/#feat=input-event" target="_blank">all browsers since IE 9</a>.</p>
-<p>There is also a <a href="https://jsfiddle.net/emkey08/tvx5e7q3" target="_blank">jQuery version</a> of this.</p>
-<table>
-  <tr>
-    <td>Integer</td>
-    <td><input id="intTextBox"></td>
-  </tr>
-  <tr>
-    <td>Integer &gt;= 0</td>
-    <td><input id="uintTextBox"></td>
-  </tr>
-  <tr>
-    <td>Integer &gt;= 0 and &lt;= 500</td>
-    <td><input id="intLimitTextBox"></td>
-  </tr>
-  <tr>
-    <td>Float (use . or , as decimal separator)</td>
-    <td><input id="floatTextBox"></td>
-  </tr>
-  <tr>
-    <td>Currency (at most two decimal places)</td>
-    <td><input id="currencyTextBox"></td>
-  </tr>
-  <tr>
-    <td>A-Z only</td>
-    <td><input id="latinTextBox"></td>
-  </tr>
-  <tr>
-    <td>Hexadecimal</td>
-    <td><input id="hexTextBox"></td>
-  </tr>
-</table>
+</html>

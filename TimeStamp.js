@@ -240,4 +240,3 @@ document.querySelector("#sH").addEventListener("click", function() { this.select
 document.querySelector("#sM").addEventListener("click", function() { this.select(); });
 document.querySelector("#sS").addEventListener("click", function() { this.select(); });
 document.querySelector("#sMS").addEventListener("click", function() { this.select(); });
- 
