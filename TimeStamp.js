@@ -82,7 +82,7 @@ document.querySelector("#sMS")
       document.querySelector("#sMS").value = 990;
     }
     if (document.querySelector("#sMS").value == 0) {
-      document.querySelector("#sMS").value = this.value + "0";
+     // document.querySelector("#sMS").value = this.value + "0";
     }
   });
 

@@ -7,6 +7,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <link rel="stylesheet" href="TimeStamp.css">
+  <style>
+    /* #timePoint{
+  border: 6px solid red;
+} */
+#border:focus-within {
+  background: lightyellow;
+  
+  
+  border: 6px solid red;
+  
+  
+}
+  </style>
 </head>
 
 <body>
@@ -29,37 +42,15 @@
     <h2>Polyfill</h2>
     <form id="timeCase">
       <div id="border">
-        <input type="number" class="D2" name="startHours" id="sH" data-tp="1" min="-1" max="100" placeholder="HH">:
-        <input type="number" class="D2" name="startMinutes" id="sM" data-tp="2" min="-1" max="60" placeholder="MM">:
-        <input type="number" class="D2" name="startSeconds" id="sS" data-tp="3" min="-1" max="60" placeholder="SS">.
-        <input type="number" class="D3" name="startMilliSecs" id="sMS" data-tp="4" min="-10" max="1010" step="10"
-          placeholder="mmm">
-        <svg xmlns="http://www.w3.org/2000/svg" width="25px" height="25px" version="1.1" viewBox="0 0 5 5">
-          <g transform="translate(-.0051364 .025687)">
-            <path d="m2.4353 1.0694v1.2033" style="fill:none;stroke-linecap:round;stroke-width:.3;stroke:#000" />
-            <path d="m2.0637 2.8142-0.53327 0.25828"
-              style="fill:none;stroke-linecap:round;stroke-width:.3;stroke:#000" />
-            <g transform="matrix(.069476 0 0 .075702 -3.4905 -1.9619)" style="stroke-width:15.168">
-              <g style="stroke-width:15.168" />
-            </g>
-            <path d="m3.8158 3.1738h0.86415" style="fill:none;stroke-linecap:round;stroke-width:.6;stroke:#000" />
-            <path
-              d="m1.0016 0.4062-0.07884 0.066075c0.09681 0.13278 0.19366 0.2656 0.29052 0.3984l0.078701-0.066225c-0.096858-0.13279-0.19358-0.26547-0.29039-0.39825zm-0.84758 1.2154-0.02749 0.10323c0.15101 0.046326 0.30203 0.092592 0.45309 0.13889l0.027489-0.10323c-0.15105-0.046298-0.30209-0.092569-0.45309-0.13889zm0.42239 1.3446c-0.14755 0.057876-0.2951 0.11568-0.44263 0.1735l0.034188 0.10099c0.14753-0.057829 0.29507-0.11577 0.44263-0.17365zm2.8497 0.99143-0.078701 0.066225c0.096858 0.13279 0.19358 0.26562 0.29039 0.3984l0.07884-0.066225c-0.09681-0.13279-0.19366-0.2656-0.29052-0.3984zm-2.2147 0.00344c-0.087685 0.13995-0.17534 0.27979-0.26304 0.41968l0.082888 0.060082c0.087698-0.13989 0.17549-0.27987 0.26318-0.41982zm1.1585 0.40005-0.10005 0.00389c0.00566 0.16856 0.011394 0.33716 0.017024 0.50568l0.099911-0.00389c-0.00563-0.16852-0.011213-0.33711-0.016884-0.50567z"
-              style="color-rendering:auto;color:#000000;dominant-baseline:auto;font-feature-settings:normal;font-variant-alternates:normal;font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal;font-variant-position:normal;font-variation-settings:normal;image-rendering:auto;inline-size:0;isolation:auto;mix-blend-mode:normal;shape-margin:0;shape-padding:0;shape-rendering:auto;solid-color:#000000;stop-color:#000000;stroke-linecap:round;stroke-miterlimit:5.1;stroke-width:.2;stroke:#000;text-decoration-color:#000000;text-decoration-line:none;text-decoration-style:solid;text-indent:0;text-orientation:mixed;text-transform:none;white-space:normal" />
-            <path
-              d="m4.6548 2.2406a0.41707 0.41707 0 0 1-0.43002 0.34141 0.41707 0.41707 0 0 1-0.39573-0.38062 0.41707 0.41707 0 0 1 0.32442-0.44298 0.41707 0.41707 0 0 1 0.4823 0.26241"
-              style="fill:none;stroke-linecap:square;stroke-linejoin:bevel;stroke-width:.3;stroke:#000" />
-            <path
-              d="m2.6913 2.7176a0.28343 0.2793 0 0 1-0.34474 0.18142 0.28343 0.2793 0 0 1-0.20089-0.33035 0.28343 0.2793 0 0 1 0.32491-0.21402 0.28343 0.2793 0 0 1 0.23296 0.30923"
-              style="fill:none;stroke-linecap:square;stroke-linejoin:bevel;stroke-width:.2;stroke:#000" />
-            <path transform="matrix(-.94894 -.31547 .31316 -.9497 0 0)"
-              d="m-1.8757 0.26095a1.6901 1.3142 0 0 1-1.4282 0.30523 1.6901 1.3142 0 0 1-1.189-0.68684"
-              style="fill:none;stroke-linecap:square;stroke-linejoin:bevel;stroke-width:.6;stroke:#000" />
-          </g>
-        </svg>
+        <input type="number" class="D2" name="startHours" id="sH" data-tp="1" min="-1" max="100" value = "00" >:
+        <input type="number" class="D2" name="startMinutes" id="sM" data-tp="2" min="-1" max="60" value = "00">:
+        <input type="number" class="D2" name="startSeconds" id="sS" data-tp="3" min="-1" max="60" value="00">.
+        <input type="number" class="D3" name="startMilliSecs" id="sMS" data-tp="4" min="-10" max="1010" step="10"value = "000">
+        <div><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" data-prefix="fal" data-icon="stopwatch" class="svg-inline--fa fa-stopwatch fa-w-14" role="img" viewBox="0 0 448 512"><path fill="currentColor" d="M393.3 141.3l17.5-17.5c4.7-4.7 4.7-12.3 0-17l-5.7-5.7c-4.7-4.7-12.3-4.7-17 0l-17.5 17.5c-35.8-31-81.5-50.9-131.7-54.2V32h25c6.6 0 12-5.4 12-12v-8c0-6.6-5.4-12-12-12h-80c-6.6 0-12 5.4-12 12v8c0 6.6 5.4 12 12 12h23v32.6C91.2 73.3 0 170 0 288c0 123.7 100.3 224 224 224s224-100.3 224-224c0-56.1-20.6-107.4-54.7-146.7zM224 480c-106.1 0-192-85.9-192-192S117.9 96 224 96s192 85.9 192 192-85.9 192-192 192zm4-128h-8c-6.6 0-12-5.4-12-12V172c0-6.6 5.4-12 12-12h8c6.6 0 12 5.4 12 12v168c0 6.6-5.4 12-12 12z"/></svg></div>
       </div>
     </form>
     <p>
+      <div><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" data-prefix="fal" data-icon="stopwatch" class="svg-inline--fa fa-stopwatch fa-w-14" role="img" viewBox="0 0 448 512"><path fill="currentColor" d="M393.3 141.3l17.5-17.5c4.7-4.7 4.7-12.3 0-17l-5.7-5.7c-4.7-4.7-12.3-4.7-17 0l-17.5 17.5c-35.8-31-81.5-50.9-131.7-54.2V32h25c6.6 0 12-5.4 12-12v-8c0-6.6-5.4-12-12-12h-80c-6.6 0-12 5.4-12 12v8c0 6.6 5.4 12 12 12h23v32.6C91.2 73.3 0 170 0 288c0 123.7 100.3 224 224 224s224-100.3 224-224c0-56.1-20.6-107.4-54.7-146.7zM224 480c-106.1 0-192-85.9-192-192S117.9 96 224 96s192 85.9 192 192-85.9 192-192 192zm4-128h-8c-6.6 0-12-5.4-12-12V172c0-6.6 5.4-12 12-12h8c6.6 0 12 5.4 12 12v168c0 6.6-5.4 12-12 12z"/></svg></div>
     <div>
       <ul>
         <div>
