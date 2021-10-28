@@ -1,25 +1,31 @@
-/* *, *:before, *:after {
+/* #timeCase{
+  box-sizing: border-box;
+} */
+
+*, *:before, *:after {
 
   -webkit-box-sizing: border-box !important;
   -moz-box-sizing: border-box !important;
   -ms-box-sizing: border-box !important;
   box-sizing: border-box !important;
-} */
-
+}
 
 #border{
+   
     display: inline-flex;
     flex-direction: row;
     max-width: 300px;
-    padding: 3px;
+    padding: 10px;
+    margin: 20px;
     border-style: solid;
     border-width: 1px;
+     
   }
 
   /* Each input width set and blinking cursor 'caret' removed */
   #border input{
     caret-color: transparent;
-    width: 7.5%;
+   width: 7.5%;
   }
 
     
@@ -42,11 +48,23 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
+
 #border:focus-within {
-  border: 3px solid red;
-  padding: 1px;
+  
+  border: 6px solid red;
+  
   }
 
-  .ts_digit {
+.ts_digit {
     border: none;
-} 
+}
+
+
+input[type="number"], textarea {
+
+  background-color : #ACCEF7; 
+
+}
+
+::-moz-selection { color: white;  background: #ACCEF7; }
+::selection      { color: white;  background: #ACCEF7; }   
