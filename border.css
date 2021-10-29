@@ -14,17 +14,19 @@
     padding: 3px;
     border-style: solid;
     border-width: 1px;
+    border-radius: 2px;
   }
 
   /* Each input width set and blinking cursor 'caret' removed */
   #border input{
     caret-color: transparent;
-    width: 7.5%;
+    width: 15px;
+    padding-top:1px;
   }
 
     
   #border .D3{
-    width: 23px;
+    width: 25px;
   }
 
 
@@ -43,10 +45,25 @@ input[type=number] {
 }
 
 #border:focus-within {
-  border: 3px solid red;
-  padding: 1px;
+  border: 2px solid black;
+  padding: 2px;
   }
 
   .ts_digit {
     border: none;
 } 
+
+#svgContainer {
+  width: 10.5px;
+  height: 10.5px;
+  padding-left: 2px;
+  padding-right: 2px;
+  padding-top:1px;
+  padding-bottom:1px;
+  color: black;
+
+}
+
+path{
+  fill: black;
+}
