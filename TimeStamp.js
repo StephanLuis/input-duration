@@ -158,7 +158,7 @@ function setInputFilter(textbox, inputFilter) {
         this.oldSelectionEnd = this.selectionEnd;
       } else if (this.hasOwnProperty("oldValue")) {
         this.value = this.oldValue;
-        this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+        // this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
       } else {
         this.value = "";
       }
@@ -226,8 +226,8 @@ setInputFilter(document.getElementById("sMS"), function(value) {
   console.log("value: " + value);
 
   // if (value.length === 3) {
-  //  document.getElementById("sMS").focus();
- //  }
+  //  document.getElementById("sMS").blur();
+  // }
 
   return newV;
 

@@ -8,62 +8,62 @@
 
 
 #border{
-    display: inline-flex;
-    flex-direction: row;
-    max-width: 300px;
-    padding: 3px;
-    border-style: solid;
-    border-width: 1px;
-    border-radius: 2px;
-  }
+  display: inline-flex;
+  flex-direction: row;
+  max-width: 300px;
+  padding: 3px;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 2px;
+}
 
-  /* Each input width set and blinking cursor 'caret' removed */
-  #border input{
-    caret-color: transparent;
-    width: 15px;
-    padding-top:1px;
-  }
+/* Each input width set and blinking cursor 'caret' removed */
+#border input{
+  caret-color: transparent;
+  width: 15px;
+  padding-top:1px;
+}
 
-    
-  #border .D3{
-    width: 25px;
-  }
+  
+#border .D3{
+  width: 25px;
+}
 
 
-  /* Hiding the up and down arrow */
-  /*https://www.w3schools.com/howto/howto_css_hide_arrow_number.asp*/
+/* Hiding the up and down arrow */
+/*https://www.w3schools.com/howto/howto_css_hide_arrow_number.asp*/
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+-webkit-appearance: none;
+margin: 0;
 }
 
 /* Firefox */
 input[type=number] {
-  -moz-appearance: textfield;
+-moz-appearance: textfield;
 }
 
 #border:focus-within {
-  border: 2px solid black;
-  padding: 2px;
-  }
+border: 2px solid black;
+padding: 2px;
+}
 
-  .ts_digit {
-    border: none;
+.ts_digit {
+  border: none;
 } 
 
 #svgContainer {
-  width: 10px;
-  height: 10px;
-  padding-left: 2px;
-  padding-right: 2px;
-  /* padding-top:1px;
-  padding-bottom:2px; */
-  color: black;
+width: 10px;
+height: 10px;
+padding-left: 2px;
+padding-right: 2px;
+/* padding-top:1px;
+padding-bottom:2px; */
+color: black;
 
 }
 
 path{
-  fill: black;
+fill: black;
 }
