@@ -1,11 +1,6 @@
-/* *, *:before, *:after {
-
-  -webkit-box-sizing: border-box !important;
-  -moz-box-sizing: border-box !important;
-  -ms-box-sizing: border-box !important;
-  box-sizing: border-box !important;
-} */
-
+*:focus {
+  outline: none;
+}
 
 #border{
   display: inline-flex;
@@ -23,6 +18,8 @@
   width: 15px;
   padding-top:1px;
 }
+:focus::-moz-selection { color: white;  background: #ACCEF7; }
+:focus::selection      { color: white;  background: #ACCEF7; } 
 
   
 #border .D3{

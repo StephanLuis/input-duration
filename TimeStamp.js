@@ -178,8 +178,8 @@ setInputFilter(document.getElementById("sH"), function(value) {
 
   if (value.length === 2) {
     document.getElementById("sM").focus();
-    
-    // document.getElementById("sM").select()
+    document.getElementById("sM").select();
+   
   }
 
   return newV;
@@ -196,6 +196,7 @@ setInputFilter(document.getElementById("sM"), function(value) {
 
   if (value > 5 || value.length === 2) {
     document.getElementById("sS").focus();
+    document.getElementById("sS").select();
   }
 
   return newV;
@@ -211,6 +212,7 @@ setInputFilter(document.getElementById("sS"), function(value) {
 
   if (value > 5 || value.length === 2) {
     document.getElementById("sMS").focus();
+    document.getElementById("sMS").select();
   }
 
   return newV;
@@ -225,9 +227,9 @@ setInputFilter(document.getElementById("sMS"), function(value) {
 
   console.log("value: " + value);
 
-  // if (value.length === 3) {
-  //  document.getElementById("sMS").blur();
-  // }
+  if (value.length === 3) {
+   document.getElementById("sMS").blur();
+  }
 
   return newV;
 
