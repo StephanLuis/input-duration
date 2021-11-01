@@ -1,3 +1,43 @@
+
+// A HH:MM:SS.mmm control that is unaffected by OSX and works on 'all'
+// browsers.
+
+class Chron {
+
+  constructor() {
+
+  }
+
+  // reports a value of the control
+  timePoint() {
+
+  }
+
+
+  // takes an element and innerhtml's the Chron value
+  chronReport(el) {
+
+
+  }
+
+  // add preceeding 0s when necessary
+
+
+  // numeric value looping
+
+  // arrow key input of values (up/down) and place toggling (left/right)
+
+
+  // numeric input (and auto toggling)
+
+  // click to activate input of values
+
+
+}
+
+
+
+
 // Manual test page setup
 
 function myFunction() {
@@ -6,7 +46,7 @@ function myFunction() {
 }
 
 document.querySelector("#timeCase")
-  .addEventListener('change', function(event) {
+  .addEventListener('change', function (event) {
     var hour = document.querySelector("#sH").value;
     var minute = document.querySelector("#sM").value;
     var second = document.querySelector("#sS").value;
@@ -22,7 +62,7 @@ document.querySelector("#timeCase")
 
 
 // hours, minutes, seconds
-document.querySelectorAll("#timeCase input").forEach(i => i.addEventListener('change', function() {
+document.querySelectorAll("#timeCase input").forEach(i => i.addEventListener('change', function () {
   if (!isNaN(this.value) && this.value.length === 1) {
     this.value = '0' + this.value;
   }
@@ -30,7 +70,7 @@ document.querySelectorAll("#timeCase input").forEach(i => i.addEventListener('ch
 
 
 // milliseconds
-document.querySelector("#sMS").addEventListener('change', function() {
+document.querySelector("#sMS").addEventListener('change', function () {
   if (!isNaN(this.value) && this.value.length === 2) {
     this.value = '0' + this.value;
   }
@@ -44,7 +84,7 @@ document.querySelector("#sMS").addEventListener('change', function() {
 
 
 document.querySelector("#sH")
-  .addEventListener('change', function(event) {
+  .addEventListener('change', function (event) {
     if (document.querySelector("#sH").value == 100) {
       document.querySelector("#sH").value = '00';
     }
@@ -54,7 +94,7 @@ document.querySelector("#sH")
   });
 
 document.querySelector("#sM")
-  .addEventListener('change', function(event) {
+  .addEventListener('change', function (event) {
     if (document.querySelector("#sM").value == 60) {
       document.querySelector("#sM").value = '00';
     }
@@ -64,7 +104,7 @@ document.querySelector("#sM")
   });
 
 document.querySelector("#sS")
-  .addEventListener('change', function(event) {
+  .addEventListener('change', function (event) {
     if (document.querySelector("#sS").value == 60) {
       document.querySelector("#sS").value = '00';
     }
@@ -74,7 +114,7 @@ document.querySelector("#sS")
   });
 
 document.querySelector("#sMS")
-  .addEventListener('change', function(event) {
+  .addEventListener('change', function (event) {
     if (document.querySelector("#sMS").value == 1000) {
       document.querySelector("#sMS").value = "010";
     }
@@ -82,7 +122,6 @@ document.querySelector("#sMS")
       document.querySelector("#sMS").value = 990;
     }
     if (document.querySelector("#sMS").value == 0) {
-     // document.querySelector("#sMS").value = this.value + "0";
     }
   });
 
@@ -94,7 +133,7 @@ document.querySelector("#sMS")
 // this depends on data-attributes ex. data-tp="1" in the HTML
 
 document.querySelector("#timeCase")
-  .addEventListener('keydown', function(event) {
+  .addEventListener('keydown', function (event) {
 
     var tp_active;
 
@@ -108,8 +147,8 @@ document.querySelector("#timeCase")
         if (tp_active >= 2) {
           tp_active--;
         }
-       document.querySelector("[data-tp='" + tp_active + "']").focus();
-      setTimeout(function () {  document.querySelector("[data-tp='" + tp_active + "']").select(); }, 10);
+        document.querySelector("[data-tp='" + tp_active + "']").focus();
+        setTimeout(function () { document.querySelector("[data-tp='" + tp_active + "']").select(); }, 10);
         el_disp.innerHTML = event.key;
         console.log("tp_active: " + tp_active);
         break;
@@ -119,17 +158,17 @@ document.querySelector("#timeCase")
         if (tp_active <= 3) {
           tp_active++;
         }
-       document.querySelector("[data-tp='" + tp_active + "']").focus();
-         setTimeout(function () {  document.querySelector("[data-tp='" + tp_active + "']").select(); }, 10);
+        document.querySelector("[data-tp='" + tp_active + "']").focus();
+        setTimeout(function () { document.querySelector("[data-tp='" + tp_active + "']").select(); }, 10);
         el_disp.innerHTML = event.key;
         console.log("tp_active: " + tp_active)
         break;
 
 
-        // these will be kept short term for testing
+      // these will be kept short term for testing
       case event.key == "ArrowUp":
         el_disp.innerHTML = event.key;
-        setTimeout(function () {  document.activeElement.select(); }, 10);
+        setTimeout(function () { document.activeElement.select(); }, 10);
         break;
 
       case event.key == "ArrowDown":
@@ -149,8 +188,8 @@ document.querySelector("#timeCase")
 // Digit input 0-9  (typed in by user)
 
 function setInputFilter(textbox, inputFilter) {
-// this sets a listener and  immediately updates the value of the input number (note: can update this from input text, like by removing setSelectionRange )
-  textbox.addEventListener('keyup', function() {
+  // this sets a listener and  immediately updates the value of the input number (note: can update this from input text, like by removing setSelectionRange )
+  textbox.addEventListener('keyup', function () {
     if (/^([0-9]?)$/.test(event.key)) {
       if (inputFilter(this.value)) {
         this.oldValue = this.value;
@@ -169,9 +208,9 @@ function setInputFilter(textbox, inputFilter) {
 
 // three types of boxes, hours or minutes and seconds (are the same) or milliseconds
 // 
-setInputFilter(document.getElementById("sH"), function(value) {
+setInputFilter(document.getElementById("sH"), function (value) {
 
-  
+
   var newV = /^([0-9]?|[0-9][0-9]?)$/.test(value);
 
   console.log("value: " + value);
@@ -179,7 +218,7 @@ setInputFilter(document.getElementById("sH"), function(value) {
   if (value.length === 2) {
     document.getElementById("sM").focus();
     document.getElementById("sM").select();
-   
+
   }
 
   return newV;
@@ -187,7 +226,7 @@ setInputFilter(document.getElementById("sH"), function(value) {
 });
 
 
-setInputFilter(document.getElementById("sM"), function(value) {
+setInputFilter(document.getElementById("sM"), function (value) {
 
 
   var newV = /^([0-9]?|[0-5][0-9]?)$/.test(value);
@@ -203,9 +242,9 @@ setInputFilter(document.getElementById("sM"), function(value) {
 
 });
 
-setInputFilter(document.getElementById("sS"), function(value) {
+setInputFilter(document.getElementById("sS"), function (value) {
 
-  
+
   var newV = /^([0-9]?|[0-5][0-9]?)$/.test(value);
 
   console.log("value: " + value);
@@ -220,15 +259,15 @@ setInputFilter(document.getElementById("sS"), function(value) {
 });
 
 
-setInputFilter(document.getElementById("sMS"), function(value) {
+setInputFilter(document.getElementById("sMS"), function (value) {
 
-  
+
   var newV = /^([0-9]?|[0-9][0-9]?|[0-9][0-9][0-9]?)$/.test(value);
 
   console.log("value: " + value);
 
   if (value.length === 3) {
-   document.getElementById("sMS").blur();
+    document.getElementById("sMS").blur();
   }
 
   return newV;
@@ -238,7 +277,7 @@ setInputFilter(document.getElementById("sMS"), function(value) {
 
 // for setting selection
 
-document.querySelector("#sH").addEventListener("click", function() { this.select(); });
-document.querySelector("#sM").addEventListener("click", function() { this.select(); });
-document.querySelector("#sS").addEventListener("click", function() { this.select(); });
-document.querySelector("#sMS").addEventListener("click", function() { this.select(); });
+document.querySelector("#sH").addEventListener("click", function () { this.select(); });
+document.querySelector("#sM").addEventListener("click", function () { this.select(); });
+document.querySelector("#sS").addEventListener("click", function () { this.select(); });
+document.querySelector("#sMS").addEventListener("click", function () { this.select(); });

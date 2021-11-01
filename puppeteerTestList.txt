@@ -1,0 +1,3 @@
+number input sequence => check value by input and final value
+arrow input
+part arrow and part number

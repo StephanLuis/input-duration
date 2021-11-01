@@ -3,7 +3,7 @@
 }
 
 
-#border{
+#timeCase{
   display: inline-flex;
   flex-direction: row;
   max-width: 300px;
@@ -15,14 +15,14 @@
 
 
 /* Each input width set and blinking cursor 'caret' removed */
-#border input{
+#timeCase input{
   caret-color: transparent;
   width: 15px;
   padding-top:1px;
 }
 
   
-#border .D3{
+#timeCase .D3{
   width: 25px;
 }
 
@@ -45,7 +45,7 @@ input[type=number] {
 }
 
 
-#border:focus-within {
+#timeCase:focus-within {
 border: 2px solid black;
 padding: 2px;
 }
