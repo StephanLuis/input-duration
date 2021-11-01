@@ -1,3 +1,5 @@
 number input sequence => check value by input and final value
 arrow input
 part arrow and part number
+
+test numbers > 5 (should bump to 06 and toggle)
