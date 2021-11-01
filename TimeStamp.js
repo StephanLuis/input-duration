@@ -46,7 +46,7 @@ document.querySelector("#sMS").addEventListener('change', function() {
 document.querySelector("#sH")
   .addEventListener('change', function(event) {
     if (document.querySelector("#sH").value == 100) {
-      document.querySelector("#sH").value = 0;
+      document.querySelector("#sH").value = '00';
     }
     if (document.querySelector("#sH").value == -1) {
       document.querySelector("#sH").value = 99;
@@ -56,7 +56,7 @@ document.querySelector("#sH")
 document.querySelector("#sM")
   .addEventListener('change', function(event) {
     if (document.querySelector("#sM").value == 60) {
-      document.querySelector("#sM").value = 0;
+      document.querySelector("#sM").value = '00';
     }
     if (document.querySelector("#sM").value == -1) {
       document.querySelector("#sM").value = 59;
@@ -66,7 +66,7 @@ document.querySelector("#sM")
 document.querySelector("#sS")
   .addEventListener('change', function(event) {
     if (document.querySelector("#sS").value == 60) {
-      document.querySelector("#sS").value = 0;
+      document.querySelector("#sS").value = '00';
     }
     if (document.querySelector("#sS").value == -1) {
       document.querySelector("#sS").value = 59;
