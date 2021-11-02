@@ -47,7 +47,9 @@ class Chron {
   // convert input data-univHMS to'univHMS'
 
   addHTML() {
-    const univHMSinp = document.querySelector('input');
+
+
+    const univHMSinp = document.querySelectAll('input');
 
     univHMSinp.forEach(el => if (el.dataset.univHMS === true) {
 

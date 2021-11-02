@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    1) <input id='bob' data-univHMS="true"></input>
+    <br>
+    2) <input id='jane' data-univHMS="true"></input>
+
+</body>
+
+<script>
+    const univHMSinp = document.querySelectorAll("input");
+
+// univHMSinp.replaceWith(`<p>Hi All</p>`);
+
+const div = document.createElement("div");
+const p = document.createElement("p");
+div.appendChild(p);
+const span = document.createElement("span");
+
+span.textContent = "hi from all";
+
+// univHMSinp.forEach(element => element.replaceWith(span));
+//univHMSinp.replaceWith(span);
+
+//univHMSinp.forEach(function callbackFn(element) { // element.replaceWith(span)});
+
+// try map instead of foreach
+
+univHMSinp.forEach(function (element) {
+  // code
+  var el = element;
+  var spanIn = document.createElement("span");
+  spanIn.id = el.id;
+  spanIn.textContent = "hi from all";
+  el.replaceWith(spanIn);
+  console.log(span);
+  console.log(el);
+  
+});
+
+console.log(div.outerHTML);
+// "<div><span></span></div>"
+
+</script>
+
+</html>
