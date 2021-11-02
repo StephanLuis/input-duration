@@ -21,7 +21,7 @@
   padding-top:1px;
 }
 
-  
+
 #timeCase .D3{
   width: 25px;
 }
@@ -41,7 +41,9 @@ margin: 0;
 /* Firefox */
 
 input[type=number] {
--moz-appearance: textfield;
+/* -moz-appearance: textfield; */
+-moz-appearance: textarea;
+-webkit-appearance: textarea;
 }
 
 

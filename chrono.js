@@ -44,6 +44,35 @@ class Chron {
       });
   }
 
+  // convert input data-univHMS to'univHMS'
+
+  addHTML() {
+    const univHMSinp = document.querySelector('input');
+
+    univHMSinp.forEach(el => if (el.dataset.univHMS === true) {
+
+      // replace el with literal
+      
+    })
+
+    var htmlStringLiteral = `
+            <div id="timeCase"></div><!--Border and Sizing on timeCase   -->
+            <input type="number" class="D2 ts_digit" name="startHours" id="sH" data-tp="1" min="-1" max="100" value="00" >:
+            <input type="number" class="D2 ts_digit" name="startMinutes" id="sM" data-tp="2" min="-1" max="60" value="00">:
+            <input type="number" class="D2 ts_digit" name="startSeconds" id="sS" data-tp="3" min="-1" max="60" value="00">.
+            <input type="number" class="D3 ts_digit" name="startMilliSecs" id="sMS" data-tp="4" min="-10" max="1010" step="10" value="000">
+            <div id="svgContainer">
+              <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+                focusable="false" data-prefix="fal" data-icon="stopwatch" class="svg-inline--fa fa-stopwatch fa-w-14"
+                role="img" viewBox="0 0 448 512">
+                <path fill="currentColor"
+                  d="M393.3 141.3l17.5-17.5c4.7-4.7 4.7-12.3 0-17l-5.7-5.7c-4.7-4.7-12.3-4.7-17 0l-17.5 17.5c-35.8-31-81.5-50.9-131.7-54.2V32h25c6.6 0 12-5.4 12-12v-8c0-6.6-5.4-12-12-12h-80c-6.6 0-12 5.4-12 12v8c0 6.6 5.4 12 12 12h23v32.6C91.2 73.3 0 170 0 288c0 123.7 100.3 224 224 224s224-100.3 224-224c0-56.1-20.6-107.4-54.7-146.7zM224 480c-106.1 0-192-85.9-192-192S117.9 96 224 96s192 85.9 192 192-85.9 192-192 192zm4-128h-8c-6.6 0-12-5.4-12-12V172c0-6.6 5.4-12 12-12h8c6.6 0 12 5.4 12 12v168c0 6.6-5.4 12-12 12z" />
+              </svg>
+            </div>
+            </div>`
+
+  }
+
   // add preceeding 0s when necessary (on update)
 
   add0s() {
@@ -169,7 +198,7 @@ class Chron {
             setTimeout(function () { document.activeElement.select(); }, 5);
             break;
 
-            // this is good for testing, to determine whether a key press is detected
+          // this is good for testing, to determine whether a key press is detected
           case /^([0-9]?)$/.test(event.key):
             el_disp.innerHTML = event.key;
             break;
