@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- <link rel="stylesheet" href="TimeStamp.css"> -->
+  <link rel="stylesheet" href="./chrono.css">
+  
+</head>
+
+<body>
+  <h1 id="S">
+    Time Point/ TimeStamp Control!
+  </h1>
+  <br>
+  <br>
+  <h2>Original</h2>
+  <div>
+    <input id="timeEnd" type="time" class="plyr__controls__item plyr__control" step="0.01" value="00:00:00.000"
+      onchange="myFunction()">
+    <div>
+      The value of the input type='time' is: <div id='itv'>
+
+      </div>
+    </div>
+    <div>
+      <input type="number"></div>
+    </div>
+    <br>
+    <br>
+    <h2>Polyfill</h2>
+    <input id='bob' data-univHMS></input>
+    <p>
+    <div>
+      <ul>
+        <div>
+
+          The timepoint is:
+          <div id="timePoint">00:00:00.000</div>
+
+          <div>
+            The event.key is: <div id="keyHolder">
+
+            </div>
+          </div>
+
+        </div>
+        <br>
+        <br>
+        <h2>
+          Style:
+        </h2>
+        <ul>
+          <li>bug if digits are input first (before arrows) look at values in console!</li>
+          <li>milliseconds are not added to time value.  Ex. keying 222222222 produces 22:22:22.000</li>
+          <li>Names for control: TimePoint, TimeStamp, Input AtTime</li>
+          <li> <strike>get all style in css</strike></li>
+          <li><strike>looks like the : and . are too low need styling!</strike></li>
+          <li><strike>font for HH MM etc is too big, the numbers (correct size) are smaller</strike></li>
+          <li>
+            border around timeCase when any of the input number s are active
+          </li>
+          <li>
+            clock icon (inactive)
+          </li>
+          <li>
+            'selection' style on active specific for each input
+          </li>
+        </ul>
+        <h2>Bugs!:</h2>
+        <ul>
+          <li>
+            in H, M, and seconds container, up arrow from 59 goes to 0 not 00. Arrow down from 1 is fine.
+          </li>
+        </ul>
+        <h2>
+          Wrap Up:
+        </h2>
+        <ul>
+          <li>some buggy behaviour, may be jsfiddle so move manual *haphazard* testing to gitpod</li>
+          <li>benefits over time input: takes pasted values</li>
+        </ul>
+        note that up and down arrows cannot 0 millisecs: now it can but it's fiddly only gets to 0 with down arrow!!
+        </p>
+        <p>
+          number entry is next, then maybe remove up and down arrows and add a clock logo with dropdown.
+        </p>
+        <span class="validity"></span>
+
+    </div>
+
+    <br>
+
+    <li>
+      https://stackoverflow.com/a/2896642/2455159 switch true case regex 1)arrow direction 2) number
+      https://keycode.info/
+      event.key = number
+    </li>
+    </ul>
+
+    <input id="${this.id}_timeEnd" type="time" class="plyr__controls__item plyr__control" step="0.01"
+      value="00:00:00.000">
+
+    <p>
+      Maybe try a 3x minutes or 3x hour strategy: NO doesn't work:
+    </p>
+    <input id="timeEnd" type="time" class="plyr__controls__item plyr__control" step="" value="">
+    <input type='time' step="3600">
+    <p>
+      Problem is with iOS, osx safari and Chrome, so dev of the control is worthwhile.
+      The role of WSWG will be that browsers don't 'crash it out', somehow mis-handle the input, ex treating it like a
+      time input.
+    </p>
+    <p>
+      User message: This works better with Chrome browser, if using Safari your browser has changed the input type. You
+      can continue with HH:MM:SS.mmm format
+    </p>
+
+    <h3>
+      Starter Number input with filter nothing-99:
+
+    </h3>
+    <input type="number" name="startHours" id="starter" min="0" max="99" placeholder="HH">
+    <br>
+    <br>
+    <h3>
+      Will need to add validation start with mdn
+
+    </h3>
+    <h4>
+      Features missing:
+    </h4>
+    <ul>
+      <li>focus on next input after two digits</li>
+      <li>leading 0 and focus on next input for values 6-9</li>
+      <li>use a 66666666666 functional test</li>
+    </ul>
+    <p>
+      List 2: Think something like this will help
+      https://stackoverflow.com/questions/5597060/detecting-arrow-key-presses-in-javascript
+    </p>
+    <ul>
+      <li>update to input number from input text re setSelectionRange</li>
+      <li>After all 6s, selction of box and typing a single number should result in 0#, ex. clear previous value</li>
+      <li>left and right arrows should swith boxes</li>
+      <li>up and down arrows should change value without causing auto box switch</li>
+      <li>probably easiest if update to 5 different setInputFilters keyup etc, then four arrow directions</li>
+      <li>test on ios and osx</li>
+      <li>this may help with the dropdowns: https://dev.to/epavanello/input-type-time-polyfill-for-ie-safari-etc-4ka1
+      </li>
+      <li> or pass e into existing fuctions see https://developer.mozilla.org/en-US/docs/Web/API/Document/keyup_event
+      </li>
+    </ul>
+
+
+
+
+
+  </div>
+
+
+  <form>
+    <label></label><input id="" type="number" min="1" max="59" step="1"
+      onchange="if(parseInt(this.value,10)<10)this.value='0'+this.value;" />
+  </form>
+
+  <h2>
+    Strategy 2
+  </h2>
+  <ul>
+    <li>
+      count keystroke events once 2 change to next input box, next might be difficult.
+    </li>
+    <li>
+      on input event: if ?regex? = 99 / or 59 then set to 0 if 0 set to 99 or 59, avoid infinate loop (somehow).
+    </li>
+  </ul>
+
+
+  <h2>JavaScript input filter showcase</h2>
+  <p>Supports Copy+Paste, Drag+Drop, keyboard shortcuts, context menu operations, non-typeable keys, the caret position,
+    different keyboard layouts, and <a href="https://caniuse.com/#feat=input-event" target="_blank">all browsers since
+      IE
+      9</a>.</p>
+  <p>There is also a <a href="https://jsfiddle.net/emkey08/tvx5e7q3" target="_blank">jQuery version</a> of this.</p>
+  <table>
+    <tr>
+      <td>Integer</td>
+      <td><input id="intTextBox"></td>
+    </tr>
+    <tr>
+      <td>Integer &gt;= 0</td>
+      <td><input id="uintTextBox"></td>
+    </tr>
+    <tr>
+      <td>Integer &gt;= 0 and &lt;= 500</td>
+      <td><input id="intLimitTextBox"></td>
+    </tr>
+    <tr>
+      <td>Float (use . or , as decimal separator)</td>
+      <td><input id="floatTextBox"></td>
+    </tr>
+    <tr>
+      <td>Currency (at most two decimal places)</td>
+      <td><input id="currencyTextBox"></td>
+    </tr>
+    <tr>
+      <td>A-Z only</td>
+      <td><input id="latinTextBox"></td>
+    </tr>
+    <tr>
+      <td>Hexadecimal</td>
+      <td><input id="hexTextBox"></td>
+    </tr>
+  </table>
+  <script src="./chrono.js"></script>
+</body>
+
+</html>
