@@ -22,44 +22,21 @@
 <script>
     
 
-// // univHMSinp.replaceWith(`<p>Hi All</p>`);
-
-// const div = document.createElement("div");
-// const p = document.createElement("p");
-// div.appendChild(p);
-// const span = document.createElement("span");
-
-// span.textContent = "hi from all";
-
-// // univHMSinp.forEach(element => element.replaceWith(span));
-// //univHMSinp.replaceWith(span);
-
-// //univHMSinp.forEach(function callbackFn(element) { // element.replaceWith(span)});
-
-
-
-
-// // univHMSinp.forEach(el => {
-// //   // code
-// //   var spanIn = document.createElement("span");
-// //   spanIn.id = el.id;
-// //   spanIn.textContent = "hi from all " + spanIn.id ;
-// //   el.replaceWith(spanIn);
-// //   console.log(span);
-// //   console.log(el);
-  
-// // });
-
 const univHMSinp = document.querySelectorAll("input[data-univHMS]");
 
 univHMSinp.forEach(el => {
   // code
 
-  var spanIn = document.createElement("span");
-  spanIn.id = el.id;
-  spanIn.textContent = "hi from all";
+  var spanIn = document.createElement("div");
+  
+  [...el.attributes].forEach( attr => { spanIn.setAttribute(attr.nodeName ,attr.nodeValue) });
+
+  el.replaceWith(spanIn);
+
+  spanIn.classList.add('timeCase');
+
   var template = document.createElement('template');
-  template.innerHTML = `<div id="timeCase"><!--Border and Sizing on timeCase   -->
+  template.innerHTML = `
     <input type="number" class="D2 ts_digit" name="startHours" id="sH" data-tp="1" min="-1" max="100" value="00" >:
     <input type="number" class="D2 ts_digit" name="startMinutes" id="sM" data-tp="2" min="-1" max="60" value="00">:
     <input type="number" class="D2 ts_digit" name="startSeconds" id="sS" data-tp="3" min="-1" max="60" value="00">.
@@ -72,8 +49,9 @@ univHMSinp.forEach(el => {
           d="M393.3 141.3l17.5-17.5c4.7-4.7 4.7-12.3 0-17l-5.7-5.7c-4.7-4.7-12.3-4.7-17 0l-17.5 17.5c-35.8-31-81.5-50.9-131.7-54.2V32h25c6.6 0 12-5.4 12-12v-8c0-6.6-5.4-12-12-12h-80c-6.6 0-12 5.4-12 12v8c0 6.6 5.4 12 12 12h23v32.6C91.2 73.3 0 170 0 288c0 123.7 100.3 224 224 224s224-100.3 224-224c0-56.1-20.6-107.4-54.7-146.7zM224 480c-106.1 0-192-85.9-192-192S117.9 96 224 96s192 85.9 192 192-85.9 192-192 192zm4-128h-8c-6.6 0-12-5.4-12-12V172c0-6.6 5.4-12 12-12h8c6.6 0 12 5.4 12 12v168c0 6.6-5.4 12-12 12z" />
       </svg>
     </div>
-  </div>`
-  el.replaceWith(template.content);
+  `
+  
+  spanIn.appendChild(template.content)
   console.log(el);
   
 });
