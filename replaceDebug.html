@@ -34,7 +34,19 @@ span.textContent = "hi from all";
 
 //univHMSinp.forEach(function callbackFn(element) { // element.replaceWith(span)});
 
-// try map instead of foreach
+
+
+
+// univHMSinp.forEach(el => {
+//   // code
+//   var spanIn = document.createElement("span");
+//   spanIn.id = el.id;
+//   spanIn.textContent = "hi from all " + spanIn.id ;
+//   el.replaceWith(spanIn);
+//   console.log(span);
+//   console.log(el);
+  
+// });
 
 univHMSinp.forEach(function (element) {
   // code
@@ -42,11 +54,12 @@ univHMSinp.forEach(function (element) {
   var spanIn = document.createElement("span");
   spanIn.id = el.id;
   spanIn.textContent = "hi from all";
-  el.replaceWith(spanIn);
+  el.replaceWith(`<span>jep string span</span>`);
   console.log(span);
   console.log(el);
   
 });
+
 
 console.log(div.outerHTML);
 // "<div><span></span></div>"
