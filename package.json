@@ -1,0 +1,24 @@
+{
+  "name": "timeinputpolyfill",
+  "version": "1.0.0",
+  "description": "",
+  "main": "chrono.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/StephanLuis/TimeInputPolyfill.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/StephanLuis/TimeInputPolyfill/issues"
+  },
+  "homepage": "https://github.com/StephanLuis/TimeInputPolyfill#readme",
+  "devDependencies": {
+    "webpack": "^5.61.0",
+    "webpack-cli": "^4.9.1"
+  }
+}
