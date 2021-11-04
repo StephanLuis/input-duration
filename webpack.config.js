@@ -6,6 +6,10 @@ module.exports = {
     filename: 'chronoBundle.js',
     path: path.resolve(__dirname, 'dist'),
     publicPath: '',
+    library: {
+        name: 'chronoBundle',
+        type: 'umd',
+      },
   },
   module: {
     rules: [
