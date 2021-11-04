@@ -1,4 +1,4 @@
-
+import './chrono.css'
 // A HH:MM:SS.mmm control that is unaffected by OSX and works on 'all' browsers.
 
 class Chron {

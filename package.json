@@ -1,0 +1,33 @@
+{
+  "name": "timeinputpolyfill",
+  "version": "1.0.0",
+  "description": "",
+  "dependencies": {
+    
+  },
+  "devDependencies": {
+    "css-loader": "^5.2.0",
+    "cssnano": "^5.0.6",
+    "node-sass": "^6.0.1",
+    "sass-loader": "^12.1.0",
+    "style-loader": "^2.0.0",
+    "webpack": "^5.27.2",
+    "webpack-cli": "^4.5.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "prepack": "webpack --mode=development",
+    "start": "python3 -m http.server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/StephanLuis/TimeInputPolyfill.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/StephanLuis/TimeInputPolyfill/issues"
+  },
+  "homepage": "https://github.com/StephanLuis/TimeInputPolyfill#readme"
+}
