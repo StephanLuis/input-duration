@@ -73,18 +73,17 @@ class Chron {
 
       var template = document.createElement('template');
       template.innerHTML = `
-        <input type="number" class="D2 ts_digit" name="startHours" id="sH" data-tp="1" min="-1" max="100" value="00" >:
-        <input type="number" class="D2 ts_digit" name="startMinutes" id="sM" data-tp="2" min="-1" max="60" value="00">:
-        <input type="number" class="D2 ts_digit" name="startSeconds" id="sS" data-tp="3" min="-1" max="60" value="00">.
-        <input type="number" class="D3 ts_digit" name="startMilliSecs" id="sMS" data-tp="4" min="-10" max="1010" step="10" value="000">
-        <div id="svgContainer">
-          <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
-            focusable="false" data-prefix="fal" data-icon="stopwatch" class="svg-inline--fa fa-stopwatch fa-w-14"
-            role="img" viewBox="0 0 448 512">
-            <path fill="currentColor"
-              d="M393.3 141.3l17.5-17.5c4.7-4.7 4.7-12.3 0-17l-5.7-5.7c-4.7-4.7-12.3-4.7-17 0l-17.5 17.5c-35.8-31-81.5-50.9-131.7-54.2V32h25c6.6 0 12-5.4 12-12v-8c0-6.6-5.4-12-12-12h-80c-6.6 0-12 5.4-12 12v8c0 6.6 5.4 12 12 12h23v32.6C91.2 73.3 0 170 0 288c0 123.7 100.3 224 224 224s224-100.3 224-224c0-56.1-20.6-107.4-54.7-146.7zM224 480c-106.1 0-192-85.9-192-192S117.9 96 224 96s192 85.9 192 192-85.9 192-192 192zm4-128h-8c-6.6 0-12-5.4-12-12V172c0-6.6 5.4-12 12-12h8c6.6 0 12 5.4 12 12v168c0 6.6-5.4 12-12 12z" />
-          </svg>
-        </div>
+          <input type="number" class="D2 ts_digit" name="startHours" id="sH" data-tp="1" min="-1" max="100" value="00" ><span class="bds">:</span>
+          <input type="number" class="D2 ts_digit" name="startMinutes" id="sM" data-tp="2" min="-1" max="60" value="00"><span class="bds">:</span>
+          <input type="number" class="D2 ts_digit" name="startSeconds" id="sS" data-tp="3" min="-1" max="60" value="00"><span class="bds">.</span>
+          <input type="number" class="D3 ts_digit" name="startMilliSecs" id="sMS" data-tp="4" min="-10" max="1010" step="10" value="000">
+          <div id="svgContainer">
+            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+              focusable="false" data-prefix="fal" data-icon="stopwatch" class="svg-inline--fa fa-stopwatch fa-w-14"
+              role="img" viewBox="0 0 448 512">
+              <path xmlns="http://www.w3.org/2000/svg" fill="currentColor" d="M393.9 184l22.6-22.6c4.7-4.7 4.7-12.3 0-17l-17-17c-4.7-4.7-12.3-4.7-17 0l-20.7 20.7c-31.1-27.5-70.4-45.9-113.8-50.8V48h28c6.6 0 12-5.4 12-12V12c0-6.6-5.4-12-12-12H172c-6.6 0-12 5.4-12 12v24c0 6.6 5.4 12 12 12h28v49.4C96.4 109.3 16 197.2 16 304c0 114.9 93.1 208 208 208s208-93.1 208-208c0-44.7-14.1-86.1-38.1-120zM224 464c-88.4 0-160-71.6-160-160s71.6-160 160-160 160 71.6 160 160-71.6 160-160 160zm12-112h-24c-6.6 0-12-5.4-12-12V204c0-6.6 5.4-12 12-12h24c6.6 0 12 5.4 12 12v136c0 6.6-5.4 12-12 12z"/>
+            </svg>
+          </div>
       `
 
       spanIn.appendChild(template.content)

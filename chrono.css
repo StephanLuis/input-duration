@@ -57,16 +57,15 @@ padding: 2px;
   border: none;
 } 
 
-
-#svgContainer {
-width: 10px;
-height: 10px;
-padding-left: 2px;
-padding-right: 2px;
-color: black;
+ /* between digit span */
+.bds{
+  padding-bottom: 1px;
 }
 
-
-path{
-fill: black;
+#svgContainer {
+width: 12px;
+height: 12px;
+padding-top: 1px;
+padding-right: 2px;
+color: black;
 }
