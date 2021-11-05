@@ -1,5 +1,5 @@
 {
-  "name": "timeinputpolyfill",
+  "name": "chronlyhms",
   "version": "1.0.0",
   "description": "",
   "dependencies": {
@@ -22,12 +22,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/StephanLuis/TimeInputPolyfill.git"
+    "url": "git+https://github.com/StephanLuis/chronlyhms.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/StephanLuis/TimeInputPolyfill/issues"
+    "url": "https://github.com/StephanLuis/chronlyhms/issues"
   },
-  "homepage": "https://github.com/StephanLuis/TimeInputPolyfill#readme"
+  "homepage": "https://github.com/StephanLuis/chronlyhms#readme"
 }
