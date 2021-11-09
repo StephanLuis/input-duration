@@ -46,6 +46,14 @@ export default class Chron {
 
   set HMSmS(input) {
 
+    // reset values to zero before setting
+    document.querySelector("#sH").value = "00";
+    document.querySelector("#sM").value = "00";
+    document.querySelector("#sS").value = "00";
+    document.querySelector("#sMS").value = "000";
+
+
+
     // input as decimal/ number / or string
 
     var dArr = input.toString().split(':');
@@ -65,7 +73,7 @@ export default class Chron {
       // minutes and seconds
       case 2:
 
-       
+
         document.querySelector("#sM").value = Number(dArr[0]);
         splitSecMilliSec(dArr[1]);
 
@@ -84,7 +92,7 @@ export default class Chron {
 
     }
 
-    function splitSecMilliSec(dArrSecs){
+    function splitSecMilliSec(dArrSecs) {
 
       var sArr = dArrSecs.split('.');
 
