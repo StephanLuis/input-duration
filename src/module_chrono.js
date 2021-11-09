@@ -17,7 +17,7 @@ export default class Chron {
 
 
   }
-
+  // 'virtual' set methods as all values come from control
   get hour() {
     return document.querySelector("#sH").value;
   }
@@ -35,9 +35,77 @@ export default class Chron {
   }
 
   // reports a value of the control
-  get timePoint() {
+  get HMSmS() {
     return this.hour + ":" + this.minute + ":" + this.second + "." + this.milliSec;
   }
+
+  // set timepoint
+  // - take many formats of time (a little different than on looper), 
+  // - set the control values (? intermediate steps? like set hour, minute etc.? )
+  //      -- #sH, #sM, #sS, #sMS
+
+  set HMSmS(input) {
+
+    // input as decimal/ number / or string
+
+    var dArr = input.toString().split(':');
+
+    switch (dArr.length) {
+
+      // error
+      case 0:
+        break;
+
+      // seconds (w/ w/o mS) only, ms will need split.
+      case 1:
+
+        splitSecMilliSec(dArr[0]);
+        break;
+
+      // minutes and seconds
+      case 2:
+
+       
+        document.querySelector("#sM").value = Number(dArr[0]);
+        splitSecMilliSec(dArr[1]);
+
+        break;
+
+      // hours minutes seconds
+
+      case 3:
+
+        document.querySelector("#sH").value = Number(dArr[0]);
+        document.querySelector("#sM").value = Number(dArr[1]);
+        splitSecMilliSec(dArr[2]);
+
+        break;
+
+
+    }
+
+    function splitSecMilliSec(dArrSecs){
+
+      var sArr = dArrSecs.split('.');
+
+      switch (sArr.length) {
+        case 0:
+          break;
+
+        case 1:
+          document.querySelector("#sS").value = Number(sArr[0]);
+          break;
+
+        case 2:
+          document.querySelector("#sS").value = Number(sArr[0]);
+          document.querySelector("#sMS").value = Number(sArr[1]);
+          break;
+      }
+
+    }
+
+  }
+
 
   // array of elements with data-attribute univHMS
   // get univHMSinp() {
