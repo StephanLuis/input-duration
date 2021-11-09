@@ -47,10 +47,15 @@ export default class Chron {
   set HMSmS(input) {
 
     // reset values to zero before setting
-    document.querySelector("#sH").value = "00";
-    document.querySelector("#sM").value = "00";
-    document.querySelector("#sS").value = "00";
-    document.querySelector("#sMS").value = "000";
+    var elHour = document.querySelector("#sH");
+    var elMinute = document.querySelector("#sM");
+    var elSec = document.querySelector("#sS");
+    var elMSec = document.querySelector("#sMS");
+
+    elHour.value = "00";
+    elMinute.value = "00";
+    elSec.value = "00";
+    elMSec.value = "000";
 
 
 
@@ -74,7 +79,9 @@ export default class Chron {
       case 2:
 
 
-        document.querySelector("#sM").value = Number(dArr[0]);
+        elMinute.value = Number(dArr[0]);
+        elMinute.dispatchEvent(new Event('change'));
+        
         splitSecMilliSec(dArr[1]);
 
         break;
@@ -83,13 +90,15 @@ export default class Chron {
 
       case 3:
 
-        document.querySelector("#sH").value = Number(dArr[0]);
-        document.querySelector("#sM").value = Number(dArr[1]);
+        elHour.value = Number(dArr[0]);
+        elHour.dispatchEvent(new Event('change'));
+
+        elMinute.value = Number(dArr[1]);
+        elMinute.dispatchEvent(new Event('change'));
+        
         splitSecMilliSec(dArr[2]);
 
         break;
-
-
     }
 
     function splitSecMilliSec(dArrSecs) {
@@ -101,12 +110,18 @@ export default class Chron {
           break;
 
         case 1:
-          document.querySelector("#sS").value = Number(sArr[0]);
+          elSec.value = Number(sArr[0]);
+          elSec.dispatchEvent(new Event('change'));
+
           break;
 
         case 2:
-          document.querySelector("#sS").value = Number(sArr[0]);
-          document.querySelector("#sMS").value = Number(sArr[1]);
+          elSec.value = Number(sArr[0]);
+          elSec.dispatchEvent(new Event('change'));
+
+          elMSec.value = Number(sArr[1] );
+          elMSec.dispatchEvent(new Event('change'));
+
           break;
       }
 
