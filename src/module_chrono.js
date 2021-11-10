@@ -67,6 +67,7 @@ export default class Chron {
 
       // error
       case 0:
+        console.log('setting value error');
         break;
 
       // seconds (w/ w/o mS) only, ms will need split.
@@ -107,6 +108,7 @@ export default class Chron {
 
       switch (sArr.length) {
         case 0:
+          console.log('setting value error');
           break;
 
         case 1:
@@ -119,7 +121,9 @@ export default class Chron {
           elSec.value = Number(sArr[0]);
           elSec.dispatchEvent(new Event('change'));
 
-          elMSec.value = Number(sArr[1] );
+          // 2 => 200 , 02 => 020 002 => 002
+          // dec in front * 1000
+          elMSec.value = Number('0.' + sArr[1]) * 1000;
           elMSec.dispatchEvent(new Event('change'));
 
           break;
