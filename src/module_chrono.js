@@ -14,6 +14,7 @@ export default class Chron {
     this.addLeftRightToggle();
     this.addNumericInput();
     this.addClicksToActivate();
+    this.addUpdateParentInput();
 
 
   }
@@ -423,6 +424,30 @@ export default class Chron {
     document.querySelector("#sM").addEventListener("click", function () { this.select(); });
     document.querySelector("#sS").addEventListener("click", function () { this.select(); });
     document.querySelector("#sMS").addEventListener("click", function () { this.select(); });
+  }
+
+  addUpdateParentInput(){
+
+
+    // update to All and foreach =>
+    document.querySelector(".timeCase input").addEventListener("change", function () { 
+      
+      // get timecase id with 'this', should be the element triggering the event
+
+      console.log(this.id + " called this change event");
+
+      // get input hidden element with id (parent of timecase)
+
+      // update value
+
+
+      // first:
+      // add input hidden with id like in addHTML() 
+
+
+
+       });
+
   }
 
 }
