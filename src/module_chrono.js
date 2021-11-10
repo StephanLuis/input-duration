@@ -83,7 +83,7 @@ export default class Chron {
 
         elMinute.value = Number(dArr[0]);
         elMinute.dispatchEvent(new Event('change'));
-        
+
         splitSecMilliSec(dArr[1]);
 
         break;
@@ -97,7 +97,7 @@ export default class Chron {
 
         elMinute.value = Number(dArr[1]);
         elMinute.dispatchEvent(new Event('change'));
-        
+
         splitSecMilliSec(dArr[2]);
 
         break;
@@ -159,14 +159,21 @@ export default class Chron {
     univHMSinp.forEach(el => {
       // code
 
-
-      var timeCase = document.createElement("div");
+      var timeCase = document.createElement('div');
+      timeCase.id = el.id + '_timeCase';
+      timeCase.classList.add('timeCase');
 
       [...el.attributes].forEach(attr => { timeCase.setAttribute(attr.nodeName, attr.nodeValue) });
 
       el.replaceWith(timeCase);
 
-      timeCase.classList.add('timeCase');
+     
+
+      var paramHolder = document.createElement('param');
+      paramHolder.name = el.id;
+      
+      timeCase.appendChild(paramHolder);
+
 
       var template = document.createElement('template');
       template.innerHTML = `
@@ -429,28 +436,28 @@ export default class Chron {
     document.querySelector("#sMS").addEventListener("click", function () { this.select(); });
   }
 
-  addUpdateParentInput(){
+  addUpdateParentInput() {
 
 
     // update to All and foreach =>
     document.querySelectorAll(".timeCase input").forEach(item =>
-      item.addEventListener("change", function () { 
-      
-      // get timecase id with 'this', should be the element triggering the event
+      item.addEventListener("change", function () {
 
-      console.log(this.id + " called this change event");
+        // get timecase id with 'this', should be the element triggering the event
 
-      // get input hidden element with id (parent of timecase)
+        console.log(this.id + " called this change event");
 
-      // update value
+        // get input hidden element with id (parent of timecase)
 
-
-      // first:
-      // add input hidden with id like in addHTML() 
+        // update value
 
 
+        // first:
+        // add input hidden with id like in addHTML() 
 
-       }));
+
+
+      }));
 
   }
 
