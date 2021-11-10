@@ -159,13 +159,14 @@ export default class Chron {
     univHMSinp.forEach(el => {
       // code
 
-      var spanIn = document.createElement("div");
 
-      [...el.attributes].forEach(attr => { spanIn.setAttribute(attr.nodeName, attr.nodeValue) });
+      var timeCase = document.createElement("div");
 
-      el.replaceWith(spanIn);
+      [...el.attributes].forEach(attr => { timeCase.setAttribute(attr.nodeName, attr.nodeValue) });
 
-      spanIn.classList.add('timeCase');
+      el.replaceWith(timeCase);
+
+      timeCase.classList.add('timeCase');
 
       var template = document.createElement('template');
       template.innerHTML = `
@@ -182,7 +183,9 @@ export default class Chron {
           </div>
       `
 
-      spanIn.appendChild(template.content)
+      timeCase.appendChild(template.content)
+
+
       console.log(el);
 
     });
@@ -430,7 +433,8 @@ export default class Chron {
 
 
     // update to All and foreach =>
-    document.querySelector(".timeCase input").addEventListener("change", function () { 
+    document.querySelectorAll(".timeCase input").forEach(item =>
+      item.addEventListener("change", function () { 
       
       // get timecase id with 'this', should be the element triggering the event
 
@@ -446,7 +450,7 @@ export default class Chron {
 
 
 
-       });
+       }));
 
   }
 
