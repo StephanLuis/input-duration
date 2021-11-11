@@ -40,22 +40,25 @@ export default class Chron {
     return this.hour + ":" + this.minute + ":" + this.second + "." + this.milliSec;
   }
 
+
+  // sets value of timecase param 
   HMSmSvalue(event) {
 
-  //   console.log(e.target.id + " called this change event, id will be removed");
+    //   console.log(e.target.id + " called this change event, id will be removed");
 
-  //  console.log(e.target.parentNode.id + " is the parent node id");
+    //  console.log(e.target.parentNode.id + " is the parent node id");
 
-  console.log('event: ' + event.target);
-  console.log('event id: ' + event.target.id);
+    console.log('event: ' + event.target);
+    console.log('event id: ' + event.target.id);
 
-  console.log(event.target.parentNode.id + " is the parent node id");
-  // console.log('button: ' + button);
-  // console.log('button id: ' + button.id);
+    console.log(event.target.parentNode.id + " is the parent node id");
+    // console.log('button: ' + button);
+    // console.log('button id: ' + button.id);
 
+    var id = event.target.parentNode.id;
 
-  //  var timeCase = document.querySelector('#' + id);
-   // return timeCase.querySelector('input .sH').value + ":" + timeCase.querySelector('input .sM').value + ":" + timeCase.querySelector('input .sS').value + "." + timeCase.querySelector('input .sMS').value;
+    var timeCase = document.querySelector('#' + id);
+    timeCase.querySelector('param').value = timeCase.querySelector('input.sH').value + ":" + timeCase.querySelector('input.sM').value + ":" + timeCase.querySelector('input.sS').value + "." + timeCase.querySelector('input.sMS').value;
 
   }
 
@@ -196,10 +199,10 @@ export default class Chron {
 
       var template = document.createElement('template');
       template.innerHTML = `
-          <input type="number" class="sH D2 ts_digit" name="startHours" id="sH" data-tp="1" min="-1" max="100" value="00" ><span class="bds">:</span>
-          <input type="number" class="D2 ts_digit" name="startMinutes" id="sM" data-tp="2" min="-1" max="60" value="00"><span class="bds">:</span>
-          <input type="number" class="D2 ts_digit" name="startSeconds" id="sS" data-tp="3" min="-1" max="60" value="00"><span class="bds">.</span>
-          <input type="number" class="D3 ts_digit" name="startMilliSecs" id="sMS" data-tp="4" min="-10" max="1010" step="10" value="000">
+          <input type="number" class="sH D2 ts_digit" name="startHours" data-tp="1" min="-1" max="100" value="00" ><span class="bds">:</span>
+          <input type="number" class="sM D2 ts_digit" name="startMinutes" data-tp="2" min="-1" max="60" value="00"><span class="bds">:</span>
+          <input type="number" class="sS D2 ts_digit" name="startSeconds" data-tp="3" min="-1" max="60" value="00"><span class="bds">.</span>
+          <input type="number" class="sMS D3 ts_digit" name="startMilliSecs" data-tp="4" min="-10" max="1010" step="10" value="000">
           <div id="svgContainer">
             <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
               focusable="false" data-prefix="fal" data-icon="stopwatch" class="svg-inline--fa fa-stopwatch fa-w-14"
@@ -231,7 +234,7 @@ export default class Chron {
 
 
     // milliseconds
-    document.querySelector("#sMS").addEventListener('change', function () {
+    document.querySelector("input.sMS").addEventListener('change', function () {
       if (!isNaN(this.value) && this.value.length === 2) {
         this.value = '0' + this.value;
       }
@@ -247,45 +250,45 @@ export default class Chron {
     // ex. 99 uparrow to 0 hours, 59 uparrow to 0 minutes and seconds, 990 uparrow to 010, downarrow 000 milliseconds
 
 
-    document.querySelector("#sH")
+    document.querySelector("input.sH")
       .addEventListener('change', function (event) {
-        if (document.querySelector("#sH").value == 100) {
-          document.querySelector("#sH").value = '00';
+        if (document.querySelector("input.sH").value == 100) {
+          document.querySelector("input.sH").value = '00';
         }
-        if (document.querySelector("#sH").value == -1) {
-          document.querySelector("#sH").value = 99;
+        if (document.querySelector("input.sH").value == -1) {
+          document.querySelector("input.sH").value = 99;
         }
       });
 
-    document.querySelector("#sM")
+    document.querySelector("input.sM")
       .addEventListener('change', function (event) {
-        if (document.querySelector("#sM").value == 60) {
-          document.querySelector("#sM").value = '00';
+        if (document.querySelector("input.sM").value == 60) {
+          document.querySelector("input.sM").value = '00';
         }
-        if (document.querySelector("#sM").value == -1) {
-          document.querySelector("#sM").value = 59;
+        if (document.querySelector("input.sM").value == -1) {
+          document.querySelector("input.sM").value = 59;
         }
       });
 
-    document.querySelector("#sS")
+    document.querySelector("input.sS")
       .addEventListener('change', function (event) {
-        if (document.querySelector("#sS").value == 60) {
-          document.querySelector("#sS").value = '00';
+        if (document.querySelector("input.sS").value == 60) {
+          document.querySelector("input.sS").value = '00';
         }
-        if (document.querySelector("#sS").value == -1) {
-          document.querySelector("#sS").value = 59;
+        if (document.querySelector("input.sS").value == -1) {
+          document.querySelector("input.sS").value = 59;
         }
       });
 
-    document.querySelector("#sMS")
+    document.querySelector("input.sMS")
       .addEventListener('change', function (event) {
-        if (document.querySelector("#sMS").value == 1000) {
-          document.querySelector("#sMS").value = "010";
+        if (document.querySelector("input.sMS").value == 1000) {
+          document.querySelector("input.sMS").value = "010";
         }
-        if (document.querySelector("#sMS").value == -10) {
-          document.querySelector("#sMS").value = 990;
+        if (document.querySelector("input.sMS").value == -10) {
+          document.querySelector("input.sMS").value = 990;
         }
-        if (document.querySelector("#sMS").value == 0) {
+        if (document.querySelector("input.sMS").value == 0) {
         }
       });
 
@@ -379,7 +382,8 @@ export default class Chron {
 
     // three types of boxes, hours or minutes and seconds (are the same) or milliseconds
     // 
-    setInputFilter(document.getElementById("sH"), function (value) {
+    // sH
+    setInputFilter(document.querySelector('input.sH'), function (value) {
 
 
       var newV = /^([0-9]?|[0-9][0-9]?)$/.test(value);
@@ -387,8 +391,8 @@ export default class Chron {
       console.log("value: " + value);
 
       if (value.length === 2) {
-        document.getElementById("sM").focus();
-        document.getElementById("sM").select();
+        document.querySelector('input.sM').focus();
+        document.querySelector('input.sM').select();
 
       }
 
@@ -397,7 +401,7 @@ export default class Chron {
     });
 
 
-    setInputFilter(document.getElementById("sM"), function (value) {
+    setInputFilter(document.querySelector('input.sM'), function (value) {
 
 
       var newV = /^([0-9]?|[0-5][0-9]?)$/.test(value);
@@ -405,15 +409,16 @@ export default class Chron {
       console.log("value: " + value);
 
       if (value > 5 || value.length === 2) {
-        document.getElementById("sS").focus();
-        document.getElementById("sS").select();
+        document.querySelector('input.sS').focus();
+        document.querySelector('input.sS').select();
+
       }
 
       return newV;
 
     });
 
-    setInputFilter(document.getElementById("sS"), function (value) {
+    setInputFilter(document.querySelector('input.sS'), function (value) {
 
 
       var newV = /^([0-9]?|[0-5][0-9]?)$/.test(value);
@@ -421,8 +426,8 @@ export default class Chron {
       console.log("value: " + value);
 
       if (value > 5 || value.length === 2) {
-        document.getElementById("sMS").focus();
-        document.getElementById("sMS").select();
+        document.querySelector('input.sMS').focus();
+        document.querySelector('input.sMS').select();
       }
 
       return newV;
@@ -430,7 +435,7 @@ export default class Chron {
     });
 
 
-    setInputFilter(document.getElementById("sMS"), function (value) {
+    setInputFilter(document.querySelector('input.sMS'), function (value) {
 
 
       var newV = /^([0-9]?|[0-9][0-9]?|[0-9][0-9][0-9]?)$/.test(value);
@@ -438,7 +443,7 @@ export default class Chron {
       console.log("value: " + value);
 
       if (value.length === 3) {
-        document.getElementById("sMS").blur();
+        document.querySelector('input.sMS').blur();
       }
 
       return newV;
@@ -449,40 +454,40 @@ export default class Chron {
 
   // click to activate input of values
   addClicksToActivate() {
-    document.querySelector("#sH").addEventListener("click", function () { this.select(); });
-    document.querySelector("#sM").addEventListener("click", function () { this.select(); });
-    document.querySelector("#sS").addEventListener("click", function () { this.select(); });
-    document.querySelector("#sMS").addEventListener("click", function () { this.select(); });
+    document.querySelectorAll("input.sH").forEach(sh => sh.addEventListener("click", function () { this.select(); }));
+    document.querySelectorAll("input.sM").forEach(sm => sm.addEventListener("click", function () { this.select(); }));
+    document.querySelectorAll("input.sS").forEach(ss => ss.addEventListener("click", function () { this.select(); }));
+    document.querySelectorAll("input.sMS").forEach(sms => sms.addEventListener("click", function () { this.select(); }));
   }
 
   addUpdateParentInput() {
 
-   // this.eventButtons.forEach(button =>
-   //   button.addEventListener('click', this.method1.bind(this)));
+    // this.eventButtons.forEach(button =>
+    //   button.addEventListener('click', this.method1.bind(this)));
 
     // update to All and foreach =>
     document.querySelectorAll(".timeCase input").forEach(item =>
       item.addEventListener('change', event => this.HMSmSvalue(event)));
-      
-      // function (e, HMSmSvalue) {
+
+    // function (e, HMSmSvalue) {
 
 
-      //   // get timecase id with 'this', should be the element triggering the event
+    //   // get timecase id with 'this', should be the element triggering the event
 
-      //   console.log(e.target.id + " called this change event, id will be removed");
+    //   console.log(e.target.id + " called this change event, id will be removed");
 
-      //   console.log(e.target.parentNode.id + " is the parent node id");
+    //   console.log(e.target.parentNode.id + " is the parent node id");
 
-      //   console.log(HMSmSvalue);
+    //   console.log(HMSmSvalue);
 
-      //   HMSmSvalue(e.target.parentNode.id);
-      //   // delegate method call for valueHMSmS passing in parentNode id
-      //   // update parentNode param value
-
-
+    //   HMSmSvalue(e.target.parentNode.id);
+    //   // delegate method call for valueHMSmS passing in parentNode id
+    //   // update parentNode param value
 
 
-      // }));
+
+
+    // }));
 
   }
 
