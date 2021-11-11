@@ -40,6 +40,25 @@ export default class Chron {
     return this.hour + ":" + this.minute + ":" + this.second + "." + this.milliSec;
   }
 
+  HMSmSvalue(event) {
+
+  //   console.log(e.target.id + " called this change event, id will be removed");
+
+  //  console.log(e.target.parentNode.id + " is the parent node id");
+
+  console.log('event: ' + event.target);
+  console.log('event id: ' + event.target.id);
+
+  console.log(event.target.parentNode.id + " is the parent node id");
+  // console.log('button: ' + button);
+  // console.log('button id: ' + button.id);
+
+
+  //  var timeCase = document.querySelector('#' + id);
+   // return timeCase.querySelector('input .sH').value + ":" + timeCase.querySelector('input .sM').value + ":" + timeCase.querySelector('input .sS').value + "." + timeCase.querySelector('input .sMS').value;
+
+  }
+
   // set timepoint
   // - take many formats of time (a little different than on looper), 
   // - set the control values (? intermediate steps? like set hour, minute etc.? )
@@ -167,17 +186,17 @@ export default class Chron {
 
       el.replaceWith(timeCase);
 
-     
+
 
       var paramHolder = document.createElement('param');
       paramHolder.name = el.id;
-      
+
       timeCase.appendChild(paramHolder);
 
 
       var template = document.createElement('template');
       template.innerHTML = `
-          <input type="number" class="D2 ts_digit" name="startHours" id="sH" data-tp="1" min="-1" max="100" value="00" ><span class="bds">:</span>
+          <input type="number" class="sH D2 ts_digit" name="startHours" id="sH" data-tp="1" min="-1" max="100" value="00" ><span class="bds">:</span>
           <input type="number" class="D2 ts_digit" name="startMinutes" id="sM" data-tp="2" min="-1" max="60" value="00"><span class="bds">:</span>
           <input type="number" class="D2 ts_digit" name="startSeconds" id="sS" data-tp="3" min="-1" max="60" value="00"><span class="bds">.</span>
           <input type="number" class="D3 ts_digit" name="startMilliSecs" id="sMS" data-tp="4" min="-10" max="1010" step="10" value="000">
@@ -438,26 +457,32 @@ export default class Chron {
 
   addUpdateParentInput() {
 
+   // this.eventButtons.forEach(button =>
+   //   button.addEventListener('click', this.method1.bind(this)));
 
     // update to All and foreach =>
     document.querySelectorAll(".timeCase input").forEach(item =>
-      item.addEventListener("change", function () {
-
-        // get timecase id with 'this', should be the element triggering the event
-
-        console.log(this.id + " called this change event");
-
-        // get input hidden element with id (parent of timecase)
-
-        // update value
+      item.addEventListener('change', event => this.HMSmSvalue(event)));
+      
+      // function (e, HMSmSvalue) {
 
 
-        // first:
-        // add input hidden with id like in addHTML() 
+      //   // get timecase id with 'this', should be the element triggering the event
+
+      //   console.log(e.target.id + " called this change event, id will be removed");
+
+      //   console.log(e.target.parentNode.id + " is the parent node id");
+
+      //   console.log(HMSmSvalue);
+
+      //   HMSmSvalue(e.target.parentNode.id);
+      //   // delegate method call for valueHMSmS passing in parentNode id
+      //   // update parentNode param value
 
 
 
-      }));
+
+      // }));
 
   }
 

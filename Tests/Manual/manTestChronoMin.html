@@ -53,6 +53,10 @@
         <br>
         <h2>Fix Time Set for New Control</h2>
         <ul>
+          <li>set method for id timeCase actually updates the timeCase input Numbers</li>
+          <li>change of the inputs updates the param value </li>
+          <li>get method for id timeCase actually gets value from param</li>
+          <br>
           <li>Best strategy is to have separate change eventhandler on number inputs trigger update to the <param> adding the value</li>
           <li> then getting the value by id just return param value</li>
           <li> start by converting all the listeners to class based, set by for each through queryAll(class) </li>
