@@ -15,7 +15,7 @@ export default class Chron {
     this.addNumericInput();
     this.addClicksToActivate();
     this.addUpdateParentInput();
-
+    this.removeAnotherBugInHTML();
 
   }
   // 'virtual' set methods as all values come from control
@@ -369,7 +369,7 @@ export default class Chron {
               tp_active--;
             }
             d.querySelector("[data-tp='" + tp_active + "']").focus();
-            setTimeout(function () { d.querySelector("[data-tp='" + tp_active + "']").select(); }, 10);
+            setTimeout(function () { d.querySelector("[data-tp='" + tp_active + "']").select(); }, 5);
             el_disp.innerHTML = event.key;
             console.log("tp_active: " + tp_active);
             break;
@@ -380,7 +380,7 @@ export default class Chron {
               tp_active++;
             }
             d.querySelector("[data-tp='" + tp_active + "']").focus();
-            setTimeout(function () { d.querySelector("[data-tp='" + tp_active + "']").select(); }, 10);
+            setTimeout(function () { d.querySelector("[data-tp='" + tp_active + "']").select(); }, 5);
             el_disp.innerHTML = event.key;
             console.log("tp_active: " + tp_active)
             break;
@@ -543,6 +543,18 @@ export default class Chron {
 
 
     // }));
+
+  }
+  removeAnotherBugInHTML(){
+    document.querySelectorAll(".timeCase input").forEach(item =>
+      item.addEventListener('keypress', function(e){
+        e = e || window.event;
+        var charCode = (typeof e.which == "undefined") ? e.keyCode : e.which;
+        var charStr = String.fromCharCode(charCode);
+      
+        if (!charStr.match(/^[0-9]+$/))
+          e.preventDefault();
+      }));
 
   }
 
