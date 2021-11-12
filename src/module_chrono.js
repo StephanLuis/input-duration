@@ -234,11 +234,11 @@ export default class Chron {
 
 
     // milliseconds
-    document.querySelector("input.sMS").addEventListener('change', function () {
+    document.querySelectorAll("input.sMS").forEach(i =>  i.addEventListener('change', function () {
       if (!isNaN(this.value) && this.value.length === 2) {
         this.value = '0' + this.value;
       }
-    });
+    }));
 
   }
 
@@ -249,48 +249,91 @@ export default class Chron {
     // Numeric Value looping (eventually this can be 'parameterised' refactored)
     // ex. 99 uparrow to 0 hours, 59 uparrow to 0 minutes and seconds, 990 uparrow to 010, downarrow 000 milliseconds
 
+    document.querySelectorAll("input.sH").forEach(i => 
+      i.addEventListener('change', function (event) {
+        if (i.value == 100) {
+          i.value = '00';
+        }
+        if (i.value == -1) {
+          i.value = 99;
+        }
+      }));
 
-    document.querySelector("input.sH")
-      .addEventListener('change', function (event) {
-        if (document.querySelector("input.sH").value == 100) {
-          document.querySelector("input.sH").value = '00';
+    document.querySelectorAll("input.sM").forEach(i =>
+      i.addEventListener('change', function (event) {
+        if (i.value == 60) {
+          i.value = '00';
         }
-        if (document.querySelector("input.sH").value == -1) {
-          document.querySelector("input.sH").value = 99;
+        if (i.value == -1) {
+          i.value = 59;
         }
-      });
+      }));
 
-    document.querySelector("input.sM")
-      .addEventListener('change', function (event) {
-        if (document.querySelector("input.sM").value == 60) {
-          document.querySelector("input.sM").value = '00';
+    document.querySelectorAll("input.sS").forEach(i =>
+      i.addEventListener('change', function (event) {
+        if (i.value == 60) {
+          i.value = '00';
         }
-        if (document.querySelector("input.sM").value == -1) {
-          document.querySelector("input.sM").value = 59;
+        if (i.value == -1) {
+          i.value = 59;
         }
-      });
+      }));
 
-    document.querySelector("input.sS")
-      .addEventListener('change', function (event) {
-        if (document.querySelector("input.sS").value == 60) {
-          document.querySelector("input.sS").value = '00';
+    document.querySelectorAll("input.sMS").forEach(i =>
+      i.addEventListener('change', function (event) {
+        if (i.value == 1000) {
+          i.value = "010";
         }
-        if (document.querySelector("input.sS").value == -1) {
-          document.querySelector("input.sS").value = 59;
+        if (i.value == -10) {
+          i.value = 990;
         }
-      });
+        if (i.value == 0) {
+        }
+      }));
 
-    document.querySelector("input.sMS")
-      .addEventListener('change', function (event) {
-        if (document.querySelector("input.sMS").value == 1000) {
-          document.querySelector("input.sMS").value = "010";
-        }
-        if (document.querySelector("input.sMS").value == -10) {
-          document.querySelector("input.sMS").value = 990;
-        }
-        if (document.querySelector("input.sMS").value == 0) {
-        }
-      });
+
+
+    // document.querySelectorAll("input.sH").forEach(i => 
+    //   i.addEventListener('change', function (event) {
+    //     if (document.querySelector("input.sH").value == 100) {
+    //       document.querySelector("input.sH").value = '00';
+    //     }
+    //     if (document.querySelector("input.sH").value == -1) {
+    //       document.querySelector("input.sH").value = 99;
+    //     }
+    //   }));
+
+    // document.querySelectorAll("input.sM").forEach(i =>
+    //   i.addEventListener('change', function (event) {
+    //     if (document.querySelector("input.sM").value == 60) {
+    //       document.querySelector("input.sM").value = '00';
+    //     }
+    //     if (document.querySelector("input.sM").value == -1) {
+    //       document.querySelector("input.sM").value = 59;
+    //     }
+    //   }));
+
+    // document.querySelectorAll("input.sS").forEach(i =>
+    //   i.addEventListener('change', function (event) {
+    //     if (document.querySelector("input.sS").value == 60) {
+    //       document.querySelector("input.sS").value = '00';
+    //     }
+    //     if (document.querySelector("input.sS").value == -1) {
+    //       document.querySelector("input.sS").value = 59;
+    //     }
+    //   }));
+
+    // document.querySelectorAll("input.sMS").forEach(i =>
+    //   i.addEventListener('change', function (event) {
+    //     if (document.querySelector("input.sMS").value == 1000) {
+    //       document.querySelector("input.sMS").value = "010";
+    //     }
+    //     if (document.querySelector("input.sMS").value == -10) {
+    //       document.querySelector("input.sMS").value = 990;
+    //     }
+    //     if (document.querySelector("input.sMS").value == 0) {
+    //     }
+    //   }));
 
   }
 
@@ -302,8 +345,16 @@ export default class Chron {
     // Left and Right arrow key toggle between HMSmS
     // this depends on data-attributes ex. data-tp="1" in the HTML
 
-    document.querySelector("div.timeCase")
-      .addEventListener('keydown', function (event) {
+    document.querySelectorAll("div.timeCase").forEach(d =>
+      d.addEventListener('keydown', function (event) {
+
+        console.log('Arrow event.target.id: ' + event.target.id);
+
+        console.log(event.target);
+
+        console.log('for each d: ' + d);
+
+        console.log('for each d id: ' + d.id);
 
         var tp_active;
 
@@ -317,8 +368,8 @@ export default class Chron {
             if (tp_active >= 2) {
               tp_active--;
             }
-            document.querySelector("[data-tp='" + tp_active + "']").focus();
-            setTimeout(function () { document.querySelector("[data-tp='" + tp_active + "']").select(); }, 10);
+            d.querySelector("[data-tp='" + tp_active + "']").focus();
+            setTimeout(function () { d.querySelector("[data-tp='" + tp_active + "']").select(); }, 10);
             el_disp.innerHTML = event.key;
             console.log("tp_active: " + tp_active);
             break;
@@ -328,8 +379,8 @@ export default class Chron {
             if (tp_active <= 3) {
               tp_active++;
             }
-            document.querySelector("[data-tp='" + tp_active + "']").focus();
-            setTimeout(function () { document.querySelector("[data-tp='" + tp_active + "']").select(); }, 10);
+            d.querySelector("[data-tp='" + tp_active + "']").focus();
+            setTimeout(function () { d.querySelector("[data-tp='" + tp_active + "']").select(); }, 10);
             el_disp.innerHTML = event.key;
             console.log("tp_active: " + tp_active)
             break;
@@ -351,7 +402,7 @@ export default class Chron {
             el_disp.innerHTML = event.key;
             break;
         }
-      });
+      }));
 
   }
 
@@ -383,7 +434,8 @@ export default class Chron {
     // three types of boxes, hours or minutes and seconds (are the same) or milliseconds
     // 
     // sH
-    setInputFilter(document.querySelector('input.sH'), function (value) {
+    
+    document.querySelectorAll('input.sH').forEach( i => setInputFilter( i, function (value) {
 
 
       var newV = /^([0-9]?|[0-9][0-9]?)$/.test(value);
@@ -391,17 +443,19 @@ export default class Chron {
       console.log("value: " + value);
 
       if (value.length === 2) {
-        document.querySelector('input.sM').focus();
-        document.querySelector('input.sM').select();
+
+        i.parentNode.querySelector('input.sM').focus();
+        i.parentNode.querySelector('input.sM').select();
 
       }
 
       return newV;
 
-    });
-
-
-    setInputFilter(document.querySelector('input.sM'), function (value) {
+    }));
+    
+    
+    
+    document.querySelectorAll('input.sM').forEach(i => setInputFilter( i, function (value) {
 
 
       var newV = /^([0-9]?|[0-5][0-9]?)$/.test(value);
@@ -409,16 +463,17 @@ export default class Chron {
       console.log("value: " + value);
 
       if (value > 5 || value.length === 2) {
-        document.querySelector('input.sS').focus();
-        document.querySelector('input.sS').select();
+
+        i.parentNode.querySelector('input.sS').focus();
+        i.parentNode.querySelector('input.sS').select();
 
       }
 
       return newV;
 
-    });
+    }));
 
-    setInputFilter(document.querySelector('input.sS'), function (value) {
+    document.querySelectorAll('input.sS').forEach(i => setInputFilter( i, function (value) {
 
 
       var newV = /^([0-9]?|[0-5][0-9]?)$/.test(value);
@@ -426,16 +481,16 @@ export default class Chron {
       console.log("value: " + value);
 
       if (value > 5 || value.length === 2) {
-        document.querySelector('input.sMS').focus();
-        document.querySelector('input.sMS').select();
+        i.parentNode.querySelector('input.sMS').focus();
+        i.parentNode.querySelector('input.sMS').select();
       }
 
       return newV;
 
-    });
+    }));
 
 
-    setInputFilter(document.querySelector('input.sMS'), function (value) {
+    document.querySelectorAll('input.sMS').forEach( i => setInputFilter( i, function (value) {
 
 
       var newV = /^([0-9]?|[0-9][0-9]?|[0-9][0-9][0-9]?)$/.test(value);
@@ -443,12 +498,12 @@ export default class Chron {
       console.log("value: " + value);
 
       if (value.length === 3) {
-        document.querySelector('input.sMS').blur();
+        i.parentNode.querySelector('input.sMS').blur();
       }
 
       return newV;
 
-    });
+    }));
 
   }
 
