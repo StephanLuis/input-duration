@@ -44,17 +44,12 @@ export default class Chron {
   // sets value of timecase param 
   HMSmSvalue(event) {
 
-    //   console.log(e.target.id + " called this change event, id will be removed");
-
-    //  console.log(e.target.parentNode.id + " is the parent node id");
-
+   
     console.log('event: ' + event.target);
     console.log('event id: ' + event.target.id);
 
     console.log(event.target.parentNode.id + " is the parent node id");
-    // console.log('button: ' + button);
-    // console.log('button id: ' + button.id);
-
+   
     var id = event.target.parentNode.id;
 
     var timeCase = document.querySelector('#' + id);
@@ -199,9 +194,12 @@ export default class Chron {
 
       var template = document.createElement('template');
       template.innerHTML = `
-          <input type="number" class="sH D2 ts_digit" name="startHours" data-tp="1" min="-1" max="100" value="00" ><span class="bds">:</span>
-          <input type="number" class="sM D2 ts_digit" name="startMinutes" data-tp="2" min="-1" max="60" value="00"><span class="bds">:</span>
-          <input type="number" class="sS D2 ts_digit" name="startSeconds" data-tp="3" min="-1" max="60" value="00"><span class="bds">.</span>
+          <input type="number" class="sH D2 ts_digit" name="startHours" data-tp="1" min="-1" max="100" value="00" >
+          <span class="bds">:</span>
+          <input type="number" class="sM D2 ts_digit" name="startMinutes" data-tp="2" min="-1" max="60" value="00">
+          <span class="bds">:</span>
+          <input type="number" class="sS D2 ts_digit" name="startSeconds" data-tp="3" min="-1" max="60" value="00">
+          <span class="bds">.</span>
           <input type="number" class="sMS D3 ts_digit" name="startMilliSecs" data-tp="4" min="-10" max="1010" step="10" value="000">
           <div id="svgContainer">
             <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
@@ -214,12 +212,12 @@ export default class Chron {
 
       timeCase.appendChild(template.content)
 
-
       console.log(el);
 
     });
 
   }
+
 
   // add preceeding 0s when necessary (on update)
 
@@ -231,7 +229,6 @@ export default class Chron {
         this.value = '0' + this.value;
       }
     }));
-
 
     // milliseconds
     document.querySelectorAll("input.sMS").forEach(i =>  i.addEventListener('change', function () {
@@ -291,50 +288,6 @@ export default class Chron {
         }
       }));
 
-
-
-    // document.querySelectorAll("input.sH").forEach(i => 
-    //   i.addEventListener('change', function (event) {
-    //     if (document.querySelector("input.sH").value == 100) {
-    //       document.querySelector("input.sH").value = '00';
-    //     }
-    //     if (document.querySelector("input.sH").value == -1) {
-    //       document.querySelector("input.sH").value = 99;
-    //     }
-    //   }));
-
-    // document.querySelectorAll("input.sM").forEach(i =>
-    //   i.addEventListener('change', function (event) {
-    //     if (document.querySelector("input.sM").value == 60) {
-    //       document.querySelector("input.sM").value = '00';
-    //     }
-    //     if (document.querySelector("input.sM").value == -1) {
-    //       document.querySelector("input.sM").value = 59;
-    //     }
-    //   }));
-
-    // document.querySelectorAll("input.sS").forEach(i =>
-    //   i.addEventListener('change', function (event) {
-    //     if (document.querySelector("input.sS").value == 60) {
-    //       document.querySelector("input.sS").value = '00';
-    //     }
-    //     if (document.querySelector("input.sS").value == -1) {
-    //       document.querySelector("input.sS").value = 59;
-    //     }
-    //   }));
-
-    // document.querySelectorAll("input.sMS").forEach(i =>
-    //   i.addEventListener('change', function (event) {
-    //     if (document.querySelector("input.sMS").value == 1000) {
-    //       document.querySelector("input.sMS").value = "010";
-    //     }
-    //     if (document.querySelector("input.sMS").value == -10) {
-    //       document.querySelector("input.sMS").value = 990;
-    //     }
-    //     if (document.querySelector("input.sMS").value == 0) {
-    //     }
-    //   }));
-
   }
 
 
@@ -385,7 +338,6 @@ export default class Chron {
             console.log("tp_active: " + tp_active)
             break;
 
-
           // these keep the input selected
           case event.key == "ArrowUp":
             el_disp.innerHTML = event.key;
@@ -402,9 +354,11 @@ export default class Chron {
             el_disp.innerHTML = event.key;
             break;
         }
+
       }));
 
   }
+
 
   // numeric input (and auto toggling)
   addNumericInput() {
@@ -422,21 +376,19 @@ export default class Chron {
             this.oldSelectionEnd = this.selectionEnd;
           } else if (this.hasOwnProperty("oldValue")) {
             this.value = this.oldValue;
-            // this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
           } else {
             this.value = "";
           }
         }
       });
+
     }
 
 
-    // three types of boxes, hours or minutes and seconds (are the same) or milliseconds
-    // 
-    // sH
-    
-    document.querySelectorAll('input.sH').forEach( i => setInputFilter( i, function (value) {
+    // three boxes, hours or minutes and seconds (are the same) but milliseconds is different
 
+    // sH
+    document.querySelectorAll('input.sH').forEach( i => setInputFilter( i, function (value) {
 
       var newV = /^([0-9]?|[0-9][0-9]?)$/.test(value);
 
@@ -452,8 +404,6 @@ export default class Chron {
       return newV;
 
     }));
-    
-    
     
     document.querySelectorAll('input.sM').forEach(i => setInputFilter( i, function (value) {
 
@@ -475,14 +425,15 @@ export default class Chron {
 
     document.querySelectorAll('input.sS').forEach(i => setInputFilter( i, function (value) {
 
-
       var newV = /^([0-9]?|[0-5][0-9]?)$/.test(value);
 
       console.log("value: " + value);
 
       if (value > 5 || value.length === 2) {
+
         i.parentNode.querySelector('input.sMS').focus();
         i.parentNode.querySelector('input.sMS').select();
+
       }
 
       return newV;
@@ -492,13 +443,14 @@ export default class Chron {
 
     document.querySelectorAll('input.sMS').forEach( i => setInputFilter( i, function (value) {
 
-
       var newV = /^([0-9]?|[0-9][0-9]?|[0-9][0-9][0-9]?)$/.test(value);
 
       console.log("value: " + value);
 
       if (value.length === 3) {
+
         i.parentNode.querySelector('input.sMS').blur();
+
       }
 
       return newV;
@@ -509,52 +461,37 @@ export default class Chron {
 
   // click to activate input of values
   addClicksToActivate() {
+
     document.querySelectorAll("input.sH").forEach(sh => sh.addEventListener("click", function () { this.select(); }));
     document.querySelectorAll("input.sM").forEach(sm => sm.addEventListener("click", function () { this.select(); }));
     document.querySelectorAll("input.sS").forEach(ss => ss.addEventListener("click", function () { this.select(); }));
     document.querySelectorAll("input.sMS").forEach(sms => sms.addEventListener("click", function () { this.select(); }));
+
   }
 
   addUpdateParentInput() {
-
-    // this.eventButtons.forEach(button =>
-    //   button.addEventListener('click', this.method1.bind(this)));
 
     // update to All and foreach =>
     document.querySelectorAll(".timeCase input").forEach(item =>
       item.addEventListener('change', event => this.HMSmSvalue(event)));
 
-    // function (e, HMSmSvalue) {
-
-
-    //   // get timecase id with 'this', should be the element triggering the event
-
-    //   console.log(e.target.id + " called this change event, id will be removed");
-
-    //   console.log(e.target.parentNode.id + " is the parent node id");
-
-    //   console.log(HMSmSvalue);
-
-    //   HMSmSvalue(e.target.parentNode.id);
-    //   // delegate method call for valueHMSmS passing in parentNode id
-    //   // update parentNode param value
-
-
-
-
-    // }));
-
   }
+
+
   removeAnotherBugInHTML(){
+
     document.querySelectorAll(".timeCase input").forEach(item =>
+
       item.addEventListener('keypress', function(e){
+
         e = e || window.event;
         var charCode = (typeof e.which == "undefined") ? e.keyCode : e.which;
         var charStr = String.fromCharCode(charCode);
       
         if (!charStr.match(/^[0-9]+$/))
           e.preventDefault();
-      }));
+
+        }));
 
   }
 
