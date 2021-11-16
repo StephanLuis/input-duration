@@ -1,6 +1,10 @@
 {
   "name": "chronlyhms",
-  "version": "1.0.0",
+  "version": "1.0.3",
+  "author": "Stephan Luis <stephan@learnsense.org>",
+  "main": "dist/chronoBundle.js",
+  "module": "dist/chronoBundle.js",
+  "browser": "dist/chronoBundle.js",
   "description": "",
   "dependencies": {
     
@@ -24,7 +28,6 @@
     "type": "git",
     "url": "git+https://github.com/StephanLuis/chronlyhms.git"
   },
-  "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/StephanLuis/chronlyhms/issues"

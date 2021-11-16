@@ -1,7 +1,7 @@
 import './chrono.css'
 // A HH:MM:SS.mmm control that is unaffected by OSX and works on 'all' browsers.
 
-export default class Chron {
+class ChronlyHMS {
   constructor() {
 
     // fire HTML input replacement
@@ -17,69 +17,49 @@ export default class Chron {
     this.addUpdateParentInput();
     this.removeAnotherBugInHTML();
 
-  }
-  // 'virtual' set methods as all values come from control
-  get hour() {
-    return document.querySelector("#sH").value;
-  }
-
-  get minute() {
-    return document.querySelector("#sM").value;
-  }
-
-  get second() {
-    return document.querySelector("#sS").value;
-  }
-
-  get milliSec() {
-    return document.querySelector("#sMS").value;
-  }
-
-  // reports a value of the control
-  get HMSmS() {
-    return this.hour + ":" + this.minute + ":" + this.second + "." + this.milliSec;
-  }
-
-
-  // sets value of timecase param 
-  HMSmSvalue(event) {
-
-   
-    console.log('event: ' + event.target);
-    console.log('event id: ' + event.target.id);
-
-    console.log(event.target.parentNode.id + " is the parent node id");
-   
-    var id = event.target.parentNode.id;
-
-    var timeCase = document.querySelector('#' + id);
-    timeCase.querySelector('param').value = timeCase.querySelector('input.sH').value + ":" + timeCase.querySelector('input.sM').value + ":" + timeCase.querySelector('input.sS').value + "." + timeCase.querySelector('input.sMS').value;
+    // gets and sets below are regular methods in order to use parameters
 
   }
 
-  // set timepoint
+
+  // intentionally avoid any 'state', 'data' is maintained on the controls
+  // three methods are required for value, get valueHMSmS, set valueHMSmS, paramUpdateHMSmS
+
+  // get method: needs to pick up value from id.qs( parameter)
+  // will take id as parameter, check that class timeCase is present, return value
+
+ valueHMSmSget(id) {
+
+    // error of null will bubble up to user
+  
+    return document.querySelector('#' + id + '.timeCase').querySelector('param').value;
+
+  }
+
+
+  // set method: will update the individual inputs, after dissecting the time 
+  // input as decimal/ number / or string
   // - take many formats of time (a little different than on looper), 
-  // - set the control values (? intermediate steps? like set hour, minute etc.? )
-  //      -- #sH, #sM, #sS, #sMS
 
-  set HMSmS(input) {
+  valueHMSmSset(id, value) {
+
+
+    var timeCase = document.querySelector('#' + id + '.timeCase');
 
     // reset values to zero before setting
-    var elHour = document.querySelector("#sH");
-    var elMinute = document.querySelector("#sM");
-    var elSec = document.querySelector("#sS");
-    var elMSec = document.querySelector("#sMS");
+    var elHour = timeCase.querySelector(".sH");
+    var elMinute = timeCase.querySelector(".sM");
+    var elSec = timeCase.querySelector(".sS");
+    var elMSec = timeCase.querySelector(".sMS");
 
     elHour.value = "00";
     elMinute.value = "00";
     elSec.value = "00";
     elMSec.value = "000";
 
-
-
     // input as decimal/ number / or string
 
-    var dArr = input.toString().split(':');
+    var dArr = value.toString().split(':');
 
     switch (dArr.length) {
 
@@ -96,7 +76,6 @@ export default class Chron {
 
       // minutes and seconds
       case 2:
-
 
         elMinute.value = Number(dArr[0]);
         elMinute.dispatchEvent(new Event('change'));
@@ -148,27 +127,26 @@ export default class Chron {
       }
 
     }
-
   }
 
 
-  // array of elements with data-attribute univHMS
-  // get univHMSinp() {
-  //   return document.querySelectorAll("input[data-univHMS]");
-  // }
+  //  'value event', ties controls to timecase param 
+  HMSmSparamUpdate(event) {
 
-  // takes an element and innerhtml's the Chron value on each update
-  chronReport(el) {
-    document.querySelector("div.timeCase")
-      .addEventListener('change', function (event) {
 
-        el.innerHTML = this.timePoint;
+    console.log('event: ' + event.target);
+    console.log('event id: ' + event.target.id);
 
-      });
+    console.log(event.target.parentNode.id + " is the parent node id");
+
+    var id = event.target.parentNode.id;
+
+    var timeCase = document.querySelector('#' + id);
+    timeCase.querySelector('param').value = timeCase.querySelector('input.sH').value + ":" + timeCase.querySelector('input.sM').value + ":" + timeCase.querySelector('input.sS').value + "." + timeCase.querySelector('input.sMS').value;
+
   }
 
-  // convert input data-univHMS to'univHMS'
-
+  
   addHTML() {
 
     const univHMSinp = document.querySelectorAll("input[data-univHMS]");
@@ -188,6 +166,7 @@ export default class Chron {
 
       var paramHolder = document.createElement('param');
       paramHolder.name = el.id;
+      paramHolder.value = "00:00:00.000";
 
       timeCase.appendChild(paramHolder);
 
@@ -215,7 +194,6 @@ export default class Chron {
       console.log(el);
 
     });
-
   }
 
 
@@ -225,18 +203,21 @@ export default class Chron {
 
     // hours, minutes, seconds
     document.querySelectorAll("div.timeCase input").forEach(i => i.addEventListener('change', function () {
+     
       if (!isNaN(this.value) && this.value.length === 1) {
         this.value = '0' + this.value;
       }
+    
     }));
 
     // milliseconds
-    document.querySelectorAll("input.sMS").forEach(i =>  i.addEventListener('change', function () {
+    document.querySelectorAll("input.sMS").forEach(i => i.addEventListener('change', function () {
+    
       if (!isNaN(this.value) && this.value.length === 2) {
         this.value = '0' + this.value;
       }
-    }));
 
+    }));
   }
 
 
@@ -246,50 +227,59 @@ export default class Chron {
     // Numeric Value looping (eventually this can be 'parameterised' refactored)
     // ex. 99 uparrow to 0 hours, 59 uparrow to 0 minutes and seconds, 990 uparrow to 010, downarrow 000 milliseconds
 
-    document.querySelectorAll("input.sH").forEach(i => 
+    document.querySelectorAll("input.sH").forEach(i =>
       i.addEventListener('change', function (event) {
+
         if (i.value == 100) {
           i.value = '00';
         }
         if (i.value == -1) {
           i.value = 99;
         }
+
       }));
 
     document.querySelectorAll("input.sM").forEach(i =>
       i.addEventListener('change', function (event) {
+
         if (i.value == 60) {
           i.value = '00';
         }
         if (i.value == -1) {
           i.value = 59;
         }
+
       }));
 
     document.querySelectorAll("input.sS").forEach(i =>
       i.addEventListener('change', function (event) {
+
         if (i.value == 60) {
           i.value = '00';
         }
+
         if (i.value == -1) {
           i.value = 59;
         }
+
       }));
 
     document.querySelectorAll("input.sMS").forEach(i =>
       i.addEventListener('change', function (event) {
+
         if (i.value == 1000) {
           i.value = "010";
         }
+
         if (i.value == -10) {
           i.value = 990;
         }
+
         if (i.value == 0) {
         }
+
       }));
-
   }
-
 
 
   // arrow key input of values (up/down) and place toggling (left/right)
@@ -301,14 +291,6 @@ export default class Chron {
     document.querySelectorAll("div.timeCase").forEach(d =>
       d.addEventListener('keydown', function (event) {
 
-        console.log('Arrow event.target.id: ' + event.target.id);
-
-        console.log(event.target);
-
-        console.log('for each d: ' + d);
-
-        console.log('for each d id: ' + d.id);
-
         var tp_active;
 
         // these help manual testing by posting to the webapge
@@ -316,47 +298,56 @@ export default class Chron {
         el_disp.innerHTML = "None";
 
         switch (true) {
+        
           case event.key == "ArrowLeft":
             tp_active = document.activeElement.dataset.tp;
+        
             if (tp_active >= 2) {
               tp_active--;
             }
+        
             d.querySelector("[data-tp='" + tp_active + "']").focus();
             setTimeout(function () { d.querySelector("[data-tp='" + tp_active + "']").select(); }, 5);
             el_disp.innerHTML = event.key;
-            console.log("tp_active: " + tp_active);
+           
             break;
 
           case event.key == "ArrowRight":
             tp_active = document.activeElement.dataset.tp;
+        
             if (tp_active <= 3) {
               tp_active++;
             }
+        
             d.querySelector("[data-tp='" + tp_active + "']").focus();
             setTimeout(function () { d.querySelector("[data-tp='" + tp_active + "']").select(); }, 5);
             el_disp.innerHTML = event.key;
-            console.log("tp_active: " + tp_active)
+        
             break;
 
           // these keep the input selected
           case event.key == "ArrowUp":
             el_disp.innerHTML = event.key;
             setTimeout(function () { document.activeElement.select(); }, 5);
+        
             break;
 
           case event.key == "ArrowDown":
             el_disp.innerHTML = event.key;
+        
             setTimeout(function () { document.activeElement.select(); }, 5);
+        
             break;
 
           // this is good for testing, to determine whether a key press is detected
           case /^([0-9]?)$/.test(event.key):
-            el_disp.innerHTML = event.key;
-            break;
+        
+          el_disp.innerHTML = event.key;
+        
+          break;
+        
         }
-
       }));
-
   }
 
 
@@ -369,13 +360,17 @@ export default class Chron {
     function setInputFilter(textbox, inputFilter) {
       // this sets a listener and  immediately updates the value of the input number (note: can update this from input text, like by removing setSelectionRange )
       textbox.addEventListener('keyup', function () {
+
         if (/^([0-9]?)$/.test(event.key)) {
+
           if (inputFilter(this.value)) {
             this.oldValue = this.value;
             this.oldSelectionStart = this.selectionStart;
             this.oldSelectionEnd = this.selectionEnd;
+
           } else if (this.hasOwnProperty("oldValue")) {
             this.value = this.oldValue;
+
           } else {
             this.value = "";
           }
@@ -388,11 +383,9 @@ export default class Chron {
     // three boxes, hours or minutes and seconds (are the same) but milliseconds is different
 
     // sH
-    document.querySelectorAll('input.sH').forEach( i => setInputFilter( i, function (value) {
+    document.querySelectorAll('input.sH').forEach(i => setInputFilter(i, function (value) {
 
       var newV = /^([0-9]?|[0-9][0-9]?)$/.test(value);
-
-      console.log("value: " + value);
 
       if (value.length === 2) {
 
@@ -404,13 +397,11 @@ export default class Chron {
       return newV;
 
     }));
-    
-    document.querySelectorAll('input.sM').forEach(i => setInputFilter( i, function (value) {
+
+    document.querySelectorAll('input.sM').forEach(i => setInputFilter(i, function (value) {
 
 
       var newV = /^([0-9]?|[0-5][0-9]?)$/.test(value);
-
-      console.log("value: " + value);
 
       if (value > 5 || value.length === 2) {
 
@@ -423,11 +414,9 @@ export default class Chron {
 
     }));
 
-    document.querySelectorAll('input.sS').forEach(i => setInputFilter( i, function (value) {
+    document.querySelectorAll('input.sS').forEach(i => setInputFilter(i, function (value) {
 
       var newV = /^([0-9]?|[0-5][0-9]?)$/.test(value);
-
-      console.log("value: " + value);
 
       if (value > 5 || value.length === 2) {
 
@@ -441,11 +430,9 @@ export default class Chron {
     }));
 
 
-    document.querySelectorAll('input.sMS').forEach( i => setInputFilter( i, function (value) {
+    document.querySelectorAll('input.sMS').forEach(i => setInputFilter(i, function (value) {
 
       var newV = /^([0-9]?|[0-9][0-9]?|[0-9][0-9][0-9]?)$/.test(value);
-
-      console.log("value: " + value);
 
       if (value.length === 3) {
 
@@ -473,26 +460,34 @@ export default class Chron {
 
     // update to All and foreach =>
     document.querySelectorAll(".timeCase input").forEach(item =>
-      item.addEventListener('change', event => this.HMSmSvalue(event)));
+      item.addEventListener('change', event => this.HMSmSparamUpdate(event)));
 
   }
 
 
-  removeAnotherBugInHTML(){
+  removeAnotherBugInHTML() {
 
     document.querySelectorAll(".timeCase input").forEach(item =>
 
-      item.addEventListener('keypress', function(e){
+      item.addEventListener('keypress', function (e) {
 
         e = e || window.event;
         var charCode = (typeof e.which == "undefined") ? e.keyCode : e.which;
         var charStr = String.fromCharCode(charCode);
-      
+
         if (!charStr.match(/^[0-9]+$/))
           e.preventDefault();
 
-        }));
+      }));
 
   }
 
 }
+
+// (function(){
+
+//   window.chronlyHMSmS = new Chron();
+
+// })()
+
+export default ChronlyHMS;

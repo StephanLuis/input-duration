@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  entry: './src/import_chrono.js',
+  entry: './src/module_chrono.js',
   output: {
     filename: 'chronoBundle.js',
     path: path.resolve(__dirname, 'dist'),
