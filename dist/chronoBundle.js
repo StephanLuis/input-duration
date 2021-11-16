@@ -15,7 +15,7 @@
 		exports["chronoBundle"] = factory();
 	else
 		root["chronoBundle"] = factory();
-})(self, function() {
+})(this, function() {
 return /******/ (() => { // webpackBootstrap
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
