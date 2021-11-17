@@ -1,13 +1,14 @@
 const path = require('path');
 
 module.exports = {
-  entry: './src/module_chrono.js',
+  entry: './src/import_chrono.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'chronoBundle.js',
-    library: 'chronoBundle',
-    libraryTarget: 'umd',
-    globalObject: 'this'
+    library: {
+      name: 'chronoly',
+      type: 'umd',
+    },
   },
   module: {
     rules: [

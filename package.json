@@ -1,11 +1,10 @@
 {
   "name": "chronlyhms",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "author": "Stephan Luis <stephan@learnsense.org>",
   "main": "dist/chronoBundle.js",
+  "module": "src/index.js",
   "description": "",
-  "dependencies": {
-  },
   "devDependencies": {
     "css-loader": "^5.2.0",
     "cssnano": "^5.0.6",
