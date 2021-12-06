@@ -1,3 +1,6 @@
+// !Important:  ChronlyHMS requires an input element with the attribute 'data-univHMS' 
+
+
 import './chrono.css'
 // A HH:MM:SS.mmm control that is unaffected by OSX and works on 'all' browsers.
 
