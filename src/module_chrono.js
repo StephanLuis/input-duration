@@ -484,10 +484,7 @@ class ChronlyHMS {
 
 }
 
-// (function(){
-
-//   window.chronlyHMSmS = new Chron();
-
-// })()
+ console.log("Now I'll boot Chronolnly, by newing it up! External to constructor!")
+ window.chronlyHMS = new ChronlyHMS();
 
 export default ChronlyHMS;

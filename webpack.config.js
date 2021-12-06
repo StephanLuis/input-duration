@@ -5,10 +5,10 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'chronoBundle.js',
-    library: {
-      name: 'chronoly',
-      type: 'umd',
-    },
+    // library: {
+    //   name: 'chronoly',
+    //   type: 'umd',
+    // },
   },
   module: {
     rules: [

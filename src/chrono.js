@@ -15,6 +15,7 @@ class Chron {
     this.addNumericInput();
     this.addClicksToActivate();
 
+    console.log("booting up inside constructor!")
 
   }
 
@@ -332,6 +333,7 @@ class Chron {
 
 }
 
+console.log("Now I'll boot Chronolnly, by newing it up! External to constructor!")
 window.chron = new Chron();
 
 

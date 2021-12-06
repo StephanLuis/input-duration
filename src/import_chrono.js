@@ -1,3 +1,6 @@
 import chrono from './module_chrono.js'
 
-window.Chrono = new chrono();
+
+// console.log("module boot!");
+
+ // window.Chrono = new chrono();
