@@ -1,7 +1,8 @@
-import './chrono.css'
+
+// import './chrono.css'
 // A HH:MM:SS.mmm control that is unaffected by OSX and works on 'all' browsers.
 
-class Chron {
+class ChronlyHMS {
   constructor() {
 
     // fire HTML input replacement
@@ -333,8 +334,10 @@ class Chron {
 
 }
 
-console.log("Now I'll boot Chronolnly, by newing it up! External to constructor!")
-window.chron = new Chron();
+// console.log("Now I'll boot Chronolnly, by newing it up! External to constructor!")
+// window.chron = new Chron();
+
+export default ChronlyHMS;
 
 
 
