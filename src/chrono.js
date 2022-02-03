@@ -341,13 +341,14 @@ class ChronlyHMS {
 
 
 
-      var timeArray = timeString.split('.');
-      this.querySelector('input[name="startMilliSecs"]').value = timeArray[1];
+      var timeArray = timeString.split(/[.:]+/);
+      
 
-      var hmsArray = timeArray[0].split(':')
+      
       this.querySelector('input[name="startHours"]').value = hmsArray[0];
       this.querySelector('input[name="startMinutes"]').value = hmsArray[1];
       this.querySelector('input[name="startSeconds"]').value = hmsArray[2];
+      this.querySelector('input[name="startMilliSecs"]').value = timeArray[4];
 
       }
       else{
