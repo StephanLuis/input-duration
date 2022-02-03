@@ -15,6 +15,7 @@ class ChronlyHMS {
     this.addLeftRightToggle();
     this.addNumericInput();
     this.addClicksToActivate();
+    this.updateDivPrototype()
 
     console.log("booting up inside constructor!")
 
@@ -254,7 +255,7 @@ class ChronlyHMS {
     }
 
 
-    // three types of boxes, hours or minutes and seconds (are the same) or milliseconds
+    // three types of boxes: hours, minutes and seconds (are the same), or milliseconds
     // 
     setInputFilter(document.getElementById("sH"), function (value) {
 
@@ -332,6 +333,32 @@ class ChronlyHMS {
     document.querySelector("#sMS").addEventListener("click", function () { this.select(); });
   }
 
+
+  updateDivPrototype() {
+
+    HTMLDivElement.prototype.__defineGetter__('value', function () {
+      return this.querySelector('input[name="startHours"]').value +
+        ':' + this.querySelector('input[name="startMinutes"]').value +
+        ':' + this.querySelector('input[name="startSeconds"]').value +
+        ':' + this.querySelector('input[name="startMilliSecs"]').value;
+    });
+
+
+    HTMLDivElement.prototype.__defineSetter__('value', function (timeString) {
+      // split val
+
+      var timeArray = timeString.split('.');
+      this.querySelector('input[name="startMilliSecs"]').value = timeArray[1];
+
+      var hmsArray = timeArray[0].split(':')
+      this.querySelector('input[name="startHours"]').value = hmsArray[0];
+      this.querySelector('input[name="startMinutes"]').value = hmsArray[1];
+      this.querySelector('input[name="startSeconds"]').value = hmsArray[2];
+
+    });
+
+
+  }
 }
 
 // console.log("Now I'll boot Chronolnly, by newing it up! External to constructor!")
