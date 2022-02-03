@@ -1,8 +1,9 @@
-
-// import './chrono.css'
 // A HH:MM:SS.mmm control that is unaffected by OSX and works on 'all' browsers.
+// ChronlyHMS requires an input element with the attribute 'data-univHMS'
 
 class ChronlyHMS {
+
+
   constructor() {
 
     // fire HTML input replacement
@@ -17,49 +18,13 @@ class ChronlyHMS {
     this.addClicksToActivate();
     this.updateDivPrototype()
 
-    console.log("booting up inside constructor!")
-
   }
 
-  get hour() {
-    return document.querySelector("#sH").value;
-  }
-
-  get minute() {
-    return document.querySelector("#sM").value;
-  }
-
-  get second() {
-    return document.querySelector("#sS").value;
-  }
-
-  get milliSec() {
-    return document.querySelector("#sMS").value;
-  }
-
-  // reports a value of the control
-  get timePoint() {
-    return this.hour + ":" + this.minute + ":" + this.second + "." + this.milliSec;
-  }
-
-  // array of elements with data-attribute univHMS
-  // get univHMSinp() {
-  //   return document.querySelectorAll("input[data-univHMS]");
-  // }
-
-  // takes an element and innerhtml's the Chron value on each update
-  chronReport(el) {
-    document.querySelector("div.timeCase")
-      .addEventListener('change', function (event) {
-
-        el.innerHTML = this.timePoint;
-
-      });
-  }
 
   // convert input data-univHMS to'univHMS'
 
   addHTML() {
+
 
     const univHMSinp = document.querySelectorAll("input[data-univHMS]");
 
@@ -93,28 +58,29 @@ class ChronlyHMS {
       console.log(el);
 
     });
-
   }
+
+
 
   // add preceeding 0s when necessary (on update)
 
   add0s() {
 
-    // hours, minutes, seconds
+    // input for hours, minutes, seconds
     document.querySelectorAll("div.timeCase input").forEach(i => i.addEventListener('change', function () {
       if (!isNaN(this.value) && this.value.length === 1) {
         this.value = '0' + this.value;
       }
     }));
 
+    // input for milliseconds
 
-    // milliseconds
     document.querySelector("#sMS").addEventListener('change', function () {
       if (!isNaN(this.value) && this.value.length === 2) {
         this.value = '0' + this.value;
       }
-    });
 
+    });
   }
 
 
@@ -170,8 +136,8 @@ class ChronlyHMS {
   }
 
 
-
   // arrow key input of values (up/down) and place toggling (left/right)
+
   addLeftRightToggle() {
 
     // Left and Right arrow key toggle between HMSmS
@@ -227,10 +193,12 @@ class ChronlyHMS {
             break;
         }
       });
-
   }
 
+
+
   // numeric input (and auto toggling)
+
   addNumericInput() {
 
     // https://stackoverflow.com/questions/469357/html-text-input-allow-only-numeric-input
@@ -238,6 +206,7 @@ class ChronlyHMS {
 
     function setInputFilter(textbox, inputFilter) {
       // this sets a listener and  immediately updates the value of the input number (note: can update this from input text, like by removing setSelectionRange )
+
       textbox.addEventListener('keyup', function () {
         if (/^([0-9]?)$/.test(event.key)) {
           if (inputFilter(this.value)) {
@@ -254,9 +223,8 @@ class ChronlyHMS {
       });
     }
 
-
     // three types of boxes: hours, minutes and seconds (are the same), or milliseconds
-    // 
+
     setInputFilter(document.getElementById("sH"), function (value) {
 
 
@@ -291,6 +259,7 @@ class ChronlyHMS {
 
     });
 
+
     setInputFilter(document.getElementById("sS"), function (value) {
 
 
@@ -306,6 +275,7 @@ class ChronlyHMS {
       return newV;
 
     });
+
 
 
     setInputFilter(document.getElementById("sMS"), function (value) {
@@ -325,27 +295,51 @@ class ChronlyHMS {
 
   }
 
-  // click to activate input of values
+
+  // click to activate input of values by the keyboard
+
   addClicksToActivate() {
+
     document.querySelector("#sH").addEventListener("click", function () { this.select(); });
     document.querySelector("#sM").addEventListener("click", function () { this.select(); });
     document.querySelector("#sS").addEventListener("click", function () { this.select(); });
     document.querySelector("#sMS").addEventListener("click", function () { this.select(); });
+
   }
 
+
+  // allows for getting and setting of values like
+  // document.querySelector('#bob').value = "08:04:05.002"
 
   updateDivPrototype() {
 
     HTMLDivElement.prototype.__defineGetter__('value', function () {
+
+      if (this.querySelector('input[name="startHours"]') !== null) {
+    
       return this.querySelector('input[name="startHours"]').value +
         ':' + this.querySelector('input[name="startMinutes"]').value +
         ':' + this.querySelector('input[name="startSeconds"]').value +
         ':' + this.querySelector('input[name="startMilliSecs"]').value;
-    });
+    
+      }
+    else{
+    
+      return null;
+    
+    }
+  });
 
 
     HTMLDivElement.prototype.__defineSetter__('value', function (timeString) {
-      // split val
+      
+      // will need warning about timeString format (like input type='time')
+      
+      if (/(^[0-9][0-9]):([0-5][0-9]):([0-5][0-9])\.([0-9][0-9][0-9]$)/.exec(timeString)) {
+        
+        // split val
+
+
 
       var timeArray = timeString.split('.');
       this.querySelector('input[name="startMilliSecs"]').value = timeArray[1];
@@ -355,14 +349,19 @@ class ChronlyHMS {
       this.querySelector('input[name="startMinutes"]').value = hmsArray[1];
       this.querySelector('input[name="startSeconds"]').value = hmsArray[2];
 
+      }
+      else{
+
+        console.warn(`The specified value ${timeString} does not conform to the required format.  The format is "HH:mm:ss.SSS" where HH is 00-99, mm is 00-59, ss is 00-59, and SSS is 000-999.`);
+      
+      }
+      
+
     });
 
 
   }
 }
-
-// console.log("Now I'll boot Chronolnly, by newing it up! External to constructor!")
-// window.chron = new Chron();
 
 export default ChronlyHMS;
 
