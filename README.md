@@ -7,7 +7,12 @@ add
 npm i chronlyhms
 
 import ChronlyHMS from 'chronlyhms';
-import 'chronlyhms/src/chrono.css'**
+
+
+import 'chronlyhms/src/chrono.css'
+
+
+**
 
 
 <!--
