@@ -1,7 +1,13 @@
 <div id="top"></div>
 
 ** I'll update with below.  For now just remember:
-ChronlyHMS requires an input element with the attribute 'data-univHMS' **
+ChronlyHMS requires an input element with the attribute 'data-univHMS'
+add
+
+npm i chronlyhms
+
+import ChronlyHMS from 'chronlyhms';
+import 'chronlyhms/src/chrono.css'**
 
 
 <!--
