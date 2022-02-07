@@ -1,8 +1,8 @@
 {
   "name": "chronlyhms",
-  "version": "1.0.22",
+  "version": "1.0.24",
   "author": "Stephan Luis <stephan@learnsense.org>",
-  "main": "src/chrono.js",
+  "main": "src/module_chrono.js",
   "style": "src/plyr.css",
   "description": "This is the beginning of 'ChronolyHMS' it is a javascript control widget that provides an hour, minute, second, and millisecond control for HTML5. Cureently the CSS for the control still needs to be 'managed'.  So the package CSS bundling is needs development. ",
   "devDependencies": {

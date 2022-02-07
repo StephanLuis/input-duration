@@ -1,3 +1,5 @@
+import './chrono.css'
+
 // A HH:MM:SS.mmm control that is unaffected by OSX and works on 'all' browsers.
 // ChronlyHMS requires an input element with the attribute 'data-univHMS'
 
@@ -381,6 +383,9 @@ class ChronlyHMS {
 
   }
 }
+
+console.log("Now I'll boot Chronolnly, by newing it up! External to constructor!")
+ window.chronlyHMS = new ChronlyHMS();
 
 export default ChronlyHMS;
 

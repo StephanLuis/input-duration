@@ -1,4 +1,4 @@
-import chrono from './module_chrono.js'
+import chrono from './chrono.js'
 
 
 // console.log("module boot!");
