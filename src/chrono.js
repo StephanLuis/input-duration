@@ -300,10 +300,28 @@ class ChronlyHMS {
 
   addClicksToActivate() {
 
-    document.querySelector("#sH").addEventListener("click", function () { this.select(); });
-    document.querySelector("#sM").addEventListener("click", function () { this.select(); });
-    document.querySelector("#sS").addEventListener("click", function () { this.select(); });
-    document.querySelector("#sMS").addEventListener("click", function () { this.select(); });
+    // document.querySelector("#sH").addEventListener("click", function () { this.select(); });
+
+    document.querySelectorAll('input[name="startHours"]').forEach(
+      item => item.addEventListener("click", function () { this.select(); })
+    );
+
+    // document.querySelector("#sM").addEventListener("click", function () { this.select(); });
+
+    document.querySelectorAll('input[name="startMinutes"]').forEach(
+      item => item.addEventListener("click", function () { this.select(); })
+    )
+
+    // document.querySelector("#sS").addEventListener("click", function () { this.select(); });
+    document.querySelectorAll('input[name="startSeconds"]').forEach(
+      item => item.addEventListener("click", function () { this.select(); })
+    )
+
+    // document.querySelector("#sMS").addEventListener("click", function () { this.select(); });
+
+    document.querySelectorAll('input[name="startMilliSecs"]').forEach(
+      item => item.addEventListener("click", function () { this.select();})
+    )
 
   }
 
@@ -316,47 +334,47 @@ class ChronlyHMS {
     HTMLDivElement.prototype.__defineGetter__('value', function () {
 
       if (this.querySelector('input[name="startHours"]') !== null) {
-    
-      return this.querySelector('input[name="startHours"]').value +
-        ':' + this.querySelector('input[name="startMinutes"]').value +
-        ':' + this.querySelector('input[name="startSeconds"]').value +
-        ':' + this.querySelector('input[name="startMilliSecs"]').value;
-    
+
+        return this.querySelector('input[name="startHours"]').value +
+          ':' + this.querySelector('input[name="startMinutes"]').value +
+          ':' + this.querySelector('input[name="startSeconds"]').value +
+          ':' + this.querySelector('input[name="startMilliSecs"]').value;
+
       }
-    else{
-    
-      return null;
-    
-    }
-  });
+      else {
+
+        return null;
+
+      }
+    });
 
 
     HTMLDivElement.prototype.__defineSetter__('value', function (timeString) {
-      
+
       // will need warning about timeString format (like input type='time')
-      
+
       if (/(^[0-9][0-9]):([0-5][0-9]):([0-5][0-9])\.([0-9][0-9][0-9]$)/.exec(timeString)) {
-        
+
         // split val
 
 
 
-      var timeArray = timeString.split(/[.:]+/);
-      
+        var timeArray = timeString.split(/[.:]+/);
 
-      
-      this.querySelector('input[name="startHours"]').value = hmsArray[0];
-      this.querySelector('input[name="startMinutes"]').value = hmsArray[1];
-      this.querySelector('input[name="startSeconds"]').value = hmsArray[2];
-      this.querySelector('input[name="startMilliSecs"]').value = timeArray[4];
+
+
+        this.querySelector('input[name="startHours"]').value = hmsArray[0];
+        this.querySelector('input[name="startMinutes"]').value = hmsArray[1];
+        this.querySelector('input[name="startSeconds"]').value = hmsArray[2];
+        this.querySelector('input[name="startMilliSecs"]').value = timeArray[4];
 
       }
-      else{
+      else {
 
         console.warn(`The specified value ${timeString} does not conform to the required format.  The format is "HH:mm:ss.SSS" where HH is 00-99, mm is 00-59, ss is 00-59, and SSS is 000-999.`);
-      
+
       }
-      
+
 
     });
 
