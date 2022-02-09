@@ -17,7 +17,6 @@ class ChronlyHMS {
     this.addLeftRightToggle();
     this.addNumericInput();
     this.addClicksToActivate();
-    this.addUpdateParentInput();
     this.removeAnotherBugInHTML();
 
     // gets and sets below are regular methods in order to use parameters
@@ -25,131 +24,6 @@ class ChronlyHMS {
   }
 
 
-  // intentionally avoid any 'state', 'data' is maintained on the controls
-  // three methods are required for value, get valueHMSmS, set valueHMSmS, paramUpdateHMSmS
-
-  // get method: needs to pick up value from id.qs( parameter)
-  // will take id as parameter, check that class timeCase is present, return value
-
- valueHMSmSget(id) {
-
-    // error of null will bubble up to user
-  
-    return document.querySelector('#' + id + '.timeCase').querySelector('param').value;
-
-  }
-
-
-  // set method: will update the individual inputs, after dissecting the time 
-  // input as decimal/ number / or string
-  // - take many formats of time (a little different than on looper), 
-
-  valueHMSmSset(id, value) {
-
-
-    var timeCase = document.querySelector('#' + id + '.timeCase');
-
-    // reset values to zero before setting
-    var elHour = timeCase.querySelector(".sH");
-    var elMinute = timeCase.querySelector(".sM");
-    var elSec = timeCase.querySelector(".sS");
-    var elMSec = timeCase.querySelector(".sMS");
-
-    elHour.value = "00";
-    elMinute.value = "00";
-    elSec.value = "00";
-    elMSec.value = "000";
-
-    // input as decimal/ number / or string
-
-    var dArr = value.toString().split(':');
-
-    switch (dArr.length) {
-
-      // error
-      case 0:
-        console.log('setting value error');
-        break;
-
-      // seconds (w/ w/o mS) only, ms will need split.
-      case 1:
-
-        splitSecMilliSec(dArr[0]);
-        break;
-
-      // minutes and seconds
-      case 2:
-
-        elMinute.value = Number(dArr[0]);
-        elMinute.dispatchEvent(new Event('change'));
-
-        splitSecMilliSec(dArr[1]);
-
-        break;
-
-      // hours minutes seconds
-
-      case 3:
-
-        elHour.value = Number(dArr[0]);
-        elHour.dispatchEvent(new Event('change'));
-
-        elMinute.value = Number(dArr[1]);
-        elMinute.dispatchEvent(new Event('change'));
-
-        splitSecMilliSec(dArr[2]);
-
-        break;
-    }
-
-    function splitSecMilliSec(dArrSecs) {
-
-      var sArr = dArrSecs.split('.');
-
-      switch (sArr.length) {
-        case 0:
-          console.log('setting value error');
-          break;
-
-        case 1:
-          elSec.value = Number(sArr[0]);
-          elSec.dispatchEvent(new Event('change'));
-
-          break;
-
-        case 2:
-          elSec.value = Number(sArr[0]);
-          elSec.dispatchEvent(new Event('change'));
-
-          // 2 => 200 , 02 => 020 002 => 002
-          // dec in front * 1000
-          elMSec.value = Number('0.' + sArr[1]) * 1000;
-          elMSec.dispatchEvent(new Event('change'));
-
-          break;
-      }
-
-    }
-  }
-
-
-  //  'value event', ties controls to timecase param 
-  HMSmSparamUpdate(event) {
-
-
-    console.log('event: ' + event.target);
-    console.log('event id: ' + event.target.id);
-
-    console.log(event.target.parentNode.id + " is the parent node id");
-
-    var id = event.target.parentNode.id;
-
-    var timeCase = document.querySelector('#' + id);
-    timeCase.querySelector('param').value = timeCase.querySelector('input.sH').value + ":" + timeCase.querySelector('input.sM').value + ":" + timeCase.querySelector('input.sS').value + "." + timeCase.querySelector('input.sMS').value;
-
-  }
-
-  
   addHTML() {
 
     const univHMSinp = document.querySelectorAll("input[data-univHMS]");
@@ -459,15 +333,7 @@ class ChronlyHMS {
 
   }
 
-  addUpdateParentInput() {
-
-    // update to All and foreach =>
-    document.querySelectorAll(".timeCase input").forEach(item =>
-      item.addEventListener('change', event => this.HMSmSparamUpdate(event)));
-
-  }
-
-
+  
   removeAnotherBugInHTML() {
 
     document.querySelectorAll(".timeCase input").forEach(item =>
@@ -482,6 +348,60 @@ class ChronlyHMS {
           e.preventDefault();
 
       }));
+
+  }
+
+
+  // allows for getting and setting of values like
+  // document.querySelector('#bob').value = "08:04:05.002"
+
+  updateDivPrototype() {
+
+    HTMLDivElement.prototype.__defineGetter__('value', function () {
+
+      if (this.querySelector('input[name="startHours"]') !== null) {
+
+        return this.querySelector('input[name="startHours"]').value +
+          ':' + this.querySelector('input[name="startMinutes"]').value +
+          ':' + this.querySelector('input[name="startSeconds"]').value +
+          ':' + this.querySelector('input[name="startMilliSecs"]').value;
+
+      }
+      else {
+
+        return null;
+
+      }
+    });
+
+
+    HTMLDivElement.prototype.__defineSetter__('value', function (timeString) {
+
+      // will need warning about timeString format (like input type='time')
+
+      if (/(^[0-9][0-9]):([0-5][0-9]):([0-5][0-9])\.([0-9][0-9][0-9]$)/.exec(timeString)) {
+
+        // split val
+
+
+
+        var timeArray = timeString.split(/[.:]+/);
+
+
+
+        this.querySelector('input[name="startHours"]').value = hmsArray[0];
+        this.querySelector('input[name="startMinutes"]').value = hmsArray[1];
+        this.querySelector('input[name="startSeconds"]').value = hmsArray[2];
+        this.querySelector('input[name="startMilliSecs"]').value = timeArray[4];
+
+      }
+      else {
+
+        console.warn(`The specified value ${timeString} does not conform to the required format.  The format is "HH:mm:ss.SSS" where HH is 00-99, mm is 00-59, ss is 00-59, and SSS is 000-999.`);
+
+      }
+
+    });
 
   }
 

@@ -365,10 +365,10 @@ class ChronlyHMS {
 
 
 
-        this.querySelector('input[name="startHours"]').value = hmsArray[0];
-        this.querySelector('input[name="startMinutes"]').value = hmsArray[1];
-        this.querySelector('input[name="startSeconds"]').value = hmsArray[2];
-        this.querySelector('input[name="startMilliSecs"]').value = timeArray[4];
+        this.querySelector('input[name="startHours"]').value = timeArray[0];
+        this.querySelector('input[name="startMinutes"]').value = timeArray[1];
+        this.querySelector('input[name="startSeconds"]').value = timeArray[2];
+        this.querySelector('input[name="startMilliSecs"]').value = timeArray[3];
 
       }
       else {
@@ -384,8 +384,8 @@ class ChronlyHMS {
   }
 }
 
-console.log("Now I'll boot Chronolnly, by newing it up! External to constructor!")
- window.chronlyHMS = new ChronlyHMS();
+// console.log("Now I'll boot Chronolnly, by newing it up! External to constructor!")
+//  window.chronlyhms = new ChronlyHMS;
 
 export default ChronlyHMS;
 
