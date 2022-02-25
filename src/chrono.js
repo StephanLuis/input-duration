@@ -24,6 +24,23 @@ class ChronlyHMS {
   }
 
 
+  // this removes the elements and removes their events
+  removeChronlyHMS() {
+
+
+    var chronoInputs = document.querySelectorAll('.timeCase').forEach(tc => {
+
+      tc.querySelectorAll('input').forEach(input => {
+
+        input.remove();
+        input = '';
+
+      });
+
+  });
+
+}
+
   // convert input data-univHMS to'univHMS'
 
   addHTML() {
@@ -180,8 +197,8 @@ class ChronlyHMS {
               tp_active--;
             }
 
-            document.querySelector('#'+ dId).querySelector("[data-tp='" + tp_active + "']").focus();
-            setTimeout(function () { document.querySelector('#'+ dId).querySelector("[data-tp='" + tp_active + "']").select(); }, 5);
+            document.querySelector('#' + dId).querySelector("[data-tp='" + tp_active + "']").focus();
+            setTimeout(function () { document.querySelector('#' + dId).querySelector("[data-tp='" + tp_active + "']").select(); }, 5);
             el_disp.innerHTML = event.key;
 
             break;
@@ -193,8 +210,8 @@ class ChronlyHMS {
               tp_active++;
             }
 
-            document.querySelector('#'+ dId).querySelector("[data-tp='" + tp_active + "']").focus();
-            setTimeout(function () { document.querySelector('#'+ dId).querySelector("[data-tp='" + tp_active + "']").select(); }, 5);
+            document.querySelector('#' + dId).querySelector("[data-tp='" + tp_active + "']").focus();
+            setTimeout(function () { document.querySelector('#' + dId).querySelector("[data-tp='" + tp_active + "']").select(); }, 5);
             el_disp.innerHTML = event.key;
 
             break;
