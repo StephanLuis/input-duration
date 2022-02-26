@@ -1,6 +1,6 @@
 {
   "name": "chronlyhms",
-  "version": "1.0.54",
+  "version": "1.0.58",
   "author": "Stephan Luis <stephan@learnsense.org>",
   "main": "src/chrono.js",
   "style": "src/plyr.css",
