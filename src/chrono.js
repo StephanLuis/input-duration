@@ -8,24 +8,65 @@ class ChronlyHMS {
 
   constructor() {
 
-    // fire HTML input replacement
 
-    this.old_addHTML();
-
-    // set up event listeners
-    this.add0s();
-    this.addNumberLooping();
-    this.addArrowKeyInput();
-    this.addNumericInput();
-    this.addClicksToActivate();
-    this.nonNumericBugInHTML();
-    this.updateDivPrototype();
-
+    this.checkBoot();
+    
     // each time Chronly is newed up
     // 1) check for an existing window.ChronlyHMS if there is one 
     // 2) clear events a) named events, b) remove 
     // 3) add events
     //      a
+
+  }
+
+  checkBoot(){
+
+    if(window.ChronlyFlag){
+      this.reboot();
+    }
+    else{
+      this.boot();
+    }
+  }
+
+    boot(){
+
+      this.old_addHTML();
+
+      // set up event listeners
+      this.add0s();
+      this.addNumberLooping();
+      this.addArrowKeyInput();
+      this.addNumericInput();
+      this.addClicksToActivate();
+      this.nonNumericBugInHTML();
+      this.updateDivPrototype();
+
+      window.ChronlyFlag = true;
+    }
+
+  reboot(){
+
+    // for each input in the timeCase replace it with (the original/ an) input
+
+    var elements = document.querySelectorAll('.timeCase');
+
+    elements.forEach(element => {
+
+      var replaceElement = document.createElement('input');
+
+      [...element.attributes].forEach(attr => { replaceElement.setAttribute(attr.nodeName, attr.nodeValue) });
+  
+      element.parentElement.insertBefore(replaceElement, element);
+  
+      element.remove();
+  
+      // removes eventlisters 
+      element = ''
+      
+    });
+
+   this.boot();
 
   }
 
@@ -504,7 +545,7 @@ class ChronlyHMS {
 // console.log("Now I'll boot Chronolnly, by newing it up! External to constructor!")
 //  window.chronlyhms = new ChronlyHMS;
 
-export default ChronlyHMS;
+export default new ChronlyHMS;
 
 
 
