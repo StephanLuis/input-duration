@@ -258,7 +258,7 @@ Use this space to list resources you find helpful and would like to give credit 
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
 
-[contributors-shield]: https://img.shields.io/github/contributors/StephanLuis/chronlyhms
+[contributors-shield]: https://img.shields.io/github/contributors/StephanLuis/chronlyhms?style=for-the-badge
 [contributors-url]: https://github.com/StephanLuis/chronlyhms/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge
 [forks-url]: https://github.com/StephanLuis/chronlyhms/network/members
