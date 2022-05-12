@@ -269,5 +269,5 @@ Use this space to list resources you find helpful and would like to give credit 
 [license-shield]: https://img.shields.io/github/license/StephanLuis/chronlyhms?style=for-the-badge
 [license-url]: https://github.com/StephanLuis/chronlyhms/blob/main/LICENSE
 [reposize-shield]: https://img.shields.io/github/repo-size/stephanluis/chronlyhms?style=for-the-badge
-[linkedin-url]: https://github.com/StephanLuis/chronlyhms
+[reposize-url]: https://github.com/StephanLuis/chronlyhms
 [product-screenshot]: images/screenshot.png
