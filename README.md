@@ -40,7 +40,7 @@ import 'chronlyhms/src/chrono.css'
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
+[![RepoSize][reposize-shield]][reposize-url]
 
 
 
@@ -260,14 +260,14 @@ Use this space to list resources you find helpful and would like to give credit 
 
 [contributors-shield]: https://img.shields.io/github/contributors/StephanLuis/chronlyhms?style=for-the-badge
 [contributors-url]: https://github.com/StephanLuis/chronlyhms/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/StephanLuis/chronlyhms?style=for-the-badge
+[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge
 [forks-url]: https://github.com/StephanLuis/chronlyhms/network/members
-[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=for-the-badge
-[stars-url]: https://github.com/othneildrew/Best-README-Template/stargazers
-[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
-[issues-url]: https://github.com/othneildrew/Best-README-Template/issues
-[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
-[license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/othneildrew
+[stars-shield]: https://img.shields.io/github/stars/StephanLuis/chronlyhms?style=for-the-badge
+[stars-url]: https://github.com/StephanLuis/chronlyhms/stargazers
+[issues-shield]: https://img.shields.io/github/issues/StephanLuis/chronlyhms?style=for-the-badge
+[issues-url]: https://github.com/StephanLuis/chronlyhms/issues
+[license-shield]: https://img.shields.io/github/license/StephanLuis/chronlyhms?style=for-the-badge
+[license-url]: https://github.com/StephanLuis/chronlyhms/blob/main/LICENSE
+[reposize-shield]: https://img.shields.io/github/repo-size/stephanluis/chronlyhms?style=for-the-badge
+[linkedin-url]: https://github.com/StephanLuis/chronlyhms
 [product-screenshot]: images/screenshot.png
