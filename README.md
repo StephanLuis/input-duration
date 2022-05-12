@@ -260,7 +260,7 @@ Use this space to list resources you find helpful and would like to give credit 
 
 [contributors-shield]: https://img.shields.io/github/contributors/StephanLuis/chronlyhms?style=for-the-badge
 [contributors-url]: https://github.com/StephanLuis/chronlyhms/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge
+[forks-shield]: https://img.shields.io/github/forks/StephanLuis/chronlyhms?style=for-the-badge
 [forks-url]: https://github.com/StephanLuis/chronlyhms/network/members
 [stars-shield]: https://img.shields.io/github/stars/StephanLuis/chronlyhms?style=for-the-badge
 [stars-url]: https://github.com/StephanLuis/chronlyhms/stargazers
