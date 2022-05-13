@@ -158,15 +158,16 @@ This section should lists any major frameworks/libraries used to for this projec
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+Strictly speaking, there are not any pre-requisites for using ChronlyHMS if you're not compiling/ packaging you javascript.  If you are:
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
+This is an example of how to get started with npm and webpack, other frameworks should work too.
+* npm & webpack
   ```sh
   npm install npm@latest -g
+  npm init -y
+  npm install webpack webpack-cli --save-dev
   ```
 
 ### Installation
