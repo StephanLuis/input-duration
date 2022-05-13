@@ -106,13 +106,13 @@ import 'chronlyhms/src/chrono.css'
 
 Yes! It seems crazy this is necessary in 2022.  The closest input, type- time, with UX for hours to millisecs is pretty finicky, I've simplified that!
 
-<img src="readme/html.png" alt="drawing" width="70%"/>
+<img src="readme/html.png" alt="drawing" width="60%"/>
 
 <!-- [![HTML Screen Shot][html-screenshot]](https://example.com) -->
 
 The very worst is Safari on desktop and mobile undermine those efforts and update the input depending on OS settings for desktop or provide a snazzy control with restricted capability...
 
-<img src="readme/safariBad.png" alt="drawing" width="70%"/>
+<img src="readme/safariBad.png" alt="drawing" width="60%"/>
 <!-- [![Safari Screen Shot][safari-screenshot]](https://example.com) -->
 
 
