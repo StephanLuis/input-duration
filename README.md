@@ -118,24 +118,24 @@ The very worst is Safari on desktop and mobile undermine those snazzy input type
 
 <h3> Bob is rescued with ChronlyHMS! </h3>
 
-The objective is a minimised vanilla javascript plugin that reproduces the behaviour of the input type=time on Chrome.  This way at least two of the major browsers are supported.
+The objective is a minimised vanilla javascript plugin that reproduces the behaviour of the input type=time on Chrome.  This way at least two of the major browsers are supported, Safari and Chrome, on desktop and mobile operating systems. 
 
 <i>Does this loose any functionality?</i>  No!  document.querySelector('#bob').value  has a getter and setter!  So values can be set and retrieved by ID.
 
 
-There are a few plugins (links to come), but I couldn't get them to work as 'time only' or 'time unit' inputs.  The controls with the plugin still treated time as a date (ex 24hr max).  Still it seems in 2022 the most relable is multi input (more links to come ), the best example is the Google countdown timer.  And that's wrong because time is a basic unit that should be separate from calendar complexities.  That got me thinking, why isn't there an input control for it implemented across browsers??  I needed one so coded ChronlyHMS.
+There are a few plugins (links to come), but controls with the plugin still treated time as a date (ex 24hr max).  Still it seems in 2022 the most relable is multi input (more links to come ), the best example is the Google countdown timer.  And that's wrong because time is a basic unit that should be separate from calendar complexities.  That got me thinking, why isn't there an input control for it implemented across browsers??  I needed one so coded ChronlyHMS.
 
 Here's why:
 * Time is a unit of hours minutes and seconds (and millisecs) and needn't be associated with date
 * The date association breaks UX and is varied with browser implementation
 * I found no other crossbrowser solution
 * I thought this would be a great open source project
-* There is no need to continue modifying number inputs for time 
+* So there is no need to continue modifying number inputs for use with time 
 
 Of course, this is functional and in it's infancy.  With some contribution this is a project that can inspire change to the HTML spec.
 
 
-feel free to vote for WhatWG inclusion of a into the HTML spec! (link comming soon)
+Feel free to vote for WhatWG inclusion of a into the HTML spec! (link comming soon)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
