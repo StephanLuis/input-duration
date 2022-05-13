@@ -56,7 +56,7 @@ import 'chronlyhms/src/chrono.css'
   <h3 align="center">ChronlyHMS-- Best 'Time Only' Input</h3>
 
   <p align="center">
-    A time only input that works cross browser in very close imitation of a native time input on Chrome.  Works on Safari without AM/PM modification, time spans up to 999 hrs are natively implemented as well as small time spans to 1 millisecond.<br> *** Yes! It seems crazy this is necessary in 2022, feel free to vote for WhatWG inclusion into the HTML spec!*** (link comming soon)</p>
+    A time only input that works cross browser in very close imitation of a native time input on Chrome.  Works on Safari without AM/PM modification, time spans up to 999 hrs are natively implemented as well as small time spans to 1 millisecond.<br> </p>
     <br />
     <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
     <br />
@@ -103,6 +103,10 @@ import 'chronlyhms/src/chrono.css'
 ## About The Project
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
+
+Yes! It seems crazy this is necessary in 2022, feel free to vote for WhatWG inclusion of a into the HTML spec! (link comming soon)
+
+There are a few plugins (links), but still most relable is multi input (links).  And that's wrong because time is a basic unit that should be separate from calendar complexities.  Why isn't there an input control for it implemented across browsers??  I needed one so coded ChronlyHMS in javascript.
 
 There are many great README templates available on GitHub; however, I didn't find one that really suited my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
 
