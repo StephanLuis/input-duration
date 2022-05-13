@@ -126,7 +126,7 @@ The objective is a minimised vanilla javascript plugin that reproduces the behav
 There are a few plugins (links to come), but controls with the plugin still treated time as a date (ex 24hr max).  Still it seems in 2022 the most relable is multi input (more links to come ), the best example is the Google countdown timer.  And that's wrong because time is a basic unit that should be separate from calendar complexities.  That got me thinking, why isn't there an input control for it implemented across browsers??  I needed one so coded ChronlyHMS.
 
 Here's why:
-* Time is a unit of hours minutes and seconds (and millisecs) and needn't be associated with date
+* Time is hours minutes and seconds (and millisecs) and needn't be associated with part of a day or a date
 * The date association breaks UX and is varied with browser implementation
 * I found no other crossbrowser solution
 * I thought this would be a great open source project
@@ -158,7 +158,7 @@ This section should lists any major frameworks/libraries used to for this projec
 <!-- GETTING STARTED -->
 ## Getting Started
 
-Strictly speaking, there are not any pre-requisites for using ChronlyHMS if you're not compiling/ packaging you javascript.  If you are:
+There are no pre-requisites for using ChronlyHMS if you're not compiling/ packaging you javascript.  If you are:
 
 ### Prerequisites
 
@@ -169,24 +169,31 @@ This is an example of how to get started with npm and webpack, other frameworks 
   npm init -y
   npm install webpack webpack-cli --save-dev
   ```
+  * Webpack requires configuration for packaging ChronlyHMS CSS
+  see [Webpack CSS Loader](https://webpack.js.org/loaders/css-loader/)
+  
 
 ### Installation
 
+With packaging:
 _Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Install from NPM ```sh
+  npm i chronlyhms
+   ```
+2. import ChronlyHMS javascript and css
    ```sh
-   git clone https://github.com/your_username_/Project-Name.git
+   import ChronlyHMS from 'chronlyhms';
+import 'chronlyhms/src/chrono.css'
    ```
-3. Install NPM packages
+Without packaging:
+
+1. Add script:
    ```sh
-   npm install
+  <script src="https://cdn.jsdelivr.net/npm/chronlyhms@1.0.65/dist/chronoBundle.min.js"></script>
+  
    ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
-   ```
+
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
