@@ -181,19 +181,20 @@ _Below is an example of how you can instruct your audience on installing and set
 1. Install from NPM
  ```sh
   npm i chronlyhms
-   ```
+ ```
 2. import ChronlyHMS javascript and css
-   ```sh
-   import ChronlyHMS from 'chronlyhms';
-import 'chronlyhms/src/chrono.css'
-   ```
+ ```sh
+ import ChronlyHMS from 'chronlyhms';
+ import 'chronlyhms/src/chrono.css'
+```
+  
 Without packaging:
 
 1. Add script:
-   ```sh
-  <script src="https://cdn.jsdelivr.net/npm/chronlyhms@1.0.65/dist/chronoBundle.min.js"></script>
+ ```sh
+ <script src="https://cdn.jsdelivr.net/npm/chronlyhms@1.0.65/dist/chronoBundle.min.js"></script>
   
-   ```
+ ```
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
