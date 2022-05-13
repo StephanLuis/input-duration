@@ -104,7 +104,7 @@ import 'chronlyhms/src/chrono.css'
 
 <!-- [![Product Name Screen Shot][product-screenshot]](https://example.com) -->
 
-Yes! It seems crazy this is necessary in 2022.  The closest input, type- time, with UX for hours to millisecs is pretty finicky, I've simplified that!
+Yes! It seems CRAZY in 2022 that there is not a native 'time only' input for HTML.  <br>What I'm talking about is a control not for dates or time of day but for time just as hours, minutes, seconds. <br> Why is it difficult to 'code' a countdown timer? Why can't it be done with one control, see google and other coundown timers! Shouldn't a user be able to 'scientifically' specify a time?  <br>The closest input, type- time, with UX for hours to millisecs is pretty finicky see below, so I've simplified that!  ()
 
 <img src="readme/html.png" alt="drawing" width="60%"/>
 
