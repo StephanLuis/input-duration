@@ -158,7 +158,7 @@ This section should lists any major frameworks/libraries used to for this projec
 <!-- GETTING STARTED -->
 ## Getting Started
 
-There are no pre-requisites for using ChronlyHMS if you're not compiling/ packaging you javascript.  If you are:
+There are no pre-requisites for using ChronlyHMS if you're not compiling/ packaging you javascript.  If you are packaging:
 
 ### Prerequisites
 
@@ -178,7 +178,8 @@ This is an example of how to get started with npm and webpack, other frameworks 
 With packaging:
 _Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
 
-1. Install from NPM ```sh
+1. Install from NPM
+ ```sh
   npm i chronlyhms
    ```
 2. import ChronlyHMS javascript and css
@@ -202,9 +203,12 @@ Without packaging:
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+ChronlyHMS requires an input element with the attribute 'data-univHMS'.  There's no more code than that needed.  
+```sh
+<input id='bob' data-univHMS></input>
+```
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+_For more examples, please refer to the source of  [chronoHMStest](http://practisemaster.com/demos/chronoHMStest.html)_
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
