@@ -110,12 +110,13 @@ Yes! It seems crazy this is necessary in 2022.  The closest input, type- time, w
 
 <!-- [![HTML Screen Shot][html-screenshot]](https://example.com) -->
 
-The very worst part is with best efforts Safari on desktop and mobile undermine those efforts and either update the input depending on OS settings for desktop or provide a snazzy control with restricted capability...
+The very worst is Safari on desktop and mobile undermine those efforts and update the input depending on OS settings for desktop or provide a snazzy control with restricted capability...
 
 <img src="readme/safariBad.png" alt="drawing" width="70%"/>
 <!-- [![Safari Screen Shot][safari-screenshot]](https://example.com) -->
 
 
+<h3> On the left you can see ChronlyHMS comes to the rescue! </h3>
 
 
 
