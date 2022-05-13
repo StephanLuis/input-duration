@@ -53,10 +53,12 @@ import 'chronlyhms/src/chrono.css'
     <img src="readme/logo.svg" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">Best-README-Template</h3>
+  <h3 align="center">ChronlyHMS-- Best 'Time Only' Input</h3>
 
   <p align="center">
-    An awesome README template to jumpstart your projects!
+    A time only input that works cross browser in very close imitation of a native time input on Chrome.  Works on Safari without AM/PM modification, time spans up to 999 hrs are natively implemented as well as small time spans to 1 millisecond.
+    
+    *** I realise that it seems crazy this is necessary in 2022, feel free to vote for WSWG inclusion into the HTML spec!*** (link comming soon)
     <br />
     <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
     <br />
