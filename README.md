@@ -110,7 +110,7 @@ Yes! It seems CRAZY in 2022 that there is not a native 'time only' input for HTM
 
 <!-- [![HTML Screen Shot][html-screenshot]](https://example.com) -->
 
-The very worst is Safari on desktop and mobile undermine those snazzy input type=time efforts and update the input depending on OS settings for desktop or provide a snazzy control with restricted capability...
+The very worst is Safari on desktop and mobile undermine those snazzy input type=time efforts and update the input depending on OS settings for desktop or provide a control with restricted capability...
 
 <img src="readme/safariBad.png" alt="drawing" width="60%"/>
 <!-- [![Safari Screen Shot][safari-screenshot]](https://example.com) -->
