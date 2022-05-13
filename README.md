@@ -56,9 +56,7 @@ import 'chronlyhms/src/chrono.css'
   <h3 align="center">ChronlyHMS-- Best 'Time Only' Input</h3>
 
   <p align="center">
-    A time only input that works cross browser in very close imitation of a native time input on Chrome.  Works on Safari without AM/PM modification, time spans up to 999 hrs are natively implemented as well as small time spans to 1 millisecond.
-    
-     I realise that it seems crazy this is necessary in 2022, feel free to vote for WSWG inclusion into the HTML spec! (link comming soon)
+    A time only input that works cross browser in very close imitation of a native time input on Chrome.  Works on Safari without AM/PM modification, time spans up to 999 hrs are natively implemented as well as small time spans to 1 millisecond.<br> I realise that it seems crazy this is necessary in 2022, feel free to vote for WSWG inclusion into the HTML spec! (link comming soon)</p>
     <br />
     <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
     <br />
