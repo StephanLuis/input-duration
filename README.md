@@ -104,7 +104,17 @@ import 'chronlyhms/src/chrono.css'
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
-Yes! It seems crazy this is necessary in 2022, feel free to vote for WhatWG inclusion of a into the HTML spec! (link comming soon)
+Yes! It seems crazy this is necessary in 2022.  The closest input, type- time, with UX for hours to millisecs is pretty finicky, I've simplified that!
+
+[![HTML Screen Shot][html-screenshot]](https://example.com)
+
+The very worst part is with best efforts Safari on desktop and mobile undermine those efforts and either update the input depending on OS settings for desktop or provide a snazzy control with restricted capability...
+
+[![Safari Screen Shot][safari-screenshot]](https://example.com)
+
+
+
+
 
 There are a few plugins (links), but still most relable is multi input (links).  And that's wrong because time is a basic unit that should be separate from calendar complexities.  Why isn't there an input control for it implemented across browsers??  I needed one so coded ChronlyHMS in javascript.
 
@@ -118,6 +128,9 @@ Here's why:
 Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have contributed to expanding this template!
 
 Use the `BLANK_README.md` to get started.
+
+
+feel free to vote for WhatWG inclusion of a into the HTML spec! (link comming soon)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -277,3 +290,6 @@ Use this space to list resources you find helpful and would like to give credit 
 [reposize-shield]: https://img.shields.io/github/repo-size/stephanluis/chronlyhms?style=for-the-badge
 [reposize-url]: https://github.com/StephanLuis/chronlyhms
 [product-screenshot]: images/screenshot.png
+
+[html-screenshot]: readme/html.png
+[safari-screenshot]: readme/safariBad.png
