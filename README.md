@@ -58,7 +58,7 @@ import 'chronlyhms/src/chrono.css'
   <p align="center">
     A time only input that works cross browser in very close imitation of a native time input on Chrome.  Works on Safari without AM/PM modification, time spans up to 999 hrs are natively implemented as well as small time spans to 1 millisecond.<br> </p>
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/StephanLuis/chronlyhms"><strong>Explore the docs »</strong></a>
     <br />
     <br />
     <a href="http://practisemaster.com/demos/chronoHMStest.html">View Demo</a>
