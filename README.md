@@ -118,6 +118,9 @@ The very worst is Safari on desktop and mobile undermine those efforts and updat
 
 <h3> On the left you can see ChronlyHMS comes to the rescue! </h3>
 
+The objective is to provide a minimised vanilla javascript plugin that reproduces the behaviour of the input type=time on Chrome.  This way at least two of the major browsers are supported.
+
+<i>Does this loose any functionality?</i>  No!  document.querySelector('#bob').value  has a getter and setter!  So values can be set and retrieved by ID.
 
 
 There are a few plugins (links), but still most relable is multi input (links).  And that's wrong because time is a basic unit that should be separate from calendar complexities.  Why isn't there an input control for it implemented across browsers??  I needed one so coded ChronlyHMS in javascript.
