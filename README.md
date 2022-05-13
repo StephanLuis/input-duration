@@ -116,25 +116,23 @@ The very worst is Safari on desktop and mobile undermine those efforts and updat
 <!-- [![Safari Screen Shot][safari-screenshot]](https://example.com) -->
 
 
-<h3> On the left you can see ChronlyHMS comes to the rescue! </h3>
+<h3> Bob is rescued with ChronlyHMS! </h3>
 
-The objective is to provide a minimised vanilla javascript plugin that reproduces the behaviour of the input type=time on Chrome.  This way at least two of the major browsers are supported.
+The objective is a minimised vanilla javascript plugin that reproduces the behaviour of the input type=time on Chrome.  This way at least two of the major browsers are supported.
 
 <i>Does this loose any functionality?</i>  No!  document.querySelector('#bob').value  has a getter and setter!  So values can be set and retrieved by ID.
 
 
-There are a few plugins (links), but still most relable is multi input (links).  And that's wrong because time is a basic unit that should be separate from calendar complexities.  Why isn't there an input control for it implemented across browsers??  I needed one so coded ChronlyHMS in javascript.
-
-There are many great README templates available on GitHub; however, I didn't find one that really suited my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
+There are a few plugins (links to come), but I couldn't get them to work as 'time only' or 'time unit' inputs.  The controls with the plugin still treated time as a date (ex 24hr max).  Still it seems in 2022 the most relable is multi input (more links to come ), the best example is the Google countdown timer.  And that's wrong because time is a basic unit that should be separate from calendar complexities.  That got me thinking, why isn't there an input control for it implemented across browsers??  I needed one so coded ChronlyHMS.
 
 Here's why:
-* Your time should be focused on creating something amazing. A project that solves a problem and helps others
-* You shouldn't be doing the same tasks over and over like creating a README from scratch
-* You should implement DRY principles to the rest of your life :smile:
+* Time is a unit of hours minutes and seconds (and millisecs) and needn't be associated with date
+* The date association breaks UX and is varied with browser implementation
+* I found no other crossbrowser solution
+* I thought this would be a great open source project
+* There is no need to continue modifying number inputs for time 
 
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have contributed to expanding this template!
-
-Use the `BLANK_README.md` to get started.
+Of course, this is functional and in it's infancy.  With some contribution this is a project that can inspire change to the HTML spec.
 
 
 feel free to vote for WhatWG inclusion of a into the HTML spec! (link comming soon)
@@ -145,16 +143,13 @@ feel free to vote for WhatWG inclusion of a into the HTML spec! (link comming so
 
 ### Built With
 
-This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
+This section should lists any major frameworks/libraries used to for this project. Any add-ons/plugins are in the acknowledgements section.
 
-* [Next.js](https://nextjs.org/)
-* [React.js](https://reactjs.org/)
-* [Vue.js](https://vuejs.org/)
-* [Angular](https://angular.io/)
-* [Svelte](https://svelte.dev/)
-* [Laravel](https://laravel.com)
-* [Bootstrap](https://getbootstrap.com)
-* [JQuery](https://jquery.com)
+* [Node.js](https://nodejs.org/)
+* [Webpack](https://webpack.js.org/)
+* [Gitpod](https://www.gitpod.io/)
+* [OpenSauce](https://angular.io/)
+* [Selenium](https://www.selenium.dev/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
