@@ -50,7 +50,7 @@ import 'chronlyhms/src/chrono.css'
   
   
   <a href="https://github.com/StephanLuis/chronlyhms">
-    <img src="readme/logo.svg" alt="Logo" width="80" height="80">
+    <img src="readme/logo.svg" alt="Logo" width="90" height="90">
   </a>
 
   <h3 align="center">ChronlyHMS-- Best 'Time Only' Input</h3>
@@ -106,13 +106,13 @@ import 'chronlyhms/src/chrono.css'
 
 Yes! It seems crazy this is necessary in 2022.  The closest input, type- time, with UX for hours to millisecs is pretty finicky, I've simplified that!
 
-<img src="readme/html.png" alt="drawing" width="80%"/>
+<img src="readme/html.png" alt="drawing" width="70%"/>
 
 <!-- [![HTML Screen Shot][html-screenshot]](https://example.com) -->
 
 The very worst part is with best efforts Safari on desktop and mobile undermine those efforts and either update the input depending on OS settings for desktop or provide a snazzy control with restricted capability...
 
-<img src="readme/safariBad.png" alt="drawing" width="80%"/>
+<img src="readme/safariBad.png" alt="drawing" width="70%"/>
 <!-- [![Safari Screen Shot][safari-screenshot]](https://example.com) -->
 
 
