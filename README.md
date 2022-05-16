@@ -18,13 +18,15 @@
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
+
+[![npm bundle size][npm-bundle-size]][npm-bundle-size](https://img.shields.io/bundlephobia/minzip/chronlyhms?style=for-the-badge)
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
 [![RepoSize][reposize-shield]][reposize-url]
-[![npm bundle size][npm-bundle-size]][npm-bundle-size](https://img.shields.io/bundlephobia/minzip/chronlyhms?style=for-the-badge)
+
 
 
 
@@ -202,15 +204,17 @@ _For more examples, please refer to the source of  [chronoHMStest](http://practi
 <!-- ROADMAP -->
 ## Roadmap
 
-- [x] Add Changelog
-- [x] Add back to top links
-- [ ] Add Additional Templates w/ Examples
-- [ ] Add "components" document to easily copy & paste sections of the readme
-- [ ] Multi-language Support
+- [x] Emperically determine <input type="time"> behaviour
+- [x] Reverse engineer input (arrows, digits, 0 addition, etc.)
+- [x] Cross browser/ cross os manual tests  
+- [ ] Get Chrome behavioural specification for <input type="time">
+- [ ] Add end to end multi-browser, multi-os Selinium tests
+- [ ] Update demo page (either PM.com or JSfiddle type)
+- [ ] Multi-language documentation (Google translate of this page?)
     - [ ] Chinese
     - [ ] Spanish
 
-See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a full list of proposed features (and known issues).
+See the [open issues](https://github.com/StephanLuis/chronlyhms/issues) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
