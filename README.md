@@ -116,9 +116,9 @@ Here's why:
 * The date association breaks UX and is varied with browser implementation
 * I found no other crossbrowser solution
 * I thought this would be a great open source project
-* So there is no need to continue modifying number inputs for use with time 
+* End use of number inputs (standard hack) for use with time 
 
-Of course, this is functional and in it's infancy.  With some contribution this is a project that can inspire change to the HTML spec.
+Of course, this is functional but in it's infancy.  Maybe, with some contribution this is a project that can inspire change to the HTML spec.
 
 
 Feel free to vote for WhatWG inclusion of a into the HTML spec! (link comming soon)
