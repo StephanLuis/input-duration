@@ -263,8 +263,12 @@ Project Link: [https://github.com/StephanLuis/chronlyhms](https://github.com/Ste
 
 Resources I've found helpful and would like to give credit to:
 
-* [Img Shields](https://shields.io)
+
 * [GitHub Pages](https://pages.github.com)
+* [Font Awesome](https://fontawesome.com)
+* [Best Readme](https://github.com/othneildrew/Best-README-Template)
+* [Img Shields](https://shields.io)
+
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
