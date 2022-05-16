@@ -24,6 +24,7 @@
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
 [![RepoSize][reposize-shield]][reposize-url]
+[![npm bundle size][npm-bundle-size]][npm-bundle-size](https://img.shields.io/bundlephobia/minzip/chronlyhms?style=for-the-badge)
 
 
 
@@ -288,6 +289,7 @@ Use this space to list resources you find helpful and would like to give credit 
 [reposize-shield]: https://img.shields.io/github/repo-size/stephanluis/chronlyhms?style=for-the-badge
 [reposize-url]: https://github.com/StephanLuis/chronlyhms
 [product-screenshot]: images/screenshot.png
+[npm-bundle-size]: https://img.shields.io/bundlephobia/minzip/chronlyhms?style=for-the-badge
 
 [html-screenshot]: readme/html.png
 [safari-screenshot]: readme/safariBad.png
