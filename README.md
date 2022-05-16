@@ -102,7 +102,7 @@ The very worst is Safari on desktop and mobile undermine those snazzy input type
 <!-- [![Safari Screen Shot][safari-screenshot]](https://example.com) -->
 
 
-<h3> Bob is rescued with ChronlyHMS! </h3>
+<h3> Bob is rescued by ChronlyHMS! </h3>
 
 The objective is a minimised vanilla javascript plugin that reproduces the behaviour of the input type=time on Chrome.  This way at least two of the major browsers are supported, Safari and Chrome, on desktop and mobile operating systems. 
 
