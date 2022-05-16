@@ -19,7 +19,7 @@
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
 
-[![npm bundle size][npm-bundle-size]][npm-bundle-size](https://img.shields.io/bundlephobia/minzip/chronlyhms?style=for-the-badge)
+[![npm bundle size][npm-bundle-size]][npm-bundle-size]
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
@@ -205,7 +205,7 @@ _For more examples, please refer to the source of  [chronoHMStest](http://practi
 ## Roadmap
 
 - [x] Emperically determine <input type="time"> behaviour
-- [x] Reverse engineer input (arrows, digits, 0 addition, etc.)
+- [x] Reverse engineer input behaviour (arrows, digits, 0 addition, etc.)
 - [x] Cross browser/ cross os manual tests  
 - [ ] Get Chrome behavioural specification for <input type="time">
 - [ ] Add end to end multi-browser, multi-os Selinium tests
