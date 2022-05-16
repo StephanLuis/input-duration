@@ -109,7 +109,7 @@ The objective is a minimised vanilla javascript plugin that reproduces the behav
 <i>Does this loose any functionality?</i>  No!  document.querySelector('#bob').value  has a getter and setter!  So values can be set and retrieved by ID.
 
 
-There are a few plugins (links to come), but controls with the plugin still treated time as a date (ex 24hr max).  Still it seems in 2022 the most relable is multi input (more links to come ), the best example is the Google countdown timer.  And that's wrong because time is a basic unit that should be separate from calendar complexities.  That got me thinking, why isn't there an input control for it implemented across browsers??  I needed one so coded ChronlyHMS.
+There are a few plugins (links to come) that remediate the lack of continuity, but even time controls with the plugin treat time as a date (ex 24hr max).  So it seems the current state is the most relable UX is multi input type number (more links to come ).  The best example is the Google countdown timer.  And that's wrong because time is a basic unit that should be separate from calendar complexities.  That got me thinking, why isn't there an input control for it implemented across browsers??  I needed one, so coded ChronlyHMS.
 
 Here's why:
 * Time is hours minutes and seconds (and millisecs) and needn't be associated with part of a day or a date
