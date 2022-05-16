@@ -90,7 +90,7 @@
 
 <!-- [![Product Name Screen Shot][product-screenshot]](https://example.com) -->
 
-Yes! It seems CRAZY in 2022 that there is not a native 'time only' input for HTML.  <br>No user input control for time that is not rendered independant of date or time of day.  ChronlyHMS is for a value of time  as hours, minutes, seconds <b>only</b>! <br> Why is it difficult to 'code' a countdown timer? Why can't it be done with one control, look at google's timer and other coundown timers! All use multiple inputs.  Shouldn't a user be able to 'scientifically' specify a time with one control?  <br>The closest HTML5 input type- time when configured with UX for hours to millisecs is very finicky and rendered differently on Chrome and Safari <b>and</b> mobile is different from laptop, so I've simplified that!
+Yes! It seems CRAZY in 2022 that there is not a native 'time only' input for HTML.  What I mean is there is no user input control for time not rendered independantly of date or time of day.  Yea, crazy, but now ChronlyHMS is a javascript that creates a UX input control simply for a value of time  as hours, minutes, seconds <b>only</b>! <br> Ever thought, why is it difficult to 'code' a countdown timer? Why can't it be done with one control? Just look at google's timer and other coundown timers! All use multiple inputs, usually designed for integers.  Shouldn't a user be able to 'scientifically' specify a period of time with one control?  <br>The closest HTML5 input type- time when configured with UX for hours to millisecs is very finicky and rendered differently on Chrome and Safari <b>and</b> mobile is different from laptop, so I've simplified that!
 
 <img src="readme/html.png" alt="drawing" width="60%"/>
 
