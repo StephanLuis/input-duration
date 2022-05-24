@@ -204,7 +204,7 @@ _For more examples, please refer to the source of  [chronoHMStest](http://practi
 <!-- ROADMAP -->
 ## Roadmap
 
-- [x] Emperically determine <input type="time"> behaviour
+- [x] Emperically determine <input type="time"> behaviour of Input (time) on Chrome
 - [x] Reverse engineer input behaviour (arrows, digits, 0 addition, etc.)
 - [x] Cross browser/ cross os manual tests  
 - [ ] Get Chrome behavioural specification for <input type="time">
