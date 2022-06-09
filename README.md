@@ -26,7 +26,7 @@
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
 [![RepoSize][reposize-shield]][reposize-url]
-[![Sauce Test Status][teststatus-shield][teststatus-url]
+[![Sauce Test Status][teststatus-shield]][teststatus-url]
 
 
 
