@@ -26,6 +26,8 @@
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
 [![RepoSize][reposize-shield]][reposize-url]
+[![Sauce Test Status](https://saucelabs.com/buildstatus/YOUR_SAUCE_USERNAME)](https://app.saucelabs.com/u/YOUR_SAUCE_USERNAME)
+
 
 
 
@@ -76,6 +78,7 @@
     </li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
+     <li><a href="#teststatus">Test Status</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -134,7 +137,7 @@ This section should lists any major frameworks/libraries used to for this projec
 * [Node.js](https://nodejs.org/)
 * [Webpack](https://webpack.js.org/)
 * [Gitpod](https://www.gitpod.io/)
-* [OpenSauce](https://angular.io/)
+* [Testing Powered By SauceLabs](https://saucelabs.com)
 * [Selenium](https://www.selenium.dev/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -218,6 +221,10 @@ See the [open issues](https://github.com/StephanLuis/chronlyhms/issues) for a fu
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+<!-- TESTSTATUS -->
+## Teststatus
+
+[![Sauce Test Status](https://saucelabs.com/browser-matrix/stephanluis.svg)](https://saucelabs.com/u/stephanluis)
 
 
 <!-- CONTRIBUTING -->
