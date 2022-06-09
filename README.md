@@ -300,8 +300,8 @@ Resources I've found helpful and would like to give credit to:
 [reposize-url]: https://github.com/StephanLuis/chronlyhms
 [product-screenshot]: images/screenshot.png
 [npm-bundle-size]: https://img.shields.io/bundlephobia/minzip/chronlyhms?style=for-the-badge
-[teststatus-shield]: https://img.shields.io/badge/dynamic/json?url=x&label=SauceTestStatus&style=for-the-badge
-[teststatus-url]:
+[teststatus-shield]: https://img.shields.io/badge/dynamic/json?url=https://saucelabs.com/buildstatus/stephanluis&label=Sauce%20Test%20Status&style=for-the-badge
+[teststatus-url]: 
 
 [html-screenshot]: readme/html.png
 [safari-screenshot]: readme/safariBad.png
