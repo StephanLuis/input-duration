@@ -44,7 +44,7 @@
   <h3 align="center">ChronlyHMS-- Best 'Time Only' Input</h3>
 
   <p align="center">
-    A 'time only' input that works on Safari in very close imitation of a time input on Chrome.  Time spans up to 999 hrs are natively implemented as well as small time spans to 1 millisecond.<br> </p>
+    A 'time only' input that works on Safari in very close imitation of a time input on Chrome.  'Time Only' means that the control is for time as a unit, like for count down timers.  Not for time of day or a point on a calendar.  No AM/PM conversions on Safari, no unwanted date-time selectors.  Just time spans up to 999 hrs and down to 1 millisecond.<br> </p>
     <br />
     <a href="https://github.com/StephanLuis/chronlyhms"><strong>Explore the docs »</strong></a>
     <br />
