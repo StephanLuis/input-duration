@@ -165,7 +165,7 @@ This is an example of how to get started with npm and webpack, other frameworks 
 ### Installation
 
 With packaging:
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
+_This template doesn't rely on any external dependencies or services._
 
 1. Install from NPM
  ```sh
