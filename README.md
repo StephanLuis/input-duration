@@ -50,9 +50,9 @@
     <a href="https://github.com/StephanLuis/chronlyhms"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://6s0mfy.csb.app/">Demo</a>
+    <a href="https://6s0mfy.csb.app/" target="_blank">Demo</a>
     ·
-  <a href="https://codesandbox.io/s/naughty-booth-6s0mfy?fontsize=14&hidenavigation=1&theme=dark">
+  <a href="https://codesandbox.io/s/naughty-booth-6s0mfy?fontsize=14&hidenavigation=1&theme=dark" target="_blank">
   Fiddle on CodeSandbox
 </a>
   ·
