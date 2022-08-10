@@ -52,6 +52,10 @@
     <br />
     <a href="https://6s0mfy.csb.app/">Demo</a>
     ·
+  <a href="https://codesandbox.io/s/naughty-booth-6s0mfy?fontsize=14&hidenavigation=1&theme=dark">
+  Fiddle on CodeSandbox
+</a>
+  ·
     <a href="https://github.com/StephanLuis/chronlyhms/issues">Report Bug</a>
     ·
     <a href="https://github.com/StephanLuis/chronlyhms/issues">Request Feature</a>
