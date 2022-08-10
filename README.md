@@ -45,6 +45,9 @@
 
   <p align="center">
     A 'time only' input that works on Safari in close imitation of a time input on Chrome.  'Time Only' means that the control is for time as a unit, like for count down timers.  Not for time of day or for a point in time on a calendar.  No AM/PM conversions on Safari, no unwanted date-time selectors.  Just time spans up to 999 hrs and down to 1 millisecond.<br> </p>
+  
+  <br />
+  [![Edit naughty-booth-6s0mfy](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/naughty-booth-6s0mfy?fontsize=14&hidenavigation=1&theme=dark)
     <br />
     <a href="https://github.com/StephanLuis/chronlyhms"><strong>Explore the docs »</strong></a>
     <br />
