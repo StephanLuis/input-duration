@@ -45,6 +45,26 @@
 
   <p align="center">
     A 'time only' input that works on Safari in close imitation of a time input on Chrome.  'Time Only' means that the control is for time as a unit, like for count down timers.  Not for time of day or for a point in time on a calendar.  No AM/PM conversions on Safari, no unwanted date-time selectors.  Just time spans up to 999 hrs and down to 1 millisecond.<br>
+    
+    <br>
+    Ok, what about mobile??  Yep, ChronlyHMS works on all popular operating system / browser combinations.  
+    
+    <style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+</style>
+<table class="tg">
+<thead>
+  <tr>
+    <td class="tg-0lax"></td>
+  </tr>
+</thead>
+</table>
+    
   </p>
   <br />
     <a href="https://github.com/StephanLuis/chronlyhms"><strong>Explore the docs »</strong></a>
