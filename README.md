@@ -66,8 +66,9 @@
     ·
     <a href="https://github.com/StephanLuis/chronlyhms/issues">Request Feature</a>
   </p>
+  Ok, what about mobile??  Yep, ChronlyHMS works on all popular operating system / browser combinations.  
 </div>
-Ok, what about mobile??  Yep, ChronlyHMS works on all popular operating system / browser combinations.  
+
 | Tables   |      Are      |  Cool |
 |----------|:-------------:|------:|
 | col 1 is |  left-aligned | $1600 |
