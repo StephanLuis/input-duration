@@ -53,10 +53,7 @@
 | col 2 is |    centered   |   $12 |
 | col 3 is | right-aligned |    $1 |
   </div>
-  
-  
-  <br />
-    <a href="https://github.com/StephanLuis/chronlyhms"><strong>Explore the docs »</strong></a>
+     <a href="https://github.com/StephanLuis/chronlyhms"><strong>Explore the docs »</strong></a>
     <br />
     <br />
     <a href="https://6s0mfy.csb.app/" target="_blank">Demo</a>
