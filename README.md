@@ -65,7 +65,12 @@
   Ok, what about mobile??  Yep, ChronlyHMS works on all popular operating system / browser combinations.  
 </div>
 
- <p align="center">
+|OS(mobile)       | Browser        | OS(laptop)  | Browser   |
+|-----------------|----------------|-------------|-----------|
+| Android  | Chrome   | Windows  10, 11   |  Chrome, Edge  |
+| iOS      | Safari, Chrone | OsX             | Safari, Chrome |    
+
+
 | OS(laptop)      | Browser        |
 |-----------------|----------------|
 | Windows  10, 11 | Chrome, Edge   |
