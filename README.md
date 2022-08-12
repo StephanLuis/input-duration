@@ -38,7 +38,7 @@
   
   
   <a href="https://github.com/StephanLuis/chronlyhms">
-    <img src="readme/logo.svg" alt="Logo" width="90" height="90">  <h3 align="center">ChronlyHMS-- Best 'Time Only' Input</h3>
+   <p> <img src="readme/logo.svg" alt="Logo" width="90" height="90">  <h3 align="center">ChronlyHMS-- Best 'Time Only' Input</h3></p>
   </a>
 
   
