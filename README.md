@@ -103,26 +103,33 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
+Time inputs <input type='time'> are updated by browsers in unwanted ways!   Safari on desktop adds AM/PM if the user is in the USA and on mobile the cool scroll time selector does not allow fractions of a second.  The best html5 option doesn't cut it, sadly, so ChronlyHMS was designed and buit for a consistant UX no matter the browser, OS, or location settings.
 
 <!-- [![Product Name Screen Shot][product-screenshot]](https://example.com) -->
-
-Yes! It seems CRAZY in 2022 that there is not a native 'time only' input for HTML.  What I mean is there is no user input control for time rendered independantly of date or time of day.  Yea, crazy, but now ChronlyHMS is a javascript plugin that creates a UX input control for a value of time simply as hours, minutes, seconds --<b>only</b>! <br> Ever thought, why is it difficult to 'code' a countdown timer? Why can't it be done with one control? Just look at google's timer and other coundown timers! All use multiple inputs, usually designed for integers.  Shouldn't a user be able to 'scientifically' specify a period of time with one control?  <br>The closest HTML5 input type- time when configured with UX for hours to millisecs is very finicky and rendered differently on Chrome and Safari <b>and</b> mobile is different from laptop, so I've simplified that!
 
 <img src="readme/html.png" alt="drawing" width="60%"/>
 
 <!-- [![HTML Screen Shot][html-screenshot]](https://example.com) -->
-
-The very worst is Safari on desktop and mobile undermine those snazzy input type=time efforts and update the input depending on OS settings for desktop or provide a control with restricted capability...
-
-<img src="readme/safariBad.png" alt="drawing" width="60%"/>
-<!-- [![Safari Screen Shot][safari-screenshot]](https://example.com) -->
-
 
 <h3> Bob is rescued by ChronlyHMS! </h3>
 
 The objective is a minimised vanilla javascript plugin that reproduces the behaviour of the input type=time on Chrome.  This way at least two of the major browsers are supported, Safari and Chrome, on desktop and mobile operating systems. 
 
 <i>Does this loose any functionality?</i>  No!  document.querySelector('#bob').value  has a getter and setter!  So values can be set and retrieved by ID.
+
+
+
+<img src="readme/safariBad.png" alt="drawing" width="60%"/>
+<!-- [![Safari Screen Shot][safari-screenshot]](https://example.com) -->
+
+Yes! It seems CRAZY in 2022 that there is not a native 'time only' input for HTML.  What I mean is there is no user input control for time rendered independantly of date or time of day.  Yea, crazy, but now ChronlyHMS is a javascript plugin that creates a UX input control for a value of time simply as hours, minutes, seconds --<b>only</b>! <br> Ever thought, why is it difficult to 'code' a countdown timer? Why can't it be done with one control? Just look at google's timer and other coundown timers! All use multiple inputs, usually designed for integers.
+
+The very worst is Safari on desktop and mobile undermine those snazzy input type=time efforts and update the input depending on OS settings for desktop or provide a control with restricted capability... Shouldn't a user be able to 'scientifically' specify a period of time with one control?  <br>The closest HTML5 input type- time when configured with UX for hours to millisecs is very finicky and rendered differently on Chrome and Safari <b>and</b> mobile is different from laptop, so I've simplified that!
+
+
+
+
+
 
 
 There are a few plugins (links to come) that remediate the lack of continuity, but even time controls with the plugin treat time as a date (ex 24hr max).  So it seems the current state is the most relable UX is multi input type number (more links to come ).  The best example is the Google countdown timer.  And that's wrong because time is a basic unit that should be separate from calendar complexities.  That got me thinking, why isn't there an input control for it implemented across browsers??  I needed one, so coded ChronlyHMS.
