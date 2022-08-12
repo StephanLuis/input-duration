@@ -28,6 +28,8 @@
 [![RepoSize][reposize-shield]][reposize-url]
 ![Sauce Test Status][teststatus-shield]
 
+[![Sauce Test Status](https://app.saucelabs.com/browser-matrix/stephanluis)](https://app.saucelabs.com/u/stephanluis)
+
 
 
 
