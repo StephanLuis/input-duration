@@ -26,9 +26,7 @@
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
 [![RepoSize][reposize-shield]][reposize-url]
-![Sauce Test Status][teststatus-shield]
-
-[![Sauce Test Status](https://app.saucelabs.com/browser-matrix/stephanluis)](https://app.saucelabs.com/u/stephanluis)
+[![Build Status](https://app.eu-central-1.saucelabs.com/buildstatus/stephanluis)](https://app.eu-central-1.saucelabs.com/builds/a008bd25881033118dcf3fcd15c000ee)
 
 
 
