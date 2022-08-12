@@ -50,9 +50,7 @@
 <p>
 <div>
   </div>
-     <a href="https://github.com/StephanLuis/chronlyhms"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
+    <div align="center">
     <a href="https://6s0mfy.csb.app/" target="_blank">Demo</a>
     ·
   <a href="https://codesandbox.io/s/naughty-booth-6s0mfy?fontsize=14&hidenavigation=1&theme=dark" target="_blank">
@@ -63,6 +61,7 @@
     ·
     <a href="https://github.com/StephanLuis/chronlyhms/issues">Request Feature</a>
   </p>
+  </div>
   Ok, what about mobile??  Yep, ChronlyHMS works on all popular operating system / browser combinations.  
 </div>
 
