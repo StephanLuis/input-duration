@@ -47,7 +47,7 @@
   <p align="center">A time unit input that works on Safari in close imitation of a time input on Chrome. </p>
 </div>
 
-'Time Only' means that the control is for time as a unit, or duration, like for count down timers.  Not for time of day nor for a point in time on a calendar.  No AM/PM conversions on Safari, no unwanted date-time selectors.  Just time spans up to 999 hrs and down to 1 millisecond.<br>
+'Time Only' means that this control is for time as a unit, or a duration, like for count down timers.  Not for time of day nor for a point in time on a calendar.  No AM/PM conversions on Safari, no unwanted date-time selectors.  Just time spans up to 999 hrs and down to 1 millisecond.<br>
 <p>
 <div>
   </div>
