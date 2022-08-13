@@ -27,6 +27,7 @@
 [![MIT License][license-shield]][license-url]
 [![RepoSize][reposize-shield]][reposize-url]
 ![Build StatusDIY](https://img.shields.io/static/v1?label=Tested&nbsp;With&message=BrowserStack&color=<COLOR>&style=for-the-badge)
+![Build StatusDIY](https://img.shields.io/static/v1?label=Testing&nbsp;Framework&message=Selenium/Appiumk&color=<COLOR>&style=for-the-badge)
 
 
 
