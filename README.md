@@ -27,6 +27,9 @@
 [![MIT License][license-shield]][license-url]
 [![RepoSize][reposize-shield]][reposize-url]
 [![Build Status](https://app.eu-central-1.saucelabs.com/buildstatus/stephanluis)](https://app.eu-central-1.saucelabs.com/builds/a008bd25881033118dcf3fcd15c000ee)
+![TestingWith](./badge.svg)
+
+[![Build StatusDIY](https://img.shields.io/static/v1?label=<LABEL>&message=<MESSAGE>&color=<COLOR>)
 
 
 
