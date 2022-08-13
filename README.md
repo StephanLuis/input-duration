@@ -244,7 +244,12 @@ See the [open issues](https://github.com/StephanLuis/chronlyhms/issues) for a fu
 <!-- TESTSTATUS -->
 ## Teststatus
 
-[![Sauce Test Status](https://saucelabs.com/browser-matrix/stephanluis.svg)](https://saucelabs.com/u/stephanluis)
+![TestStatusDIY](https://img.shields.io/static/v1?label=Android:Chrome&message=Pass&color=<COLOR>&style=for-the-badge)
+![TestStatusDIY](https://img.shields.io/static/v1?label=iOS:Safari&message=Pass&color=<COLOR>&style=for-the-badge)
+![TestStatusDIY](https://img.shields.io/static/v1?label=iOS:Chrome&message=Pass&color=<COLOR>&style=for-the-badge)
+![TestStatusDIY](https://img.shields.io/static/v1?label=Windows:Chrome&message=Pass&color=<COLOR>&style=for-the-badge)
+![TestStatusDIY](https://img.shields.io/static/v1?label=osX:Safari&message=Pass&color=<COLOR>&style=for-the-badge)
+![TestStatusDIY](https://img.shields.io/static/v1?label=osX:Chrome&message=Pass&color=<COLOR>&style=for-the-badge)
 
 
 <!-- CONTRIBUTING -->
