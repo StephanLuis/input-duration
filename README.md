@@ -26,10 +26,7 @@
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
 [![RepoSize][reposize-shield]][reposize-url]
-[![Build Status](https://app.eu-central-1.saucelabs.com/buildstatus/stephanluis)](https://app.eu-central-1.saucelabs.com/builds/a008bd25881033118dcf3fcd15c000ee)
-![TestingWith](./badge.svg)
-
-[![Build StatusDIY](https://img.shields.io/static/v1?label=<LABEL>&message=<MESSAGE>&color=<COLOR>)
+![Build StatusDIY](https://img.shields.io/static/v1?label=Tested&nbsp;With&message=BrowserStack&color=<COLOR>&style=for-the-badge)
 
 
 
@@ -49,7 +46,7 @@
   <p align="center">A time unit input that works on Safari in close imitation of a time input on Chrome. </p>
 </div>
 
-'Time Only' means that the control is for time as a unit, like for count down timers.  Not for time of day nor for a point in time on a calendar.  No AM/PM conversions on Safari, no unwanted date-time selectors.  Just time spans up to 999 hrs and down to 1 millisecond.<br>
+'Time Only' means that the control is for time as a unit, or duration, like for count down timers.  Not for time of day nor for a point in time on a calendar.  No AM/PM conversions on Safari, no unwanted date-time selectors.  Just time spans up to 999 hrs and down to 1 millisecond.<br>
 <p>
 <div>
   </div>
