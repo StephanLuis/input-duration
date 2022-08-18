@@ -252,6 +252,8 @@ See the [open issues](https://github.com/StephanLuis/chronlyhms/issues) for a fu
 ![TestStatusDIY](https://img.shields.io/static/v1?label=osX:Safari&message=Pass&color=<COLOR>&style=for-the-badge)
 ![TestStatusDIY](https://img.shields.io/static/v1?label=osX:Chrome&message=Pass&color=<COLOR>&style=for-the-badge)
 
+[Tests & Live Status](https://github.com/StephanLuis/BrowserStackSelenium/blob/main/chronlyHMStests/README.md)
+
 
 <!-- CONTRIBUTING -->
 ## Contributing
