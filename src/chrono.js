@@ -12,10 +12,12 @@ class ChronlyHMS {
     this.checkBoot();
     
     // each time Chronly is newed up
-    // 1) check for an existing window.ChronlyHMS if there is one 
+    // 1) check for an existing window.ChronlyFlag if there is one 
     // 2) clear events a) named events, b) remove 
     // 3) add events
-    //      a
+
+
+    window.ChronlyHMS = this;
 
   }
 
