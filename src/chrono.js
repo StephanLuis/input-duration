@@ -33,7 +33,7 @@ class ChronlyHMS {
 
     boot(){
 
-      this.old_addHTML();
+      this.addHTML();
 
       // set up event listeners
       this.add0s();
@@ -92,7 +92,7 @@ class ChronlyHMS {
 
   // convert input data-univHMS to'univHMS'
 
-  old_addHTML() {
+  addHTML() {
 
 
     const univHMSinp = document.querySelectorAll("input[data-univHMS]");
@@ -133,24 +133,7 @@ class ChronlyHMS {
     });
   }
 
-  addHTML() {
-    const univHMSinp = document.querySelectorAll("input[data-univHMS]");
-
-    univHMSinp.forEach(el => {
-      // code
-
-      var spanIn = document.createElement("div");
-
-      [...el.attributes].forEach(attr => { spanIn.setAttribute(attr.nodeName, attr.nodeValue) });
-
-      el.replaceWith(spanIn);
-
-      spanIn.classList.add('timeCase');
-
-      this.addInputs(el);
-    })
-  }
-
+  
   addInputs(el) {
 
     var template = document.createElement('template');
