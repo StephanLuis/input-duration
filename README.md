@@ -221,6 +221,19 @@ ChronlyHMS requires an input element with the attribute 'data-univHMS'.  There's
 <input id='bob' data-univHMS></input>
 ```
 
+If you would like ChronlyHMS to update inputs that are placed on DOM with javascipt (ex. after chronlyhms script is added), then with your js: 
+1) add a data attribute to the input 
+```sh
+data-univHMS [data-univHMS='']
+``` 
+
+2) call the Chronly boot method
+
+```sh
+window.ChronlyHMS.boot()
+```
+so the inputs are modified.
+
 _For more examples, please refer to the source of  [chronoHMStest](http://practisemaster.com/demos/chronoHMStest.html)_
 
 <p align="right">(<a href="#top">back to top</a>)</p>
