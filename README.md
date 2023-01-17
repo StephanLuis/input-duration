@@ -252,6 +252,7 @@ _For more examples, please refer to the source of  [chronoHMStest](http://practi
 - [ ] Multi-language documentation (Google translate of this page?)
     - [ ] Chinese
     - [ ] Spanish
+- [ ] Is it worth having a remove function, restoring the original input?
 
 See the [open issues](https://github.com/StephanLuis/chronlyhms/issues) for a full list of proposed features (and known issues).
 
