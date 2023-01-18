@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- <link rel="stylesheet" href="./chrono.css"> -->
+  
+</head>
+
+<body>
+  <h1 id="S">
+    Time Point/ TimeStamp Control!
+  </h1>
+  <br>
+  <br>
+  <h2>Original (Doesn't work in Safari!)</h2>
+  <div>
+    <input id="badtime" type="time" class="plyr__controls__item plyr__control" step="0.01" value="00:00:00.000">
+    <div>
+      <br>
+      <br>
+
+      <input type="button" value="Get BadTime Value" onclick="(function(){document.querySelector('#BadTimePoint').innerHTML =  document.querySelector('#badtime').value}())" >
+     <br>
+      The value of the input type='time' is:  
+
+      
+     
+      <div id="BadTimePoint">00:00:00.000</div>
+
+      </div>
+    </div>
+    <br><br><br>
+    <h2>Input HMSmS Chrono Widget</h2>
+    <div>
+      The event.key is: <div id="keyHolder">
+
+      </div>
+    <br>
+    <br>
+   
+    <p>Bob:</p>
+    <input id='bob' data-univHMS></input>
+    <p>Jane</p>
+    <input id='jane' data-univHMS></input>
+    <p>Jill</p>
+    <input id='jill' data-univHMS></input>
+    <p>
+    <div>
+      <br><br><br>
+
+        <h2>Retrieve values with .value</h2>
+       CODE: <input type="text" disabled value="document.querySelector('#bob').value" style="width: 300px;">
+        
+        <br>
+        <br>
+        <br>
+
+          <input type="button" value="Get Bob Value" onclick="(function(){document.querySelector('#BobTimePoint').innerHTML =  document.querySelector('#bob').value}())" >
+          <div id="BobTimePoint">00:00:00.000</div>
+          <br>
+          <br>
+          <input type="button" value="Get Jane Value" onclick="(function(){document.querySelector('#JaneTimePoint').innerHTML =  document.querySelector('#jane').value}())" >
+          <div id="JaneTimePoint">00:00:00.000</div>
+          <br>
+          <br>
+          <input type="button" value="Get Jill Value" onclick="(function(){document.querySelector('#JillTimePoint').innerHTML =  document.querySelector('#jill').value}())" >
+          <div id="JillTimePoint">00:00:00.000</div>
+          
+          </div>
+
+        </div>
+        <br>
+        <br>
+        <br>
+  <script type="module" src="../../dist/chronoBundle.js"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/chronlyhms@develop/dist/chronoBundle.js"></script> -->
+
+</body>
+
+</html>

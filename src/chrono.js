@@ -12,10 +12,12 @@ class ChronlyHMS {
     this.checkBoot();
     
     // each time Chronly is newed up
-    // 1) check for an existing window.ChronlyHMS if there is one 
+    // 1) check for an existing window.ChronlyFlag if there is one 
     // 2) clear events a) named events, b) remove 
     // 3) add events
-    //      a
+
+
+    window.ChronlyHMS = this;
 
   }
 
@@ -31,7 +33,7 @@ class ChronlyHMS {
 
     boot(){
 
-      this.old_addHTML();
+      this.addHTML();
 
       // set up event listeners
       this.add0s();
@@ -90,7 +92,7 @@ class ChronlyHMS {
 
   // convert input data-univHMS to'univHMS'
 
-  old_addHTML() {
+  addHTML() {
 
 
     const univHMSinp = document.querySelectorAll("input[data-univHMS]");
@@ -131,24 +133,7 @@ class ChronlyHMS {
     });
   }
 
-  addHTML() {
-    const univHMSinp = document.querySelectorAll("input[data-univHMS]");
-
-    univHMSinp.forEach(el => {
-      // code
-
-      var spanIn = document.createElement("div");
-
-      [...el.attributes].forEach(attr => { spanIn.setAttribute(attr.nodeName, attr.nodeValue) });
-
-      el.replaceWith(spanIn);
-
-      spanIn.classList.add('timeCase');
-
-      this.addInputs(el);
-    })
-  }
-
+  
   addInputs(el) {
 
     var template = document.createElement('template');
