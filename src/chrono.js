@@ -10,7 +10,7 @@ class ChronlyHMS {
 
 
     this.checkBoot();
-    
+
     // each time Chronly is newed up
     // 1) check for an existing window.ChronlyFlag if there is one 
     // 2) clear events a) named events, b) remove 
@@ -19,35 +19,50 @@ class ChronlyHMS {
 
     window.ChronlyHMS = this;
 
+    document.querySelectorAll(".timeCase input").forEach(item =>
+
+      item.addEventListener('keypress', function (e) {
+
+        e = e || window.event;
+        var charCode = (typeof e.which == "undefined") ? e.keyCode : e.which;
+        var charStr = String.fromCharCode(charCode);
+
+        if (!charStr.match(/^[0-9]+$/))
+          e.preventDefault();
+
+      }));
+
+
+
   }
 
-  checkBoot(){
+  checkBoot() {
 
-    if(window.ChronlyFlag){
+    if (window.ChronlyFlag) {
       this.reboot();
     }
-    else{
+    else {
       this.boot();
     }
   }
 
-    boot(){
+  boot() {
 
-      this.addHTML();
+    this.addHTML();
 
-      // set up event listeners
-      this.add0s();
-      this.addNumberLooping();
-      this.addArrowKeyInput();
-      this.addNumericInput();
-      this.addClicksToActivate();
-      this.nonNumericBugInHTML();
-      this.updateDivPrototype();
+    // set up event listeners
+    this.add0s();
+    this.addNumberLooping();
+    this.addArrowKeyInput();
+    this.addNumericInput();
+    this.addClicksToActivate();
+    this.nonNumericBugInHTML();
+    this.updateDivPrototype();
 
-      window.ChronlyFlag = true;
-    }
+    window.ChronlyFlag = true;
+  }
 
-  reboot(){
+  reboot() {
 
     // for each input in the timeCase replace it with (the original/ an) input
 
@@ -58,17 +73,17 @@ class ChronlyHMS {
       var replaceElement = document.createElement('input');
 
       [...element.attributes].forEach(attr => { replaceElement.setAttribute(attr.nodeName, attr.nodeValue) });
-  
+
       element.parentElement.insertBefore(replaceElement, element);
-  
+
       element.remove();
-  
+
       // removes eventlisters 
       element = ''
-      
+
     });
 
-   this.boot();
+    this.boot();
 
   }
 
@@ -90,7 +105,30 @@ class ChronlyHMS {
     });
   }
 
-  // convert input data-univHMS to'univHMS'
+
+  noHours() {
+
+    // hide chronly hours inputs on page
+    
+    document.querySelectorAll(".timeCase input.sH").forEach(el => el.style.display = 'none');
+
+
+    // hide the hours colon on page
+
+    document.querySelectorAll(".timeCase span.bds-h").forEach(el => el.style.display = 'none');
+
+
+  }
+
+
+  disableInputs() {
+
+    // disable chronly inputs on page
+
+    document.querySelectorAll(".timeCase input").forEach(el => el.disabled = 'true')
+
+  }
+
 
   addHTML() {
 
@@ -112,11 +150,11 @@ class ChronlyHMS {
 
       template.innerHTML = `
       <input type="number" class="sH D2 ts_digit" name="startHours" data-tp="1" min="-1" max="100" value="00" >
-      <span class="bds">:</span>
+      <span class="bds-h">:</span>
       <input type="number" class="sM D2 ts_digit" name="startMinutes" data-tp="2" min="-1" max="60" value="00">
-      <span class="bds">:</span>
+      <span class="bds-m">:</span>
       <input type="number" class="sS D2 ts_digit" name="startSeconds" data-tp="3" min="-1" max="60" value="00">
-      <span class="bds">.</span>
+      <span class="bds-s">.</span>
       <input type="number" class="sMS D3 ts_digit" name="startMilliSecs" data-tp="4" min="-10" max="1010" step="10" value="000">
       <div id="svgContainer">
         <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
@@ -133,7 +171,7 @@ class ChronlyHMS {
     });
   }
 
-  
+
   addInputs(el) {
 
     var template = document.createElement('template');
