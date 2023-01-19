@@ -17,23 +17,36 @@ import './chrono.css'
 
 class ChronlyHMS {
 
+  /**
+  * the contructor creates two window variables
+  * window.ChronlyHMS a global ChronlyHMS instance and
+  * window.ChronlyFlag for determining re-boot status 
+  * @constructor
+   */
 
   constructor() {
 
-
+    /**
+    * Triggers the boot/reboot  
+    * @constructor
+    * @method
+    */
 
     this.checkBoot();
 
-    /// *** continue coments here!
 
-    // each time Chronly is newed up
-    // 1) check for an existing window.ChronlyFlag if there is one 
-    // 2) clear events a) named events, b) remove 
-    // 3) add events
-
+    /**
+     * A global ChronlyHMS instance
+     * @global
+     */
 
     window.ChronlyHMS = this;
 
+
+    /**
+     * @constructor
+     * @method
+     */
     document.querySelectorAll(".timeCase input").forEach(item =>
 
       item.addEventListener('keypress', function (e) {
@@ -47,13 +60,16 @@ class ChronlyHMS {
 
       }));
 
-
-
+      this.checkBoot()
   }
 
 
+
   /**
-   * Text above
+   * // each time Chronly is newed up
+    // 1) check for an existing window.ChronlyFlag if there is one 
+    // 2) clear events a) named events, b) remove 
+    // 3) add eventsText above
    * @method text beside
    * text below
    */
