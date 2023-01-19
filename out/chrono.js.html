@@ -1,4 +1,32 @@
-/**
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: chrono.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: chrono.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
  * This import of this module self-news a ChronlyHMS class, it requires import of chrono.css
  * and the addition of a data-univHMS attibute on html (time) input tags
  * @module ChronlyHMS Module
@@ -192,20 +220,20 @@ class ChronlyHMS {
       var template = document.createElement('template');
 
       template.innerHTML = `
-      <input type="number" class="sH D2 ts_digit" name="startHours" data-tp="1" min="-1" max="100" value="00" >
-      <span class="bds-h">:</span>
-      <input type="number" class="sM D2 ts_digit" name="startMinutes" data-tp="2" min="-1" max="60" value="00">
-      <span class="bds-m">:</span>
-      <input type="number" class="sS D2 ts_digit" name="startSeconds" data-tp="3" min="-1" max="60" value="00">
-      <span class="bds-s">.</span>
-      <input type="number" class="sMS D3 ts_digit" name="startMilliSecs" data-tp="4" min="-10" max="1010" step="10" value="000">
-      <div id="svgContainer">
-        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+      &lt;input type="number" class="sH D2 ts_digit" name="startHours" data-tp="1" min="-1" max="100" value="00" >
+      &lt;span class="bds-h">:&lt;/span>
+      &lt;input type="number" class="sM D2 ts_digit" name="startMinutes" data-tp="2" min="-1" max="60" value="00">
+      &lt;span class="bds-m">:&lt;/span>
+      &lt;input type="number" class="sS D2 ts_digit" name="startSeconds" data-tp="3" min="-1" max="60" value="00">
+      &lt;span class="bds-s">.&lt;/span>
+      &lt;input type="number" class="sMS D3 ts_digit" name="startMilliSecs" data-tp="4" min="-10" max="1010" step="10" value="000">
+      &lt;div id="svgContainer">
+        &lt;svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
           focusable="false" data-prefix="fal" data-icon="stopwatch" class="svg-inline--fa fa-stopwatch fa-w-14"
           role="img" viewBox="0 0 448 512">
-          <path xmlns="http://www.w3.org/2000/svg" fill="currentColor" d="M393.9 184l22.6-22.6c4.7-4.7 4.7-12.3 0-17l-17-17c-4.7-4.7-12.3-4.7-17 0l-20.7 20.7c-31.1-27.5-70.4-45.9-113.8-50.8V48h28c6.6 0 12-5.4 12-12V12c0-6.6-5.4-12-12-12H172c-6.6 0-12 5.4-12 12v24c0 6.6 5.4 12 12 12h28v49.4C96.4 109.3 16 197.2 16 304c0 114.9 93.1 208 208 208s208-93.1 208-208c0-44.7-14.1-86.1-38.1-120zM224 464c-88.4 0-160-71.6-160-160s71.6-160 160-160 160 71.6 160 160-71.6 160-160 160zm12-112h-24c-6.6 0-12-5.4-12-12V204c0-6.6 5.4-12 12-12h24c6.6 0 12 5.4 12 12v136c0 6.6-5.4 12-12 12z"/>
-        </svg>
-      </div>
+          &lt;path xmlns="http://www.w3.org/2000/svg" fill="currentColor" d="M393.9 184l22.6-22.6c4.7-4.7 4.7-12.3 0-17l-17-17c-4.7-4.7-12.3-4.7-17 0l-20.7 20.7c-31.1-27.5-70.4-45.9-113.8-50.8V48h28c6.6 0 12-5.4 12-12V12c0-6.6-5.4-12-12-12H172c-6.6 0-12 5.4-12 12v24c0 6.6 5.4 12 12 12h28v49.4C96.4 109.3 16 197.2 16 304c0 114.9 93.1 208 208 208s208-93.1 208-208c0-44.7-14.1-86.1-38.1-120zM224 464c-88.4 0-160-71.6-160-160s71.6-160 160-160 160 71.6 160 160-71.6 160-160 160zm12-112h-24c-6.6 0-12-5.4-12-12V204c0-6.6 5.4-12 12-12h24c6.6 0 12 5.4 12 12v136c0 6.6-5.4 12-12 12z"/>
+        &lt;/svg>
+      &lt;/div>
   `
 
       spanIn.appendChild(template.content)
@@ -220,20 +248,20 @@ class ChronlyHMS {
     var template = document.createElement('template');
 
     template.innerHTML = `
-      <input type="number" class="sH D2 ts_digit" name="startHours" data-tp="1" min="-1" max="100" value="00" >
-      <span class="bds">:</span>
-      <input type="number" class="sM D2 ts_digit" name="startMinutes" data-tp="2" min="-1" max="60" value="00">
-      <span class="bds">:</span>
-      <input type="number" class="sS D2 ts_digit" name="startSeconds" data-tp="3" min="-1" max="60" value="00">
-      <span class="bds">.</span>
-      <input type="number" class="sMS D3 ts_digit" name="startMilliSecs" data-tp="4" min="-10" max="1010" step="10" value="000">
-      <div id="svgContainer">
-        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+      &lt;input type="number" class="sH D2 ts_digit" name="startHours" data-tp="1" min="-1" max="100" value="00" >
+      &lt;span class="bds">:&lt;/span>
+      &lt;input type="number" class="sM D2 ts_digit" name="startMinutes" data-tp="2" min="-1" max="60" value="00">
+      &lt;span class="bds">:&lt;/span>
+      &lt;input type="number" class="sS D2 ts_digit" name="startSeconds" data-tp="3" min="-1" max="60" value="00">
+      &lt;span class="bds">.&lt;/span>
+      &lt;input type="number" class="sMS D3 ts_digit" name="startMilliSecs" data-tp="4" min="-10" max="1010" step="10" value="000">
+      &lt;div id="svgContainer">
+        &lt;svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
           focusable="false" data-prefix="fal" data-icon="stopwatch" class="svg-inline--fa fa-stopwatch fa-w-14"
           role="img" viewBox="0 0 448 512">
-          <path xmlns="http://www.w3.org/2000/svg" fill="currentColor" d="M393.9 184l22.6-22.6c4.7-4.7 4.7-12.3 0-17l-17-17c-4.7-4.7-12.3-4.7-17 0l-20.7 20.7c-31.1-27.5-70.4-45.9-113.8-50.8V48h28c6.6 0 12-5.4 12-12V12c0-6.6-5.4-12-12-12H172c-6.6 0-12 5.4-12 12v24c0 6.6 5.4 12 12 12h28v49.4C96.4 109.3 16 197.2 16 304c0 114.9 93.1 208 208 208s208-93.1 208-208c0-44.7-14.1-86.1-38.1-120zM224 464c-88.4 0-160-71.6-160-160s71.6-160 160-160 160 71.6 160 160-71.6 160-160 160zm12-112h-24c-6.6 0-12-5.4-12-12V204c0-6.6 5.4-12 12-12h24c6.6 0 12 5.4 12 12v136c0 6.6-5.4 12-12 12z"/>
-        </svg>
-      </div>
+          &lt;path xmlns="http://www.w3.org/2000/svg" fill="currentColor" d="M393.9 184l22.6-22.6c4.7-4.7 4.7-12.3 0-17l-17-17c-4.7-4.7-12.3-4.7-17 0l-20.7 20.7c-31.1-27.5-70.4-45.9-113.8-50.8V48h28c6.6 0 12-5.4 12-12V12c0-6.6-5.4-12-12-12H172c-6.6 0-12 5.4-12 12v24c0 6.6 5.4 12 12 12h28v49.4C96.4 109.3 16 197.2 16 304c0 114.9 93.1 208 208 208s208-93.1 208-208c0-44.7-14.1-86.1-38.1-120zM224 464c-88.4 0-160-71.6-160-160s71.6-160 160-160 160 71.6 160 160-71.6 160-160 160zm12-112h-24c-6.6 0-12-5.4-12-12V204c0-6.6 5.4-12 12-12h24c6.6 0 12 5.4 12 12v136c0 6.6-5.4 12-12 12z"/>
+        &lt;/svg>
+      &lt;/div>
   `
 
     el.appendChild(template.content)
@@ -249,7 +277,7 @@ class ChronlyHMS {
 
     // input for hours, minutes, seconds
     document.querySelectorAll("div.timeCase input").forEach(i => i.addEventListener('change', function () {
-      if (!isNaN(this.value) && this.value.length === 1) {
+      if (!isNaN(this.value) &amp;&amp; this.value.length === 1) {
         this.value = '0' + this.value;
       }
     }));
@@ -258,7 +286,7 @@ class ChronlyHMS {
     // milliseconds
     document.querySelectorAll("input.sMS").forEach(i => i.addEventListener('change', function () {
 
-      if (!isNaN(this.value) && this.value.length === 2) {
+      if (!isNaN(this.value) &amp;&amp; this.value.length === 2) {
         this.value = '0' + this.value;
       }
 
@@ -363,7 +391,7 @@ class ChronlyHMS {
           case event.key == "ArrowRight":
             tp_active = document.activeElement.dataset.tp;
 
-            if (tp_active <= 3) {
+            if (tp_active &lt;= 3) {
               tp_active++;
             }
 
@@ -619,3 +647,26 @@ export default new ChronlyHMS;
 
 
 
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-ChronlyHMS%2520Module.html">ChronlyHMS Module</a></li></ul><h3>Classes</h3><ul><li><a href="module-ChronlyHMS%2520Module-ChronlyHMS.html">ChronlyHMS</a></li></ul><h3>Global</h3><ul><li><a href="global.html#ChronlyHMS">ChronlyHMS</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Thu Jan 19 2023 19:36:12 GMT+0000 (Coordinated Universal Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
