@@ -1,7 +1,19 @@
+
+/**
+ * Import the required css
+ */
 import './chrono.css'
 
 // A HH:MM:SS.mmm control that is unaffected by OSX and works on 'all' browsers.
 // ChronlyHMS requires an input element with the attribute 'data-univHMS'
+
+/**
+ * ChronlyHMS Module
+ * @class 
+ * @module This self-news ChronlyHMS class on export of module
+ * @requires module ./chrono.css
+ * @requires input element with the attribute 'data-univHMS'
+ */
 
 class ChronlyHMS {
 
@@ -9,7 +21,10 @@ class ChronlyHMS {
   constructor() {
 
 
+
     this.checkBoot();
+
+    /// *** continue coments here!
 
     // each time Chronly is newed up
     // 1) check for an existing window.ChronlyFlag if there is one 
@@ -36,6 +51,13 @@ class ChronlyHMS {
 
   }
 
+
+  /**
+   * Text above
+   * @method text beside
+   * text below
+   */
+
   checkBoot() {
 
     if (window.ChronlyFlag) {
@@ -45,6 +67,8 @@ class ChronlyHMS {
       this.boot();
     }
   }
+
+
 
   boot() {
 
@@ -109,7 +133,7 @@ class ChronlyHMS {
   noHours() {
 
     // hide chronly hours inputs on page
-    
+
     document.querySelectorAll(".timeCase input.sH").forEach(el => el.style.display = 'none');
 
 
