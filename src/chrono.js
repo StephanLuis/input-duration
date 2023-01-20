@@ -9,6 +9,7 @@
 /**
  * Import the required css
  */
+
 import './chrono.css'
 
 // A HH:MM:SS.mmm control that is unaffected by OSX and works on 'all' browsers.
@@ -17,17 +18,22 @@ import './chrono.css'
 /**
  * A single class plugin
  * @class ChronlyHMS Class
- * @property checkboot() runs when asked
+ * @property checkboot() checks ChronlyHMS presence on page through window.ChronlyFlag.
+ * @propety querySelectorAll determines which inputs to update
+ * @property globals instantiates window.ChronlyHMS and window.ChronlyFlag
  */
 
+
 class ChronlyHMS {
+
 
   /**
   * The contructor creates two window variables
   * window.ChronlyHMS a global ChronlyHMS instance and
   * window.ChronlyFlag for determining re-boot status 
   * @constructor
-   */
+  */
+
 
   constructor() {
 
@@ -47,6 +53,7 @@ class ChronlyHMS {
      * A loose method that scans for existing ChronlyHMS html
      * 
      */
+
     document.querySelectorAll(".timeCase input").forEach(item =>
 
       item.addEventListener('keypress', function (e) {
@@ -72,7 +79,8 @@ class ChronlyHMS {
    * // each time Chronly is newed up
     // 1) check for an existing window.ChronlyFlag if there is one 
     // 2) clear events a) named events, b) remove 
-    // 3) add eventsText above
+    // 3) add events
+    Text above
    * @method text beside
    * text below
    */
@@ -102,6 +110,10 @@ class ChronlyHMS {
     this.nonNumericBugInHTML();
     this.updateDivPrototype();
 
+
+    /**
+     * @global  window.ChronlyFlag
+     */
     window.ChronlyFlag = true;
   }
 
