@@ -18,14 +18,13 @@ import './chrono.css'
 /**
  * A single class plugin
  * @class ChronlyHMS Class
- * @property checkboot() checks ChronlyHMS presence on page through window.ChronlyFlag.
- * @propety querySelectorAll determines which inputs to update
- * @property globals instantiates window.ChronlyHMS and window.ChronlyFlag
+ * @property {method} checkboot() - checks ChronlyHMS presence on page through window.ChronlyFlag
+ * @property  {declaration} querySelectorAll - determines which inputs to update
+ * @property {global} globals - instantiates window.ChronlyHMS and window.ChronlyFlag
  */
 
 
 class ChronlyHMS {
-
 
   /**
   * The contructor creates two window variables
@@ -33,7 +32,6 @@ class ChronlyHMS {
   * window.ChronlyFlag for determining re-boot status 
   * @constructor
   */
-
 
   constructor() {
 
@@ -50,7 +48,7 @@ class ChronlyHMS {
 
 
     /**
-     * A loose method that scans for existing ChronlyHMS html
+     * A loose method (codeblock) that scans for existing ChronlyHMS html
      * 
      */
 
@@ -67,8 +65,8 @@ class ChronlyHMS {
 
       }));
 
-      // run checkboot again
-      this.checkBoot()
+    // run checkboot again
+    this.checkBoot()
 
 
   }
@@ -76,13 +74,11 @@ class ChronlyHMS {
 
 
   /**
-   * // each time Chronly is newed up
-    // 1) check for an existing window.ChronlyFlag if there is one 
-    // 2) clear events a) named events, b) remove 
-    // 3) add events
-    Text above
-   * @method text beside
-   * text below
+   * each time Chronly is newed up, the constructor uses checkBoot() to
+   * 1) check for an existing window.ChronlyFlag if there is one 
+   * 2) clear events a) named events, b) remove 
+   * 3) add events
+   * @method 
    */
 
   checkBoot() {
@@ -96,6 +92,12 @@ class ChronlyHMS {
   }
 
 
+
+  /**
+   * used by checkBoot() and externally exposed for user
+   * @method
+   * 
+   */
 
   boot() {
 
@@ -112,10 +114,19 @@ class ChronlyHMS {
 
 
     /**
-     * @global  window.ChronlyFlag
+     * window.ChronlyFlag declared here
+     * @global  
      */
     window.ChronlyFlag = true;
   }
+
+
+
+  /**
+  * used by checkBoot() and externally exposed for user
+  * @method
+  * @see boot()
+  */
 
   reboot() {
 
@@ -143,9 +154,14 @@ class ChronlyHMS {
   }
 
 
-  // this removes the elements and removes their events
-  refreshChronlyHMS() {
 
+  /**
+   * this removes the elements and removes their events
+   * @todo Remove next refactoring/ version
+   * @deprecated
+   */
+
+  refreshChronlyHMS() {
 
     var chronoInputs = document.querySelectorAll('.timeCase').forEach(tc => {
 
@@ -161,6 +177,12 @@ class ChronlyHMS {
   }
 
 
+
+  /**
+   * removes hours display, so only minutes, seconds, and microseconds are displayed
+   * @method
+   */
+
   noHours() {
 
     // hide chronly hours inputs on page
@@ -172,9 +194,15 @@ class ChronlyHMS {
 
     document.querySelectorAll(".timeCase span.bds-h").forEach(el => el.style.display = 'none');
 
-
   }
 
+
+
+  /**
+   * disables all chronlyHMS inputs to user, does not change their js get/set()
+   * @method
+   * @todo create an id sepcific selector method that calls this method
+   */
 
   disableInputs() {
 
@@ -185,8 +213,14 @@ class ChronlyHMS {
   }
 
 
-  addHTML() {
 
+  /**
+   * used by boot() to update inputs marked with data-univHMS
+   * @method
+   * @see boot()
+   */
+
+  addHTML() {
 
     const univHMSinp = document.querySelectorAll("input[data-univHMS]");
 
@@ -226,6 +260,12 @@ class ChronlyHMS {
     });
   }
 
+  /**
+   * used by refreshChronlyHMS() to add inputs without time case
+   * @method
+   * @param {element} el HTML input element
+   * @see refreshChronlyHMS() 
+   */
 
   addInputs(el) {
 
@@ -255,7 +295,12 @@ class ChronlyHMS {
 
 
 
-  // add preceeding 0s when necessary (on update)
+  /**
+   * eventlistener that adds 0s to preface numbers less than 10 triggered by
+   * the change event of the input 
+   * @method
+   * @see boot()
+   */
 
   add0s() {
 
@@ -265,7 +310,6 @@ class ChronlyHMS {
         this.value = '0' + this.value;
       }
     }));
-
 
     // milliseconds
     document.querySelectorAll("input.sMS").forEach(i => i.addEventListener('change', function () {
@@ -278,6 +322,14 @@ class ChronlyHMS {
 
   }
 
+
+
+  /**
+   * eventlistener that adds number looping for up and down keys triggered by
+   * the change event of the input 
+   * @method
+   * @see boot()
+   */
 
   addNumberLooping() {
     // Numeric Value looping (eventually this can be 'parameterised' refactored)
@@ -295,6 +347,7 @@ class ChronlyHMS {
 
       }));
 
+
     document.querySelectorAll("input.sM").forEach(i =>
       i.addEventListener('change', function (event) {
 
@@ -306,6 +359,7 @@ class ChronlyHMS {
         }
 
       }));
+
 
     document.querySelectorAll("input.sS").forEach(i =>
       i.addEventListener('change', function (event) {
@@ -320,6 +374,7 @@ class ChronlyHMS {
 
       }));
 
+      
     document.querySelectorAll("input.sMS").forEach(i =>
       i.addEventListener('change', function (event) {
 
@@ -338,7 +393,13 @@ class ChronlyHMS {
   }
 
 
-  // arrow key input of values (up/down) and place toggling (left/right)
+
+  /**
+   * eventlistener that adds arrow key input of values (up/down) and place toggling (left/right) triggered by
+   * the change event of the input 
+   * @method
+   * @see boot()
+   */
 
   addArrowKeyInput() {
 
@@ -410,7 +471,14 @@ class ChronlyHMS {
       }));
   }
 
-  // numeric input (and auto toggling)
+
+
+  /**
+   * eventlistener that adds number input filtering for keys triggered by
+   * the key event of the input 
+   * @method
+   * @see boot()
+   */
 
   addNumericInput() {
 
@@ -506,29 +574,27 @@ class ChronlyHMS {
 
 
 
-  // click to activate input of values by the keyboard
-  // old
+
+  /**
+   * eventlistener that adds click to activate input of values by the keyboard triggered by
+   * the click event of the input 
+   * @method
+   * @see boot()
+   */
 
   addClicksToActivate() {
-
-    // document.querySelector("#sH").addEventListener("click", function () { this.select(); });
 
     document.querySelectorAll('input[name="startHours"]').forEach(
       item => item.addEventListener("click", function () { this.select(); })
     );
 
-    // document.querySelector("#sM").addEventListener("click", function () { this.select(); });
-
     document.querySelectorAll('input[name="startMinutes"]').forEach(
       item => item.addEventListener("click", function () { this.select(); })
     )
 
-    // document.querySelector("#sS").addEventListener("click", function () { this.select(); });
     document.querySelectorAll('input[name="startSeconds"]').forEach(
       item => item.addEventListener("click", function () { this.select(); })
     )
-
-    // document.querySelector("#sMS").addEventListener("click", function () { this.select(); });
 
     document.querySelectorAll('input[name="startMilliSecs"]').forEach(
       item => item.addEventListener("click", function () { this.select(); })
@@ -536,15 +602,14 @@ class ChronlyHMS {
 
   }
 
-  // click to activate input of values
-  // addClicksToActivate() {
 
-  //   document.querySelectorAll("input.sH").forEach(sh => sh.addEventListener("click", function () { this.select(); }));
-  //   document.querySelectorAll("input.sM").forEach(sm => sm.addEventListener("click", function () { this.select(); }));
-  //   document.querySelectorAll("input.sS").forEach(ss => ss.addEventListener("click", function () { this.select(); }));
-  //   document.querySelectorAll("input.sMS").forEach(sms => sms.addEventListener("click", function () { this.select(); }));
 
-  // }
+  /**
+   * eventlistener that adds key filtering to stop letters (or other non-numerics) from being input triggered by
+   * the keypress event of the input 
+   * @method
+   * @see boot()
+   */
 
   nonNumericBugInHTML() {
 
@@ -564,8 +629,14 @@ class ChronlyHMS {
   }
 
 
-  // allows for getting and setting of values like
-  // document.querySelector('#bob').value = "08:04:05.002"
+  
+  /**
+   * updates HTMLDivElement.prototype so that values can read from and set for the .timecase div 
+   * so it functions as a single element, 
+   * allows for getting and setting of values like document.querySelector('#bob').value = "08:04:05.002"
+   * @method
+   * @see boot()
+   */
 
   updateDivPrototype() {
 
@@ -587,6 +658,7 @@ class ChronlyHMS {
     });
 
 
+
     HTMLDivElement.prototype.__defineSetter__('value', function (timeString) {
 
       // will need warning about timeString format (like input type='time')
@@ -595,11 +667,7 @@ class ChronlyHMS {
 
         // split val
 
-
-
         var timeArray = timeString.split(/[.:]+/);
-
-
 
         this.querySelector('input[name="startHours"]').value = timeArray[0];
         this.querySelector('input[name="startMinutes"]').value = timeArray[1];
@@ -613,19 +681,9 @@ class ChronlyHMS {
 
       }
 
-
     });
-
-
   }
 }
-
-// console.log("Now I'll boot Chronolnly, by newing it up! External to constructor!")
-//  window.chronlyhms = new ChronlyHMS;
-
-
-
-
 
 export default new ChronlyHMS;
 
