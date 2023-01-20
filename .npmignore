@@ -1,4 +1,10 @@
-Test
-.github
+out/
+Tests/
+readme/
+.gitpod.Dockerfile
+.gitpod.yml
 build.json
+package.json
 package-lock.json
+postcss.config.js
+webpack.config

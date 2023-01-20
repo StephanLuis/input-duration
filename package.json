@@ -1,6 +1,6 @@
 {
   "name": "chronlyhms",
-  "version": "1.1.4",
+  "version": "1.1.12",
   "author": "Stephan Luis <stephan@learnsense.org>",
   "main": "src/chrono.js",
   "browser": "dist/chronoBundle.js",
@@ -17,8 +17,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack",
-    "prepack": "webpack --mode=development",
+    
     "start": "python3 -m http.server"
   },
   "repository": {
