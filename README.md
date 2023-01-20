@@ -234,7 +234,7 @@ window.ChronlyHMS.boot()
 ```
 so the inputs are modified.
 
-_For more examples, please refer to the source of  [chronoHMStest](http://practisemaster.com/demos/chronoHMStest.html)_
+_For more documentation, please refer to the jscocs on  [ChronlyHMS Docs](https://stephanluis.github.io/chronlyhms/)_
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
