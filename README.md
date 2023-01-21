@@ -54,11 +54,13 @@
     <div align="center">
     <a href="https://6s0mfy.csb.app/" target="_blank">Demo</a>
     ·
+  <a href="https://stephanluis.github.io/chronlyhms/" target="_blank">Docs</a>
+  ·
   <a href="https://codesandbox.io/s/naughty-booth-6s0mfy?fontsize=14&hidenavigation=1&theme=dark" target="_blank">
-  Fiddle on CodeSandbox
+  Fiddle
 </a>
   ·
-    <a href="https://github.com/StephanLuis/chronlyhms/issues">Report Bug</a>
+    <a href="https://github.com/StephanLuis/chronlyhms/issues">Bugs</a>
     ·
     <a href="https://github.com/StephanLuis/chronlyhms/issues">Request Feature</a>
   </p>
