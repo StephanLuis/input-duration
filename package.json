@@ -1,10 +1,9 @@
 {
   "name": "chronlyhms",
-  "version": "1.1.12",
+  "version": "2.0.3",
   "author": "Stephan Luis <stephan@learnsense.org>",
   "main": "src/chrono.js",
   "browser": "dist/chronoBundle.js",
-  "style": "src/plyr.css",
   "description": "This is the beginning of 'ChronolyHMS' it is a javascript control widget that provides an hour, minute, second, and millisecond control for HTML5. Cureently the CSS for the control still needs to be 'managed'.  So the package CSS bundling is needs development. ",
   "devDependencies": {
     "css-loader": "^5.2.0",
@@ -16,8 +15,9 @@
     "webpack-cli": "^4.5.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    
+    "test": " node ./Tests/",
+    "build": "webpack && date '+%T'",
+    "devbuild": "webpack --mode=development && date '+%T'",
     "start": "python3 -m http.server"
   },
   "repository": {
