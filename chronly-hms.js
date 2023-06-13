@@ -1,6 +1,7 @@
-class ChronlyHMSElement extends HTMLElement {
+export default class ChronlyHMSElement extends HTMLElement {
   constructor() {
-      super();
+      
+    super();
 
       this.myElement = this.attachShadow({ mode: 'open' });
 
@@ -707,6 +708,3 @@ opacity: .6;
 // page script (try making this auto instantiate in module like PM does)
 
 customElements.define('chronly-hms', ChronlyHMSElement);
-
-export default ChronlyHMSElement
-
