@@ -1,4 +1,4 @@
-export class ChronlyHMS extends HTMLElement {
+class ChronlyHMS extends HTMLElement {
   constructor() {
       
     super();
@@ -707,4 +707,4 @@ opacity: .6;
 
 // page script (try making this auto instantiate in module like PM does)
 
-customElements.define('chronly-hms', ChronlyHMS);
+export default customElements.define('chronly-hms', ChronlyHMS);
