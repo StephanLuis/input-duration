@@ -1,32 +1,25 @@
 {
-  "name": "chronlyhms",
-  "version": "1.1.12",
+  "name": "input-duration",
+  "version": "2.0.11",
   "author": "Stephan Luis <stephan@learnsense.org>",
-  "main": "src/chrono.js",
-  "browser": "dist/chronoBundle.js",
-  "style": "src/plyr.css",
-  "description": "This is the beginning of 'ChronolyHMS' it is a javascript control widget that provides an hour, minute, second, and millisecond control for HTML5. Cureently the CSS for the control still needs to be 'managed'.  So the package CSS bundling is needs development. ",
-  "devDependencies": {
-    "css-loader": "^5.2.0",
-    "cssnano": "^5.0.6",
-    "node-sass": "^8.0.0",
-    "sass-loader": "^12.1.0",
-    "style-loader": "^2.0.0",
-    "webpack": "^5.27.2",
-    "webpack-cli": "^4.5.0"
-  },
+  "description": "This is the beginning of 'Input-Duration' it is a javascript control widget that provides an hour, minute, second, and millisecond control for HTML5.",
+  "browser": "indexjs",
+  "module": "index.js",
+  "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    
+    "test": " node ./Tests/",
+    "build": "webpack && date '+%T'",
+    "devbuild": "webpack --mode=development && date '+%T'",
     "start": "python3 -m http.server"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/StephanLuis/chronlyhms.git"
+    "url": "git+https://github.com/StephanLuis/input-duration.git"
   },
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/StephanLuis/chronlyhms/issues"
+    "url": "https://github.com/StephanLuis/input-duration/issues"
   },
-  "homepage": "https://github.com/StephanLuis/chronlyhms#readme"
+  "homepage": "https://github.com/StephanLuis/input-duration#readme"
 }
