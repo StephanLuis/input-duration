@@ -1,6 +1,6 @@
 {
   "name": "input-duration",
-  "version": "2.0.11",
+  "version": "2.0.12",
   "author": "Stephan Luis <stephan@learnsense.org>",
   "description": "This is the beginning of 'Input-Duration' it is a javascript control widget that provides an hour, minute, second, and millisecond control for HTML5.",
   "browser": "indexjs",
