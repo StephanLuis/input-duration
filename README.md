@@ -52,11 +52,11 @@
 <div>
   </div>
     <div align="center">
-    <a href="https://6s0mfy.csb.app/" target="_blank">Demo</a>
+    <a href="https://6mxpg2.csb.app/" target="_blank">Demo</a>
     ·
   <a href="https://stephanluis.github.io/chronlyhms/" target="_blank">Docs</a>
   ·
-  <a href="https://codesandbox.io/s/naughty-booth-6s0mfy?fontsize=14&hidenavigation=1&theme=dark" target="_blank">
+  <a href="https://codesandbox.io/s/peaceful-waterfall-6mxpg2?file=/index.html" target="_blank">
   Fiddle
 </a>
   ·
