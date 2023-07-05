@@ -1,8 +1,8 @@
 {
-  "name": "chronlyhms",
-  "version": "2.0.10",
+  "name": "input-duration",
+  "version": "2.0.11",
   "author": "Stephan Luis <stephan@learnsense.org>",
-  "description": "This is the beginning of 'ChronolyHMS' it is a javascript control widget that provides an hour, minute, second, and millisecond control for HTML5. Cureently the CSS for the control still needs to be 'managed'.  So the package CSS bundling is needs development. ",
+  "description": "This is the beginning of 'Input-Duration' it is a javascript control widget that provides an hour, minute, second, and millisecond control for HTML5.",
   "browser": "indexjs",
   "module": "index.js",
   "main": "index.js",
@@ -15,11 +15,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/StephanLuis/chronlyhms.git"
+    "url": "git+https://github.com/StephanLuis/input-duration.git"
   },
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/StephanLuis/chronlyhms/issues"
+    "url": "https://github.com/StephanLuis/input-duration/issues"
   },
-  "homepage": "https://github.com/StephanLuis/chronlyhms#readme"
+  "homepage": "https://github.com/StephanLuis/input-duration#readme"
 }
