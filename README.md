@@ -54,15 +54,15 @@
     <div align="center">
     <a href="https://6mxpg2.csb.app/" target="_blank">Demo</a>
     ·
-  <a href="https://stephanluis.github.io/chronlyhms/" target="_blank">Docs</a>
+  <a href="https://stephanluis.github.io/input-duration/" target="_blank">Docs</a>
   ·
   <a href="https://codesandbox.io/s/peaceful-waterfall-6mxpg2?file=/index.html" target="_blank">
   Fiddle
 </a>
   ·
-    <a href="https://github.com/StephanLuis/chronlyhms/issues">Bugs</a>
+    <a href="https://github.com/StephanLuis/input-duration/issues">Bugs</a>
     ·
-    <a href="https://github.com/StephanLuis/chronlyhms/issues">Request Feature</a>
+    <a href="https://github.com/StephanLuis/input-duration/issues">Request Feature</a>
   </p>
   </div>
   Ok, what about mobile??  Yep, ChronlyHMS works on all popular operating system / browser combinations.  
