@@ -1,4 +1,4 @@
-class ChronlyHMS extends HTMLElement {
+class InputDuration extends HTMLElement {
   constructor() {
       
     super();
@@ -707,4 +707,4 @@ opacity: .6;
 
 // page script (try making this auto instantiate in module like PM does)
 
-export default customElements.define('chronly-hms', ChronlyHMS);
+export default customElements.define('input-duration', InputDuration);
