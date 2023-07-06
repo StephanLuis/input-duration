@@ -21,5 +21,16 @@
   "bugs": {
     "url": "https://github.com/StephanLuis/input-duration/issues"
   },
-  "homepage": "https://github.com/StephanLuis/input-duration#readme"
+  "homepage": "https://github.com/StephanLuis/input-duration#readme",
+   "keywords": [
+    "vanilla js",
+    "input",
+    "time",
+    "duration",
+    "webcomponent",
+     "hour",
+     "minute",
+     "second",
+     "millisecond",
+  ],
 }
