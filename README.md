@@ -38,7 +38,7 @@
 <div align="center">
   
   
-  <a href="https://github.com/StephanLuis/chronlyhms">
+  <a href="https://github.com/StephanLuis/input-duration">
    <h3 align="center">Input-Duration -- The best 'Time Only' Input</h3> <img src="readme/logo.svg" alt="Logo" width="90" height="90">
   </a>
 
@@ -65,7 +65,7 @@
     <a href="https://github.com/StephanLuis/input-duration/issues">Request Feature</a>
   </p>
   </div>
-  Ok, what about mobile??  Yep, ChronlyHMS works on all popular operating system / browser combinations.  
+  Ok, what about mobile??  Yep, input-duration works on all popular operating system / browser combinations.  
 <br/>
 </div>
 <br/>
@@ -108,7 +108,7 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-Time inputs <input type='time'> are updated by browsers in unwanted ways!   Safari on desktop adds AM/PM if the user is in the USA and on mobile the cool scroll time selector does not allow fractions of a second.  The best html5 option doesn't cut it, sadly, so ChronlyHMS was designed and buit for a consistant UX no matter the browser, OS, or location settings.
+Time inputs <input type='time'> are updated by browsers in unwanted ways!   Safari on desktop adds AM/PM if the user is in the USA and on mobile the cool scroll time selector does not allow fractions of a second.  The best html5 option doesn't cut it, sadly, so input-duration was designed and buit for a consistant UX no matter the browser, OS, or location settings.
 
 <!-- [![Product Name Screen Shot][product-screenshot]](https://example.com) -->
 
@@ -116,7 +116,7 @@ Time inputs <input type='time'> are updated by browsers in unwanted ways!   Safa
 
 <!-- [![HTML Screen Shot][html-screenshot]](https://example.com) -->
 
-<h3> Bob is rescued by ChronlyHMS! </h3>
+<h3> Bob is rescued by INPUT-DURATION! </h3>
 
 The objective is a minimised vanilla javascript plugin that reproduces the behaviour of the input type=time on Chrome.  This way at least two of the major browsers are supported, Safari and Chrome, on desktop and mobile operating systems. 
 
@@ -127,7 +127,7 @@ The objective is a minimised vanilla javascript plugin that reproduces the behav
 <img src="readme/safariBad.png" alt="drawing" width="60%"/>
 <!-- [![Safari Screen Shot][safari-screenshot]](https://example.com) -->
 
-Yes! It seems CRAZY in 2022 that there is not a native 'time only' input for HTML.  What I mean is there is no user input control for time rendered independantly of date or time of day.  Yea, crazy, but now ChronlyHMS is a javascript plugin that creates a UX input control for a value of time simply as hours, minutes, seconds --<b>only</b>! <br> Ever thought, why is it difficult to 'code' a countdown timer? Why can't it be done with one control? Just look at google's timer and other coundown timers! All use multiple inputs, usually designed for integers.
+Yes! It seems CRAZY in 2022 that there is not a native 'time only' input for HTML.  What I mean is there is no user input control for time rendered independantly of date or time of day.  Yea, crazy, but now input-duration is a javascript plugin that creates a UX input control for a value of time simply as hours, minutes, seconds --<b>only</b>! <br> Ever thought, why is it difficult to 'code' a countdown timer? Why can't it be done with one control? Just look at google's timer and other coundown timers! All use multiple inputs, usually designed for integers.
 
 The very worst is Safari on desktop and mobile undermine those snazzy input type=time efforts and update the input depending on OS settings for desktop or provide a control with restricted capability... Shouldn't a user be able to 'scientifically' specify a period of time with one control?  <br>The closest HTML5 input type- time when configured with UX for hours to millisecs is very finicky and rendered differently on Chrome and Safari <b>and</b> mobile is different from laptop, so I've simplified that!
 
@@ -137,7 +137,7 @@ The very worst is Safari on desktop and mobile undermine those snazzy input type
 
 
 
-There are a few plugins (links to come) that remediate the lack of continuity, but even time controls with the plugin treat time as a date (ex 24hr max).  So it seems the current state is the most relable UX is multi input type number (more links to come ).  The best example is the Google countdown timer.  And that's wrong because time is a basic unit that should be separate from calendar complexities.  That got me thinking, why isn't there an input control for it implemented across browsers??  I needed one, so coded ChronlyHMS.
+There are a few plugins (links to come) that remediate the lack of continuity, but even time controls with the plugin treat time as a date (ex 24hr max).  So it seems the current state is the most relable UX is multi input type number (more links to come ).  The best example is the Google countdown timer.  And that's wrong because time is a basic unit that should be separate from calendar complexities.  That got me thinking, why isn't there an input control for it implemented across browsers??  I needed one, so coded input-duration.
 
 Here's why:
 * Time is hours minutes and seconds (and millisecs) and needn't be associated with part of a day or a date
@@ -172,7 +172,7 @@ This section should lists any major frameworks/libraries used to for this projec
 <!-- GETTING STARTED -->
 ## Getting Started
 
-There are no pre-requisites for using ChronlyHMS if you're not compiling/ packaging you javascript.  If you are packaging:
+There are no pre-requisites for using input-duration if you're not compiling/ packaging you javascript.  If you are packaging:
 
 ### Prerequisites
 
@@ -183,7 +183,7 @@ This is an example of how to get started with npm and webpack, other frameworks 
   npm init -y
   npm install webpack webpack-cli --save-dev
   ```
-  * Webpack requires configuration for packaging ChronlyHMS CSS
+  * Webpack requires configuration for packaging input-duration CSS
   see [Webpack CSS Loader](https://webpack.js.org/loaders/css-loader/)
   
 
@@ -194,19 +194,18 @@ _This template doesn't rely on any external dependencies or services._
 
 1. Install from NPM
  ```sh
-  npm i chronlyhms
+  npm i input-duration
  ```
-2. import ChronlyHMS javascript and css
+2. import input-duration in javascript
  ```sh
- import ChronlyHMS from 'chronlyhms';
- import 'chronlyhms/src/chrono.css'
+ import id from 'input-duration';
 ```
   
 Without packaging:
 
 1. Add script:
  ```sh
- <script src="https://cdn.jsdelivr.net/npm/chronlyhms@1.0.65/dist/chronoBundle.min.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/input-duration@latest/index.min.js"></script>
   
  ```
 
@@ -218,12 +217,12 @@ Without packaging:
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-ChronlyHMS requires an input element with the attribute 'data-univHMS'.  There's no more code than that needed.  
+input-duration requires a <input-duration> element .  There's no more HTML than that needed.  
 ```sh
-<input id='bob' data-univHMS></input>
+<input-duration id='bob' data-univHMS></input-duration>
 ```
 
-If you would like ChronlyHMS to update inputs that are placed on DOM with javascipt (ex. after chronlyhms script is added), then with your js: 
+If you would like input-duration to update inputs that are placed on DOM with javascipt (ex. after chronlyhms script is added), then with your js: 
 1) add a data attribute to the input 
 ```sh
 data-univHMS [data-univHMS='']
