@@ -1,4 +1,16 @@
 /**
+ * 
+ * @file input-duration has index.js as the root file .
+ * It kicks things off.
+ * @author Stephan Luis
+ * @see <a href="https://www.npmjs.com/package/input-duration">NPM input-duration</a>
+ * @see <a href="https://github.com/StephanLuis/input-duration">GitHub input-duration</a>
+ * @copyright MIT License, Copyright (c) 2022 
+ */
+
+
+
+/**
  * Class for the Input-Duration webcomponent
  * @class InputDuration
  * @extends HTMLElement
