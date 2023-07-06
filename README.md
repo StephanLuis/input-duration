@@ -112,7 +112,7 @@ Time inputs <input type='time'> are updated by browsers in unwanted ways!   Safa
 
 <!-- [![Product Name Screen Shot][product-screenshot]](https://example.com) -->
 
-<img src="readme/html.png" alt="drawing" width="60%"/>
+<img src="readme/codeDrawing.png" alt="drawing" width="60%"/>
 
 <!-- [![HTML Screen Shot][html-screenshot]](https://example.com) -->
 
