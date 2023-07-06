@@ -1,4 +1,4 @@
-import ChronlyHMS from '../../dist/chronoBundle';
+import im from '../../index.js';
 
 
 
