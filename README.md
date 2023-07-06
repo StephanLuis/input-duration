@@ -222,7 +222,7 @@ input-duration requires a <input-duration> element .  There's no more HTML than 
 <input-duration id='bob' data-univHMS></input-duration>
 ```
 
-If you would like input-duration to update inputs that are placed on DOM with javascipt (ex. after chronlyhms script is added), then with your js: 
+If you would like input-duration elemets with javascipt (ex. after chronlyhms script is added), then with your js: 
 1) add a data attribute to the input 
 ```sh
 data-univHMS [data-univHMS='']
