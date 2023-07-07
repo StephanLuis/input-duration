@@ -44,7 +44,7 @@
 
   
 
-  <p align="center">A time input that works on Safari in close imitation of a time input on Chrome... only better. </p>
+  <p align="center">A vanilla JS boosted input that works on Safari in very close imitation of a time input on Chrome <br>... only better. </p>
 </div>
 
 'Time Only' means that this control is for time as a unit, or a duration, like for count down timers.  Not for time of day nor date on a calendar, so no unwanted AM/PM conversions on Safari, no unwanted date-time selectors.  Just time up to 999 hrs and down to 1 millisecond.<br>
@@ -118,18 +118,18 @@ Time inputs <input type='time'> are updated by browsers in unwanted ways!   Safa
 
 <h3> Bob is rescued by INPUT-DURATION! </h3>
 
-The objective is a minimised vanilla javascript plugin that reproduces the behaviour of the input type=time on Chrome.  This way at least two of the major browsers are supported, Safari and Chrome, on desktop and mobile operating systems. 
+The objective is a minimised javascript plugin that reproduces the behaviour of the input type=time on Chrome.  This way at least two of the major browsers are supported, Safari and Chrome, on desktop and mobile operating systems. 
 
-<i>Does this loose any functionality?</i>  No!  document.querySelector('#bob').value  has a getter and setter!  So values can be set and retrieved by ID.
+<i>Does this loose any functionality?</i>  No!  document.querySelector('#bob').value  has a getter and setter!  So values can be set and retrieved by ID or attribute in HTML.
 
 
 
-<img src="readme/safariBad.png" alt="drawing" width="60%"/>
+<img src="readme/safariBad.png" alt="drawing" width="80%"/>
 <!-- [![Safari Screen Shot][safari-screenshot]](https://example.com) -->
 
 Yes! It seems CRAZY in 2022 that there is not a native 'time only' input for HTML.  What I mean is there is no user input control for time rendered independantly of date or time of day.  Yea, crazy, but now input-duration is a javascript plugin that creates a UX input control for a value of time simply as hours, minutes, seconds --<b>only</b>! <br> Ever thought, why is it difficult to 'code' a countdown timer? Why can't it be done with one control? Just look at google's timer and other coundown timers! All use multiple inputs, usually designed for integers.
 
-The very worst is Safari on desktop and mobile undermine those snazzy input type=time efforts and update the input depending on OS settings for desktop or provide a control with restricted capability... Shouldn't a user be able to 'scientifically' specify a period of time with one control?  <br>The closest HTML5 input type- time when configured with UX for hours to millisecs is very finicky and rendered differently on Chrome and Safari <b>and</b> mobile is different from laptop, so I've simplified that!
+The very worst is Safari on desktop and mobile, which undermine any input type=time coding efforts and update the input based on OS settings!  Shouldn't a user be able to 'scientifically' specify a period of time with one control?  <br>  Maybe it's just me, but the chrome / google timer is 14 separate elements ... those guys must be paid by the hour.   The closest HTML5 input type- time when configured with UX for hours to millisecs is very finicky and is rendered differently on Chrome than Safari. <b>Mobile</b> is different from laptop<br> ... so I've simplified that!
 
 
 
@@ -137,7 +137,7 @@ The very worst is Safari on desktop and mobile undermine those snazzy input type
 
 
 
-There are a few plugins (links to come) that remediate the lack of continuity, but even time controls with the plugin treat time as a date (ex 24hr max).  So it seems the current state is the most relable UX is multi input type number (more links to come ).  The best example is the Google countdown timer.  And that's wrong because time is a basic unit that should be separate from calendar complexities.  That got me thinking, why isn't there an input control for it implemented across browsers??  I needed one, so coded input-duration.
+There were a few plugins that remediated the lack of continuity, but even those controls treated time as a date (ex 24hr max).  So it seems the current state is the most relable UX is multi input type number.  The worst example is the Google countdown timer.  That way is wrong because time is a basic unit that should be separate from calendar complexities.  That got me thinking, why isn't there an input control for it implemented across browsers??  I needed one, so coded input-duration.
 
 Here's why:
 * Time is hours minutes and seconds (and millisecs) and needn't be associated with part of a day or a date
@@ -157,13 +157,14 @@ Feel free to vote for WhatWG inclusion of a into the HTML spec! (link comming so
 
 ### Built With
 
-This section should lists any major frameworks/libraries used to for this project. Any add-ons/plugins are in the acknowledgements section.
+
 
 * [Node.js](https://nodejs.org/)
-* [Webpack](https://webpack.js.org/)
 * [Gitpod](https://www.gitpod.io/)
 * [Testing Powered By SauceLabs](https://saucelabs.com)
 * [Selenium](https://www.selenium.dev/)
+
+input-duration is a module and works with webpack. Any add-ons/plugins used in dev are in the acknowledgements section.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -183,9 +184,6 @@ This is an example of how to get started with npm and webpack, other frameworks 
   npm init -y
   npm install webpack webpack-cli --save-dev
   ```
-  * Webpack requires configuration for packaging input-duration CSS
-  see [Webpack CSS Loader](https://webpack.js.org/loaders/css-loader/)
-  
 
 ### Installation
 
