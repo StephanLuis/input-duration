@@ -1,6 +1,6 @@
 {
   "name": "input-duration",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "author": "Stephan Luis <stephan@learnsense.org>",
   "description": "This is the 'Input-Duration'! It is a webcomponent that provides an hour, minute, second, and millisecond control for HTML5.",
   "browser": "indexjs",
