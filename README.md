@@ -196,14 +196,21 @@ _This template doesn't rely on any external dependencies or services._
  ```
 2. import input-duration in javascript
  ```sh
+
  import id from 'input-duration';
+
 ```
   
 Without packaging:
 
 1. Add script:
  ```sh
- <script src="https://cdn.jsdelivr.net/npm/input-duration@latest/index.min.js"></script>
+
+<script type="module">
+
+import chronlyhms from 'https://cdn.jsdelivr.net/npm/input-duration/+esm'
+        
+ </script>
   
  ```
 
@@ -215,25 +222,31 @@ Without packaging:
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-input-duration requires a <input-duration> element .  There's no more HTML than that needed.  
+input-duration requires a <input-duration> element .  There's no more HTML than that.  
 ```sh
-<input-duration id='bob' data-univHMS></input-duration>
+
+<input-duration id='bob'></input-duration>
+
 ```
 
-If you would like input-duration elemets with javascipt (ex. after chronlyhms script is added), then with your js: 
-1) add a data attribute to the input 
+If you would like to get or set values or to disable input-duration elemet, javascipt can do that: 
+
 ```sh
-data-univHMS [data-univHMS='']
+
+document.querySelector('#bob').value = '44:04:04.444'
+
 ``` 
 
-2) call the Chronly boot method
+and
 
 ```sh
-window.ChronlyHMS.boot()
+
+document.querySelector('#bob').disable()
+
 ```
 so the inputs are modified.
 
-_For more documentation, please refer to the jscocs on  [ChronlyHMS Docs](https://stephanluis.github.io/chronlyhms/)_
+_For more documentation, please refer to the jscocs on  [input-duration Docs](https://stephanluis.github.io/input-duration/)_
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -251,7 +264,7 @@ _For more documentation, please refer to the jscocs on  [ChronlyHMS Docs](https:
 - [ ] Multi-language documentation (Google translate of this page?)
     - [ ] Chinese
     - [ ] Spanish
-- [ ] Is it worth having a remove function, restoring the original input?
+- [ ] min and max values (sorry for the moment you'll have to do those yourself in js)
 
 See the [open issues](https://github.com/StephanLuis/chronlyhms/issues) for a full list of proposed features (and known issues).
 
