@@ -52,13 +52,12 @@
 <div>
   </div>
     <div align="center">
-    <a href="https://6mxpg2.csb.app/" target="_blank">Demo</a>
-    ·
-  <a href="https://stephanluis.github.io/input-duration/" target="_blank">Docs</a>
-  ·
   <a href="https://codesandbox.io/s/peaceful-waterfall-6mxpg2?file=/index.html" target="_blank">
   Fiddle
-</a>
+</a> ·
+      <a href="https://6mxpg2.csb.app/" target="_blank">Demo</a>
+    ·
+  <a href="https://stephanluis.github.io/input-duration/" target="_blank">Docs</a>
   ·
     <a href="https://github.com/StephanLuis/input-duration/issues">Bugs</a>
     ·
