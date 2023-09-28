@@ -114,6 +114,7 @@ Time inputs <input type='time'> are updated by browsers in unwanted ways!   Safa
 <img src="readme/codeDrawing.png" alt="drawing" width="60%"/>
 
 <!-- [![HTML Screen Shot][html-screenshot]](https://example.com) -->
+*note input-duration needs closing tag!
 
 <h3> Bob is rescued by INPUT-DURATION! </h3>
 
@@ -221,7 +222,7 @@ import chronlyhms from 'https://cdn.jsdelivr.net/npm/input-duration/+esm'
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-input-duration requires a <input-duration> element .  There's no more HTML than that.  
+input-duration requires a `<input-duration>` element .  There's no more HTML than that, but don't forget the closing tag.  Native Input elements don't have them!
 ```sh
 
 <input-duration id='bob'></input-duration>
