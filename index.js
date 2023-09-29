@@ -141,6 +141,7 @@ class InputDuration extends HTMLElement {
         this.addNumericInput();
         this.addClicksToActivate();
         this.nonNumericBugInHTML();
+        this.removeEprop();
 
     }
 
@@ -574,7 +575,21 @@ class InputDuration extends HTMLElement {
             }));
     }
 
+    /**
+     * Stop event propigation from the timeCase up through the DOM so when keys 
+     * are being used they don't affect other controls (like volume on plyr)
+     * @method
+     */
 
+    removeEprop()   {
+        
+        document.querySelector('input-duration').shadowRoot.querySelector('.timeCase')
+        .addEventListener('keydown', function (event) { event.stopPropagation();}); 
+
+    }
+
+
+    
     // formatting and behaviour options
 
     /**
