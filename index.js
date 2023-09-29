@@ -1,4 +1,9 @@
 /**
+ * This is jsdoc 'auto' documentation see https://jsdoc.app/
+ * npm install -g jsdoc
+ * jsdoc index.js -d ./docs/
+ * 
+ * 
  * @fileoverview INPUT-DURATION
  * @file INPUT-DURATION 
  * @author Stephan Luis
@@ -233,7 +238,7 @@ class InputDuration extends HTMLElement {
         var template = document.createElement('template');
 
         template.innerHTML = `
-          <input id="inShadow" type="number" class="sH D2 ts_digit" name="startHours" data-tp="1" min="-1" max="100" value="00" >
+          <input type="number" class="sH D2 ts_digit" name="startHours" data-tp="1" min="-1" max="100" value="00" >
           <span class="bds-h">:</span>
           <input type="number" class="sM D2 ts_digit" name="startMinutes" data-tp="2" min="-1" max="60" value="00">
           <span class="bds-m">:</span>
