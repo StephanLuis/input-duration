@@ -208,7 +208,7 @@ Without packaging:
 
 <script type="module">
 
-import chronlyhms from 'https://cdn.jsdelivr.net/npm/input-duration/+esm'
+import id from 'https://cdn.jsdelivr.net/npm/input-duration/+esm'
         
  </script>
   
@@ -266,7 +266,7 @@ _For more documentation, please refer to the jscocs on  [input-duration Docs](ht
     - [ ] Spanish
 - [ ] min and max values (sorry for the moment you'll have to do those yourself in js)
 
-See the [open issues](https://github.com/StephanLuis/chronlyhms/issues) for a full list of proposed features (and known issues).
+See the [open issues](https://github.com/StephanLuis/input-duration/issues) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -280,7 +280,7 @@ See the [open issues](https://github.com/StephanLuis/chronlyhms/issues) for a fu
 ![TestStatusDIY](https://img.shields.io/static/v1?label=osX:Safari&message=Pass&color=<COLOR>&style=for-the-badge)
 ![TestStatusDIY](https://img.shields.io/static/v1?label=osX:Chrome&message=Pass&color=<COLOR>&style=for-the-badge)
 
-[Tests & Live Status](https://github.com/StephanLuis/BrowserStackSelenium/blob/main/chronlyHMStests/README.md)
+[Tests & Live Status](https://github.com/StephanLuis/BrowserStackSelenium/blob/main/input-duration/README.md)
 
 
 <!-- CONTRIBUTING -->
@@ -304,7 +304,7 @@ Don't forget to give the project a star! Thanks again!
 <!-- LICENSE -->
 ## License
 
-Distributed under the MIT License. See [`LICENSE.txt`](https://github.com/StephanLuis/chronlyhms/blob/main/LICENSE)  for more information.
+Distributed under the MIT License. See [`LICENSE.txt`](https://github.com/StephanLuis/input-duration/blob/main/LICENSE)  for more information.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -315,7 +315,7 @@ Distributed under the MIT License. See [`LICENSE.txt`](https://github.com/Stepha
 
 Stephan Luis - stephan@learnsense.org
 
-Project Link: [https://github.com/StephanLuis/chronlyhms](https://github.com/StephanLuis/chronlyhms)
+Project Link: [https://github.com/StephanLuis/input-duration](https://github.com/StephanLuis/input-duration)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -342,20 +342,20 @@ Resources I've found helpful and would like to give credit to:
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
 
-[contributors-shield]: https://img.shields.io/github/contributors/StephanLuis/chronlyhms?style=for-the-badge
-[contributors-url]: https://github.com/StephanLuis/chronlyhms/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/StephanLuis/chronlyhms?style=for-the-badge
-[forks-url]: https://github.com/StephanLuis/chronlyhms/network/members
-[stars-shield]: https://img.shields.io/github/stars/StephanLuis/chronlyhms?style=for-the-badge
-[stars-url]: https://github.com/StephanLuis/chronlyhms/stargazers
-[issues-shield]: https://img.shields.io/github/issues/StephanLuis/chronlyhms?style=for-the-badge
-[issues-url]: https://github.com/StephanLuis/chronlyhms/issues
-[license-shield]: https://img.shields.io/github/license/StephanLuis/chronlyhms?style=for-the-badge
-[license-url]: https://github.com/StephanLuis/chronlyhms/blob/main/LICENSE
-[reposize-shield]: https://img.shields.io/github/repo-size/stephanluis/chronlyhms?style=for-the-badge
-[reposize-url]: https://github.com/StephanLuis/chronlyhms
+[contributors-shield]: https://img.shields.io/github/contributors/StephanLuis/input-duration?style=for-the-badge
+[contributors-url]: https://github.com/StephanLuis/input-duration/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/StephanLuis/input-duration?style=for-the-badge
+[forks-url]: https://github.com/StephanLuis/input-duration/network/members
+[stars-shield]: https://img.shields.io/github/stars/StephanLuis/input-duration?style=for-the-badge
+[stars-url]: https://github.com/StephanLuis/input-duration/stargazers
+[issues-shield]: https://img.shields.io/github/issues/StephanLuis/input-duration?style=for-the-badge
+[issues-url]: https://github.com/StephanLuis/input-duration/issues
+[license-shield]: https://img.shields.io/github/license/StephanLuis/input-duration?style=for-the-badge
+[license-url]: https://github.com/StephanLuis/input-duration/blob/main/LICENSE
+[reposize-shield]: https://img.shields.io/github/repo-size/stephanluis/input-duration?style=for-the-badge
+[reposize-url]: https://github.com/StephanLuis/input-duration
 [product-screenshot]: images/screenshot.png
-[npm-bundle-size]: https://img.shields.io/bundlephobia/minzip/chronlyhms?style=for-the-badge
+[npm-bundle-size]: https://img.shields.io/bundlephobia/minzip/input-duration?style=for-the-badge
 [teststatus-shield]: https://img.shields.io/badge/dynamic/json?url=https://app.saucelabs.com/u/stephanluis&label=Sauce%20Labs%20Status&color=brightgreen&style=for-the-badge&query=passing
 
 
