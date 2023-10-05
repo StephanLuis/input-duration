@@ -588,8 +588,8 @@ class InputDuration extends HTMLElement {
 
     removeEprop()   {
         
-        document.querySelector('input-duration').shadowRoot.querySelector('.timeCase')
-        .addEventListener('keydown', function (event) { event.stopPropagation();}); 
+        document.querySelectorAll('input-duration').forEach(x => x.shadowRoot.querySelector('.timeCase')
+        .addEventListener('keydown', function (event) { event.stopPropagation();})); 
 
     }
 
