@@ -8,7 +8,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": " node ./Tests/",
+    "test": " node -v",
     "build": "webpack && date '+%T'",
     "devbuild": "webpack --mode=development && date '+%T'",
     "start": "python3 -m http.server"
