@@ -48,9 +48,11 @@ jobs:
 
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - name: Test
+      
       run: |
-          curl -X POST https://api.github.com/repos/:userName/:repoName/dispatches \
-          -H 'Accept: application/vnd.github.everest-preview+json' \
-          -u ${{ secrets.ACTIONS_KEY }} \
-          --data '{"event_type": "Trigger Workflow", "client_payload": { "repository": "'"$GITHUB_REPOSITORY"'" }}'
+        curl -X POST https://api.github.com/repos/:userName/:repoName/dispatches 
+        -u ${{secrets.ACTIONS_KEY }}
+        -H "Accept: application/vnd.github.everest-preview+json"
+        -H "Content-Type: application/json"
+        --data '{"event_type": "build_application"}'
     - uses: actions/checkout@v3
