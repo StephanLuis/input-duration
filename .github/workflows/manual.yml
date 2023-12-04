@@ -17,6 +17,21 @@ on:
         required: true
         # The data type of the input
         type: string
+        
+      workflow_02:
+        description: 'ًWorkflow 2 which will be triggered'
+        required: true
+        default: 'workflow_02'
+
+      workflow2_github_account:
+        description: 'GitHub Account Owner'
+        required: true
+        default: ':StephanLuis'
+
+      workflow2_repo_github:
+        description: 'repo-name'
+        required: true
+        default: ':BrowserStackSelenium' 
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -30,3 +45,12 @@ jobs:
     # Runs a single command using the runners shell
     - name: Send greeting
       run: echo "Hello ${{ inputs.name }}"
+
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - name: Test
+      run: |
+          curl -X POST https://api.github.com/repos/:userName/:repoName/dispatches \
+          -H 'Accept: application/vnd.github.everest-preview+json' \
+          -u ${{ secrets.ACTIONS_KEY }} \
+          --data '{"event_type": "Trigger Workflow", "client_payload": { "repository": "'"$GITHUB_REPOSITORY"'" }}'
+    - uses: actions/checkout@v3
