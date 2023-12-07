@@ -1,4 +1,5 @@
-# This is a basic workflow that is manually triggered
+# manually triggered
+# triggers specific workflow in curl enpoint (that workflow needs workflow_disptach)
 
 name: ManualTrigger0
 
