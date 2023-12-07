@@ -1,4 +1,5 @@
-# This is a basic workflow that is manually triggered
+# manually triggered
+# triggers all repository_dispatch workflows in curl enpoint repo
 
 name: ManualTriggerAll
 
