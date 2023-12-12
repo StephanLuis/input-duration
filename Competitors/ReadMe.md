@@ -1,4 +1,4 @@
-# Feel free to list or upload a scrape of a control that does the same as this:
+# Feel free to list or upload a scrape of a control that does the same as <input-duration>:
 
 - Parliament Live TV (js scraped)
   - drawback is jQ
