@@ -22,9 +22,10 @@
 Live BrowserStack Test Results:
 
 ![example workflow](https://github.com/StephanLuis/BrowserStackSelenium/workflows/curlEcho1/badge.svg)
-- https://github.com/StephanLuis/BrowserStackSelenium/workflows/curlEcho1.yml
+- this can be updated with https://shields.io/
 
-Remove these:
+Remove these:  
+
 [![npm bundle size][npm-bundle-size]][npm-bundle-size]
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
@@ -346,6 +347,8 @@ Resources I've found helpful and would like to give credit to:
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+
+
 
 
 [contributors-shield]: https://img.shields.io/github/contributors/StephanLuis/input-duration?style=for-the-badge
