@@ -39,7 +39,7 @@
   
   
   <a href="https://github.com/StephanLuis/input-duration">
-   <h3 align="center">Input-Duration -- The best 'Time Only' Input</h3> <img src="readme/logo.svg" alt="Logo" width="90" height="90">
+   <h3 align="center">Input-Duration -- The best 'Time Only' Input (Vanilla JS)</h3> <img src="readme/logo.svg" alt="Logo" width="90" height="90">
   </a>
 
   
