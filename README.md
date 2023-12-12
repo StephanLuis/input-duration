@@ -19,6 +19,12 @@
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
 
+Live BrowserStack Test Results:
+
+![example workflow](https://github.com/StephanLuis/BrowserStackSelenium/workflows/curlEcho1/badge.svg)
+- https://github.com/StephanLuis/BrowserStackSelenium/workflows/curlEcho1.yml
+
+Remove these:
 [![npm bundle size][npm-bundle-size]][npm-bundle-size]
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
