@@ -1,5 +1,3 @@
-// SL: these are also needed
-
 function resizePlayer() {
     var n = $(".video-container").width();
     $(".video-container").height(Math.ceil(n / 16 * 9));
@@ -2349,9 +2347,7 @@ $(function() {
         u = $("#eventId").val(),
         i = setTimeout(stopHub, t),
         n;
-    r.client.eventStateChanged = function(n, r, f, e, o) {
-        u == n && (stateChanged(r, f, e, o), clearTimeout(i), i = setTimeout(stopHub, t))
-    };
+    
     $.connection.hub.start().done(function() {});
     $(".embed-code").hide();
     $(".embed-terms .btn-agree").on("click", function(n) {
