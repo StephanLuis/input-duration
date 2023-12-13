@@ -20,8 +20,11 @@ jobs:
       - run: npm ci
 
      # bumps minor version
-      - run: npm version patch
-      - run: git push "https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" "${{ github.head_ref }}"
+      - run: echo "Token ${{ secrets.GITHUB_TOKEN }}"
+      - run: echo "Repo ${{ github.repository }}"
+      - run: echo "Head ${{ github.head_ref }}"
+     # - run: npm version patch
+     # - run: git push "https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" "${{ github.head_ref }}"
 
       # publishes with credentials
       - run: npm publish
