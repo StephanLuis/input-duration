@@ -21,7 +21,7 @@ jobs:
 
      # bumps minor version
       - run: npm version patch
-      - run: git push
+      - run: git push "https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" "${{ github.head_ref }}"
 
       # publishes with credentials
       - run: npm publish
