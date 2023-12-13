@@ -20,7 +20,7 @@ jobs:
       - run: npm ci
 
      # bumps minor version
-      - run: npm version patch --force
+      - run: npm version patch
       - run: git push
 
       # publishes with credentials
