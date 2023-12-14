@@ -1,10 +1,15 @@
 name: Dev Version and Release
 
-on: push
- 
+on:
+  push:
+    paths-ignore:
+      - '!index.js'
+      - '!Tests/**'
+      - '**'
 
 env:
   node_version: lts/*
+  new_version: patch
   
 concurrency: # prevent concurrent releases
   group: npm-bump
@@ -34,7 +39,7 @@ jobs:
       with:
         git_email: bcomnes@gmail.com
         git_username: ${{ github.actor }}
-        newversion: patch
+        newversion: ${{ env.new_version }}
         push_version_commit: true # if your prePublishOnly step pushes git commits, you can omit this input or set it to false.
         github_token: ${{ secrets.GITHUB_TOKEN }} # built in actions token.  Passed tp gh-release if in use.
         npm_token: ${{ secrets.NPM_TOKEN }} # user set secret token generated at npm
