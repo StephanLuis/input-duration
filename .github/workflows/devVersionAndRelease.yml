@@ -2,6 +2,10 @@ name: Dev Version and Release
 
 on:
   push:
+    paths-ignore:
+      - 'README.md'
+      - '.github/**'
+      - '**/*.draft.md'
 
 env:
   node_version: lts/*
@@ -33,7 +37,7 @@ jobs:
       id: npm-bump
       uses: bcomnes/npm-bump@v2
       with:
-        git_email: bcomnes@gmail.com
+        git_email: stephan@learnsense.org
         git_username: ${{ github.actor }}
         newversion: ${{ env.new_version }}
         push_version_commit: true # if your prePublishOnly step pushes git commits, you can omit this input or set it to false.
