@@ -14,7 +14,7 @@ jobs:
   version_and_release:
     runs-on: ubuntu-latest
     outputs:
-      tagName: ${{ steps.npm-bump.outputs.release_tag }}
+      tagName: patch
     steps:
     - uses: actions/checkout@v3
       with:
@@ -38,4 +38,4 @@ jobs:
         push_version_commit: true # if your prePublishOnly step pushes git commits, you can omit this input or set it to false.
         github_token: ${{ secrets.PAT_KEY }} # built in actions token.  Passed tp gh-release if in use.
         npm_token: ${{ secrets.NPM_TOKEN }} # user set secret token generated at npm
-    - run: echo ${{ steps.npm-bump.outputs.release_tag }}
+    - run: echo patch
