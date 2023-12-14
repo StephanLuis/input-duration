@@ -1,11 +1,7 @@
 name: Dev Version and Release
 
-on:
-  workflow_dispatch:
-    inputs:
-      newversion:
-        description: 'Semantic Version Bump Type (major minor patch)'
-        required: true
+on: push
+  
 
 env:
   node_version: lts/*
