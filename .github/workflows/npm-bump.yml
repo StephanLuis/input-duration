@@ -1,6 +1,6 @@
 # second commit
 # from https://github.com/marketplace/actions/npm-bump
-name: Version and Release
+name: NPM Version and Release (npm-bump.yml)
 
 on:
   workflow_dispatch:
