@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - '**.js'
+      - '!**.config.js'
       - '!.github/**'
       - '!Competitors/**'
       - '!docs/**'
