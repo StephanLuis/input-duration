@@ -1,7 +1,7 @@
 name: Dev Version and Release
 
 on: push
-  
+ 
 
 env:
   node_version: lts/*
@@ -14,7 +14,7 @@ jobs:
   version_and_release:
     runs-on: ubuntu-latest
     outputs:
-      tagName: patch
+      tagName: ${{ steps.npm-bump.outputs.release_tag }}
     steps:
     - uses: actions/checkout@v3
       with:
@@ -32,10 +32,10 @@ jobs:
       id: npm-bump
       uses: bcomnes/npm-bump@v2
       with:
-        git_email: stephan@learnsense.org
+        git_email: bcomnes@gmail.com
         git_username: ${{ github.actor }}
-        newversion: ${{ github.event.inputs.newversion }}
+        newversion: patch
         push_version_commit: true # if your prePublishOnly step pushes git commits, you can omit this input or set it to false.
-        github_token: ${{ secrets.PAT_KEY }} # built in actions token.  Passed tp gh-release if in use.
+        github_token: ${{ secrets.GITHUB_TOKEN }} # built in actions token.  Passed tp gh-release if in use.
         npm_token: ${{ secrets.NPM_TOKEN }} # user set secret token generated at npm
-    - run: echo patch
+    - run: echo ${{ steps.npm-bump.outputs.release_tag }}
