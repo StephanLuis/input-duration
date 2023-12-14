@@ -24,7 +24,7 @@ jobs:
       - run: echo "Repo ${{ github.repository }}"
       - run: echo "Head ${{ github.head_ref }}"
      # - run: npm version patch
-     # - run: git push "https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" "${{ github.head_ref }}"
+     # - run: git push "https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}"
 
       # publishes with credentials
       - run: npm publish
