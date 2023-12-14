@@ -2,10 +2,6 @@ name: Dev Version and Release
 
 on:
   push:
-    paths-ignore:
-      - '!index.js'
-      - '!Tests/**'
-      - '**'
 
 env:
   node_version: lts/*
