@@ -2,12 +2,12 @@ name: Dev Version and Release
 
 on:
   push:
-    paths-ignore:
-      - 'README.md'
-      - '.github/**'
-      - 'Competitors/**'
-      - 'docs/**'
-      - 'readme/**'
+    paths:
+      - '**.js'
+      - '!.github/**'
+      - '!Competitors/**'
+      - '!docs/**'
+      - '!readme/**'
 
 env:
   node_version: lts/*
