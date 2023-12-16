@@ -62,10 +62,5 @@ jobs:
         -H "Accept: application/vnd.github+json" \
         -u "StephanLuis:${{secrets.PAT_KEY}}" \
         -H "X-GitHub-Api-Version: 2022-11-28" \
-        
-         # echo
-         # https://api.github.com/repos/StephanLuis/BrowserStackSelenium/actions/workflows/78546395/dispatches \
-
-         # test
          https://api.github.com/repos/StephanLuis/BrowserStackSelenium/actions/workflows/CurlDispatchTest/dispatches \
         -d '{"ref":"main"}'
