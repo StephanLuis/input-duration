@@ -11,6 +11,7 @@
  * @see <a href="https://github.com/StephanLuis/input-duration">GitHub input-duration</a>
  * @copyright MIT License, Copyright (c) 2024 
  * @version 2.2.XXX (DEV) / auto increment
+ * fake update to check CI 
  */
 
 
