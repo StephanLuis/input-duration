@@ -20,6 +20,7 @@
 Live BrowserStack Test Results:
 
 ![example workflow](https://github.com/StephanLuis/BrowserStackSelenium/workflows/curlEcho1/badge.svg)
+![example workflow](https://github.com/StephanLuis/BrowserStackSelenium/workflows/InputDurationNodeTest/badge.svg)
 - this can be updated with https://shields.io/
 
 Remove these:  
