@@ -6,11 +6,12 @@
  * 
  * @fileoverview INPUT-DURATION
  * @file INPUT-DURATION 
- * @author Stephan Luis
+ * @author Stephan Luis stephan@learnsense.org
  * @see <a href="https://www.npmjs.com/package/input-duration">NPM input-duration</a>
  * @see <a href="https://github.com/StephanLuis/input-duration">GitHub input-duration</a>
- * @copyright MIT License, Copyright (c) 2022 
- * @version 2.2.8 (release)
+ * @copyright MIT License, Copyright (c) 2024 
+ * @version 2.2.XXX (DEV) / auto increment
+ * fake update to check CI , 16 Dec, 6x
  */
 
 

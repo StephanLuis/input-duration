@@ -1,7 +1,7 @@
 # manually triggered
 # triggers specific workflow in curl enpoint (that workflow needs workflow_disptach)
 
-name: ManualTrigger0
+name: ManualTrigger Echo0
 
 # Controls when the action will run. Workflow runs when manually triggered using the UI
 # or API.
