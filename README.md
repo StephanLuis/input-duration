@@ -44,10 +44,13 @@
 
   
 
-  <p align="center">A vanilla JS boosted input that works on Safari in very close imitation of a time input on Chrome <br>... only better. </p>
+  <p align="center">A compact duration input with a fixed, locale-independent display for hours, minutes, seconds, and milliseconds.</p>
 </div>
 
-'Time Only' means that this control is for time as a unit, or a duration, like for count down timers.  Not for time of day nor date on a calendar, so no unwanted AM/PM conversions on Safari, no unwanted date-time selectors.  Just time up to 999 hrs and down to 1 millisecond.<br>
+Use `input-duration` when users need to enter a duration rather than a time of day: for example, a countdown, elapsed-time limit, or media offset. Its displayed value uses `HH:mm:ss.SSS` on every locale, without a locale-specific AM/PM presentation, and supports durations greater than 24 hours (currently up to 99 hours) with millisecond values, such as `30:00:00.125`.
+
+The component supplies its own segmented layout instead of the browser's native time-picker UI, so the displayed format does not change with browser or locale. It is built from native number inputs, however, so details such as the on-screen keyboard and interaction can still vary by device and browser; this is consistency of the value's presentation, not a guarantee of pixel-identical rendering. Milliseconds can be entered as three digits; the input's step controls increment in 10 ms intervals.
+<br>
 <p>
 <div>
   </div>
@@ -57,6 +60,8 @@
 </a> ·
       <a href="https://6mxpg2.csb.app/" target="_blank">Demo</a>
     ·
+  <a href="https://stephanluis.github.io/input-duration/" target="_blank">Live demo</a>
+    ·
   <a href="https://stephanluis.github.io/input-duration/" target="_blank">Docs</a>
   ·
     <a href="https://github.com/StephanLuis/input-duration/issues">Bugs</a>
@@ -64,17 +69,12 @@
     <a href="https://github.com/StephanLuis/input-duration/issues">Request Feature</a>
   </p>
   </div>
-  Ok, what about mobile??  Yep, input-duration works on all popular operating system / browser combinations.  
-<br/>
 </div>
 <br/>
 
-<h2>Touch and Keyboard Timepicker</h2>
+<h2>Fixed-format duration input</h2>
 
-|OS(mobile)       | Browser       | | OS(laptop)  | Browser   |
-|-----------------|----------------|--|-------------|-----------|
-| Android  | Chrome   | |Windows  10, 11   |  Chrome, Edge  |
-| iOS      | Safari, Chrome | |OsX             | Safari, Chrome |    
+`input-duration` is intended for touch and keyboard use. The HTML structure and displayed field order are controlled by the component; device-specific input and keyboard behavior remains native to the browser.
 
 <!-- TABLE OF CONTENTS -->
 <details>
@@ -95,7 +95,7 @@
     </li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
-     <li><a href="#teststatus">Test Status</a></li>
+     <li><a href="#cross-browser-testing">Cross-browser testing</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -107,7 +107,10 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-Time inputs <input type='time'> are updated by browsers in unwanted ways!   Safari on desktop adds AM/PM if the user is in the USA and on mobile the cool scroll time selector does not allow fractions of a second.  The best html5 option doesn't cut it, sadly, so input-duration was designed and buit for a consistant UX no matter the browser, OS, or location settings.
+
+HTML's `<input type="time">` represents a time of day. Browsers may localize its visible control (for example, showing a 12-hour clock with AM/PM), even though its value is standardized. It also cannot represent a duration longer than a day.
+
+`input-duration` is for duration values, not appointments or clock times. Its separate numeric fields present hours, minutes, seconds, and milliseconds in a fixed `HH:mm:ss.SSS` format. This avoids locale-dependent time-of-day presentation while allowing durations beyond 24 hours and millisecond values in a compact control.
 
 <!-- [![Product Name Screen Shot][product-screenshot]](https://example.com) -->
 
@@ -118,7 +121,7 @@ Time inputs <input type='time'> are updated by browsers in unwanted ways!   Safa
 
 <h3> Bob is rescued by INPUT-DURATION! </h3>
 
-The objective is a minimised javascript plugin that reproduces the behaviour of the input type=time on Chrome.  This way at least two of the major browsers are supported, Safari and Chrome, on desktop and mobile operating systems. 
+The goal is a small JavaScript component that gives duration entry a predictable displayed format across browser and locale settings, while retaining native numeric inputs for editing.
 
 <i>Does this loose any functionality?</i>  No!  document.querySelector('#bob').value  has a getter and setter!  So values can be set and retrieved by ID or attribute in HTML.
 
@@ -127,29 +130,13 @@ The objective is a minimised javascript plugin that reproduces the behaviour of 
 <img src="readme/safariBad.png" alt="drawing" width="80%"/>
 <!-- [![Safari Screen Shot][safari-screenshot]](https://example.com) -->
 
-Yes! It seems CRAZY in 2022 that there is not a native 'time only' input for HTML.  What I mean is there is no user input control for time rendered independantly of date or time of day.  Yea, crazy, but now input-duration is a javascript plugin that creates a UX input control for a value of time simply as hours, minutes, seconds --<b>only</b>! <br> Ever thought, why is it difficult to 'code' a countdown timer? Why can't it be done with one control? Just look at google's timer and other coundown timers! All use multiple inputs, usually designed for integers.
-
-The very worst is Safari on desktop and mobile, which undermine any input type=time coding efforts and update the input based on OS settings!  Shouldn't a user be able to 'scientifically' specify a period of time with one control?  <br>  Maybe it's just me, but the chrome / google timer is 14 separate elements ... those guys must be paid by the hour.   The closest HTML5 input type- time when configured with UX for hours to millisecs is very finicky and is rendered differently on Chrome than Safari. <b>Mobile</b> is different from laptop<br> ... so I've simplified that!
-
-
-
-
-
-
-
-There were a few plugins that remediated the lack of continuity, but even those controls treated time as a date (ex 24hr max).  So it seems the current state is the most relable UX is multi input type number.  The worst example is the Google countdown timer.  That way is wrong because time is a basic unit that should be separate from calendar complexities.  That got me thinking, why isn't there an input control for it implemented across browsers??  I needed one, so coded input-duration.
+Native time inputs are useful when the user is choosing a time on a clock. A duration is different: `30:00:00.000` means thirty hours, not 6 AM the next day. Keeping those concepts separate avoids date, timezone, and 12/24-hour display concerns when collecting a duration.
 
 Here's why:
-* Time is hours minutes and seconds (and millisecs) and needn't be associated with part of a day or a date
-* The date association breaks UX and is varied with browser implementation
-* I found no other crossbrowser solution
-* I thought this would be a great open source project
-* End use of number inputs (standard hack) for use with time 
-
-Of course, this is functional but in it's infancy.  Maybe, with some contribution this is a project that can inspire change to the HTML spec.
-
-
-Feel free to vote for WhatWG inclusion of a into the HTML spec! (link comming soon)
+* Enter durations independently of a calendar date or time of day.
+* Keep a fixed `HH:mm:ss.SSS` display regardless of locale-specific clock conventions.
+* Represent durations beyond 24 hours (up to 99 hours in the current implementation).
+* Read and set the value from JavaScript using the component's `.value` property.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -271,14 +258,9 @@ See the [open issues](https://github.com/StephanLuis/input-duration/issues) for 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- TESTSTATUS -->
-## Teststatus
+## Cross-browser testing
 
-![TestStatusDIY](https://img.shields.io/static/v1?label=Android:Chrome&message=Pass&color=<COLOR>&style=for-the-badge)
-![TestStatusDIY](https://img.shields.io/static/v1?label=iOS:Safari&message=Pass&color=<COLOR>&style=for-the-badge)
-![TestStatusDIY](https://img.shields.io/static/v1?label=iOS:Chrome&message=Pass&color=<COLOR>&style=for-the-badge)
-![TestStatusDIY](https://img.shields.io/static/v1?label=Windows:Chrome&message=Pass&color=<COLOR>&style=for-the-badge)
-![TestStatusDIY](https://img.shields.io/static/v1?label=osX:Safari&message=Pass&color=<COLOR>&style=for-the-badge)
-![TestStatusDIY](https://img.shields.io/static/v1?label=osX:Chrome&message=Pass&color=<COLOR>&style=for-the-badge)
+The browser and device results linked below are historical and should not be treated as verification against current browser versions. The local regression suite checks component behavior, but current cross-browser rendering and interaction still need to be tested.
 
 [Tests & Live Status](https://github.com/StephanLuis/BrowserStackSelenium/blob/main/input-duration/README.md)
 
