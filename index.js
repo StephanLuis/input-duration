@@ -22,20 +22,34 @@
  */
 
 class InputDuration extends HTMLElement {
+    static get observedAttributes() {
+        return ['value'];
+    }
+
     constructor() {
 
         super();
 
         this.myElement = this.attachShadow({ mode: 'open' });
 
-        // needed for setting inputs when value attribute is added to chronlyHMS 
-        // <chronly-hms id="bobPrepop" value="99:09:09.999"></chronly-hms>
-
-        this.value = this.getAttribute('value');
-
         this.boot();
 
     }  // end constructor
+
+    attributeChangedCallback(name, oldValue, newValue) {
+
+        if (name !== 'value' || oldValue === newValue) {
+            return;
+        }
+
+        if (newValue === null) {
+            this.resetInputs();
+        } else if (this.isValidValue(newValue)) {
+            this.setInputValues(newValue);
+        } else {
+            this.warnInvalidValue(newValue);
+        }
+    }
 
 
     /**
@@ -74,60 +88,52 @@ class InputDuration extends HTMLElement {
     set value(val) {
 
         // for setting the value in js (like document.querySelector("#bobPrepop").value = "05:05:05.005")
-        if (val) {
-
-
-            console.log(val);
-
-
-            if (/(^[0-9][0-9]):([0-5][0-9]):([0-5][0-9])\.([0-9][0-9][0-9]$)/.exec(val)) {
-
-
-                // split val
-
-                var timeArray = val.split(/[.:]+/);
-
-                console.log('time array is ' + timeArray[0] + ':' + timeArray[1] + ':' + timeArray[2] + ':' + timeArray[3]);
-
-                console.log('this.id = ' + this.id);
-
-                setTimeout(() => {
-
-                    this.myElement.querySelector('input[name="startHours"]').value = timeArray[0];
-                    this.myElement.querySelector('input[name="startMinutes"]').value = timeArray[1];
-                    this.myElement.querySelector('input[name="startSeconds"]').value = timeArray[2];
-                    this.myElement.querySelector('input[name="startMilliSecs"]').value = timeArray[3];
-
-                }, 0);
-
-
-                this.setAttribute('value', val);
-
-            }
-
-            else {
-
-                console.warn(`The specified value ${val} does not conform to the required format.  The format is "HH:mm:ss.SSS" where HH is 00-99, mm is 00-59, ss is 00-59, and SSS is 000-999.`);
-
-            }
-
-            //  I think this is for empty string to clear value
-            // gives a False bool and removes value from Webcomponent chronlyHMS
-
-        } else {
-
-            setTimeout(() => {
-
-                this.myElement.querySelector('input[name="startHours"]').value = '00';
-                this.myElement.querySelector('input[name="startMinutes"]').value = '00';
-                this.myElement.querySelector('input[name="startSeconds"]').value = '00';
-                this.myElement.querySelector('input[name="startMilliSecs"]').value = '000';
-
-            }, 0);
-
+        if (!val) {
+            this.resetInputs();
             this.removeAttribute('value');
-
+            return;
         }
+
+        if (typeof val !== 'string' || !this.isValidValue(val)) {
+            this.warnInvalidValue(val);
+            return;
+        }
+
+        this.setInputValues(val);
+
+        if (this.getAttribute('value') !== val) {
+            this.setAttribute('value', val);
+        }
+    }
+
+    isValidValue(val) {
+        return typeof val === 'string' &&
+            /^[0-9]{2}:[0-5][0-9]:[0-5][0-9]\.[0-9]{3}$/.test(val);
+    }
+
+    setInputValues(val) {
+        const timeArray = val.split(/[.:]+/);
+        const inputNames = ['startHours', 'startMinutes', 'startSeconds', 'startMilliSecs'];
+
+        inputNames.forEach((name, index) => {
+            const input = this.myElement.querySelector(`input[name="${name}"]`);
+            input.value = timeArray[index];
+            input.oldValue = input.value;
+        });
+    }
+
+    resetInputs() {
+        const defaults = ['00', '00', '00', '000'];
+        const inputs = this.myElement.querySelectorAll('.timeCase input');
+
+        inputs.forEach((input, index) => {
+            input.value = defaults[index];
+            input.oldValue = input.value;
+        });
+    }
+
+    warnInvalidValue(val) {
+        console.warn(`The specified value ${val} does not conform to the required format.  The format is "HH:mm:ss.SSS" where HH is 00-99, mm is 00-59, ss is 00-59, and SSS is 000-999.`);
     }
 
 
@@ -160,10 +166,6 @@ class InputDuration extends HTMLElement {
      */
 
     addArrowKeyInput() {
-
-        console.log('1 this: ' + this);
-        console.log('1 this.myElement: ' + this.myElement);
-        console.log('1 this.myElement active: ' + this.myElement);
 
         var mE = this.myElement;
 
@@ -421,26 +423,19 @@ class InputDuration extends HTMLElement {
         // Digit input 0-9  (typed in by user)
 
         function setInputFilter(inputElement, inputFilter) {
-            // this sets a listener and  immediately updates the value of the input number (note: can update this from input text, like by removing setSelectionRange )
+            inputElement.oldValue = inputElement.value;
 
-            console.log('inputElement: ' + inputElement);
-            window.inputElement = inputElement;
+            inputElement.addEventListener('input', function () {
+                if (inputFilter(this.value)) {
+                    this.oldValue = this.value;
+                } else {
+                    this.value = this.oldValue;
+                }
+            });
 
             inputElement.addEventListener('keyup', function (event) {
-
-                window.kue = event;
-
-                if (/^([0-9]?)$/.test(event.key)) {
-                    if (inputFilter(this.value)) {
-                        this.oldValue = this.value;
-                        this.oldSelectionStart = this.selectionStart;
-                        this.oldSelectionEnd = this.selectionEnd;
-                    } else if (this.hasOwnProperty("oldValue")) {
-                        this.value = this.oldValue;
-                        // this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
-                    } else {
-                        this.value = "";
-                    }
+                if (/^[0-9]$/.test(event.key)) {
+                    inputFilter(this.value);
                 }
             });
         }
@@ -454,7 +449,7 @@ class InputDuration extends HTMLElement {
             var newV = /^([0-9]?|[0-9][0-9]?)$/.test(value);
 
 
-            if (value.length === 2) {
+            if (newV && value.length === 2) {
 
                 mE.querySelector('input.sM').focus();
                 mE.querySelector('input.sM').select();
@@ -471,7 +466,7 @@ class InputDuration extends HTMLElement {
 
             var newV = /^([0-9]?|[0-5][0-9]?)$/.test(value);
 
-            if (value > 5 || value.length === 2) {
+            if (newV && (value > 5 || value.length === 2)) {
 
                 mE.querySelector('input.sS').focus();
                 mE.querySelector('input.sS').select();
@@ -487,7 +482,7 @@ class InputDuration extends HTMLElement {
 
             var newV = /^([0-9]?|[0-5][0-9]?)$/.test(value);
 
-            if (value > 5 || value.length === 2) {
+            if (newV && (value > 5 || value.length === 2)) {
 
                 mE.querySelector('input.sMS').focus();
                 mE.querySelector('input.sMS').select();
@@ -505,7 +500,7 @@ class InputDuration extends HTMLElement {
             var newV = /^([0-9]?|[0-9][0-9]?|[0-9][0-9][0-9]?)$/.test(value);
 
 
-            if (value.length === 3) {
+            if (newV && value.length === 3) {
 
                 mE.querySelector('input.sMS').blur();
 
@@ -642,6 +637,8 @@ class InputDuration extends HTMLElement {
 // end class
 
 
-export default customElements.define('input-duration', InputDuration);
+customElements.define('input-duration', InputDuration);
+
+export default InputDuration;
 
 // an option is to make all above an IIFE

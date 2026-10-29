@@ -1,6 +1,6 @@
 {
   "name": "input-duration",
-  "version": "2.2.11",
+  "version": "3.0.0",
   "author": "Stephan Luis <stephan@learnsense.org>",
   "description": "This is the 'Input-Duration'! It is a webcomponent that provides an hour, minute, second, and millisecond control for HTML5.",
   "browser": "indexjs",
@@ -8,7 +8,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": " node -v",
+    "test": "node --test Tests/inputDuration.test.js",
     "build": "webpack && date '+%T'",
     "devbuild": "webpack --mode=development && date '+%T'",
     "start": "python3 -m http.server"
@@ -18,6 +18,9 @@
     "url": "git+https://github.com/StephanLuis/input-duration.git"
   },
   "license": "ISC",
+  "devDependencies": {
+    "jsdom": "^26.1.0"
+  },
   "bugs": {
     "url": "https://github.com/StephanLuis/input-duration/issues"
   },
