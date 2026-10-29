@@ -39,7 +39,7 @@
   
   
   <a href="https://github.com/StephanLuis/input-duration">
-   <h3 align="center">Input-Duration -- The best 'Time Only' Input (Vanilla JS)</h3> <img src="readme/logo.svg" alt="Logo" width="90" height="90">
+   <h3 align="center">Input-Duration -- JavaScript duration input</h3> <img src="readme/logo.svg" alt="Logo" width="90" height="90">
   </a>
 
   
@@ -75,6 +75,22 @@ The component supplies its own segmented layout instead of the browser's native 
 <h2>Fixed-format duration input</h2>
 
 `input-duration` is intended for touch and keyboard use. The HTML structure and displayed field order are controlled by the component; device-specific input and keyboard behavior remains native to the browser.
+
+<h2>Bob is rescued by INPUT-DURATION!</h2>
+
+The goal is a small JavaScript duration input that gives countdowns and elapsed-time entry a predictable displayed format across browser and locale settings, while retaining native numeric inputs for editing.
+
+<i>Does this lose any functionality?</i> No! `document.querySelector('#bob').value` has a getter and setter, so values can be set and retrieved from JavaScript or the HTML attribute.
+
+<img src="readme/safariBad.png" alt="Example comparing a native time input with input-duration" width="80%"/>
+
+Native time inputs are useful when the user is choosing a time on a clock. A duration is different: `30:00:00.125` means thirty hours, not 6 AM the next day. Keeping those concepts separate avoids date, timezone, and 12/24-hour display concerns when collecting a duration.
+
+Here's why:
+* Enter durations independently of a calendar date or time of day.
+* Keep a fixed `HH:mm:ss.SSS` display regardless of locale-specific clock conventions.
+* Represent durations beyond 24 hours (up to 99 hours in the current implementation).
+* Read and set the value from JavaScript using the component's `.value` property.
 
 <!-- TABLE OF CONTENTS -->
 <details>
@@ -117,27 +133,6 @@ HTML's `<input type="time">` represents a time of day. Browsers may localize its
 <img src="readme/codeDrawing.png" alt="drawing" width="60%"/>
 
 <!-- [![HTML Screen Shot][html-screenshot]](https://example.com) -->
-*note input-duration needs closing tag!
-
-<h3> Bob is rescued by INPUT-DURATION! </h3>
-
-The goal is a small JavaScript component that gives duration entry a predictable displayed format across browser and locale settings, while retaining native numeric inputs for editing.
-
-<i>Does this loose any functionality?</i>  No!  document.querySelector('#bob').value  has a getter and setter!  So values can be set and retrieved by ID or attribute in HTML.
-
-
-
-<img src="readme/safariBad.png" alt="drawing" width="80%"/>
-<!-- [![Safari Screen Shot][safari-screenshot]](https://example.com) -->
-
-Native time inputs are useful when the user is choosing a time on a clock. A duration is different: `30:00:00.000` means thirty hours, not 6 AM the next day. Keeping those concepts separate avoids date, timezone, and 12/24-hour display concerns when collecting a duration.
-
-Here's why:
-* Enter durations independently of a calendar date or time of day.
-* Keep a fixed `HH:mm:ss.SSS` display regardless of locale-specific clock conventions.
-* Represent durations beyond 24 hours (up to 99 hours in the current implementation).
-* Read and set the value from JavaScript using the component's `.value` property.
-
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 

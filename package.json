@@ -2,8 +2,8 @@
   "name": "input-duration",
   "version": "3.0.0",
   "author": "Stephan Luis <stephan@learnsense.org>",
-  "description": "This is the 'Input-Duration'! It is a webcomponent that provides an hour, minute, second, and millisecond control for HTML5.",
-  "browser": "indexjs",
+  "description": "A JavaScript web component for entering durations up to 99 hours in a fixed HH:mm:ss.SSS format, with millisecond precision for countdown timers and elapsed time.",
+  "browser": "./index.js",
   "module": "index.js",
   "main": "index.js",
   "type": "module",
@@ -26,14 +26,21 @@
   },
   "homepage": "https://github.com/StephanLuis/input-duration#readme",
   "keywords": [
+    "javascript",
+    "duration input",
+    "time duration",
+    "countdown timer",
+    "elapsed time",
+    "millisecond",
+    "time input",
+    "web component",
     "vanilla js",
     "input",
     "time",
     "duration",
-    "webcomponent",
     "hour",
     "minute",
     "second",
-    "millisecond"
+    "milliseconds"
   ]
 }
