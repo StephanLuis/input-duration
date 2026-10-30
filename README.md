@@ -49,7 +49,11 @@
 
 Use `input-duration` when users need to enter a duration rather than a time of day: for example, a countdown, elapsed-time limit, or media offset. Its displayed value uses `HH:mm:ss.SSS` on every locale, without a locale-specific AM/PM presentation, and supports durations greater than 24 hours (currently up to 99 hours) with millisecond values, such as `30:00:00.125`.
 
+HTML's built-in `<input type="time">` is for choosing a time of day, not entering elapsed time. HTML does not provide a native duration input with a fixed `HH:mm:ss.SSS` format or support for values over 24 hours; this web component fills that gap.
+
 The component supplies its own segmented layout instead of the browser's native time-picker UI, so the displayed format does not change with browser or locale. It is built from native number inputs, however, so details such as the on-screen keyboard and interaction can still vary by device and browser; this is consistency of the value's presentation, not a guarantee of pixel-identical rendering. Milliseconds can be entered as three digits; the input's step controls increment in 10 ms intervals.
+
+The control's styles are scoped inside its Shadow DOM, so global styles and resets from Tailwind or other CSS libraries do not leak into its internal layout. The control inherits its font and text color from its surrounding page.
 <br>
 <p>
 <div>

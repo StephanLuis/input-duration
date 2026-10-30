@@ -1,196 +1,266 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
-<h1> See the input-duration in action</h1>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A tiny demo of why a time-of-day input is not the same thing as a duration input.">
+    <title>Time is not a duration — input-duration</title>
+    <style>
+        :root {
+            color-scheme: light;
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            color: #17201c;
+            background: #f5f7f3;
+            font-synthesis: none;
+            text-rendering: optimizeLegibility;
+            --green: #176b4a;
+            --muted: #64716a;
+            --line: #dce4dd;
+        }
 
-    <h2>Best HTML5 Option</h2>
- <input type="time" id="problemTime" step="0.01" value="00:00:00.000">
+        * {
+            box-sizing: border-box;
+        }
 
-<h2>Better Option</h2>
-<input-duration id="bob"></input-duration>
+        body {
+            min-width: 320px;
+            margin: 0;
+        }
 
-<h1>More uses of input-duration</h1>
-<input-duration id="bobPrepop" value="99:09:09.999"></input-duration><br>
-<input-duration id="Jane"></input-duration><br>
-<input type="date" id="BobsDate"><br>
+        main {
+            width: min(100% - 40px, 960px);
+            margin: 0 auto;
+            padding: 48px 0 32px;
+        }
 
-<h2>Test the prototype</h2>
-<p id="what">This is for testing HTMLelement prototype update</p>
+        header {
+            max-width: 720px;
+            margin: 0 auto 34px;
+            text-align: center;
+        }
 
-<script type="module">
-    import chronlyhms from 'https://cdn.jsdelivr.net/npm/input-duration/+esm';
-</script>
+        .eyebrow {
+            margin: 0 0 14px;
+            color: var(--green);
+            font-size: .78rem;
+            font-weight: 750;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+        }
 
-    <script src="scripts/prettify/prettify.js"> </script>
-    <script src="scripts/prettify/lang-css.js"> </script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
-    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+        h1 {
+            margin: 0;
+            font-size: clamp(2.35rem, 7vw, 4.5rem);
+            letter-spacing: -.065em;
+            line-height: 1.02;
+        }
+
+        .intro {
+            max-width: 610px;
+            margin: 20px auto 0;
+            color: var(--muted);
+            font-size: 1.08rem;
+            line-height: 1.6;
+        }
+
+        .scenario {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 15px;
+            border: 1px solid #d6e8dc;
+            border-radius: 999px;
+            background: #eaf4ed;
+            color: #25513b;
+            font-size: .95rem;
+            font-weight: 650;
+        }
+
+        .comparison {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        article {
+            display: flex;
+            min-height: 300px;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 26px;
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            background: #fff;
+            box-shadow: 0 12px 32px rgb(23 32 28 / 5%);
+        }
+
+        article.duration {
+            border-color: #b7d9c4;
+            box-shadow: 0 12px 32px rgb(23 107 74 / 9%);
+        }
+
+        .card-label {
+            margin: 0 0 8px;
+            color: var(--muted);
+            font-size: .76rem;
+            font-weight: 750;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+        }
+
+        h2 {
+            margin: 0;
+            font-size: 1.45rem;
+            letter-spacing: -.03em;
+        }
+
+        .card-copy {
+            min-height: 52px;
+            margin: 10px 0 20px;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        .field {
+            display: flex;
+            min-height: 54px;
+            align-items: center;
+            margin: 0 0 18px;
+            padding: 8px 12px;
+            border: 1px solid #bdc9c0;
+            border-radius: 10px;
+            background: #fff;
+        }
+
+        input[type="time"] {
+            width: 100%;
+            border: 0;
+            background: transparent;
+            color: inherit;
+            font: inherit;
+            font-size: 1.2rem;
+        }
+
+        input[type="time"]:focus-visible {
+            outline: 2px solid var(--green);
+            outline-offset: 3px;
+        }
+
+        input-duration {
+            display: block;
+            max-width: 100%;
+            font-size: 1.2rem;
+        }
+
+        .result {
+            margin: auto 0 0;
+            color: #33463a;
+            font-size: .94rem;
+            line-height: 1.5;
+        }
+
+        .result strong {
+            color: #a23e2c;
+        }
+
+        .duration .result strong {
+            color: var(--green);
+        }
+
+        footer {
+            margin-top: 28px;
+            color: var(--muted);
+            font-size: .92rem;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        a {
+            color: var(--green);
+            font-weight: 650;
+        }
+
+        @media (max-width: 650px) {
+            main {
+                width: min(100% - 28px, 480px);
+                padding-top: 34px;
+            }
+
+            .comparison {
+                grid-template-columns: 1fr;
+            }
+
+            article {
+                min-height: 270px;
+                padding: 22px;
+            }
+        }
+    </style>
 </head>
-
 <body>
-
-<div id="main">
-
-    <h1 class="page-title">Plugin Doccumentation</h1>
-
-    
-
-
-
-    
-
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-<section>
-
-<header>
-    
-        <h2>index.js</h2>
-        
-    
-</header>
-
-<article>
-    <div class="container-overview">
-    
-        
-            <div class="description">INPUT-DURATION</div>
-        
-
-        
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-author">Author:</dt>
-    <dd class="tag-author">
-        <ul>
-            <li>Stephan Luis</li>
-        </ul>
-    </dd>
-    
-
-    
-    <dt class="tag-copyright">Copyright:</dt>
-    <dd class="tag-copyright"><ul class="dummy"><li>MIT License, Copyright (c) 2022</li></ul></dd>
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1">line 1</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-    <dt class="tag-see">See:</dt>
-    <dd class="tag-see">
-        <ul>
-            <li><a href="https://www.npmjs.com/package/input-duration">NPM input-duration</a></li>
-        
-            <li><a href="https://github.com/StephanLuis/input-duration">GitHub input-duration</a></li>
-        </ul>
-    </dd>
-    
-
-    
-</dl>
-
-
-        
-    
-    </div>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
-
-
-
-
-</div>
-
-<nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="InputDuration.html">InputDuration</a></li></ul>
-</nav>
-
-<br class="clear">
-
-<footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Fri Sep 29 2023 11:02:59 GMT+0000 (GMT)
-</footer>
-
-<script> prettyPrint(); </script>
-<script src="scripts/linenumber.js"> </script>
+    <main>
+        <header>
+            <p class="eyebrow">A small input, a very different question</p>
+            <h1>Time is not a duration.</h1>
+            <p class="intro">You need to set a maintenance window. It’ll take 30 hours. Surely a time picker can handle that?</p>
+            <p class="scenario">The task: run for 30 hours</p>
+        </header>
+
+        <section class="comparison" aria-label="Compare a time-of-day input with a duration input">
+            <article>
+                <p class="card-label">The time picker</p>
+                <h2>“What time is it?”</h2>
+                <p class="card-copy">HTML's built-in time input asks for a time of day—not an elapsed duration. The clock has other plans.</p>
+                <label class="field" for="clock-time">
+                    <input id="clock-time" type="time" value="06:00" step="60">
+                </label>
+                <p class="result" id="clock-result" aria-live="polite">06:00 is a time of day—not how long the task takes.</p>
+            </article>
+
+            <article class="duration">
+                <p class="card-label">The duration input</p>
+                <h2>“How long does it take?”</h2>
+                <p class="card-copy">HTML has no built-in duration input. This one handles 30 hours, with a fixed HH:mm:ss.SSS display.</p>
+                <input-duration id="duration" role="group" aria-label="Duration in hours, minutes, seconds, and milliseconds" value="30:00:00.000"></input-duration>
+                <p class="result" id="duration-result" aria-live="polite"><strong>30:00:00.000</strong> — a 30-hour duration, exactly as requested.</p>
+            </article>
+        </section>
+
+        <footer>
+            Native HTML time inputs are for times of day; HTML has no built-in control for entering a duration like 30:00:00.000.
+            That's the gap <a href="InputDuration.html">input-duration</a> fills. Read the
+            <a href="https://github.com/StephanLuis/input-duration">source on GitHub</a>.
+        </footer>
+    </main>
+    <script type="module">
+        import '../index.js';
+
+        const clockInput = document.querySelector('#clock-time');
+        const clockResult = document.querySelector('#clock-result');
+        const durationInput = document.querySelector('#duration');
+        const durationResult = document.querySelector('#duration-result');
+
+        clockInput.addEventListener('input', () => {
+            clockResult.textContent = clockInput.value
+                ? `${clockInput.value} is a time of day—not how long the task takes.`
+                : 'No time picked. Still not a duration.';
+        });
+
+        const updateDurationResult = () => {
+            const value = durationInput.value;
+            if (/^[0-9]{2}:[0-5][0-9]:[0-5][0-9]\.[0-9]{3}$/.test(value)) {
+                const formattedValue = document.createElement('strong');
+                formattedValue.textContent = value;
+                durationResult.replaceChildren(
+                    formattedValue,
+                    document.createTextNode(' — a duration, exactly as requested.')
+                );
+            } else {
+                durationResult.textContent = 'Keep going—finish entering the duration.';
+            }
+        };
+
+        durationInput.addEventListener('input', updateDurationResult);
+        durationInput.addEventListener('change', updateDurationResult);
+    </script>
 </body>
 </html>

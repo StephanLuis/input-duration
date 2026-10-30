@@ -256,82 +256,89 @@ class InputDuration extends HTMLElement {
               </svg>
           </div>
           <style>
-                *:focus {
-                outline: none;
+                :host {
+                    display: inline-block;
+                    color: inherit;
+                    font: inherit;
+                    vertical-align: middle;
                 }
 
-
-                div.timeCase{
-                display: inline-flex;
-                flex-direction: row;
-                max-width: 300px;
-                padding: 3px;
-                border-style: solid;
-                border-width: 1px;
-                border-radius: 2px;
+                .timeCase {
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 0.08em;
+                    max-width: 100%;
+                    padding: 0.4em 0.55em;
+                    border: 1px solid #9aa6b2;
+                    border-radius: 0.4em;
+                    background: transparent;
+                    color: inherit;
+                    font-variant-numeric: tabular-nums;
+                    line-height: 1.4;
+                    white-space: nowrap;
                 }
 
-
-                /* Each input width set and blinking cursor 'caret' removed */
-                div.timeCase input{
-                caret-color: transparent;
-                width: 15px;
-                padding-top:1px;
+                .timeCase:focus-within {
+                    border-color: #176b4a;
+                    outline: 3px solid #176b4a;
+                    outline-offset: 2px;
                 }
 
-
-                div.timeCase .D3{
-                width: 25px;
+                .timeCase input {
+                    box-sizing: content-box;
+                    width: 2ch;
+                    min-width: 2ch;
+                    margin: 0;
+                    padding: 0;
+                    border: 0;
+                    outline: 0;
+                    background: transparent;
+                    color: inherit;
+                    font: inherit;
+                    font-variant-numeric: tabular-nums;
+                    text-align: center;
+                    caret-color: transparent;
+                    appearance: textfield;
                 }
 
-
-                /* Hiding the up and down arrow */
-                /*https://www.w3schools.com/howto/howto_css_hide_arrow_number.asp*/
-                /* Chrome, Safari, Edge, Opera */
-
-                input::-webkit-outer-spin-button,
-                input::-webkit-inner-spin-button {
-                -webkit-appearance: none;
-                margin: 0;
+                .timeCase input.D3 {
+                    width: 3ch;
+                    min-width: 3ch;
                 }
 
-
-                /* Firefox */
-
-                input[type=number] {
-                /* -moz-appearance: textfield; */
-                -moz-appearance: textarea;
-                -webkit-appearance: textarea;
+                .timeCase input::-webkit-outer-spin-button,
+                .timeCase input::-webkit-inner-spin-button {
+                    margin: 0;
+                    appearance: none;
                 }
 
-
-                div.timeCase:focus-within {
-                border: 2px solid black;
-                padding: 2px;
-                }
-
-
-                .ts_digit {
-                border: none;
-                } 
-
-                /* between digit span */
-                .bds{
-                padding-bottom: 1px;
+                .timeCase span {
+                    color: currentColor;
+                    opacity: 0.7;
                 }
 
                 #svgContainer {
-                width: 12px;
-                height: 12px;
-                padding-top: 1px;
-                padding-right: 2px;
-                color: black;
-                }  
+                    display: inline-flex;
+                    width: 1em;
+                    height: 1em;
+                    flex: 0 0 auto;
+                    align-items: center;
+                    justify-content: center;
+                    margin-left: 0.2em;
+                    color: inherit;
+                }
 
-                *:disabled {
-                background-color: grey;
-                color: lightgrey;
-                opacity: .6;
+                #svgContainer svg {
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                }
+
+                .timeCase input:disabled {
+                    background: transparent;
+                    color: GrayText;
+                    cursor: not-allowed;
+                    opacity: 0.65;
                 }
                 </style> `
 

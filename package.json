@@ -1,6 +1,6 @@
 {
   "name": "input-duration",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "author": "Stephan Luis <stephan@learnsense.org>",
   "description": "A JavaScript web component for entering durations up to 99 hours in a fixed HH:mm:ss.SSS format, with millisecond precision for countdown timers and elapsed time.",
   "browser": "./index.js",
