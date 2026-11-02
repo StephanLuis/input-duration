@@ -59,12 +59,12 @@ The control's styles are scoped inside its Shadow DOM, so global styles and rese
 <div>
   </div>
     <div align="center">
-  <a href="https://codesandbox.io/s/peaceful-waterfall-6mxpg2?file=/index.html" target="_blank">
+  <a href="https://stephanluis.github.io/input-duration/" target="_blank">Demo</a>
+·
+      <a href="https://codesandbox.io/s/peaceful-waterfall-6mxpg2?file=/index.html" target="_blank">
   Fiddle
 </a> ·
-      <a href="https://6mxpg2.csb.app/" target="_blank">Demo</a>
-    ·
-  <a href="https://stephanluis.github.io/input-duration/" target="_blank">Live demo</a>
+      <a href="https://6mxpg2.csb.app/" target="_blank">Fiddle's Output</a>
     ·
   <a href="https://stephanluis.github.io/input-duration/" target="_blank">Docs</a>
   ·
