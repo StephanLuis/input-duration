@@ -54,6 +54,7 @@ HTML's built-in `<input type="time">` is for choosing a time of day, not enterin
 The component supplies its own segmented layout instead of the browser's native time-picker UI, so the displayed format does not change with browser or locale. It is built from native number inputs, however, so details such as the on-screen keyboard and interaction can still vary by device and browser; this is consistency of the value's presentation, not a guarantee of pixel-identical rendering. Milliseconds can be entered as three digits; the input's step controls increment in 10 ms intervals.
 
 The control's styles are scoped inside its Shadow DOM, so global styles and resets from Tailwind or other CSS libraries do not leak into its internal layout. The control inherits its font and text color from its surrounding page.
+
 <br>
 <p>
 <div>
@@ -86,7 +87,39 @@ The goal is a small JavaScript duration input that gives countdowns and elapsed-
 
 <i>Does this lose any functionality?</i> No! `document.querySelector('#bob').value` has a getter and setter, so values can be set and retrieved from JavaScript or the HTML attribute.
 
-<img src="readme/safariBad.png" alt="Example comparing a native time input with input-duration" width="80%"/>
+### Screenshots
+
+The desktop comparisons show how a native time input represents a time of day, while `input-duration` displays an elapsed duration in a fixed format.
+
+<h4>Chrome</h4>
+<img src="readme/rendering/chromeBoth.png" alt="Chrome comparison of a native time input and input-duration" width="100%"/>
+
+<h4>Safari</h4>
+<img src="readme/rendering/safariBoth.png" alt="Safari comparison of a native time input and input-duration" width="100%"/>
+
+The mobile screenshots show the native time picker alongside `input-duration` on each platform.
+
+<table>
+  <thead>
+    <tr>
+      <th>Device</th>
+      <th>Native time input</th>
+      <th>input-duration</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Android</th>
+      <td><img src="readme/rendering/androidBad.png" alt="Android native time picker" width="200"/></td>
+      <td><img src="readme/rendering/androidGood.png" alt="input-duration on Android with the numeric keyboard" width="200"/></td>
+    </tr>
+    <tr>
+      <th>iOS</th>
+      <td><img src="readme/rendering/iosBad.png" alt="iOS native time picker" width="200"/></td>
+      <td><img src="readme/rendering/iosGood.png" alt="input-duration on iOS with the numeric keyboard" width="200"/></td>
+    </tr>
+  </tbody>
+</table>
 
 Native time inputs are useful when the user is choosing a time on a clock. A duration is different: `30:00:00.125` means thirty hours, not 6 AM the next day. Keeping those concepts separate avoids date, timezone, and 12/24-hour display concerns when collecting a duration.
 

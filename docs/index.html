@@ -101,6 +101,27 @@
             font-weight: 650;
         }
 
+        .get-started {
+            display: table;
+            margin: 30px auto 0;
+            padding: 13px 22px;
+            border: 1px solid var(--blue);
+            border-radius: 10px;
+            background: var(--blue);
+            color: #fff;
+            font-size: 1.05rem;
+            text-decoration: none;
+        }
+
+        .get-started:hover {
+            background: #1d4f87;
+        }
+
+        .get-started:focus-visible {
+            outline: 3px solid #8bb9e8;
+            outline-offset: 3px;
+        }
+
         .comparison {
             display: grid;
             grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -262,6 +283,7 @@
             That's the gap <a href="InputDuration.html">input-duration</a> fills. Read the
             <a href="https://github.com/StephanLuis/input-duration">source on GitHub</a>.
         </footer>
+        <a class="get-started" href="https://github.com/StephanLuis/input-duration#getting-started">Get Started</a>
     </main>
     <script type="module">
         import 'https://cdn.jsdelivr.net/npm/input-duration/+esm';
