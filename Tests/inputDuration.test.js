@@ -90,3 +90,30 @@ test('input handling does not create debug globals', () => {
     assert.equal(Object.hasOwn(window, 'inputElement'), false);
     assert.equal(Object.hasOwn(window, 'kue'), false);
 });
+
+test('numeric input advances only one field at a time', () => {
+    const element = createInputDuration();
+    const inputs = element.shadowRoot;
+
+    const cases = [
+        ['.sH', '.sM'],
+        ['.sM', '.sS'],
+        ['.sS', '.sMS']
+    ];
+
+    for (const [currentSelector, nextSelector] of cases) {
+        const currentInput = inputs.querySelector(currentSelector);
+        currentInput.value = '55';
+        currentInput.dispatchEvent(new window.Event('input', { bubbles: true }));
+
+        const nextInput = inputs.querySelector(nextSelector);
+        assert.equal(inputs.activeElement, nextInput);
+
+        nextInput.dispatchEvent(new window.KeyboardEvent('keyup', {
+            key: '5',
+            bubbles: true
+        }));
+
+        assert.equal(inputs.activeElement, nextInput);
+    }
+});

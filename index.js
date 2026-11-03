@@ -417,7 +417,7 @@ class InputDuration extends HTMLElement {
 
 
     /**
-    * eventlistener that adds number input for keyed values triggered by the keyup event
+    * eventlistener that filters number input and advances between fields
     * @method
     * @see boot()
     */
@@ -437,12 +437,6 @@ class InputDuration extends HTMLElement {
                     this.oldValue = this.value;
                 } else {
                     this.value = this.oldValue;
-                }
-            });
-
-            inputElement.addEventListener('keyup', function (event) {
-                if (/^[0-9]$/.test(event.key)) {
-                    inputFilter(this.value);
                 }
             });
         }
