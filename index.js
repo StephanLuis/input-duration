@@ -279,8 +279,8 @@ class InputDuration extends HTMLElement {
                 }
 
                 .timeCase:focus-within {
-                    border-color: #176b4a;
-                    outline: 3px solid #176b4a;
+                    border-color: #2196f3;
+                    outline: 3px solid #2196f3;
                     outline-offset: 2px;
                 }
 
