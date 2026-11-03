@@ -91,7 +91,7 @@ The goal is a small JavaScript duration input that gives countdowns and elapsed-
 
 The desktop comparisons show how a native time input represents a time of day, while `input-duration` displays an elapsed duration in a fixed format.
 
-<p><strong style="color: #b42318;">Bad!</strong> labels the native time input on the left; `input-duration` is shown on the right.</p>
+<p> 💔 the native time input on the left; 🏁 `input-duration` is shown on the right.</p>
 
 <h4>Chrome</h4>
 <img src="readme/rendering/chromeBoth.png" alt="Chrome comparison of a native time input and input-duration" width="100%"/>
@@ -105,8 +105,8 @@ The mobile screenshots show the native time picker alongside `input-duration` on
   <thead>
     <tr>
       <th>Device</th>
-      <th>Native time input<br/><strong style="color: #b42318;">Bad!</strong></th>
-      <th>input-duration</th>
+      <th> 💔 Native time input<br/></th>
+      <th> 🏁 input-duration</th>
     </tr>
   </thead>
   <tbody>
