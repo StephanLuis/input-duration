@@ -57,6 +57,17 @@ test('initial value attributes populate the controls', () => {
     assert.equal(element.value, '99:59:59.999');
 });
 
+test('exposes styling parts for the control and its fields', () => {
+    const element = createInputDuration();
+    const shadow = element.shadowRoot;
+
+    assert.equal(shadow.querySelector('[part~="control"]') !== null, true);
+    assert.equal(shadow.querySelectorAll('[part~="field"]').length, 4);
+    assert.equal(shadow.querySelectorAll('[part~="divider"]').length, 3);
+    assert.equal(shadow.querySelector('[part~="icon"]') !== null, true);
+    assert.match(shadow.querySelector('style').textContent, /--input-duration-border-color:\s*#9aa6b2/);
+});
+
 test('invalid pasted values are rejected and do not alter the duration', () => {
     const element = createInputDuration();
     const cases = [

@@ -62,6 +62,8 @@ The control's styles are scoped inside its Shadow DOM, so global styles and rese
     <div align="center">
   <a href="https://stephanluis.github.io/input-duration/" target="_blank">Demo</a>
 ·
+  <a href="https://stephanluis.github.io/input-duration/bootstrap.html" target="_blank">Bootstrap Demo</a>
+·
       <a href="https://codesandbox.io/s/peaceful-waterfall-6mxpg2?file=/index.html" target="_blank">
   Fiddle
 </a> ·
@@ -150,6 +152,8 @@ Here's why:
     </li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#related-duration-controls">Related duration controls</a></li>
+    <li><a href="#future-partners">Future partners</a></li>
      <li><a href="#cross-browser-testing">Cross-browser testing</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
@@ -258,6 +262,35 @@ document.querySelector('#bob').value = '44:04:04.444'
 
 ``` 
 
+### Bootstrap styling
+
+The component keeps its Shadow DOM, so Bootstrap's CSS selectors do not directly style its internal fields. Instead, map Bootstrap theme variables to the component's CSS custom properties. This is additive: without overrides, the component retains its default appearance.
+
+```css
+input-duration {
+  --input-duration-border-color: var(--bs-border-color);
+  --input-duration-border-radius: var(--bs-border-radius);
+  --input-duration-background: var(--bs-body-bg);
+  --input-duration-color: var(--bs-body-color);
+  --input-duration-focus-color: var(--bs-primary);
+  --input-duration-focus-outline: 0.25rem solid rgba(var(--bs-primary-rgb), 0.25);
+}
+```
+
+The internal control and its fields, dividers, and icon are also exposed as Shadow Parts for targeted styling:
+
+```css
+input-duration::part(control) {
+  padding: 0.375rem 0.75rem;
+}
+
+input-duration::part(field) {
+  font-size: 1rem;
+}
+```
+
+Available parts are `control`, `field` (also `field-hours`, `field-minutes`, `field-seconds`, and `field-milliseconds`), `divider` (also `divider-hours-minutes`, `divider-minutes-seconds`, and `divider-seconds-milliseconds`), and `icon`. Supported CSS custom properties are `--input-duration-gap`, `--input-duration-padding`, `--input-duration-border-color`, `--input-duration-border-radius`, `--input-duration-background`, `--input-duration-color`, `--input-duration-focus-color`, `--input-duration-focus-outline`, `--input-duration-focus-outline-offset`, `--input-duration-divider-color`, `--input-duration-divider-opacity`, `--input-duration-disabled-color`, and `--input-duration-icon-color`.
+
 and
 
 ```sh
@@ -279,15 +312,52 @@ _For more documentation, please refer to the jscocs on  [input-duration Docs](ht
 - [x] Emperically determine <input type="time"> behaviour of Input (time) on Chrome
 - [x] Reverse engineer input behaviour (arrows, digits, 0 addition, etc.)
 - [x] Cross browser/ cross os manual tests  
-- [ ] Get Chrome behavioural specification for <input type="time">
 - [ ] Add end to end multi-browser, multi-os Selinium tests
-- [ ] Update demo page (either PM.com or JSfiddle type)
+- [X] Update demo page (either PM.com or JSfiddle type)
 - [ ] Multi-language documentation (Google translate of this page?)
     - [ ] Chinese
     - [ ] Spanish
-- [ ] min and max values (sorry for the moment you'll have to do those yourself in js)
+
+### 2026
+
+- [ ] Document and verify a versioned Chrome `<input type="time">` behavior profile: compare the [WHATWG standard](https://html.spec.whatwg.org/multipage/input.html#time-state-(type=time)) with [Blink's implementation](https://chromium.googlesource.com/chromium/src/+/main/third_party/blink/renderer/core/html/forms/time_input_type.cc) and [time-input tests](https://chromium.googlesource.com/chromium/src/+/main/third_party/blink/web_tests/fast/forms/time/) (including [multiple-field UI tests](https://chromium.googlesource.com/chromium/src/+/main/third_party/blink/web_tests/fast/forms/time-multiple-fields/)). Record Chrome version, OS, and locale; verify relevant keyboard and segment-editing behavior, then adapt `input-duration` where appropriate without assuming platform-specific time-picker UI is universal.
+- [ ] Add configurable duration segments and presentation, including optional days, hiding units, and custom dividers. Keep `HH:mm:ss.SSS` as the default. ([html-duration-picker.js](https://nadchif.github.io/html-duration-picker.js/), [input-duration-element](https://muan.github.io/input-duration-element/))
+- [ ] Support declarative minimum and maximum values with consistent validation and boundary behavior. ([html-duration-picker.js](https://nadchif.github.io/html-duration-picker.js/))
+- [ ] Improve accessibility with per-segment labels, group semantics, and documented screen-reader and keyboard behavior. ([time-input-polyfill](https://github.com/Dan503/time-input-polyfill/) demonstrates accessible time-field interactions.)
+- [ ] Participate in native HTML forms, including named submission, required/validity, disabled state, and form reset/restore behavior. ([duration-input example](https://gist.github.com/Wigny/97cc83ea5179e7b8ab5a044fb14deb9a))
+- [ ] Offer optional ISO 8601 duration serialization and `Temporal.Duration` interoperability without breaking the existing `HH:mm:ss.SSS` value format. ([WHATWG discussion](https://github.com/whatwg/html/issues/5488#issuecomment-3961032394), [duration-input example](https://gist.github.com/Wigny/97cc83ea5179e7b8ab5a044fb14deb9a))
 
 See the [open issues](https://github.com/StephanLuis/input-duration/issues) for a full list of proposed features (and known issues).
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+<!-- RELATED DURATION CONTROLS -->
+## Related duration controls
+
+This comparison summarizes capabilities described in each project's documentation; a dash means the feature is not documented, not necessarily unsupported. "Estimated users" is approximated by npm package downloads from 2026-10-28 through 2026-11-03, not unique people; downloads can include CI, repeated installs, and automated systems, and omit CDN or other use. The Wigny entry is a gist example rather than a maintained library, so no npm download figure is available.
+
+| Control | Display / units | Value representation | Bounds | Precision / interaction | Estimated users* |
+|---|---|---|---|---|---:|
+| [input-duration](https://github.com/StephanLuis/input-duration) | Fixed `HH:mm:ss.SSS` (00–99 hours); `noHours()` can hide hours | `HH:mm:ss.SSS` string via `.value` | No public min/max options documented | Milliseconds; digit entry, arrow navigation and increment | [~748](https://api.npmjs.org/downloads/point/last-week/input-duration) |
+| [timepoint-selection](https://github.com/naomiaro/timepoint-selection) | Selectable `dd:hh:mm:ss`, `dd:hh:mm`, `hh:mm:ss`, `hh:mm`, or `mm:ss`; custom unit labels | Numeric seconds through `getValue()` / `setValue()` | Configurable maximum / rollover | Seconds; keyboard navigation, arrow increments, rollover | [~22](https://api.npmjs.org/downloads/point/last-week/timepoint-selection) |
+| [html-duration-picker.js](https://github.com/nadchif/html-duration-picker.js) | `HH:MM:SS`; optional hidden seconds | Formatted text in an enhanced native `<input>` | Configurable minimum and maximum durations | Seconds in documented formats; interaction details not specified | [~905](https://api.npmjs.org/downloads/point/last-week/html-duration-picker) |
+| [muan/input-duration-element](https://github.com/muan/input-duration-element) | Hours, minutes, seconds; customizable dividers/slots | Numeric seconds; `value` and `change` event | `max` documented; `min` and validation listed as TODOs | Demo covers durations up to 180 seconds; precision beyond seconds not specified | [~9](https://api.npmjs.org/downloads/point/last-week/input-duration-element) |
+| [segmented-input](https://github.com/jimmywarting/segmented-input) | Duration preset or custom parsing/formatting and segments | Formatted string in an enhanced native `<input>` | Per-segment `min`, `max`, and `step`; custom validity | Duration preset shown to seconds; arrow-key segment navigation and adjustment | [~4](https://api.npmjs.org/downloads/point/last-week/segmented-input) |
+| [Wigny duration-input example](https://gist.github.com/Wigny/97cc83ea5179e7b8ab5a044fb14deb9a) | Markup-defined hour, minute, and second segments | ISO 8601 duration string; form-associated custom element | No public min/max API documented | Fractional seconds; keyboard segment navigation and adjustment | N/A (gist) |
+
+These projects illustrate possible directions—such as optional units, configurable formatting, bounds, alternate value formats, and native form participation—without implying that every feature is a fit for `input-duration`.
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+<!-- FUTURE PARTNERS -->
+## Future partners
+
+Potential integration targets only; these projects are not affiliated with or endorsing `input-duration`.
+
+- [React Hook Form](https://react-hook-form.com/docs/usecontroller/controller) — provide a tested `Controller` adapter/example that synchronizes the custom element's value, events, ref, and validation.
+- [Formik](https://formik.org/docs/api/field) — add a custom `Field` example to connect duration values to Formik-managed forms.
+- [Angular Reactive Forms](https://angular.dev/api/forms/ControlValueAccessor) — provide a `ControlValueAccessor` adapter for model-to-view updates, user changes, touched state, and disabled state.
+- [Shoelace](https://shoelace.style/) — document how to use the framework-agnostic duration element alongside Shoelace form controls in a consistent design system.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 

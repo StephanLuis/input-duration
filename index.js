@@ -237,18 +237,19 @@ class InputDuration extends HTMLElement {
         var spanIn = document.createElement("div");
 
         spanIn.classList.add('timeCase');
+        spanIn.setAttribute('part', 'control');
 
         var template = document.createElement('template');
 
         template.innerHTML = `
-          <input type="number" class="sH D2 ts_digit" name="startHours" data-tp="1" min="-1" max="100" value="00" >
-          <span class="bds-h">:</span>
-          <input type="number" class="sM D2 ts_digit" name="startMinutes" data-tp="2" min="-1" max="60" value="00">
-          <span class="bds-m">:</span>
-          <input type="number" class="sS D2 ts_digit" name="startSeconds" data-tp="3" min="-1" max="60" value="00">
-          <span class="bds-s">.</span>
-          <input type="number" class="sMS D3 ts_digit" name="startMilliSecs" data-tp="4" min="-10" max="1010" step="10" value="000">
-          <div id="svgContainer">
+          <input type="number" class="sH D2 ts_digit" part="field field-hours" name="startHours" data-tp="1" min="-1" max="100" value="00" >
+          <span class="bds-h" part="divider divider-hours-minutes">:</span>
+          <input type="number" class="sM D2 ts_digit" part="field field-minutes" name="startMinutes" data-tp="2" min="-1" max="60" value="00">
+          <span class="bds-m" part="divider divider-minutes-seconds">:</span>
+          <input type="number" class="sS D2 ts_digit" part="field field-seconds" name="startSeconds" data-tp="3" min="-1" max="60" value="00">
+          <span class="bds-s" part="divider divider-seconds-milliseconds">.</span>
+          <input type="number" class="sMS D3 ts_digit" part="field field-milliseconds" name="startMilliSecs" data-tp="4" min="-10" max="1010" step="10" value="000">
+          <div id="svgContainer" part="icon">
               <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
               focusable="false" data-prefix="fal" data-icon="stopwatch" class="svg-inline--fa fa-stopwatch fa-w-14"
               role="img" viewBox="0 0 448 512">
@@ -261,27 +262,41 @@ class InputDuration extends HTMLElement {
                     color: inherit;
                     font: inherit;
                     vertical-align: middle;
+                    --input-duration-gap: 0.08em;
+                    --input-duration-padding: 0.4em 0.55em;
+                    --input-duration-border-color: #9aa6b2;
+                    --input-duration-border-radius: 0.4em;
+                    --input-duration-background: transparent;
+                    --input-duration-color: inherit;
+                    --input-duration-focus-color: #2196f3;
+                    --input-duration-focus-outline: 3px solid #2196f3;
+                    --input-duration-focus-outline-offset: 2px;
+                    --input-duration-divider-color: currentColor;
+                    --input-duration-divider-opacity: 0.7;
+                    --input-duration-disabled-color: GrayText;
+                    --input-duration-icon-color: inherit;
                 }
 
-                .timeCase {
+                .timeCase,
+                .timeCase[part~="control"] {
                     display: inline-flex;
                     align-items: center;
-                    gap: 0.08em;
+                    gap: var(--input-duration-gap);
                     max-width: 100%;
-                    padding: 0.4em 0.55em;
-                    border: 1px solid #9aa6b2;
-                    border-radius: 0.4em;
-                    background: transparent;
-                    color: inherit;
+                    padding: var(--input-duration-padding);
+                    border: 1px solid var(--input-duration-border-color);
+                    border-radius: var(--input-duration-border-radius);
+                    background: var(--input-duration-background);
+                    color: var(--input-duration-color);
                     font-variant-numeric: tabular-nums;
                     line-height: 1.4;
                     white-space: nowrap;
                 }
 
                 .timeCase:focus-within {
-                    border-color: #2196f3;
-                    outline: 3px solid #2196f3;
-                    outline-offset: 2px;
+                    border-color: var(--input-duration-focus-color);
+                    outline: var(--input-duration-focus-outline);
+                    outline-offset: var(--input-duration-focus-outline-offset);
                 }
 
                 .timeCase input {
@@ -313,8 +328,8 @@ class InputDuration extends HTMLElement {
                 }
 
                 .timeCase span {
-                    color: currentColor;
-                    opacity: 0.7;
+                    color: var(--input-duration-divider-color);
+                    opacity: var(--input-duration-divider-opacity);
                 }
 
                 #svgContainer {
@@ -325,7 +340,7 @@ class InputDuration extends HTMLElement {
                     align-items: center;
                     justify-content: center;
                     margin-left: 0.2em;
-                    color: inherit;
+                    color: var(--input-duration-icon-color);
                 }
 
                 #svgContainer svg {
@@ -336,7 +351,7 @@ class InputDuration extends HTMLElement {
 
                 .timeCase input:disabled {
                     background: transparent;
-                    color: GrayText;
+                    color: var(--input-duration-disabled-color);
                     cursor: not-allowed;
                     opacity: 0.65;
                 }
