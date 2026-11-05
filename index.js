@@ -17,6 +17,16 @@
 
 /**
  * Class for the Input-Duration webcomponent
+ *
+ * Boolean attributes `no-hours`, `no-minutes`, `no-seconds`, and
+ * `no-microseconds` hide their respective fields. String attributes
+ * `hours-divider`, `minutes-divider`, `seconds-divider`, and
+ * `microseconds-divider` customize the separators; the last adds a suffix
+ * after milliseconds. Divider values are rendered as text.
+ *
+ * @example
+ * <input-duration no-microseconds hours-divider="h " microseconds-divider="ms"></input-duration>
+ *
  * @class InputDuration
  * @extends HTMLElement
  */
@@ -647,66 +657,162 @@ class InputDuration extends HTMLElement {
     }
 
 
+    /**
+     * Hides the hours field and its adjacent divider.
+     * Sets the `no-hours` attribute.
+     *
+     * @returns {void}
+     */
     hideHours() {
         this.setAttribute('no-hours', '');
     }
 
+    /**
+     * Shows the hours field and its adjacent divider.
+     * Removes the `no-hours` attribute.
+     *
+     * @returns {void}
+     */
     showHours() {
         this.removeAttribute('no-hours');
     }
 
+    /**
+     * Backward-compatible alias for {@link InputDuration#hideHours}.
+     *
+     * @returns {void}
+     */
     noHours() {
         this.hideHours();
     }
 
+    /**
+     * Hides the minutes field and its adjacent divider.
+     * Sets the `no-minutes` attribute.
+     *
+     * @returns {void}
+     */
     hideMinutes() {
         this.setAttribute('no-minutes', '');
     }
 
+    /**
+     * Shows the minutes field and its adjacent divider.
+     * Removes the `no-minutes` attribute.
+     *
+     * @returns {void}
+     */
     showMinutes() {
         this.removeAttribute('no-minutes');
     }
 
+    /**
+     * Backward-compatible alias for {@link InputDuration#hideMinutes}.
+     *
+     * @returns {void}
+     */
     noMinutes() {
         this.hideMinutes();
     }
 
+    /**
+     * Hides the seconds field and its adjacent divider.
+     * Sets the `no-seconds` attribute.
+     *
+     * @returns {void}
+     */
     hideSeconds() {
         this.setAttribute('no-seconds', '');
     }
 
+    /**
+     * Shows the seconds field and its adjacent divider.
+     * Removes the `no-seconds` attribute.
+     *
+     * @returns {void}
+     */
     showSeconds() {
         this.removeAttribute('no-seconds');
     }
 
+    /**
+     * Backward-compatible alias for {@link InputDuration#hideSeconds}.
+     *
+     * @returns {void}
+     */
     noSeconds() {
         this.hideSeconds();
     }
 
+    /**
+     * Hides the milliseconds field and its adjacent divider or suffix.
+     * Sets the `no-microseconds` attribute.
+     *
+     * @returns {void}
+     */
     hideMicroSeconds() {
         this.setAttribute('no-microseconds', '');
     }
 
+    /**
+     * Shows the milliseconds field and its adjacent divider or suffix.
+     * Removes the `no-microseconds` attribute.
+     *
+     * @returns {void}
+     */
     showMicroSeconds() {
         this.removeAttribute('no-microseconds');
     }
 
+    /**
+     * Backward-compatible alias for {@link InputDuration#hideMicroSeconds}.
+     *
+     * @returns {void}
+     */
     noMicroSeconds() {
         this.hideMicroSeconds();
     }
 
+    /**
+     * Replaces the hours/minutes separator.
+     * Also available through the `hours-divider` attribute.
+     *
+     * @param {string} text - Divider text to display.
+     * @returns {void}
+     */
     setHoursDivider(text) {
         this.setAttribute('hours-divider', text);
     }
 
+    /**
+     * Replaces the minutes/seconds separator.
+     * Also available through the `minutes-divider` attribute.
+     *
+     * @param {string} text - Divider text to display.
+     * @returns {void}
+     */
     setMinutesDivider(text) {
         this.setAttribute('minutes-divider', text);
     }
 
+    /**
+     * Replaces the seconds/milliseconds separator.
+     * Also available through the `seconds-divider` attribute.
+     *
+     * @param {string} text - Divider text to display.
+     * @returns {void}
+     */
     setSecondsDivider(text) {
         this.setAttribute('seconds-divider', text);
     }
 
+    /**
+     * Sets a suffix to display after milliseconds.
+     * Also available through the `microseconds-divider` attribute.
+     *
+     * @param {string} text - Suffix text to display.
+     * @returns {void}
+     */
     setMicroSecondsDivider(text) {
         this.setAttribute('microseconds-divider', text);
     }

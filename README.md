@@ -69,7 +69,7 @@ The control's styles are scoped inside its Shadow DOM, so global styles and rese
 </a> ·
       <a href="https://6mxpg2.csb.app/" target="_blank">Fiddle's Output</a>
     ·
-  <a href="https://stephanluis.github.io/input-duration/" target="_blank">Docs</a>
+  <a href="https://stephanluis.github.io/input-duration/InputDuration.html" target="_blank">API Docs</a>
   ·
     <a href="https://github.com/StephanLuis/input-duration/issues">Bugs</a>
     ·
@@ -316,7 +316,7 @@ document.querySelector('#bob').disable()
 ```
 so the inputs are modified.
 
-_For more documentation, please refer to the jscocs on  [input-duration Docs](https://stephanluis.github.io/input-duration/)_
+For the generated JSDoc API reference, see the [input-duration API documentation](https://stephanluis.github.io/input-duration/InputDuration.html).
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
