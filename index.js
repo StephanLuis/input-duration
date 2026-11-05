@@ -23,7 +23,17 @@
 
 class InputDuration extends HTMLElement {
     static get observedAttributes() {
-        return ['value'];
+        return [
+            'value',
+            'no-hours',
+            'no-minutes',
+            'no-seconds',
+            'no-microseconds',
+            'hours-divider',
+            'minutes-divider',
+            'seconds-divider',
+            'microseconds-divider'
+        ];
     }
 
     constructor() {
@@ -38,7 +48,13 @@ class InputDuration extends HTMLElement {
 
     attributeChangedCallback(name, oldValue, newValue) {
 
-        if (name !== 'value' || oldValue === newValue) {
+        if (oldValue === newValue) {
+            return;
+        }
+
+        if (name !== 'value') {
+            this.updateVisibleFields();
+            this.updateDividers();
             return;
         }
 
@@ -249,6 +265,7 @@ class InputDuration extends HTMLElement {
           <input type="number" class="sS D2 ts_digit" part="field field-seconds" name="startSeconds" data-tp="3" min="-1" max="60" value="00">
           <span class="bds-s" part="divider divider-seconds-milliseconds">.</span>
           <input type="number" class="sMS D3 ts_digit" part="field field-milliseconds" name="startMilliSecs" data-tp="4" min="-10" max="1010" step="10" value="000">
+          <span class="bds-ms" part="divider divider-milliseconds-suffix" style="display: none"></span>
           <div id="svgContainer" part="icon">
               <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
               focusable="false" data-prefix="fal" data-icon="stopwatch" class="svg-inline--fa fa-stopwatch fa-w-14"
@@ -630,24 +647,112 @@ class InputDuration extends HTMLElement {
     }
 
 
-    /**
-     * removes the hours, so the display is mm:ss.uuu
-     * @method
-     */
+    hideHours() {
+        this.setAttribute('no-hours', '');
+    }
+
+    showHours() {
+        this.removeAttribute('no-hours');
+    }
 
     noHours() {
+        this.hideHours();
+    }
 
-        var closure = this;
+    hideMinutes() {
+        this.setAttribute('no-minutes', '');
+    }
 
-        // hide chronly hours inputs on page
+    showMinutes() {
+        this.removeAttribute('no-minutes');
+    }
 
-        closure.shadowRoot.querySelectorAll(".timeCase input.sH").forEach(el => el.style.display = 'none');
+    noMinutes() {
+        this.hideMinutes();
+    }
 
+    hideSeconds() {
+        this.setAttribute('no-seconds', '');
+    }
 
-        // hide the hours colon on page
+    showSeconds() {
+        this.removeAttribute('no-seconds');
+    }
 
-        closure.shadowRoot.querySelectorAll(".timeCase span.bds-h").forEach(el => el.style.display = 'none');
+    noSeconds() {
+        this.hideSeconds();
+    }
 
+    hideMicroSeconds() {
+        this.setAttribute('no-microseconds', '');
+    }
+
+    showMicroSeconds() {
+        this.removeAttribute('no-microseconds');
+    }
+
+    noMicroSeconds() {
+        this.hideMicroSeconds();
+    }
+
+    setHoursDivider(text) {
+        this.setAttribute('hours-divider', text);
+    }
+
+    setMinutesDivider(text) {
+        this.setAttribute('minutes-divider', text);
+    }
+
+    setSecondsDivider(text) {
+        this.setAttribute('seconds-divider', text);
+    }
+
+    setMicroSecondsDivider(text) {
+        this.setAttribute('microseconds-divider', text);
+    }
+
+    updateVisibleFields() {
+        const hiddenFields = {
+            'no-hours': '.sH',
+            'no-minutes': '.sM',
+            'no-seconds': '.sS',
+            'no-microseconds': '.sMS'
+        };
+        const hiddenDividers = {
+            '.bds-h': ['no-hours', 'no-minutes'],
+            '.bds-m': ['no-seconds'],
+            '.bds-s': ['no-microseconds'],
+            '.bds-ms': ['no-microseconds']
+        };
+
+        for (const [attribute, selector] of Object.entries(hiddenFields)) {
+            const field = this.myElement.querySelector(selector);
+            field.style.display = this.hasAttribute(attribute) ? 'none' : '';
+        }
+
+        for (const [selector, attributes] of Object.entries(hiddenDividers)) {
+            const divider = this.myElement.querySelector(selector);
+            const shouldHide = attributes.some(attribute => this.hasAttribute(attribute));
+            divider.style.display = shouldHide ? 'none' : '';
+        }
+    }
+
+    updateDividers() {
+        const dividers = {
+            'hours-divider': ['.bds-h', ':'],
+            'minutes-divider': ['.bds-m', ':'],
+            'seconds-divider': ['.bds-s', '.'],
+            'microseconds-divider': ['.bds-ms', '']
+        };
+
+        for (const [attribute, [selector, defaultText]] of Object.entries(dividers)) {
+            const divider = this.myElement.querySelector(selector);
+            const text = this.getAttribute(attribute) ?? defaultText;
+            divider.textContent = text;
+            if (selector === '.bds-ms') {
+                divider.style.display = text && !this.hasAttribute('no-microseconds') ? '' : 'none';
+            }
+        }
     }
 } 
 // end class

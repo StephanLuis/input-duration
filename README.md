@@ -254,6 +254,22 @@ input-duration requires a `<input-duration>` element .  There's no more HTML tha
 
 ```
 
+Individual duration fields can be hidden with boolean attributes:
+
+```html
+<input-duration no-hours no-minutes no-seconds no-microseconds></input-duration>
+```
+
+Use `hideHours()`, `hideMinutes()`, `hideSeconds()`, and `hideMicroSeconds()` to hide fields, and the corresponding `show*()` methods to show them again. The existing `noHours()`, `noMinutes()`, `noSeconds()`, and `noMicroSeconds()` methods remain available as aliases for the `hide*()` methods. Hidden fields do not change the component's `HH:mm:ss.SSS` value format.
+
+Customize the separators with the `hours-divider`, `minutes-divider`, `seconds-divider`, and `microseconds-divider` attributes. The first three replace the separators between fields; `microseconds-divider` adds an optional suffix after milliseconds. For example:
+
+```html
+<input-duration hours-divider="h " minutes-divider="m " seconds-divider="s " microseconds-divider="ms"></input-duration>
+```
+
+The equivalent methods are `setHoursDivider(text)`, `setMinutesDivider(text)`, `setSecondsDivider(text)`, and `setMicroSecondsDivider(text)`. Pass text as a string; it is rendered as text, not HTML. Remove an attribute to restore its default separator (or remove the milliseconds suffix).
+
 If you would like to get or set values or to disable input-duration elemet, javascipt can do that: 
 
 ```sh

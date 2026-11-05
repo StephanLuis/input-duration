@@ -57,13 +57,119 @@ test('initial value attributes populate the controls', () => {
     assert.equal(element.value, '99:59:59.999');
 });
 
+test('unit attributes hide their fields and dividers and can be removed', () => {
+    const container = document.createElement('div');
+    container.innerHTML = '<input-duration value="12:34:56.789" no-hours no-minutes no-seconds no-microseconds></input-duration>';
+    const element = container.firstElementChild;
+    const shadow = element.shadowRoot;
+
+    assert.equal(element.value, '12:34:56.789');
+
+    for (const selector of ['.sH', '.sM', '.sS', '.sMS', '.bds-h', '.bds-m', '.bds-s']) {
+        assert.equal(shadow.querySelector(selector).style.display, 'none');
+    }
+
+    element.removeAttribute('no-hours');
+    assert.equal(shadow.querySelector('.sH').style.display, '');
+    assert.equal(shadow.querySelector('.bds-h').style.display, 'none');
+
+    element.removeAttribute('no-minutes');
+    assert.equal(shadow.querySelector('.sM').style.display, '');
+    assert.equal(shadow.querySelector('.bds-h').style.display, '');
+
+    element.removeAttribute('no-seconds');
+    element.removeAttribute('no-microseconds');
+    assert.equal(shadow.querySelector('.sS').style.display, '');
+    assert.equal(shadow.querySelector('.sMS').style.display, '');
+    assert.equal(shadow.querySelector('.bds-m').style.display, '');
+    assert.equal(shadow.querySelector('.bds-s').style.display, '');
+});
+
+test('unit hide and show methods toggle their attributes', () => {
+    const element = createInputDuration();
+    const units = [
+        ['no-hours', '.sH', () => element.hideHours(), () => element.showHours()],
+        ['no-minutes', '.sM', () => element.hideMinutes(), () => element.showMinutes()],
+        ['no-seconds', '.sS', () => element.hideSeconds(), () => element.showSeconds()],
+        ['no-microseconds', '.sMS', () => element.hideMicroSeconds(), () => element.showMicroSeconds()]
+    ];
+
+    for (const [attribute, fieldSelector, hide, show] of units) {
+        hide();
+        assert.equal(element.hasAttribute(attribute), true);
+        assert.equal(element.shadowRoot.querySelector(fieldSelector).style.display, 'none');
+
+        show();
+        assert.equal(element.hasAttribute(attribute), false);
+        assert.equal(element.shadowRoot.querySelector(fieldSelector).style.display, '');
+    }
+
+    element.hideHours();
+    element.hideMinutes();
+    element.showHours();
+    assert.equal(element.shadowRoot.querySelector('.bds-h').style.display, 'none');
+    element.showMinutes();
+    assert.equal(element.shadowRoot.querySelector('.bds-h').style.display, '');
+});
+
+test('no* methods remain aliases for hiding their corresponding units', () => {
+    const element = createInputDuration();
+
+    element.noHours();
+    element.noMinutes();
+    element.noSeconds();
+    element.noMicroSeconds();
+
+    for (const attribute of ['no-hours', 'no-minutes', 'no-seconds', 'no-microseconds']) {
+        assert.equal(element.hasAttribute(attribute), true);
+    }
+});
+
+test('divider attributes customize separators and add an optional milliseconds suffix', () => {
+    const container = document.createElement('div');
+    container.innerHTML = '<input-duration hours-divider="h" minutes-divider="m" seconds-divider="s" microseconds-divider="ms"></input-duration>';
+    const element = container.firstElementChild;
+    const shadow = element.shadowRoot;
+
+    assert.deepEqual(
+        [...shadow.querySelectorAll('[part~="divider"]')].map(divider => divider.textContent),
+        ['h', 'm', 's', 'ms']
+    );
+    assert.equal(shadow.querySelector('.bds-ms').style.display, '');
+
+    element.setAttribute('no-microseconds', '');
+    assert.equal(shadow.querySelector('.bds-ms').style.display, 'none');
+    element.removeAttribute('no-microseconds');
+    assert.equal(shadow.querySelector('.bds-ms').style.display, '');
+
+    element.setHoursDivider(' hrs ');
+    element.setMinutesDivider(' min ');
+    element.setSecondsDivider(' sec ');
+    element.setMicroSecondsDivider(' ms');
+
+    assert.deepEqual(
+        [...shadow.querySelectorAll('[part~="divider"]')].map(divider => divider.textContent),
+        [' hrs ', ' min ', ' sec ', ' ms']
+    );
+
+    for (const attribute of ['hours-divider', 'minutes-divider', 'seconds-divider', 'microseconds-divider']) {
+        element.removeAttribute(attribute);
+    }
+
+    assert.deepEqual(
+        [...shadow.querySelectorAll('[part~="divider"]')].map(divider => divider.textContent),
+        [':', ':', '.', '']
+    );
+    assert.equal(shadow.querySelector('.bds-ms').style.display, 'none');
+});
+
 test('exposes styling parts for the control and its fields', () => {
     const element = createInputDuration();
     const shadow = element.shadowRoot;
 
     assert.equal(shadow.querySelector('[part~="control"]') !== null, true);
     assert.equal(shadow.querySelectorAll('[part~="field"]').length, 4);
-    assert.equal(shadow.querySelectorAll('[part~="divider"]').length, 3);
+    assert.equal(shadow.querySelectorAll('[part~="divider"]').length, 4);
     assert.equal(shadow.querySelector('[part~="icon"]') !== null, true);
     assert.match(shadow.querySelector('style').textContent, /--input-duration-border-color:\s*#9aa6b2/);
 });

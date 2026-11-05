@@ -1,26 +1,136 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light">
+    <title>Focus session duration — jsDelivr</title>
+    <style>
+        :root {
+            color-scheme: light;
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            color: #172b45;
+            background: #eef6ff;
+            font-synthesis: none;
+            text-rendering: optimizeLegibility;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            display: grid;
+            min-width: 320px;
+            min-height: 100vh;
+            margin: 0;
+            padding: 24px;
+            place-items: center;
+        }
+
+        main {
+            width: min(100%, 560px);
+            padding: 32px;
+            border: 1px solid #d2e2f2;
+            border-radius: 18px;
+            background: #fff;
+            box-shadow: 0 12px 32px rgb(35 79 125 / 9%);
+        }
+
+        .eyebrow {
+            margin: 0 0 8px;
+            color: #2563a6;
+            font-size: .78rem;
+            font-weight: 750;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: clamp(1.6rem, 5vw, 2rem);
+            letter-spacing: -.04em;
+        }
+
+        .description {
+            margin: 10px 0 24px;
+            color: #536b84;
+            line-height: 1.55;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 650;
+        }
+
+        input-duration {
+            display: block;
+            max-width: 100%;
+            font-size: 1.2rem;
+            --input-duration-border-color: #b8cde2;
+            --input-duration-border-radius: 10px;
+            --input-duration-background: #fff;
+            --input-duration-focus-color: #2563a6;
+            --input-duration-focus-outline: 3px solid rgb(37 99 166 / 25%);
+            --input-duration-focus-outline-offset: 2px;
+        }
+
+        input-duration::part(control) {
+            width: fit-content;
+            max-width: 100%;
+        }
+
+        .help {
+            margin: 12px 0 0;
+            color: #536b84;
+            font-size: .9rem;
+            line-height: 1.5;
+        }
+
+        output {
+            display: block;
+            min-height: 1.5em;
+            margin-top: 20px;
+            color: #2563a6;
+            font-weight: 650;
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 16px;
+            }
+
+            main {
+                padding: 24px 20px;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <input-duration id="bob"></input-duration>
-    <input-duration id="bobPrepop" value="99:09:09.999"></input-duration>
-    <input-duration id="Jane"></input-duration>
-    <input type="date" id="BobsDate"></input>
-    <p id="what">This is for testing HTMLelement prototype update</p>
-    
+    <main>
+        <p class="eyebrow">Focus timer · jsDelivr build</p>
+        <h1>Set your session length</h1>
+        <p class="description">Choose how long you want to focus. You can adjust the duration before starting the timer.</p>
+
+        <label id="duration-label">Session duration</label>
+        <input-duration id="duration" aria-labelledby="duration-label" value="00:25:00.000" no-microseconds></input-duration>
+        <p class="help">Enter hours, minutes, and seconds. Milliseconds are hidden for this timer.</p>
+        <output id="duration-value" aria-live="polite">Ready for a 25-minute focus session.</output>
+    </main>
+
     <script type="module">
-        import chronlyhms from 'https://cdn.jsdelivr.net/npm/input-duration/+esm'
-        
-        </script>
-        
-        
+        import 'https://cdn.jsdelivr.net/npm/input-duration/+esm';
+
+        const duration = document.querySelector('#duration');
+        const output = document.querySelector('#duration-value');
+
+        duration.addEventListener('input', () => {
+            output.textContent = `Selected duration: ${duration.value}`;
+        });
+    </script>
 </body>
 
 </html>
