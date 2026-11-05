@@ -32,6 +32,12 @@
  */
 
 class InputDuration extends HTMLElement {
+    /**
+     * HTML attributes that update the component when changed.
+     *
+     * @static
+     * @returns {string[]} Observed value, visibility, and divider attributes.
+     */
     static get observedAttributes() {
         return [
             'value',
@@ -50,12 +56,24 @@ class InputDuration extends HTMLElement {
 
         super();
 
+        /**
+         * Shadow root containing this component's controls.
+         * @type {ShadowRoot}
+         */
         this.myElement = this.attachShadow({ mode: 'open' });
 
         this.boot();
 
     }  // end constructor
 
+    /**
+     * Updates the rendered control when an observed attribute changes.
+     *
+     * @param {string} name - Changed attribute name.
+     * @param {?string} oldValue - Previous attribute value.
+     * @param {?string} newValue - New attribute value, or null when removed.
+     * @returns {void}
+     */
     attributeChangedCallback(name, oldValue, newValue) {
 
         if (oldValue === newValue) {
@@ -81,7 +99,7 @@ class InputDuration extends HTMLElement {
     /**
      * get the input-duration value, pulls values from each input
      * so in js use var x = document.querySelector("#bobPrepop").value; 
-     * @return {duration}
+     * @returns {?string} Duration in `HH:mm:ss.SSS` format, or null before initialization.
      */
 
     get value() {
@@ -105,10 +123,10 @@ class InputDuration extends HTMLElement {
 
 
     /**
-    * set the input-duration value
-    * so in js use document.querySelector("#bobPrepop").value = "05:05:05.005"
-    * @return {duration}
-    * @param {duration} can be html attribute or set in js
+    * Sets the duration using the fixed `HH:mm:ss.SSS` format.
+    *
+    * @param {string} val - Duration string, such as `05:05:05.005`.
+    * @returns {void}
     */
 
     set value(val) {
@@ -132,11 +150,23 @@ class InputDuration extends HTMLElement {
         }
     }
 
+    /**
+     * Checks whether a value follows the supported duration format and ranges.
+     *
+     * @param {*} val - Candidate value.
+     * @returns {boolean} Whether the value is valid `HH:mm:ss.SSS`.
+     */
     isValidValue(val) {
         return typeof val === 'string' &&
             /^[0-9]{2}:[0-5][0-9]:[0-5][0-9]\.[0-9]{3}$/.test(val);
     }
 
+    /**
+     * Copies a validated duration string into the four shadow inputs.
+     *
+     * @param {string} val - Valid duration in `HH:mm:ss.SSS` format.
+     * @returns {void}
+     */
     setInputValues(val) {
         const timeArray = val.split(/[.:]+/);
         const inputNames = ['startHours', 'startMinutes', 'startSeconds', 'startMilliSecs'];
@@ -148,6 +178,11 @@ class InputDuration extends HTMLElement {
         });
     }
 
+    /**
+     * Resets all duration fields to zero.
+     *
+     * @returns {void}
+     */
     resetInputs() {
         const defaults = ['00', '00', '00', '000'];
         const inputs = this.myElement.querySelectorAll('.timeCase input');
@@ -158,6 +193,12 @@ class InputDuration extends HTMLElement {
         });
     }
 
+    /**
+     * Reports a value that does not match the supported duration format.
+     *
+     * @param {*} val - Rejected value.
+     * @returns {void}
+     */
     warnInvalidValue(val) {
         console.warn(`The specified value ${val} does not conform to the required format.  The format is "HH:mm:ss.SSS" where HH is 00-99, mm is 00-59, ss is 00-59, and SSS is 000-999.`);
     }
@@ -817,6 +858,11 @@ class InputDuration extends HTMLElement {
         this.setAttribute('microseconds-divider', text);
     }
 
+    /**
+     * Synchronizes field and divider visibility with the `no-*` attributes.
+     *
+     * @returns {void}
+     */
     updateVisibleFields() {
         const hiddenFields = {
             'no-hours': '.sH',
@@ -843,6 +889,11 @@ class InputDuration extends HTMLElement {
         }
     }
 
+    /**
+     * Synchronizes divider text with the corresponding divider attributes.
+     *
+     * @returns {void}
+     */
     updateDividers() {
         const dividers = {
             'hours-divider': ['.bds-h', ':'],
