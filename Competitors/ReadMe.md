@@ -9,7 +9,7 @@
 
 Prioritize making `input-duration` straightforward to use in existing applications before pursuing inclusion in a larger component library. Its native Web Component implementation provides a framework-independent foundation.
 
-1. **Add framework integration examples.** Provide concise, copy-paste examples for React, Vue, Angular, and Svelte. Start with examples rather than separate adapter packages; add adapters only if users encounter framework-specific friction.
+1. **Framework integration examples (available).** Copy-paste examples for React, Vue, Angular, and Svelte are in the main [README](../README.md#framework-examples). Start with examples rather than separate adapter packages; add adapters only if users encounter framework-specific friction.
 2. **Support native HTML forms.** Add named form submission, required and validity behavior, disabled state, and form reset and restore behavior. See the [forms and accessibility roadmap](#forms-and-accessibility-roadmap).
 3. **Strengthen accessibility.** Document and verify labels for individual segments, group semantics, keyboard interaction, and screen-reader behavior. See the [forms and accessibility roadmap](#forms-and-accessibility-roadmap).
 4. **Improve discoverability and onboarding.** Lead the README with short install-and-use instructions for common frameworks, and review package metadata for TypeScript declarations and clear exports.

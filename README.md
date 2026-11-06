@@ -150,7 +150,12 @@ Here's why:
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
+    <li>
+      <a href="#usage">Usage</a>
+      <ul>
+        <li><a href="#framework-examples">Framework examples</a></li>
+      </ul>
+    </li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#related-duration-controls">Related duration controls</a></li>
     <li><a href="#future-partners">Future partners</a></li>
@@ -185,7 +190,7 @@ HTML's `<input type="time">` represents a time of day. Browsers may localize its
 
 
 * [Node.js](https://nodejs.org/)
-* [Gitpod](https://www.gitpod.io/)
+* [Codespaces](https://github.com/features/codespaces)
 * [Testing Powered By SauceLabs](https://saucelabs.com)
 * [Selenium](https://www.selenium.dev/)
 
@@ -317,6 +322,118 @@ document.querySelector('#bob').disable()
 so the inputs are modified.
 
 For the generated JSDoc API reference, see the [input-duration API documentation](https://stephanluis.github.io/input-duration/InputDuration.html).
+
+### Framework examples
+
+Install the package in your project:
+
+```sh
+npm install input-duration
+```
+
+Import it once in the app entry point or component file. The module registers the `<input-duration>` custom element. Each example reads its value with a framework reference when the button is clicked.
+
+#### React
+
+```jsx
+import { useRef, useState } from 'react';
+import 'input-duration';
+
+export function DurationExample() {
+  const durationRef = useRef(null);
+  const [duration, setDuration] = useState('');
+
+  return (
+    <div>
+      <input-duration ref={durationRef} value="01:23:45.678"></input-duration>
+      <button
+        type="button"
+        onClick={() => setDuration(durationRef.current.value)}
+      >
+        Read duration
+      </button>
+      <output>{duration}</output>
+    </div>
+  );
+}
+```
+
+#### Vue 3
+
+```vue
+<script setup>
+import { ref } from 'vue';
+import 'input-duration';
+
+const durationInput = ref(null);
+const duration = ref('');
+
+function readDuration() {
+  duration.value = durationInput.value.value;
+}
+</script>
+
+<template>
+  <div>
+    <input-duration ref="durationInput" value="01:23:45.678"></input-duration>
+    <button type="button" @click="readDuration">Read duration</button>
+    <output>{{ duration }}</output>
+  </div>
+</template>
+```
+
+#### Angular
+
+```ts
+import { Component, CUSTOM_ELEMENTS_SCHEMA, ElementRef, ViewChild } from '@angular/core';
+import 'input-duration';
+
+type InputDurationElement = HTMLElement & { value: string };
+
+@Component({
+  selector: 'app-duration-example',
+  standalone: true,
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  template: `
+    <input-duration #durationInput value="01:23:45.678"></input-duration>
+    <button type="button" (click)="readDuration()">Read duration</button>
+    <output>{{ duration }}</output>
+  `
+})
+export class DurationExampleComponent {
+  @ViewChild('durationInput', { static: true })
+  durationInput!: ElementRef<InputDurationElement>;
+
+  duration = '';
+
+  readDuration() {
+    this.duration = this.durationInput.nativeElement.value;
+  }
+}
+```
+
+#### Svelte
+
+```svelte
+<script>
+  import 'input-duration';
+
+  let durationInput;
+  let duration = '';
+
+  function readDuration() {
+    duration = durationInput.value;
+  }
+</script>
+
+<div>
+  <input-duration bind:this={durationInput} value="01:23:45.678"></input-duration>
+  <button type="button" on:click={readDuration}>Read duration</button>
+  <output>{duration}</output>
+</div>
+```
+
+These examples retrieve the value on demand; the component does not currently provide a documented host-level change event or native form participation. Use the component's `.value` property to read or set its `HH:mm:ss.SSS` duration.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
