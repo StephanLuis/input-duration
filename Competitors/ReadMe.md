@@ -5,3 +5,50 @@
 - [Input Duration Element (Muan)](https://github.com/muan/input-duration-element/)
   - one benefit is character separation of units
 
+## Roadmap to Broaden Adoption
+
+Prioritize making `input-duration` straightforward to use in existing applications before pursuing inclusion in a larger component library. Its native Web Component implementation provides a framework-independent foundation.
+
+1. **Add framework integration examples.** Provide concise, copy-paste examples for React, Vue, Angular, and Svelte. Start with examples rather than separate adapter packages; add adapters only if users encounter framework-specific friction.
+2. **Support native HTML forms.** Add named form submission, required and validity behavior, disabled state, and form reset and restore behavior. See the [forms and accessibility roadmap](#forms-and-accessibility-roadmap).
+3. **Strengthen accessibility.** Document and verify labels for individual segments, group semantics, keyboard interaction, and screen-reader behavior. See the [forms and accessibility roadmap](#forms-and-accessibility-roadmap).
+4. **Improve discoverability and onboarding.** Lead the README with short install-and-use instructions for common frameworks, and review package metadata for TypeScript declarations and clear exports.
+5. **Approach component libraries with focused integrations.** Offer an optional integration example or wrapper that follows each library's conventions before proposing that a specialized duration control be included in its core set.
+
+Keep the component's purpose clear throughout: it supports elapsed-duration entry in a fixed format, including durations over 24 hours; it is not a replacement for time-of-day inputs.
+
+### Potential Integration Prospects
+
+These are possible targets for examples, wrappers, or future contribution proposals—not existing integrations or confirmed partnerships. Start with the framework-independent component libraries, then consider framework-specific ecosystems where users request them.
+
+#### Web Component libraries
+
+- [Web Awesome](https://webawesome.com/) (formerly Shoelace)
+- [Vaadin Components](https://vaadin.com/docs/latest/components)
+- [FAST](https://www.fast.design/)
+
+#### Framework-specific component libraries
+
+- [MUI](https://mui.com/) and [Ant Design](https://ant.design/) for React
+- [Angular Material](https://material.angular.io/) for Angular
+- [PrimeReact](https://primereact.org/), [PrimeVue](https://primevue.org/), and [PrimeNG](https://primeng.org/) for React, Vue, and Angular
+- [Vuetify](https://vuetifyjs.com/) for Vue
+
+### Forms and Accessibility Roadmap
+
+#### HTML forms
+
+- [ ] Participate in forms using the form-associated custom elements API where supported.
+- [ ] Submit the duration through a `name` attribute and the component's existing `HH:mm:ss.SSS` value format.
+- [ ] Define and implement `required` and validity behavior, including how empty or invalid values are reported to the browser.
+- [ ] Ensure the `disabled` state is reflected in form submission and user interaction.
+- [ ] Support form reset and value restoration, and verify behavior when the control is dynamically added or removed.
+- [ ] Add automated tests for successful submission, omitted disabled controls, required and invalid values, reset, and restore behavior.
+
+#### Accessibility
+
+- [ ] Provide an accessible group name and meaningful, individually accessible labels for the hour, minute, second, and millisecond fields.
+- [ ] Verify keyboard navigation and editing behavior, including focus order and the component's digit-entry and arrow-key interactions.
+- [ ] Test announcements and field relationships with representative screen readers and browsers; document verified combinations and known limitations.
+- [ ] Ensure required, invalid, disabled, and focus states are communicated accessibly and remain visibly distinguishable.
+- [ ] Add automated accessibility checks where practical, alongside manual keyboard and screen-reader testing.
