@@ -89,6 +89,50 @@
             line-height: 1.5;
         }
 
+        button {
+            margin-top: 20px;
+            padding: 10px 16px;
+            border: 0;
+            border-radius: 8px;
+            background: #2563a6;
+            color: #fff;
+            font: inherit;
+            font-weight: 650;
+            cursor: pointer;
+        }
+
+        button:focus-visible {
+            outline: 3px solid rgb(37 99 166 / 35%);
+            outline-offset: 3px;
+        }
+
+        .form-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .form-actions button[type="reset"] {
+            border: 1px solid #b8cde2;
+            background: #fff;
+            color: #172b45;
+        }
+
+        .disabled-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 20px;
+            font-weight: 500;
+        }
+
+        .disabled-toggle input {
+            width: 1rem;
+            height: 1rem;
+            margin: 0;
+        }
+
         output {
             display: block;
             min-height: 1.5em;
@@ -115,20 +159,63 @@
         <h1>Set your session length</h1>
         <p class="description">Choose how long you want to focus. You can adjust the duration before starting the timer.</p>
 
-        <label id="duration-label">Session duration</label>
-        <input-duration id="duration" aria-labelledby="duration-label" value="00:25:00.000" no-microseconds></input-duration>
-        <p class="help">Enter hours, minutes, and seconds. Milliseconds are hidden for this timer.</p>
-        <output id="duration-value" aria-live="polite">Ready for a 25-minute focus session.</output>
+        <form id="session-form">
+            <label id="duration-label" for="duration">Session duration</label>
+            <input-duration id="duration" name="duration" required aria-labelledby="duration-label" no-microseconds></input-duration>
+            <p class="help">Enter hours, minutes, and seconds. Milliseconds are hidden. The zero display starts empty for required validation; edit a field before submitting.</p>
+            <label class="disabled-toggle" for="disable-duration">
+                <input id="disable-duration" type="checkbox">
+                Disable the duration control
+            </label>
+            <div class="form-actions">
+                <button type="submit">Named Submit duration</button>
+                <button type="reset">Reset form</button>
+            </div>
+        </form>
+        <output id="duration-value" aria-live="polite">The required duration has not been set.</output>
     </main>
 
     <script type="module">
         import '../../index.js';
 
         const duration = document.querySelector('#duration');
+        const form = document.querySelector('#session-form');
         const output = document.querySelector('#duration-value');
+        const disabledToggle = document.querySelector('#disable-duration');
 
         duration.addEventListener('input', () => {
-            output.textContent = `Selected duration: ${duration.value}`;
+            if (!duration.validity.valid) {
+                output.textContent = duration.validationMessage;
+            } else {
+                output.textContent = `Selected duration: ${duration.value}`;
+            }
+        });
+
+        duration.addEventListener('invalid', () => {
+            output.textContent = duration.validationMessage;
+        });
+
+        form.addEventListener('submit', event => {
+            event.preventDefault();
+            const formData = new FormData(form);
+            output.textContent = `Submitted duration: ${formData.get('duration')}`;
+        });
+
+        form.addEventListener('reset', () => {
+            setTimeout(() => {
+                output.textContent = duration.validity.valid
+                    ? `Reset to: ${duration.value}`
+                    : duration.validationMessage;
+                disabledToggle.checked = false;
+                duration.disabled = false;
+            });
+        });
+
+        disabledToggle.addEventListener('change', () => {
+            duration.disabled = disabledToggle.checked;
+            output.textContent = disabledToggle.checked
+                ? 'Duration disabled; disabled controls are omitted from form submission.'
+                : 'Duration enabled.';
         });
     </script>
 </body>

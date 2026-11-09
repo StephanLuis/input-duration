@@ -23,6 +23,8 @@
  * `hours-divider`, `minutes-divider`, `seconds-divider`, and
  * `microseconds-divider` customize the separators; the last adds a suffix
  * after milliseconds. Divider values are rendered as text.
+ * The element is form-associated in supporting browsers; use `name`,
+ * `required`, and `disabled` attributes for form submission and validation.
  *
  * @example
  * <input-duration no-microseconds hours-divider="h " microseconds-divider="ms"></input-duration>
@@ -32,15 +34,18 @@
  */
 
 class InputDuration extends HTMLElement {
+    static formAssociated = true;
+
     /**
      * HTML attributes that update the component when changed.
      *
      * @static
-     * @returns {string[]} Observed value, visibility, and divider attributes.
+     * @returns {string[]} Observed value, required, visibility, and divider attributes.
      */
     static get observedAttributes() {
         return [
             'value',
+            'required',
             'no-hours',
             'no-minutes',
             'no-seconds',
@@ -55,6 +60,11 @@ class InputDuration extends HTMLElement {
     constructor() {
 
         super();
+
+        this.valueIsSet = false;
+        this.formInternals = typeof this.attachInternals === 'function'
+            ? this.attachInternals()
+            : null;
 
         /**
          * Shadow root containing this component's controls.
@@ -81,8 +91,12 @@ class InputDuration extends HTMLElement {
         }
 
         if (name !== 'value') {
-            this.updateVisibleFields();
-            this.updateDividers();
+            if (name === 'required') {
+                this.updateFormValue();
+            } else {
+                this.updateVisibleFields();
+                this.updateDividers();
+            }
             return;
         }
 
@@ -119,6 +133,69 @@ class InputDuration extends HTMLElement {
             return null;
 
         }
+    }
+
+    /**
+     * Current form validity state.
+     *
+     * @returns {?ValidityState} The browser-computed validity state.
+     */
+    get validity() {
+        return this.formInternals ? this.formInternals.validity : null;
+    }
+
+    /**
+     * Validation message for the current form state.
+     *
+     * @returns {string} The browser-computed validation message.
+     */
+    get validationMessage() {
+        return this.formInternals ? this.formInternals.validationMessage : '';
+    }
+
+    /**
+     * Whether this control participates in constraint validation.
+     *
+     * @returns {boolean} Whether the control will be validated.
+     */
+    get willValidate() {
+        return this.formInternals ? this.formInternals.willValidate : false;
+    }
+
+    /**
+     * Runs constraint validation and fires an invalid event when needed.
+     *
+     * @returns {boolean} Whether the control is valid.
+     */
+    checkValidity() {
+        return this.formInternals ? this.formInternals.checkValidity() : true;
+    }
+
+    /**
+     * Runs constraint validation and asks the browser to report any error.
+     *
+     * @returns {boolean} Whether the control is valid.
+     */
+    reportValidity() {
+        return this.formInternals ? this.formInternals.reportValidity() : true;
+    }
+
+    /**
+     * Whether the control is disabled.
+     *
+     * @returns {boolean} The value of the `disabled` attribute.
+     */
+    get disabled() {
+        return this.hasAttribute('disabled');
+    }
+
+    /**
+     * Sets whether the control is disabled.
+     *
+     * @param {boolean} value - Whether to disable the control.
+     */
+    set disabled(value) {
+        this.toggleAttribute('disabled', Boolean(value));
     }
 
 
@@ -168,6 +245,7 @@ class InputDuration extends HTMLElement {
      * @returns {void}
      */
     setInputValues(val) {
+        this.valueIsSet = true;
         const timeArray = val.split(/[.:]+/);
         const inputNames = ['startHours', 'startMinutes', 'startSeconds', 'startMilliSecs'];
 
@@ -176,6 +254,8 @@ class InputDuration extends HTMLElement {
             input.value = timeArray[index];
             input.oldValue = input.value;
         });
+
+        this.updateFormValue();
     }
 
     /**
@@ -183,14 +263,140 @@ class InputDuration extends HTMLElement {
      *
      * @returns {void}
      */
-    resetInputs() {
+    resetInputs(valueIsSet = false) {
         const defaults = ['00', '00', '00', '000'];
         const inputs = this.myElement.querySelectorAll('.timeCase input');
 
+        this.valueIsSet = valueIsSet;
         inputs.forEach((input, index) => {
             input.value = defaults[index];
             input.oldValue = input.value;
         });
+
+        this.updateFormValue();
+    }
+
+    /**
+     * Keeps the form-associated value synchronized with the displayed duration.
+     *
+     * @returns {void}
+     */
+    updateFormValue() {
+        if (this.formInternals) {
+            const value = this.value;
+            const isValid = this.isValidValue(value);
+            const valueMissing = this.hasAttribute('required') && !this.valueIsSet;
+            const validity = {};
+
+            if (valueMissing) {
+                validity.valueMissing = true;
+            } else if (!isValid) {
+                validity.badInput = true;
+            }
+
+            if (Object.keys(validity).length) {
+                const message = valueMissing
+                    ? 'Please enter a duration.'
+                    : 'Enter a duration in HH:mm:ss.SSS format.';
+                const anchor = [...this.myElement.querySelectorAll('.timeCase input')]
+                    .find(input => input.style.display !== 'none' && !input.disabled);
+                if (anchor) {
+                    this.formInternals.setValidity(validity, message, anchor);
+                } else {
+                    this.formInternals.setValidity(validity, message);
+                }
+            } else {
+                this.formInternals.setValidity({});
+            }
+
+            const state = JSON.stringify({
+                value,
+                valueIsSet: Boolean(this.valueIsSet)
+            });
+            this.formInternals.setFormValue(isValid && !valueMissing ? value : null, state);
+        }
+    }
+
+    /**
+     * Synchronizes form submission after the user edits a duration field.
+     *
+     * @returns {void}
+     */
+    addFormValueSync() {
+        const control = this.myElement.querySelector('.timeCase');
+        const syncFormValue = () => {
+            this.valueIsSet = true;
+            this.updateFormValue();
+        };
+
+        control.addEventListener('input', syncFormValue);
+        control.addEventListener('change', syncFormValue);
+    }
+
+    /**
+     * Disables or enables the internal fields when the form disables this control.
+     *
+     * @param {boolean} disabled - Whether the control is disabled.
+     * @returns {void}
+     */
+    formDisabledCallback(disabled) {
+        this.myElement.querySelectorAll('.timeCase input').forEach(input => {
+            input.disabled = disabled;
+        });
+    }
+
+    /**
+     * Restores the initial value when its form is reset.
+     *
+     * @returns {void}
+     */
+    formResetCallback() {
+        const defaultValue = this.getAttribute('value');
+        if (defaultValue !== null && this.isValidValue(defaultValue)) {
+            this.setInputValues(defaultValue);
+        } else {
+            this.resetInputs();
+        }
+    }
+
+    /**
+     * Restores the duration and required state saved by the browser.
+     *
+     * @param {string} state - Serialized duration state.
+     * @param {string} mode - Browser restoration mode.
+     * @returns {void}
+     */
+    formStateRestoreCallback(state, mode) {
+        let restoredState;
+
+        try {
+            restoredState = JSON.parse(state);
+        } catch {
+            if (this.isValidValue(state)) {
+                this.setInputValues(state);
+                this.updateFormValue();
+                return;
+            }
+
+            this.warnInvalidValue(state);
+            this.resetInputs();
+            return;
+        }
+
+        if (
+            !restoredState ||
+            typeof restoredState !== 'object' ||
+            !this.isValidValue(restoredState.value) ||
+            typeof restoredState.valueIsSet !== 'boolean'
+        ) {
+            this.warnInvalidValue(state);
+            this.resetInputs();
+            return;
+        }
+
+        this.setInputValues(restoredState.value);
+        this.valueIsSet = restoredState.valueIsSet;
+        this.updateFormValue();
     }
 
     /**
@@ -221,6 +427,8 @@ class InputDuration extends HTMLElement {
         this.addClicksToActivate();
         this.nonNumericBugInHTML();
         this.removeEprop();
+        this.addFormValueSync();
+        this.updateFormValue();
 
     }
 
@@ -339,6 +547,7 @@ class InputDuration extends HTMLElement {
                     --input-duration-focus-color: #2196f3;
                     --input-duration-focus-outline: 3px solid #2196f3;
                     --input-duration-focus-outline-offset: 2px;
+                    --input-duration-invalid-color: #b42318;
                     --input-duration-divider-color: currentColor;
                     --input-duration-divider-opacity: 0.7;
                     --input-duration-disabled-color: GrayText;
@@ -365,6 +574,10 @@ class InputDuration extends HTMLElement {
                     border-color: var(--input-duration-focus-color);
                     outline: var(--input-duration-focus-outline);
                     outline-offset: var(--input-duration-focus-outline-offset);
+                }
+
+                :host(:invalid) .timeCase {
+                    border-color: var(--input-duration-invalid-color);
                 }
 
                 .timeCase input {
@@ -683,18 +896,23 @@ class InputDuration extends HTMLElement {
     // formatting and behaviour options
 
     /**
-     * disables entire control => read-only
+     * Disables the entire control and excludes it from form submission.
      * @method 
      */
 
     disable() {
+        this.setAttribute('disabled', '');
+        this.formDisabledCallback(true);
+    }
 
-        var closure = this;
-
-        // disable chronly inputs on page
-
-        closure.shadowRoot.querySelectorAll(".timeCase input").forEach(el => el.disabled = 'true')
-
+    /**
+     * Enables the duration fields.
+     *
+     * @returns {void}
+     */
+    enable() {
+        this.removeAttribute('disabled');
+        this.formDisabledCallback(false);
     }
 
 

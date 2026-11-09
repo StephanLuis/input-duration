@@ -10,7 +10,7 @@
 Prioritize making `input-duration` straightforward to use in existing applications before pursuing inclusion in a larger component library. Its native Web Component implementation provides a framework-independent foundation.
 
 1. **Framework integration examples (available).** Copy-paste examples for React, Vue, Angular, and Svelte are in the main [README](../README.md#framework-examples). Start with examples rather than separate adapter packages; add adapters only if users encounter framework-specific friction.
-2. **Support native HTML forms.** Add named form submission, required and validity behavior, disabled state, and form reset and restore behavior. See the [forms and accessibility roadmap](#forms-and-accessibility-roadmap).
+2. **Support native HTML forms.** Named submission, required/validity, disabled state, form reset, and browser-managed state restoration are implemented for browsers that support form-associated custom elements. See the [forms and accessibility roadmap](#forms-and-accessibility-roadmap).
 3. **Strengthen accessibility.** Document and verify labels for individual segments, group semantics, keyboard interaction, and screen-reader behavior. See the [forms and accessibility roadmap](#forms-and-accessibility-roadmap).
 4. **Improve discoverability and onboarding.** Lead the README with short install-and-use instructions for common frameworks, and review package metadata for TypeScript declarations and clear exports.
 5. **Approach component libraries with focused integrations.** Offer an optional integration example or wrapper that follows each library's conventions before proposing that a specialized duration control be included in its core set.
@@ -38,12 +38,13 @@ These are possible targets for examples, wrappers, or future contribution propos
 
 #### HTML forms
 
-- [ ] Participate in forms using the form-associated custom elements API where supported.
-- [ ] Submit the duration through a `name` attribute and the component's existing `HH:mm:ss.SSS` value format.
-- [ ] Define and implement `required` and validity behavior, including how empty or invalid values are reported to the browser.
-- [ ] Ensure the `disabled` state is reflected in form submission and user interaction.
-- [ ] Support form reset and value restoration, and verify behavior when the control is dynamically added or removed.
-- [ ] Add automated tests for successful submission, omitted disabled controls, required and invalid values, reset, and restore behavior.
+- [x] Participate in forms using the form-associated custom elements API where supported.
+- [x] Submit the duration through a `name` attribute and the component's existing `HH:mm:ss.SSS` value format.
+- [x] Define `required` and validity behavior: an untouched zero display is missing when required, and incomplete edits are invalid.
+- [x] Reflect disabled state in field interaction and form submission.
+- [x] Restore the default value (or zero when unset) on form reset.
+- [x] Support browser state restoration, including the required/unset state.
+- [x] Add automated tests for named value synchronization, required and invalid values, disabled callbacks, reset, and state restoration.
 
 #### Accessibility
 

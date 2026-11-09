@@ -283,6 +283,21 @@ document.querySelector('#bob').value = '44:04:04.444'
 
 ``` 
 
+### HTML form submission, validation, disabled state, and reset
+
+On browsers that support form-associated custom elements, give the component a `name` to include its `HH:mm:ss.SSS` value in form submission. Add `required` to require an explicitly set or user-edited duration. The untouched zero display is treated as empty for required validation; a supplied `value`, including `00:00:00.000`, satisfies `required`.
+
+```html
+<form action="/save" method="post">
+  <label for="duration">Duration</label>
+  <input-duration id="duration" name="duration" value="01:23:45.678" required></input-duration>
+  <button type="submit">Save</button>
+  <button type="reset">Reset</button>
+</form>
+```
+
+The submitted form field is `duration=01:23:45.678`. Invalid intermediate edits fail constraint validation and are not submitted. The `disabled` attribute disables the internal fields and excludes the component from submission; the `disable()` and `enable()` methods are also available. A form reset restores the `value` attribute, or the zero display when no default value is provided. In browsers that support form-associated custom elements and restore form state, the component also restores the saved duration and whether it had been explicitly set.
+
 ### Bootstrap styling
 
 The component keeps its Shadow DOM, so Bootstrap's CSS selectors do not directly style its internal fields. Instead, map Bootstrap theme variables to the component's CSS custom properties. This is additive: without overrides, the component retains its default appearance.
@@ -310,7 +325,7 @@ input-duration::part(field) {
 }
 ```
 
-Available parts are `control`, `field` (also `field-hours`, `field-minutes`, `field-seconds`, and `field-milliseconds`), `divider` (also `divider-hours-minutes`, `divider-minutes-seconds`, and `divider-seconds-milliseconds`), and `icon`. Supported CSS custom properties are `--input-duration-gap`, `--input-duration-padding`, `--input-duration-border-color`, `--input-duration-border-radius`, `--input-duration-background`, `--input-duration-color`, `--input-duration-focus-color`, `--input-duration-focus-outline`, `--input-duration-focus-outline-offset`, `--input-duration-divider-color`, `--input-duration-divider-opacity`, `--input-duration-disabled-color`, and `--input-duration-icon-color`.
+Available parts are `control`, `field` (also `field-hours`, `field-minutes`, `field-seconds`, and `field-milliseconds`), `divider` (also `divider-hours-minutes`, `divider-minutes-seconds`, and `divider-seconds-milliseconds`), and `icon`. Supported CSS custom properties are `--input-duration-gap`, `--input-duration-padding`, `--input-duration-border-color`, `--input-duration-border-radius`, `--input-duration-background`, `--input-duration-color`, `--input-duration-focus-color`, `--input-duration-focus-outline`, `--input-duration-focus-outline-offset`, `--input-duration-invalid-color`, `--input-duration-divider-color`, `--input-duration-divider-opacity`, `--input-duration-disabled-color`, and `--input-duration-icon-color`.
 
 and
 
@@ -433,7 +448,7 @@ export class DurationExampleComponent {
 </div>
 ```
 
-These examples retrieve the value on demand; the component does not currently provide a documented host-level change event or native form participation. Use the component's `.value` property to read or set its `HH:mm:ss.SSS` duration.
+These examples retrieve the value on demand; the component does not currently provide a documented host-level change event. For native form submission, add a `name` attribute as shown in [HTML form submission](#html-form-submission). Use the component's `.value` property to read or set its `HH:mm:ss.SSS` duration.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -457,7 +472,9 @@ These examples retrieve the value on demand; the component does not currently pr
 - [ ] Add configurable duration segments and presentation, including optional days, hiding units, and custom dividers. Keep `HH:mm:ss.SSS` as the default. ([html-duration-picker.js](https://nadchif.github.io/html-duration-picker.js/), [input-duration-element](https://muan.github.io/input-duration-element/))
 - [ ] Support declarative minimum and maximum values with consistent validation and boundary behavior. ([html-duration-picker.js](https://nadchif.github.io/html-duration-picker.js/))
 - [ ] Improve accessibility with per-segment labels, group semantics, and documented screen-reader and keyboard behavior. ([time-input-polyfill](https://github.com/Dan503/time-input-polyfill/) demonstrates accessible time-field interactions.)
-- [ ] Participate in native HTML forms, including named submission, required/validity, disabled state, and form reset/restore behavior. ([duration-input example](https://gist.github.com/Wigny/97cc83ea5179e7b8ab5a044fb14deb9a))
+- [x] Submit the duration through a `name` attribute in browsers that support form-associated custom elements.
+- [x] Support required validation, invalid intermediate input, disabled state, and form reset.
+- [x] Support browser form state restoration, including the required/unset state.
 - [ ] Offer optional ISO 8601 duration serialization and `Temporal.Duration` interoperability without breaking the existing `HH:mm:ss.SSS` value format. ([WHATWG discussion](https://github.com/whatwg/html/issues/5488#issuecomment-3961032394), [duration-input example](https://gist.github.com/Wigny/97cc83ea5179e7b8ab5a044fb14deb9a))
 
 See the [open issues](https://github.com/StephanLuis/input-duration/issues) for a full list of proposed features (and known issues).
