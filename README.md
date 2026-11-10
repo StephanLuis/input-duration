@@ -99,7 +99,7 @@ TypeScript declarations are included. See the [framework examples](#framework-ex
 
 <h2>Fixed-format duration input</h2>
 
-`input-duration` is intended for touch and keyboard use. The HTML structure and displayed field order are controlled by the component; device-specific input and keyboard behavior remains native to the browser.
+`input-duration` is intended for touch and keyboard use. Typing a complete unit advances to the next unit; if that next unit is hidden, focus leaves the control. The HTML structure and displayed field order are controlled by the component; device-specific input and keyboard behavior remains native to the browser.
 
 <h2>Bob is rescued by INPUT-DURATION!</h2>
 
@@ -310,7 +310,7 @@ document.querySelector('#bob').value = '44:04:04.444'
 
 ### HTML form submission, validation, disabled state, and reset
 
-On browsers that support form-associated custom elements, give the component a `name` to include its `HH:mm:ss.SSS` value in form submission. Add `required` to require an explicitly set or user-edited duration. The untouched zero display is treated as empty for required validation; a supplied `value`, including `00:00:00.000`, satisfies `required`.
+On browsers that support form-associated custom elements, give the component a `name` to include its `HH:mm:ss.SSS` value in form submission. Add `required` to require an explicitly set or committed user-edited duration. The untouched zero display is treated as empty for required validation; a supplied `value`, including `00:00:00.000`, satisfies `required`.
 
 ```html
 <form action="/save" method="post">
@@ -321,7 +321,7 @@ On browsers that support form-associated custom elements, give the component a `
 </form>
 ```
 
-The submitted form field is `duration=01:23:45.678` in the default format, or `duration=2:03:04:05.006` when days are enabled. Invalid intermediate edits fail constraint validation and are not submitted. The `disabled` attribute disables the internal fields and excludes the component from submission; the `disable()` and `enable()` methods are also available. A form reset restores the `value` attribute, or the zero display when no default value is provided. In browsers that support form-associated custom elements and restore form state, the component also restores the saved duration and whether it had been explicitly set.
+The submitted form field is `duration=01:23:45.678` in the default format, or `duration=2:03:04:05.006` when days are enabled. While a field is being edited, `.value` and form submission retain the last committed duration; edits are committed when the field changes (typically when it loses focus), after single-digit fields are normalized. The `disabled` attribute disables the internal fields and excludes the component from submission; the `disable()` and `enable()` methods are also available. A form reset restores the `value` attribute, or the zero display when no default value is provided. In browsers that support form-associated custom elements and restore form state, the component also restores the saved duration and whether it had been explicitly set.
 
 ### Bootstrap styling
 
@@ -473,7 +473,7 @@ export class DurationExampleComponent {
 </div>
 ```
 
-These examples retrieve the value on demand; the component does not currently provide a documented host-level change event. For native form submission, add a `name` attribute as shown in [HTML form submission](#html-form-submission). Use `.value` to read or set the duration, and `.dayFriendlyValue` for a unit-labeled string.
+After an edited field changes, the component commits and normalizes its value, then dispatches a bubbling `change` event from the host element. Listen for `change` to read the updated `.value` or `.dayFriendlyValue`; during `input`, those properties continue to report the last committed duration. For native form submission, add a `name` attribute as shown in [HTML form submission](#html-form-submission).
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -498,7 +498,7 @@ These examples retrieve the value on demand; the component does not currently pr
 - [ ] Support declarative minimum and maximum values with consistent validation and boundary behavior. ([html-duration-picker.js](https://nadchif.github.io/html-duration-picker.js/))
 - [ ] Improve accessibility with per-segment labels, group semantics, and documented screen-reader and keyboard behavior. ([time-input-polyfill](https://github.com/Dan503/time-input-polyfill/) demonstrates accessible time-field interactions.)
 - [x] Submit the duration through a `name` attribute in browsers that support form-associated custom elements.
-- [x] Support required validation, invalid intermediate input, disabled state, and form reset.
+- [x] Support required validation, field input filtering, disabled state, and form reset.
 - [x] Support browser form state restoration, including the required/unset state.
 - [ ] Offer optional ISO 8601 duration serialization and `Temporal.Duration` interoperability without breaking the existing `HH:mm:ss.SSS` value format. ([WHATWG discussion](https://github.com/whatwg/html/issues/5488#issuecomment-3961032394), [duration-input example](https://gist.github.com/Wigny/97cc83ea5179e7b8ab5a044fb14deb9a))
 

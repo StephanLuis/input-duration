@@ -25,6 +25,8 @@
  * the day label. Divider values are rendered as text.
  * The days field is slightly wider than other numeric fields and has extra
  * spacing before its divider to emphasize the less-common unit.
+ * User edits update the public value and form state when the field changes,
+ * after its intermediate input has been normalized.
  * The element is form-associated in supporting browsers; use `name`,
  * `required`, and `disabled` attributes for form submission and validation.
  *
@@ -105,6 +107,7 @@ class InputDuration extends HTMLElement {
                 }
                 this.updateVisibleFields();
                 this.updateDividers();
+                this.committedValue = this.readInputValue();
                 this.updateFormValue();
             } else {
                 this.updateVisibleFields();
@@ -124,12 +127,21 @@ class InputDuration extends HTMLElement {
 
 
     /**
-     * get the input-duration value, pulls values from each input
-     * so in js use var x = document.querySelector("#bobPrepop").value; 
+     * Gets the last committed duration value.
      * @returns {?string} Duration in `HH:mm:ss.SSS` or `D:HH:mm:ss.SSS` format.
      */
 
     get value() {
+        return this.committedValue ?? this.readInputValue();
+    }
+
+    /**
+     * Reads and serializes the current input fields, including uncommitted edits.
+     *
+     * @returns {?string} Duration in the current display format.
+     * @private
+     */
+    readInputValue() {
         const hoursInput = this.myElement.querySelector('input[name="startHours"]');
         if (hoursInput === null) {
             return null;
@@ -158,14 +170,16 @@ class InputDuration extends HTMLElement {
             return null;
         }
 
-        const daysInput = Number(this.myElement.querySelector('.sD').value) || 0;
-        const hoursInput = Number(this.myElement.querySelector('.sH').value) || 0;
-        const totalHours = (this.hasAttribute('show-days') || daysInput > 0 ? daysInput * 24 : 0) + hoursInput;
+        const parts = this.value.split(/[:.]/);
+        const hasDays = parts.length === 5;
+        const daysInput = hasDays ? Number(parts[0]) : 0;
+        const hoursInput = Number(parts[hasDays ? 1 : 0]) || 0;
+        const totalHours = daysInput * 24 + hoursInput;
         const days = Math.floor(totalHours / 24);
         const hours = totalHours % 24;
-        const minutes = Number(this.myElement.querySelector('.sM').value) || 0;
-        const seconds = Number(this.myElement.querySelector('.sS').value) || 0;
-        const milliseconds = Number(this.myElement.querySelector('.sMS').value) || 0;
+        const minutes = Number(parts[hasDays ? 2 : 1]) || 0;
+        const seconds = Number(parts[hasDays ? 3 : 2]) || 0;
+        const milliseconds = Number(parts[hasDays ? 4 : 3]) || 0;
 
         return `${days}d ${String(hours).padStart(2, '0')}h ${String(minutes).padStart(2, '0')}m ${String(seconds).padStart(2, '0')}.${String(milliseconds).padStart(3, '0')}s`;
     }
@@ -323,6 +337,7 @@ class InputDuration extends HTMLElement {
 
         this.updateVisibleFields();
         this.updateDividers();
+        this.committedValue = this.readInputValue();
         this.updateFormValue();
     }
 
@@ -343,6 +358,7 @@ class InputDuration extends HTMLElement {
 
         this.updateVisibleFields();
         this.updateDividers();
+        this.committedValue = this.readInputValue();
         this.updateFormValue();
     }
 
@@ -388,18 +404,20 @@ class InputDuration extends HTMLElement {
     }
 
     /**
-     * Synchronizes form submission after the user edits a duration field.
+     * Commits edits after a field change, once its value has been normalized.
      *
      * @returns {void}
      */
     addFormValueSync() {
         const control = this.myElement.querySelector('.timeCase');
         const syncFormValue = () => {
+            this.committedValue = this.readInputValue();
             this.valueIsSet = true;
             this.updateFormValue();
+            const EventConstructor = this.ownerDocument.defaultView.Event;
+            this.dispatchEvent(new EventConstructor('change', { bubbles: true }));
         };
 
-        control.addEventListener('input', syncFormValue);
         control.addEventListener('change', syncFormValue);
     }
 
@@ -504,8 +522,8 @@ class InputDuration extends HTMLElement {
 
 
     /**
-     * eventlistener that adds arrow key input of values (up/down) and place toggling (left/right) triggered by
-     * the change event of the input 
+     * Handles arrow-key adjustment and field navigation while keeping the
+     * active field selected.
      * @method
      * @see boot()
      */
@@ -513,6 +531,14 @@ class InputDuration extends HTMLElement {
     addArrowKeyInput() {
 
         var mE = this.myElement;
+        const keepAdjustedFieldSelected = input => {
+            setTimeout(function () {
+                input.suppressAutoAdvance = false;
+                if (mE.activeElement) {
+                    mE.activeElement.select();
+                }
+            }, 5);
+        };
 
         this.myElement.querySelector("div.timeCase")
             .addEventListener('keydown', function (event) {
@@ -543,24 +569,12 @@ class InputDuration extends HTMLElement {
                     // these keep the input selected
                     case event.key == "ArrowUp":
                         et.suppressAutoAdvance = true;
-                        setTimeout(function () {
-                            et.suppressAutoAdvance = false;
-                            if (mE.activeElement) {
-                                mE.activeElement.select();
-                            }
-                        }, 5);
-
+                        keepAdjustedFieldSelected(et);
                         break;
 
                     case event.key == "ArrowDown":
                         et.suppressAutoAdvance = true;
-                        setTimeout(function () {
-                            et.suppressAutoAdvance = false;
-                            if (mE.activeElement) {
-                                mE.activeElement.select();
-                            }
-                        }, 5);
-
+                        keepAdjustedFieldSelected(et);
                         break;
 
                     // this is good for testing, to determine whether a key press is detected
@@ -724,6 +738,7 @@ class InputDuration extends HTMLElement {
         spanIn.appendChild(template.content);
 
         this.myElement.appendChild(spanIn);
+        this.committedValue = this.readInputValue();
 
     }
 
@@ -817,7 +832,8 @@ class InputDuration extends HTMLElement {
 
 
     /**
-    * eventlistener that filters number input and advances between fields
+    * Filters numeric input and advances to the next unit. If the next unit is
+    * hidden, focus leaves the control once the current field is complete.
     * @method
     * @see boot()
     */
@@ -842,6 +858,16 @@ class InputDuration extends HTMLElement {
             });
         }
 
+        const moveToNextUnitOrBlur = (input, nextSelector) => {
+            const nextInput = mE.querySelector(nextSelector);
+            if (nextInput.style.display === 'none') {
+                input.blur();
+                return;
+            }
+            nextInput.focus();
+            nextInput.select();
+        };
+
         // three filters, hours or minutes and seconds (are the same) but milliseconds is different
 
         var sH = this.myElement.querySelector('input.sH');
@@ -854,10 +880,7 @@ class InputDuration extends HTMLElement {
             const newV = hourPattern.test(value);
 
             if (shouldAdvance && newV && value.length === 2) {
-
-                mE.querySelector('input.sM').focus();
-                mE.querySelector('input.sM').select();
-
+                moveToNextUnitOrBlur(sH, 'input.sM');
             }
 
             return newV;
@@ -880,7 +903,6 @@ class InputDuration extends HTMLElement {
             this.oldValue = this.value;
             this.style.width = `${Math.max(3, this.value.length)}ch`;
             owner.updateDividers();
-            owner.updateFormValue();
         });
 
         var sM = this.myElement.querySelector('input.sM');
@@ -889,11 +911,10 @@ class InputDuration extends HTMLElement {
 
             var newV = /^([0-9]?|[0-5][0-9]?)$/.test(value);
 
-            if (shouldAdvance && newV && (value > 5 || value.length === 2)) {
-
-                mE.querySelector('input.sS').focus();
-                mE.querySelector('input.sS').select();
-
+            const nextUnitHidden = mE.querySelector('input.sS').style.display === 'none';
+            if (shouldAdvance && newV &&
+                (nextUnitHidden ? value.length === 2 : value > 5 || value.length === 2)) {
+                moveToNextUnitOrBlur(sM, 'input.sS');
             }
 
             return newV;
@@ -905,11 +926,10 @@ class InputDuration extends HTMLElement {
 
             var newV = /^([0-9]?|[0-5][0-9]?)$/.test(value);
 
-            if (shouldAdvance && newV && (value > 5 || value.length === 2)) {
-
-                mE.querySelector('input.sMS').focus();
-                mE.querySelector('input.sMS').select();
-
+            const nextUnitHidden = mE.querySelector('input.sMS').style.display === 'none';
+            if (shouldAdvance && newV &&
+                (nextUnitHidden ? value.length === 2 : value > 5 || value.length === 2)) {
+                moveToNextUnitOrBlur(sS, 'input.sMS');
             }
 
             return newV;

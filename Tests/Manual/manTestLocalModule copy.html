@@ -211,7 +211,7 @@
         const longDuration = document.querySelector('#long-duration');
         const friendlyDuration = document.querySelector('#friendly-duration');
 
-        duration.addEventListener('input', () => {
+        duration.addEventListener('change', () => {
             if (!duration.validity.valid) {
                 output.textContent = duration.validationMessage;
             } else {
@@ -246,7 +246,7 @@
                 : 'Duration enabled.';
         });
 
-        longDuration.addEventListener('input', () => {
+        longDuration.addEventListener('change', () => {
             friendlyDuration.textContent = longDuration.dayFriendlyValue;
         });
     </script>

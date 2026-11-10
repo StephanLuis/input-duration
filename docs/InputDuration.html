@@ -58,6 +58,8 @@ Boolean attributes `show-days`, `no-hours`, `no-minutes`, `no-seconds`, and
 the day label. Divider values are rendered as text.
 The days field is slightly wider than other numeric fields and has extra
 spacing before its divider to emphasize the less-common unit.
+User edits update the public value and form state when the field changes,
+after its intermediate input has been normalized.
 The element is form-associated in supporting browsers; use `name`,
 `required`, and `disabled` attributes for form submission and validation.
 </div>
@@ -213,7 +215,7 @@ The element is form-associated in supporting browsers; use `name`,
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line156">line 156</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line168">line 168</a>
     </li></ul></dd>
     
 
@@ -275,7 +277,7 @@ The element is form-associated in supporting browsers; use `name`,
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line223">line 223</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line237">line 237</a>
     </li></ul></dd>
     
 
@@ -337,7 +339,7 @@ The element is form-associated in supporting browsers; use `name`,
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line232">line 232</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line246">line 246</a>
     </li></ul></dd>
     
 
@@ -409,7 +411,7 @@ The element is form-associated in supporting browsers; use `name`,
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line77">line 77</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line79">line 79</a>
     </li></ul></dd>
     
 
@@ -471,7 +473,7 @@ The element is form-associated in supporting browsers; use `name`,
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line187">line 187</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line201">line 201</a>
     </li></ul></dd>
     
 
@@ -533,7 +535,7 @@ The element is form-associated in supporting browsers; use `name`,
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line178">line 178</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line192">line 192</a>
     </li></ul></dd>
     
 
@@ -557,8 +559,7 @@ The element is form-associated in supporting browsers; use `name`,
 
 
 <div class="description">
-    get the input-duration value, pulls values from each input
-so in js use var x = document.querySelector("#bobPrepop").value;
+    Gets the last committed duration value.
 </div>
 
 
@@ -596,7 +597,7 @@ so in js use var x = document.querySelector("#bobPrepop").value;
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line132">line 132</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line134">line 134</a>
     </li></ul></dd>
     
 
@@ -658,7 +659,7 @@ so in js use var x = document.querySelector("#bobPrepop").value;
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line244">line 244</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line258">line 258</a>
     </li></ul></dd>
     
 
@@ -720,7 +721,7 @@ so in js use var x = document.querySelector("#bobPrepop").value;
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line196">line 196</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line210">line 210</a>
     </li></ul></dd>
     
 
@@ -782,7 +783,7 @@ so in js use var x = document.querySelector("#bobPrepop").value;
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line47">line 47</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line49">line 49</a>
     </li></ul></dd>
     
 
@@ -863,7 +864,7 @@ the change event of the input
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line945">line 945</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line965">line 965</a>
     </li></ul></dd>
     
 
@@ -914,8 +915,8 @@ the change event of the input
 
 
 <div class="description">
-    eventlistener that adds arrow key input of values (up/down) and place toggling (left/right) triggered by
-the change event of the input
+    Handles arrow-key adjustment and field navigation while keeping the
+active field selected.
 </div>
 
 
@@ -959,7 +960,7 @@ the change event of the input
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line513">line 513</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line531">line 531</a>
     </li></ul></dd>
     
 
@@ -1055,7 +1056,7 @@ the click event of the input
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line973">line 973</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line993">line 993</a>
     </li></ul></dd>
     
 
@@ -1106,7 +1107,7 @@ the click event of the input
 
 
 <div class="description">
-    Synchronizes form submission after the user edits a duration field.
+    Commits edits after a field change, once its value has been normalized.
 </div>
 
 
@@ -1150,7 +1151,7 @@ the click event of the input
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line395">line 395</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line411">line 411</a>
     </li></ul></dd>
     
 
@@ -1256,7 +1257,7 @@ the click event of the input
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line582">line 582</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line596">line 596</a>
     </li></ul></dd>
     
 
@@ -1352,7 +1353,7 @@ the change event of the input
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line738">line 738</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line753">line 753</a>
     </li></ul></dd>
     
 
@@ -1403,7 +1404,8 @@ the change event of the input
 
 
 <div class="description">
-    eventlistener that filters number input and advances between fields
+    Filters numeric input and advances to the next unit. If the next unit is
+hidden, focus leaves the control once the current field is complete.
 </div>
 
 
@@ -1447,7 +1449,7 @@ the change event of the input
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line825">line 825</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line841">line 841</a>
     </li></ul></dd>
     
 
@@ -1667,7 +1669,7 @@ the change event of the input
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line91">line 91</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line93">line 93</a>
     </li></ul></dd>
     
 
@@ -1773,7 +1775,7 @@ the change event of the input
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line488">line 488</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line506">line 506</a>
     </li></ul></dd>
     
 
@@ -1861,7 +1863,7 @@ the change event of the input
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line205">line 205</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line219">line 219</a>
     </li></ul></dd>
     
 
@@ -1971,7 +1973,7 @@ the change event of the input
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1029">line 1029</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1049">line 1049</a>
     </li></ul></dd>
     
 
@@ -2059,7 +2061,7 @@ the change event of the input
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1039">line 1039</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1059">line 1059</a>
     </li></ul></dd>
     
 
@@ -2214,7 +2216,7 @@ the change event of the input
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line412">line 412</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line430">line 430</a>
     </li></ul></dd>
     
 
@@ -2320,7 +2322,7 @@ the change event of the input
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line423">line 423</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line441">line 441</a>
     </li></ul></dd>
     
 
@@ -2498,7 +2500,7 @@ the change event of the input
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line439">line 439</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line457">line 457</a>
     </li></ul></dd>
     
 
@@ -2605,7 +2607,7 @@ Removes the `show-days` attribute.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1199">line 1199</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1219">line 1219</a>
     </li></ul></dd>
     
 
@@ -2712,7 +2714,7 @@ Sets the `no-hours` attribute.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1051">line 1051</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1071">line 1071</a>
     </li></ul></dd>
     
 
@@ -2819,7 +2821,7 @@ Sets the `no-microseconds` attribute.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1138">line 1138</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1158">line 1158</a>
     </li></ul></dd>
     
 
@@ -2926,7 +2928,7 @@ Sets the `no-minutes` attribute.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1080">line 1080</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1100">line 1100</a>
     </li></ul></dd>
     
 
@@ -3033,7 +3035,7 @@ Sets the `no-seconds` attribute.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1109">line 1109</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1129">line 1129</a>
     </li></ul></dd>
     
 
@@ -3188,7 +3190,7 @@ Sets the `no-seconds` attribute.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line271">line 271</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line285">line 285</a>
     </li></ul></dd>
     
 
@@ -3298,7 +3300,7 @@ Sets the `no-seconds` attribute.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1070">line 1070</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1090">line 1090</a>
     </li></ul></dd>
     
 
@@ -3404,7 +3406,7 @@ Sets the `no-seconds` attribute.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1157">line 1157</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1177">line 1177</a>
     </li></ul></dd>
     
 
@@ -3510,7 +3512,7 @@ Sets the `no-seconds` attribute.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1099">line 1099</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1119">line 1119</a>
     </li></ul></dd>
     
 
@@ -3616,7 +3618,7 @@ Sets the `no-seconds` attribute.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1128">line 1128</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1148">line 1148</a>
     </li></ul></dd>
     
 
@@ -3723,7 +3725,7 @@ the keypress event of the input
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line986">line 986</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1006">line 1006</a>
     </li></ul></dd>
     
 
@@ -3819,7 +3821,7 @@ are being used they don't affect other controls (like volume on plyr)
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1008">line 1008</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1028">line 1028</a>
     </li></ul></dd>
     
 
@@ -3907,7 +3909,7 @@ are being used they don't affect other controls (like volume on plyr)
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line214">line 214</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line228">line 228</a>
     </li></ul></dd>
     
 
@@ -4017,7 +4019,7 @@ are being used they don't affect other controls (like volume on plyr)
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line334">line 334</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line349">line 349</a>
     </li></ul></dd>
     
 
@@ -4173,7 +4175,7 @@ Also available through the `days-divider` attribute.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1179">line 1179</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1199">line 1199</a>
     </li></ul></dd>
     
 
@@ -4329,7 +4331,7 @@ Also available through the `hours-divider` attribute.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1168">line 1168</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1188">line 1188</a>
     </li></ul></dd>
     
 
@@ -4484,7 +4486,7 @@ Also available through the `hours-divider` attribute.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line300">line 300</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line314">line 314</a>
     </li></ul></dd>
     
 
@@ -4640,7 +4642,7 @@ Also available through the `microseconds-divider` attribute.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1232">line 1232</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1252">line 1252</a>
     </li></ul></dd>
     
 
@@ -4796,7 +4798,7 @@ Also available through the `minutes-divider` attribute.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1210">line 1210</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1230">line 1230</a>
     </li></ul></dd>
     
 
@@ -4952,7 +4954,7 @@ Also available through the `seconds-divider` attribute.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1221">line 1221</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1241">line 1241</a>
     </li></ul></dd>
     
 
@@ -5059,7 +5061,7 @@ Sets the `show-days` attribute.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1189">line 1189</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1209">line 1209</a>
     </li></ul></dd>
     
 
@@ -5166,7 +5168,7 @@ Removes the `no-hours` attribute.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1061">line 1061</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1081">line 1081</a>
     </li></ul></dd>
     
 
@@ -5273,7 +5275,7 @@ Removes the `no-microseconds` attribute.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1148">line 1148</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1168">line 1168</a>
     </li></ul></dd>
     
 
@@ -5380,7 +5382,7 @@ Removes the `no-minutes` attribute.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1090">line 1090</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1110">line 1110</a>
     </li></ul></dd>
     
 
@@ -5487,7 +5489,7 @@ Removes the `no-seconds` attribute.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1119">line 1119</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1139">line 1139</a>
     </li></ul></dd>
     
 
@@ -5593,7 +5595,7 @@ Removes the `no-seconds` attribute.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1283">line 1283</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1303">line 1303</a>
     </li></ul></dd>
     
 
@@ -5699,7 +5701,7 @@ Removes the `no-seconds` attribute.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line354">line 354</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line370">line 370</a>
     </li></ul></dd>
     
 
@@ -5806,7 +5808,7 @@ The days field keeps a one-character wider minimum than the other fields.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1242">line 1242</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1262">line 1262</a>
     </li></ul></dd>
     
 
@@ -5961,7 +5963,7 @@ The days field keeps a one-character wider minimum than the other fields.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line478">line 478</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line496">line 496</a>
     </li></ul></dd>
     
 
@@ -6031,7 +6033,7 @@ The days field keeps a one-character wider minimum than the other fields.
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Tue Nov 10 2026 15:33:33 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Tue Nov 10 2026 16:23:05 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>

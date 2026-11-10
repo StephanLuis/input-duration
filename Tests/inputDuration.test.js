@@ -96,10 +96,29 @@ test('named form value stays synchronized with the duration', () => {
     const hours = element.shadowRoot.querySelector('.sH');
     hours.value = '12';
     hours.dispatchEvent(new window.Event('input', { bubbles: true }));
+    assert.equal(element.value, '05:05:05.005');
+    assert.equal(formValues.get(element), '05:05:05.005');
+    hours.dispatchEvent(new window.Event('change', { bubbles: true }));
+    assert.equal(element.value, '12:05:05.005');
     assert.equal(formValues.get(element), '12:05:05.005');
 
     element.value = '';
     assert.equal(formValues.get(element), '00:00:00.000');
+});
+
+test('host change event reports the newly committed value', () => {
+    const element = createInputDuration();
+    const hours = element.shadowRoot.querySelector('.sH');
+    let observedValue;
+    element.addEventListener('change', () => {
+        observedValue = element.value;
+    });
+
+    hours.value = '3';
+    hours.dispatchEvent(new window.Event('change', { bubbles: true }));
+
+    assert.equal(hours.value, '03');
+    assert.equal(observedValue, '03:00:00.000');
 });
 
 test('required reports value missing until a value is set or edited', () => {
@@ -123,19 +142,51 @@ test('required reports value missing until a value is set or edited', () => {
     assert.equal(element.validity.valueMissing, true);
 });
 
-test('incomplete field edits are invalid until they form a complete duration', () => {
+test('incomplete field edits do not affect the committed value until change', () => {
     const element = createInputDuration();
     element.setAttribute('required', '');
     const hours = element.shadowRoot.querySelector('.sH');
 
     hours.value = '1';
     hours.dispatchEvent(new window.Event('input', { bubbles: true }));
-    assert.equal(element.validity.badInput, true);
+    assert.equal(element.value, '00:00:00.000');
+    assert.equal(element.validity.valueMissing, true);
     assert.equal(formValues.get(element), null);
 
     hours.dispatchEvent(new window.Event('change', { bubbles: true }));
+    assert.equal(hours.value, '01');
+    assert.equal(element.value, '01:00:00.000');
     assert.equal(element.validity.valid, true);
     assert.equal(formValues.get(element), '01:00:00.000');
+});
+
+test('up and down arrows commit single-digit values only after change', () => {
+    for (const key of ['ArrowUp', 'ArrowDown']) {
+        const element = createInputDuration();
+        element.setAttribute('required', '');
+        const hours = element.shadowRoot.querySelector('.sH');
+        assert.equal(element.validity.valueMissing, true);
+        hours.focus();
+        hours.dispatchEvent(new window.KeyboardEvent('keydown', {
+            key,
+            bubbles: true
+        }));
+
+        hours.value = '9';
+        hours.dispatchEvent(new window.Event('input', { bubbles: true }));
+        assert.equal(element.value, '00:00:00.000');
+        assert.equal(element.validity.valueMissing, true);
+        assert.equal(element.validationMessage, 'Please enter a duration.');
+        assert.equal(formValues.get(element), null);
+
+        hours.dispatchEvent(new window.Event('change', { bubbles: true }));
+
+        assert.equal(hours.value, '09');
+        assert.equal(element.value, '09:00:00.000');
+        assert.equal(element.validity.valid, true);
+        assert.equal(element.validationMessage, '');
+        assert.equal(formValues.get(element), '09:00:00.000');
+    }
 });
 
 test('form disabled callback disables and enables all duration fields', () => {
@@ -293,14 +344,22 @@ test('days are opt-in and support extended and friendly duration formats', () =>
     assert.equal(element.value, '184:05:10:10.006');
     assert.equal(element.dayFriendlyValue, '184d 05h 10m 10.006s');
     assert.equal(dayField.oldValue, '184');
+    dayField.value = '185';
+    dayField.dispatchEvent(new window.Event('input', { bubbles: true }));
+    assert.equal(element.value, '184:05:10:10.006');
+    assert.equal(element.dayFriendlyValue, '184d 05h 10m 10.006s');
+    dayField.dispatchEvent(new window.Event('change', { bubbles: true }));
+    assert.equal(element.value, '185:05:10:10.006');
+    assert.equal(element.dayFriendlyValue, '185d 05h 10m 10.006s');
+
     dayField.value = '-1';
     dayField.dispatchEvent(new window.Event('input', { bubbles: true }));
-    assert.equal(dayField.value, '184');
+    assert.equal(dayField.value, '185');
 
     element.hideDays();
     assert.equal(dayField.style.display, 'none');
-    assert.equal(element.value, '184:05:10:10.006');
-    assert.equal(element.dayFriendlyValue, '184d 05h 10m 10.006s');
+    assert.equal(element.value, '185:05:10:10.006');
+    assert.equal(element.dayFriendlyValue, '185d 05h 10m 10.006s');
 });
 
 test('days divider can be customized and extended formats are range-checked', () => {
@@ -489,6 +548,32 @@ test('numeric input advances only one field at a time', () => {
 
         assert.equal(inputs.activeElement, nextInput);
     }
+});
+
+test('last visible seconds and hours fields blur after two digits', () => {
+    const secondsElement = createInputDuration();
+    secondsElement.setAttribute('no-microseconds', '');
+    const seconds = secondsElement.shadowRoot.querySelector('.sS');
+    seconds.focus();
+    seconds.value = '5';
+    seconds.dispatchEvent(new window.Event('input', { bubbles: true }));
+    assert.equal(secondsElement.shadowRoot.activeElement, seconds);
+
+    seconds.value = '59';
+    seconds.dispatchEvent(new window.Event('input', { bubbles: true }));
+    assert.equal(secondsElement.shadowRoot.activeElement, null);
+
+    const hoursElement = createInputDuration();
+    hoursElement.setAttribute('no-minutes', '');
+    const hours = hoursElement.shadowRoot.querySelector('.sH');
+    hours.focus();
+    hours.value = '1';
+    hours.dispatchEvent(new window.Event('input', { bubbles: true }));
+    assert.equal(hoursElement.shadowRoot.activeElement, hours);
+
+    hours.value = '12';
+    hours.dispatchEvent(new window.Event('input', { bubbles: true }));
+    assert.equal(hoursElement.shadowRoot.activeElement, null);
 });
 
 test('up and down arrow adjustments keep focus on the active segment', async () => {
