@@ -96,6 +96,18 @@
             overflow-wrap: anywhere;
         }
 
+        pre {
+            margin: 8px 0 0;
+            padding: 14px 16px;
+            overflow-x: auto;
+            border: 1px solid #d2e2f2;
+            border-radius: 10px;
+            background: #f7fbff;
+            color: #172b45;
+            font-size: .9rem;
+            line-height: 1.5;
+        }
+
         .note {
             margin-bottom: 0;
             font-size: .9rem;
@@ -147,6 +159,15 @@
             `.value` uses `D:HH:mm:ss.SSS` in days mode. `dayFriendlyValue` includes unit labels,
             such as `2d 03h 04m 05.006s`.
         </p>
+        <section aria-labelledby="markup-heading">
+            <h2 id="markup-heading">Element markup</h2>
+            <pre><code>&lt;input-duration
+  id="duration"
+  show-days
+  aria-labelledby="duration-label"
+  value="2:03:04:05.006"&gt;
+&lt;/input-duration&gt;</code></pre>
+        </section>
         <a class="back-link" href="https://stephanluis.github.io/input-duration/">Back to project demo</a>
     </main>
 
