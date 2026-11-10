@@ -1,6 +1,6 @@
 {
   "name": "input-duration",
-  "version": "3.5.0",
+  "version": "3.5.1",
   "author": "Stephan Luis <stephan@learnsense.org>",
   "description": "A JavaScript web component for entering elapsed durations with millisecond precision, optional days, and a fixed HH:mm:ss.SSS format by default.",
   "browser": "./index.js",
