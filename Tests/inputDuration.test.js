@@ -412,3 +412,35 @@ test('numeric input advances only one field at a time', () => {
         assert.equal(inputs.activeElement, nextInput);
     }
 });
+
+test('up and down arrow adjustments keep focus on the active segment', async () => {
+    const element = createInputDuration();
+    const shadow = element.shadowRoot;
+    const minutes = shadow.querySelector('.sM');
+    const seconds = shadow.querySelector('.sS');
+    minutes.focus();
+
+    for (const [key, value] of [['ArrowUp', '01'], ['ArrowUp', '02'], ['ArrowDown', '01']]) {
+        minutes.dispatchEvent(new window.KeyboardEvent('keydown', {
+            key,
+            bubbles: true
+        }));
+        minutes.value = value;
+        minutes.dispatchEvent(new window.Event('input', { bubbles: true }));
+
+        assert.equal(shadow.activeElement, minutes);
+        assert.equal(seconds.value, '00');
+    }
+
+    await new Promise(resolve => window.setTimeout(resolve, 10));
+
+    minutes.dispatchEvent(new window.KeyboardEvent('keydown', {
+        key: 'ArrowUp',
+        bubbles: true
+    }));
+    minutes.value = '02';
+    minutes.dispatchEvent(new window.Event('input', { bubbles: true }));
+
+    assert.equal(shadow.activeElement, minutes);
+    assert.equal(seconds.value, '00');
+});

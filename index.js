@@ -480,14 +480,24 @@ class InputDuration extends HTMLElement {
 
                     // these keep the input selected
                     case event.key == "ArrowUp":
-
-                        setTimeout(function () { mE.activeElement.select(); }, 5);
+                        et.suppressAutoAdvance = true;
+                        setTimeout(function () {
+                            et.suppressAutoAdvance = false;
+                            if (mE.activeElement) {
+                                mE.activeElement.select();
+                            }
+                        }, 5);
 
                         break;
 
                     case event.key == "ArrowDown":
-
-                        setTimeout(function () { mE.activeElement.select(); }, 5);
+                        et.suppressAutoAdvance = true;
+                        setTimeout(function () {
+                            et.suppressAutoAdvance = false;
+                            if (mE.activeElement) {
+                                mE.activeElement.select();
+                            }
+                        }, 5);
 
                         break;
 
@@ -729,7 +739,7 @@ class InputDuration extends HTMLElement {
             inputElement.oldValue = inputElement.value;
 
             inputElement.addEventListener('input', function () {
-                if (inputFilter(this.value)) {
+                if (inputFilter(this.value, !this.suppressAutoAdvance)) {
                     this.oldValue = this.value;
                 } else {
                     this.value = this.oldValue;
@@ -741,12 +751,12 @@ class InputDuration extends HTMLElement {
 
         var sH = this.myElement.querySelector('input.sH');
 
-        setInputFilter(sH, function (value) {
+        setInputFilter(sH, function (value, shouldAdvance) {
 
             var newV = /^([0-9]?|[0-9][0-9]?)$/.test(value);
 
 
-            if (newV && value.length === 2) {
+            if (shouldAdvance && newV && value.length === 2) {
 
                 mE.querySelector('input.sM').focus();
                 mE.querySelector('input.sM').select();
@@ -758,12 +768,12 @@ class InputDuration extends HTMLElement {
         });
 
         var sM = this.myElement.querySelector('input.sM');
-        setInputFilter(sM, function (value) {
+        setInputFilter(sM, function (value, shouldAdvance) {
 
 
             var newV = /^([0-9]?|[0-5][0-9]?)$/.test(value);
 
-            if (newV && (value > 5 || value.length === 2)) {
+            if (shouldAdvance && newV && (value > 5 || value.length === 2)) {
 
                 mE.querySelector('input.sS').focus();
                 mE.querySelector('input.sS').select();
@@ -775,11 +785,11 @@ class InputDuration extends HTMLElement {
         });
 
         var sS = this.myElement.querySelector('input.sS');
-        setInputFilter(sS, function (value) {
+        setInputFilter(sS, function (value, shouldAdvance) {
 
             var newV = /^([0-9]?|[0-5][0-9]?)$/.test(value);
 
-            if (newV && (value > 5 || value.length === 2)) {
+            if (shouldAdvance && newV && (value > 5 || value.length === 2)) {
 
                 mE.querySelector('input.sMS').focus();
                 mE.querySelector('input.sMS').select();
