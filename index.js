@@ -18,11 +18,13 @@
 /**
  * Class for the Input-Duration webcomponent
  *
- * Boolean attributes `no-hours`, `no-minutes`, `no-seconds`, and
- * `no-microseconds` hide their respective fields. String attributes
+ * Boolean attributes `show-days`, `no-hours`, `no-minutes`, `no-seconds`, and
+ * `no-microseconds` control field visibility. String attributes
  * `hours-divider`, `minutes-divider`, `seconds-divider`, and
- * `microseconds-divider` customize the separators; the last adds a suffix
- * after milliseconds. Divider values are rendered as text.
+ * `microseconds-divider` customize the separators; `days-divider` customizes
+ * the day label. Divider values are rendered as text.
+ * The days field is slightly wider than other numeric fields and has extra
+ * spacing before its divider to emphasize the less-common unit.
  * The element is form-associated in supporting browsers; use `name`,
  * `required`, and `disabled` attributes for form submission and validation.
  *
@@ -46,10 +48,12 @@ class InputDuration extends HTMLElement {
         return [
             'value',
             'required',
+            'show-days',
             'no-hours',
             'no-minutes',
             'no-seconds',
             'no-microseconds',
+            'days-divider',
             'hours-divider',
             'minutes-divider',
             'seconds-divider',
@@ -93,6 +97,15 @@ class InputDuration extends HTMLElement {
         if (name !== 'value') {
             if (name === 'required') {
                 this.updateFormValue();
+            } else if (name === 'show-days') {
+                if (newValue !== null && Number(this.myElement.querySelector('.sD').value) === 0) {
+                    const hours = Number(this.myElement.querySelector('.sH').value);
+                    this.myElement.querySelector('.sD').value = String(Math.floor(hours / 24));
+                    this.myElement.querySelector('.sH').value = String(hours % 24).padStart(2, '0');
+                }
+                this.updateVisibleFields();
+                this.updateDividers();
+                this.updateFormValue();
             } else {
                 this.updateVisibleFields();
                 this.updateDividers();
@@ -113,26 +126,48 @@ class InputDuration extends HTMLElement {
     /**
      * get the input-duration value, pulls values from each input
      * so in js use var x = document.querySelector("#bobPrepop").value; 
-     * @returns {?string} Duration in `HH:mm:ss.SSS` format, or null before initialization.
+     * @returns {?string} Duration in `HH:mm:ss.SSS` or `D:HH:mm:ss.SSS` format.
      */
 
     get value() {
-
-        // return this.getAttribute('value');
-
-        if (this.myElement.querySelector('input[name="startHours"]') !== null) {
-
-            return this.myElement.querySelector('input[name="startHours"]').value +
-                ':' + this.myElement.querySelector('input[name="startMinutes"]').value +
-                ':' + this.myElement.querySelector('input[name="startSeconds"]').value +
-                '.' + this.myElement.querySelector('input[name="startMilliSecs"]').value;
-
-        }
-        else {
-
+        const hoursInput = this.myElement.querySelector('input[name="startHours"]');
+        if (hoursInput === null) {
             return null;
-
         }
+
+        const days = Number(this.myElement.querySelector('.sD').value) || 0;
+        const hours = hoursInput.value;
+        const minutes = this.myElement.querySelector('input[name="startMinutes"]').value;
+        const seconds = this.myElement.querySelector('input[name="startSeconds"]').value;
+        const milliseconds = this.myElement.querySelector('input[name="startMilliSecs"]').value;
+
+        if (this.hasAttribute('show-days') || days > 0) {
+            return `${days}:${hours}:${minutes}:${seconds}.${milliseconds}`;
+        }
+
+        return `${hours}:${minutes}:${seconds}.${milliseconds}`;
+    }
+
+    /**
+     * Gets a normalized, unit-labeled duration.
+     *
+     * @returns {?string} Duration such as `2d 03h 04m 05.006s`.
+     */
+    get dayFriendlyValue() {
+        if (this.value === null) {
+            return null;
+        }
+
+        const daysInput = Number(this.myElement.querySelector('.sD').value) || 0;
+        const hoursInput = Number(this.myElement.querySelector('.sH').value) || 0;
+        const totalHours = (this.hasAttribute('show-days') || daysInput > 0 ? daysInput * 24 : 0) + hoursInput;
+        const days = Math.floor(totalHours / 24);
+        const hours = totalHours % 24;
+        const minutes = Number(this.myElement.querySelector('.sM').value) || 0;
+        const seconds = Number(this.myElement.querySelector('.sS').value) || 0;
+        const milliseconds = Number(this.myElement.querySelector('.sMS').value) || 0;
+
+        return `${days}d ${String(hours).padStart(2, '0')}h ${String(minutes).padStart(2, '0')}m ${String(seconds).padStart(2, '0')}.${String(milliseconds).padStart(3, '0')}s`;
     }
 
     /**
@@ -200,7 +235,7 @@ class InputDuration extends HTMLElement {
 
 
     /**
-    * Sets the duration using the fixed `HH:mm:ss.SSS` format.
+    * Sets the duration using `HH:mm:ss.SSS` or `D:HH:mm:ss.SSS` format.
     *
     * @param {string} val - Duration string, such as `05:05:05.005`.
     * @returns {void}
@@ -231,30 +266,63 @@ class InputDuration extends HTMLElement {
      * Checks whether a value follows the supported duration format and ranges.
      *
      * @param {*} val - Candidate value.
-     * @returns {boolean} Whether the value is valid `HH:mm:ss.SSS`.
+     * @returns {boolean} Whether the value follows a supported duration format.
      */
     isValidValue(val) {
-        return typeof val === 'string' &&
-            /^[0-9]{2}:[0-5][0-9]:[0-5][0-9]\.[0-9]{3}$/.test(val);
+        if (typeof val !== 'string') {
+            return false;
+        }
+
+        const parts = val.split(/[:.]/);
+        if (parts.length === 4) {
+            return /^[0-9]{2}$/.test(parts[0]) &&
+                /^[0-5][0-9]$/.test(parts[1]) &&
+                /^[0-5][0-9]$/.test(parts[2]) &&
+                /^[0-9]{3}$/.test(parts[3]);
+        }
+
+        return parts.length === 5 &&
+            /^[0-9]+$/.test(parts[0]) &&
+            Number.isSafeInteger(Number(parts[0])) &&
+            Number(parts[0]) <= Math.floor(Number.MAX_SAFE_INTEGER / 24) &&
+            /^(?:[01][0-9]|2[0-3])$/.test(parts[1]) &&
+            /^[0-5][0-9]$/.test(parts[2]) &&
+            /^[0-5][0-9]$/.test(parts[3]) &&
+            /^[0-9]{3}$/.test(parts[4]);
     }
 
     /**
-     * Copies a validated duration string into the four shadow inputs.
+     * Copies a validated duration string into the shadow inputs.
      *
      * @param {string} val - Valid duration in `HH:mm:ss.SSS` format.
      * @returns {void}
      */
     setInputValues(val) {
         this.valueIsSet = true;
-        const timeArray = val.split(/[.:]+/);
-        const inputNames = ['startHours', 'startMinutes', 'startSeconds', 'startMilliSecs'];
+        const parts = val.split(/[:.]/);
+        const hasDays = parts.length === 5;
+        const days = hasDays ? Number(parts[0]) : 0;
+        let hours = Number(parts[hasDays ? 1 : 0]);
+        if (!hasDays && this.hasAttribute('show-days')) {
+            this.myElement.querySelector('.sD').value = String(Math.floor(hours / 24));
+            hours %= 24;
+        } else {
+            this.myElement.querySelector('.sD').value = String(days);
+        }
+        const daysInput = this.myElement.querySelector('.sD');
+        daysInput.oldValue = daysInput.value;
+        daysInput.style.width = `${Math.max(3, daysInput.value.length)}ch`;
 
+        const values = [String(hours).padStart(2, '0'), parts[hasDays ? 2 : 1], parts[hasDays ? 3 : 2], parts[hasDays ? 4 : 3]];
+        const inputNames = ['startHours', 'startMinutes', 'startSeconds', 'startMilliSecs'];
         inputNames.forEach((name, index) => {
             const input = this.myElement.querySelector(`input[name="${name}"]`);
-            input.value = timeArray[index];
+            input.value = values[index];
             input.oldValue = input.value;
         });
 
+        this.updateVisibleFields();
+        this.updateDividers();
         this.updateFormValue();
     }
 
@@ -264,7 +332,7 @@ class InputDuration extends HTMLElement {
      * @returns {void}
      */
     resetInputs(valueIsSet = false) {
-        const defaults = ['00', '00', '00', '000'];
+        const defaults = ['0', '00', '00', '00', '000'];
         const inputs = this.myElement.querySelectorAll('.timeCase input');
 
         this.valueIsSet = valueIsSet;
@@ -273,6 +341,8 @@ class InputDuration extends HTMLElement {
             input.oldValue = input.value;
         });
 
+        this.updateVisibleFields();
+        this.updateDividers();
         this.updateFormValue();
     }
 
@@ -297,7 +367,7 @@ class InputDuration extends HTMLElement {
             if (Object.keys(validity).length) {
                 const message = valueMissing
                     ? 'Please enter a duration.'
-                    : 'Enter a duration in HH:mm:ss.SSS format.';
+                    : 'Enter a duration in HH:mm:ss.SSS or D:HH:mm:ss.SSS format.';
                 const anchor = [...this.myElement.querySelectorAll('.timeCase input')]
                     .find(input => input.style.display !== 'none' && !input.disabled);
                 if (anchor) {
@@ -406,7 +476,7 @@ class InputDuration extends HTMLElement {
      * @returns {void}
      */
     warnInvalidValue(val) {
-        console.warn(`The specified value ${val} does not conform to the required format.  The format is "HH:mm:ss.SSS" where HH is 00-99, mm is 00-59, ss is 00-59, and SSS is 000-999.`);
+        console.warn(`The specified value ${val} does not conform to a supported duration format: "HH:mm:ss.SSS" (HH 00-99) or "D:HH:mm:ss.SSS" (HH 00-23); minutes and seconds must be 00-59 and milliseconds 000-999.`);
     }
 
 
@@ -444,38 +514,30 @@ class InputDuration extends HTMLElement {
 
         var mE = this.myElement;
 
-        // Left and Right arrow key toggle between HMSmS
-        // this depends on data-attributes ex. data-tp="1" in HTML
-
         this.myElement.querySelector("div.timeCase")
             .addEventListener('keydown', function (event) {
 
                 var et = event.target;
-                var tp_active = mE.activeElement.dataset.tp;
+                const visibleInputs = [...mE.querySelectorAll('.timeCase input')]
+                    .filter(input => input.style.display !== 'none');
+                const activeIndex = visibleInputs.indexOf(mE.activeElement);
 
                 switch (true) {
 
                     case event.key == "ArrowLeft":
-
-                        if (tp_active >= 2) {
-                            tp_active--;
+                        if (activeIndex > 0) {
+                            const nextInput = visibleInputs[activeIndex - 1];
+                            nextInput.focus();
+                            setTimeout(() => nextInput.select(), 5);
                         }
-
-                        et.parentElement.querySelector("[data-tp='" + tp_active + "']").focus();
-                        setTimeout(function () { et.parentElement.querySelector("[data-tp='" + tp_active + "']").select(); }, 5);
-
                         break;
 
                     case event.key == "ArrowRight":
-                        // tp_active = this.myElement.shadowRoot.activeElement.dataset.tp;
-
-                        if (tp_active <= 3) {
-                            tp_active++;
+                        if (activeIndex !== -1 && activeIndex < visibleInputs.length - 1) {
+                            const nextInput = visibleInputs[activeIndex + 1];
+                            nextInput.focus();
+                            setTimeout(() => nextInput.select(), 5);
                         }
-
-                        et.parentElement.querySelector("[data-tp='" + tp_active + "']").focus();
-                        setTimeout(function () { et.parentElement.querySelector("[data-tp='" + tp_active + "']").select(); }, 5);
-
                         break;
 
                     // these keep the input selected
@@ -527,13 +589,15 @@ class InputDuration extends HTMLElement {
         var template = document.createElement('template');
 
         template.innerHTML = `
-          <input type="number" class="sH D2 ts_digit" part="field field-hours" name="startHours" data-tp="1" min="-1" max="100" value="00" >
+          <input type="number" class="sD ts_digit" part="field field-days" name="startDays" data-tp="1" min="0" step="1" value="0" style="display: none">
+          <span class="bds-d" part="divider divider-days-hours" style="display: none">d </span>
+          <input type="number" class="sH D2 ts_digit" part="field field-hours" name="startHours" data-tp="2" min="-1" max="100" value="00" >
           <span class="bds-h" part="divider divider-hours-minutes">:</span>
-          <input type="number" class="sM D2 ts_digit" part="field field-minutes" name="startMinutes" data-tp="2" min="-1" max="60" value="00">
+          <input type="number" class="sM D2 ts_digit" part="field field-minutes" name="startMinutes" data-tp="3" min="-1" max="60" value="00">
           <span class="bds-m" part="divider divider-minutes-seconds">:</span>
-          <input type="number" class="sS D2 ts_digit" part="field field-seconds" name="startSeconds" data-tp="3" min="-1" max="60" value="00">
+          <input type="number" class="sS D2 ts_digit" part="field field-seconds" name="startSeconds" data-tp="4" min="-1" max="60" value="00">
           <span class="bds-s" part="divider divider-seconds-milliseconds">.</span>
-          <input type="number" class="sMS D3 ts_digit" part="field field-milliseconds" name="startMilliSecs" data-tp="4" min="-10" max="1010" step="10" value="000">
+          <input type="number" class="sMS D3 ts_digit" part="field field-milliseconds" name="startMilliSecs" data-tp="5" min="-10" max="1010" step="10" value="000">
           <span class="bds-ms" part="divider divider-milliseconds-suffix" style="display: none"></span>
           <div id="svgContainer" part="icon">
               <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
@@ -612,6 +676,11 @@ class InputDuration extends HTMLElement {
                     min-width: 3ch;
                 }
 
+                .timeCase input.sD {
+                    width: 3ch;
+                    min-width: 3ch;
+                }
+
                 .timeCase input::-webkit-outer-spin-button,
                 .timeCase input::-webkit-inner-spin-button {
                     margin: 0;
@@ -621,6 +690,10 @@ class InputDuration extends HTMLElement {
                 .timeCase span {
                     color: var(--input-duration-divider-color);
                     opacity: var(--input-duration-divider-opacity);
+                }
+
+                .timeCase .bds-d {
+                    margin-left: 0.04em;
                 }
 
                 #svgContainer {
@@ -667,15 +740,36 @@ class InputDuration extends HTMLElement {
         // Numeric Value looping (eventually this can be 'parameterised' refactored)
         // ex. 99 uparrow to 0 hours, 59 uparrow to 0 minutes and seconds, 990 uparrow to 010, downarrow 000 milliseconds
 
+        const sD = this.myElement.querySelector("input.sD");
         const sH = this.myElement.querySelector("input.sH");
-        sH.addEventListener('change', function (event) {
-
-            if (sH.value == 100) {
-                sH.value = '00';
+        sH.addEventListener('change', () => {
+            if (this.hasAttribute('show-days') || Number(sD.value) > 0) {
+                if (Number(sH.value) === 24) {
+                    sH.value = '00';
+                    const nextDay = Number(sD.value) + 1;
+                    if (Number.isSafeInteger(nextDay)) {
+                        sD.value = String(nextDay);
+                    }
+                } else if (Number(sH.value) === -1) {
+                    if (Number(sD.value) > 0) {
+                        sD.value = String(Number(sD.value) - 1);
+                        sH.value = '23';
+                    } else {
+                        sH.value = '00';
+                    }
+                }
+            } else {
+                if (sH.value == 100) {
+                    sH.value = '00';
+                }
+                if (sH.value == -1) {
+                    sH.value = 99;
+                }
             }
-            if (sH.value == -1) {
-                sH.value = 99;
-            }
+            sD.oldValue = sD.value;
+            sH.oldValue = sH.value;
+            sD.style.width = `${Math.max(3, sD.value.length)}ch`;
+            this.updateDividers();
 
         });
 
@@ -731,6 +825,7 @@ class InputDuration extends HTMLElement {
     addNumericInput() {
 
         const mE = this.myElement;
+        const owner = this;
 
         // https://stackoverflow.com/questions/469357/html-text-input-allow-only-numeric-input
         // Digit input 0-9  (typed in by user)
@@ -752,9 +847,11 @@ class InputDuration extends HTMLElement {
         var sH = this.myElement.querySelector('input.sH');
 
         setInputFilter(sH, function (value, shouldAdvance) {
-
-            var newV = /^([0-9]?|[0-9][0-9]?)$/.test(value);
-
+            const hourPattern = owner.hasAttribute('show-days') ||
+                Number(owner.myElement.querySelector('.sD').value) > 0
+                ? /^(?:[0-9]?|[01][0-9]?|2[0-3]?)$/
+                : /^(?:[0-9]?|[0-9][0-9]?)$/;
+            const newV = hourPattern.test(value);
 
             if (shouldAdvance && newV && value.length === 2) {
 
@@ -765,6 +862,25 @@ class InputDuration extends HTMLElement {
 
             return newV;
 
+        });
+
+        const sD = this.myElement.querySelector('input.sD');
+        setInputFilter(sD, function (value) {
+            const valid = /^\d*$/.test(value) && (value === '' || Number.isSafeInteger(Number(value)));
+            if (valid) {
+                sD.style.width = `${Math.max(3, value.length)}ch`;
+            }
+            return valid;
+        });
+        sD.addEventListener('change', function () {
+            if (this.value === '') {
+                this.value = '0';
+            }
+            this.value = String(Number(this.value));
+            this.oldValue = this.value;
+            this.style.width = `${Math.max(3, this.value.length)}ch`;
+            owner.updateDividers();
+            owner.updateFormValue();
         });
 
         var sM = this.myElement.querySelector('input.sM');
@@ -829,7 +945,7 @@ class InputDuration extends HTMLElement {
     add0s() {
 
         // input for hours, minutes, seconds
-        this.myElement.querySelectorAll('input').forEach(i => i.addEventListener('change', function () {
+        this.myElement.querySelectorAll('input:not(.sD)').forEach(i => i.addEventListener('change', function () {
             if (!isNaN(this.value) && this.value.length === 1) {
                 this.value = '0' + this.value;
             }
@@ -1054,6 +1170,37 @@ class InputDuration extends HTMLElement {
     }
 
     /**
+     * Replaces the day/hour separator.
+     * Also available through the `days-divider` attribute.
+     *
+     * @param {string} text - Divider text to display.
+     * @returns {void}
+     */
+    setDaysDivider(text) {
+        this.setAttribute('days-divider', text);
+    }
+
+    /**
+     * Shows the days field and its adjacent divider.
+     * Sets the `show-days` attribute.
+     *
+     * @returns {void}
+     */
+    showDays() {
+        this.setAttribute('show-days', '');
+    }
+
+    /**
+     * Hides the days field and its adjacent divider.
+     * Removes the `show-days` attribute.
+     *
+     * @returns {void}
+     */
+    hideDays() {
+        this.removeAttribute('show-days');
+    }
+
+    /**
      * Replaces the minutes/seconds separator.
      * Also available through the `minutes-divider` attribute.
      *
@@ -1088,6 +1235,7 @@ class InputDuration extends HTMLElement {
 
     /**
      * Synchronizes field and divider visibility with the `no-*` attributes.
+     * The days field keeps a one-character wider minimum than the other fields.
      *
      * @returns {void}
      */
@@ -1110,11 +1258,21 @@ class InputDuration extends HTMLElement {
             field.style.display = this.hasAttribute(attribute) ? 'none' : '';
         }
 
+        const showDays = this.hasAttribute('show-days');
+        const dayField = this.myElement.querySelector('.sD');
+        dayField.style.display = showDays ? '' : 'none';
+        dayField.style.width = `${Math.max(3, dayField.value.length)}ch`;
+        const dayMode = showDays || Number(dayField.value) > 0;
+        this.myElement.querySelector('.sH').max = dayMode ? '24' : '100';
+
         for (const [selector, attributes] of Object.entries(hiddenDividers)) {
             const divider = this.myElement.querySelector(selector);
             const shouldHide = attributes.some(attribute => this.hasAttribute(attribute));
             divider.style.display = shouldHide ? 'none' : '';
         }
+
+        const dayDivider = this.myElement.querySelector('.bds-d');
+        dayDivider.style.display = showDays && !this.hasAttribute('no-hours') ? '' : 'none';
     }
 
     /**
@@ -1123,17 +1281,32 @@ class InputDuration extends HTMLElement {
      * @returns {void}
      */
     updateDividers() {
+        const dayFormat = this.hasAttribute('show-days') ||
+            Number(this.myElement.querySelector('.sD').value) > 0;
         const dividers = {
-            'hours-divider': ['.bds-h', ':'],
-            'minutes-divider': ['.bds-m', ':'],
+            'days-divider': ['.bds-d', 'd '],
+            'hours-divider': ['.bds-h', dayFormat ? 'h ' : ':'],
+            'minutes-divider': ['.bds-m', dayFormat ? 'm ' : ':'],
             'seconds-divider': ['.bds-s', '.'],
-            'microseconds-divider': ['.bds-ms', '']
+            'microseconds-divider': ['.bds-ms', dayFormat ? 's' : '']
         };
 
         for (const [attribute, [selector, defaultText]] of Object.entries(dividers)) {
             const divider = this.myElement.querySelector(selector);
             const text = this.getAttribute(attribute) ?? defaultText;
             divider.textContent = text;
+            if (selector === '.bds-d') {
+                divider.style.display = this.hasAttribute('show-days') && !this.hasAttribute('no-hours') ? '' : 'none';
+            }
+            if (selector === '.bds-h') {
+                divider.style.display = this.hasAttribute('no-hours') || this.hasAttribute('no-minutes') ? 'none' : '';
+            }
+            if (selector === '.bds-m') {
+                divider.style.display = this.hasAttribute('no-minutes') || this.hasAttribute('no-seconds') ? 'none' : '';
+            }
+            if (selector === '.bds-s') {
+                divider.style.display = this.hasAttribute('no-seconds') || this.hasAttribute('no-microseconds') ? 'none' : '';
+            }
             if (selector === '.bds-ms') {
                 divider.style.display = text && !this.hasAttribute('no-microseconds') ? '' : 'none';
             }

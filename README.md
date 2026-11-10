@@ -47,7 +47,7 @@
   <p align="center">A compact duration input with a fixed, locale-independent display for hours, minutes, seconds, and milliseconds.</p>
 </div>
 
-Use `input-duration` when users need to enter a duration rather than a time of day: for example, a countdown, elapsed-time limit, or media offset. Its displayed value uses `HH:mm:ss.SSS` on every locale, without a locale-specific AM/PM presentation, and supports durations greater than 24 hours (currently up to 99 hours) with millisecond values, such as `30:00:00.125`.
+Use `input-duration` when users need to enter a duration rather than a time of day: for example, a countdown, elapsed-time limit, or media offset. Its default display uses `HH:mm:ss.SSS` on every locale, without a locale-specific AM/PM presentation, and supports durations up to 99 hours. An optional days field supports longer durations.
 
 HTML's built-in `<input type="time">` is for choosing a time of day, not entering elapsed time. HTML does not provide a native duration input with a fixed `HH:mm:ss.SSS` format or support for values over 24 hours; this web component fills that gap.
 
@@ -193,7 +193,7 @@ Here's why:
 
 HTML's `<input type="time">` represents a time of day. Browsers may localize its visible control (for example, showing a 12-hour clock with AM/PM), even though its value is standardized. It also cannot represent a duration longer than a day.
 
-`input-duration` is for duration values, not appointments or clock times. Its separate numeric fields present hours, minutes, seconds, and milliseconds in a fixed `HH:mm:ss.SSS` format. This avoids locale-dependent time-of-day presentation while allowing durations beyond 24 hours and millisecond values in a compact control.
+`input-duration` is for duration values, not appointments or clock times. Its separate numeric fields present hours, minutes, seconds, and milliseconds in a fixed `HH:mm:ss.SSS` format by default. An optional days field supports longer durations. This avoids locale-dependent time-of-day presentation while allowing millisecond values in a compact control.
 
 <!-- [![Product Name Screen Shot][product-screenshot]](https://example.com) -->
 
@@ -286,15 +286,19 @@ Individual duration fields can be hidden with boolean attributes:
 <input-duration no-hours no-minutes no-seconds no-microseconds></input-duration>
 ```
 
-Use `hideHours()`, `hideMinutes()`, `hideSeconds()`, and `hideMicroSeconds()` to hide fields, and the corresponding `show*()` methods to show them again. The existing `noHours()`, `noMinutes()`, `noSeconds()`, and `noMicroSeconds()` methods remain available as aliases for the `hide*()` methods. Hidden fields do not change the component's `HH:mm:ss.SSS` value format.
+The days field is hidden by default. Add `show-days` or call `showDays()` to display it. In days mode, hours range from `00` to `23` and roll over into days; dividers default to `d `, `h `, and `m `, followed by the decimal point and `s` suffix. The `.value` format becomes `D:HH:mm:ss.SSS` in days mode, such as `2:03:04:05.006`; legacy `HH:mm:ss.SSS` values continue to work and are normalized when days are shown. Call `hideDays()` to hide the field. Hiding a nonzero days field preserves its value and extended `.value` representation.
 
-Customize the separators with the `hours-divider`, `minutes-divider`, `seconds-divider`, and `microseconds-divider` attributes. The first three replace the separators between fields; `microseconds-divider` adds an optional suffix after milliseconds. For example:
+The read-only `.dayFriendlyValue` property returns a normalized, labeled string such as `2d 03h 04m 05.006s`, including when the days field is hidden.
+
+Use `hideHours()`, `hideMinutes()`, `hideSeconds()`, and `hideMicroSeconds()` to hide fields, and the corresponding `show*()` methods to show them again. The existing `noHours()`, `noMinutes()`, `noSeconds()`, and `noMicroSeconds()` methods remain available as aliases for the `hide*()` methods. Hidden fields do not change the component's value.
+
+Customize the separators with the `days-divider`, `hours-divider`, `minutes-divider`, `seconds-divider`, and `microseconds-divider` attributes. The first four replace the separators between fields; `microseconds-divider` adds an optional suffix after milliseconds. For example:
 
 ```html
-<input-duration hours-divider="h " minutes-divider="m " seconds-divider="s " microseconds-divider="ms"></input-duration>
+<input-duration show-days days-divider="d " hours-divider="h " minutes-divider="m " seconds-divider="." microseconds-divider="s"></input-duration>
 ```
 
-The equivalent methods are `setHoursDivider(text)`, `setMinutesDivider(text)`, `setSecondsDivider(text)`, and `setMicroSecondsDivider(text)`. Pass text as a string; it is rendered as text, not HTML. Remove an attribute to restore its default separator (or remove the milliseconds suffix).
+The equivalent methods are `setDaysDivider(text)`, `setHoursDivider(text)`, `setMinutesDivider(text)`, `setSecondsDivider(text)`, and `setMicroSecondsDivider(text)`. Pass text as a string; it is rendered as text, not HTML. Remove an attribute to restore its default separator (or remove the milliseconds suffix).
 
 If you would like to get or set values or to disable input-duration elemet, javascipt can do that: 
 
@@ -317,7 +321,7 @@ On browsers that support form-associated custom elements, give the component a `
 </form>
 ```
 
-The submitted form field is `duration=01:23:45.678`. Invalid intermediate edits fail constraint validation and are not submitted. The `disabled` attribute disables the internal fields and excludes the component from submission; the `disable()` and `enable()` methods are also available. A form reset restores the `value` attribute, or the zero display when no default value is provided. In browsers that support form-associated custom elements and restore form state, the component also restores the saved duration and whether it had been explicitly set.
+The submitted form field is `duration=01:23:45.678` in the default format, or `duration=2:03:04:05.006` when days are enabled. Invalid intermediate edits fail constraint validation and are not submitted. The `disabled` attribute disables the internal fields and excludes the component from submission; the `disable()` and `enable()` methods are also available. A form reset restores the `value` attribute, or the zero display when no default value is provided. In browsers that support form-associated custom elements and restore form state, the component also restores the saved duration and whether it had been explicitly set.
 
 ### Bootstrap styling
 
@@ -346,7 +350,7 @@ input-duration::part(field) {
 }
 ```
 
-Available parts are `control`, `field` (also `field-hours`, `field-minutes`, `field-seconds`, and `field-milliseconds`), `divider` (also `divider-hours-minutes`, `divider-minutes-seconds`, and `divider-seconds-milliseconds`), and `icon`. Supported CSS custom properties are `--input-duration-gap`, `--input-duration-padding`, `--input-duration-border-color`, `--input-duration-border-radius`, `--input-duration-background`, `--input-duration-color`, `--input-duration-focus-color`, `--input-duration-focus-outline`, `--input-duration-focus-outline-offset`, `--input-duration-invalid-color`, `--input-duration-divider-color`, `--input-duration-divider-opacity`, `--input-duration-disabled-color`, and `--input-duration-icon-color`.
+Available parts are `control`, `field` (also `field-days`, `field-hours`, `field-minutes`, `field-seconds`, and `field-milliseconds`), `divider` (also `divider-days-hours`, `divider-hours-minutes`, `divider-minutes-seconds`, and `divider-seconds-milliseconds`), and `icon`. Supported CSS custom properties are `--input-duration-gap`, `--input-duration-padding`, `--input-duration-border-color`, `--input-duration-border-radius`, `--input-duration-background`, `--input-duration-color`, `--input-duration-focus-color`, `--input-duration-focus-outline`, `--input-duration-focus-outline-offset`, `--input-duration-invalid-color`, `--input-duration-divider-color`, `--input-duration-divider-opacity`, `--input-duration-disabled-color`, and `--input-duration-icon-color`.
 
 and
 
@@ -469,7 +473,7 @@ export class DurationExampleComponent {
 </div>
 ```
 
-These examples retrieve the value on demand; the component does not currently provide a documented host-level change event. For native form submission, add a `name` attribute as shown in [HTML form submission](#html-form-submission). Use the component's `.value` property to read or set its `HH:mm:ss.SSS` duration.
+These examples retrieve the value on demand; the component does not currently provide a documented host-level change event. For native form submission, add a `name` attribute as shown in [HTML form submission](#html-form-submission). Use `.value` to read or set the duration, and `.dayFriendlyValue` for a unit-labeled string.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -490,7 +494,7 @@ These examples retrieve the value on demand; the component does not currently pr
 ### 2026
 
 - [ ] Document and verify a versioned Chrome `<input type="time">` behavior profile: compare the [WHATWG standard](https://html.spec.whatwg.org/multipage/input.html#time-state-(type=time)) with [Blink's implementation](https://chromium.googlesource.com/chromium/src/+/main/third_party/blink/renderer/core/html/forms/time_input_type.cc) and [time-input tests](https://chromium.googlesource.com/chromium/src/+/main/third_party/blink/web_tests/fast/forms/time/) (including [multiple-field UI tests](https://chromium.googlesource.com/chromium/src/+/main/third_party/blink/web_tests/fast/forms/time-multiple-fields/)). Record Chrome version, OS, and locale; verify relevant keyboard and segment-editing behavior, then adapt `input-duration` where appropriate without assuming platform-specific time-picker UI is universal.
-- [ ] Add configurable duration segments and presentation, including optional days, hiding units, and custom dividers. Keep `HH:mm:ss.SSS` as the default. ([html-duration-picker.js](https://nadchif.github.io/html-duration-picker.js/), [input-duration-element](https://muan.github.io/input-duration-element/))
+- [x] Add an optional days field with 24-hour rollover, unit dividers, and `dayFriendlyValue`; keep `HH:mm:ss.SSS` as the default. ([html-duration-picker.js](https://nadchif.github.io/html-duration-picker.js/), [input-duration-element](https://muan.github.io/input-duration-element/))
 - [ ] Support declarative minimum and maximum values with consistent validation and boundary behavior. ([html-duration-picker.js](https://nadchif.github.io/html-duration-picker.js/))
 - [ ] Improve accessibility with per-segment labels, group semantics, and documented screen-reader and keyboard behavior. ([time-input-polyfill](https://github.com/Dan503/time-input-polyfill/) demonstrates accessible time-field interactions.)
 - [x] Submit the duration through a `name` attribute in browsers that support form-associated custom elements.
@@ -509,7 +513,7 @@ This comparison summarizes capabilities described in each project's documentatio
 
 | Control | Display / units | Value representation | Bounds | Precision / interaction | Estimated users* |
 |---|---|---|---|---|---:|
-| [input-duration](https://github.com/StephanLuis/input-duration) | Fixed `HH:mm:ss.SSS` (00–99 hours); `noHours()` can hide hours | `HH:mm:ss.SSS` string via `.value` | No public min/max options documented | Milliseconds; digit entry, arrow navigation and increment | [~748](https://api.npmjs.org/downloads/point/last-week/input-duration) |
+| [input-duration](https://github.com/StephanLuis/input-duration) | `HH:mm:ss.SSS` by default (00–99 hours); optional days via `show-days` | `HH:mm:ss.SSS` normally; `D:HH:mm:ss.SSS` with days | No public min/max options documented | Milliseconds; digit entry, arrow navigation and increment | [~748](https://api.npmjs.org/downloads/point/last-week/input-duration) |
 | [timepoint-selection](https://github.com/naomiaro/timepoint-selection) | Selectable `dd:hh:mm:ss`, `dd:hh:mm`, `hh:mm:ss`, `hh:mm`, or `mm:ss`; custom unit labels | Numeric seconds through `getValue()` / `setValue()` | Configurable maximum / rollover | Seconds; keyboard navigation, arrow increments, rollover | [~22](https://api.npmjs.org/downloads/point/last-week/timepoint-selection) |
 | [html-duration-picker.js](https://github.com/nadchif/html-duration-picker.js) | `HH:MM:SS`; optional hidden seconds | Formatted text in an enhanced native `<input>` | Configurable minimum and maximum durations | Seconds in documented formats; interaction details not specified | [~905](https://api.npmjs.org/downloads/point/last-week/html-duration-picker) |
 | [muan/input-duration-element](https://github.com/muan/input-duration-element) | Hours, minutes, seconds; customizable dividers/slots | Numeric seconds; `value` and `change` event | `max` documented; `min` and validation listed as TODOs | Demo covers durations up to 180 seconds; precision beyond seconds not specified | [~9](https://api.npmjs.org/downloads/point/last-week/input-duration-element) |

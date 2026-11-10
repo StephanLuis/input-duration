@@ -19,7 +19,7 @@
 
     <h1 class="page-title">Class: InputDuration</h1>
 
-
+    
 
 
 
@@ -27,35 +27,39 @@
 <section>
 
 <header>
-
+    
         <h2><span class="attribs"><span class="type-signature"></span></span>InputDuration<span class="signature">()</span><span class="type-signature"></span></h2>
-
-
+        
+    
 </header>
 
 <article>
     <div class="container-overview">
+    
+        
 
+    
 
-
-
-
-
+    
     <h4 class="name" id="InputDuration"><span class="type-signature"></span>new InputDuration<span class="signature">()</span><span class="type-signature"></span></h4>
+    
 
-
-
+    
 
 
 
 <div class="description">
     Class for the Input-Duration webcomponent
 
-Boolean attributes `no-hours`, `no-minutes`, `no-seconds`, and
-`no-microseconds` hide their respective fields. String attributes
+Boolean attributes `show-days`, `no-hours`, `no-minutes`, `no-seconds`, and
+`no-microseconds` control field visibility. String attributes
 `hours-divider`, `minutes-divider`, `seconds-divider`, and
-`microseconds-divider` customize the separators; the last adds a suffix
-after milliseconds. Divider values are rendered as text.
+`microseconds-divider` customize the separators; `days-divider` customizes
+the day label. Divider values are rendered as text.
+The days field is slightly wider than other numeric fields and has extra
+spacing before its divider to emphasize the less-common unit.
+The element is form-associated in supporting browsers; use `name`,
+`required`, and `disabled` attributes for form submission and validation.
 </div>
 
 
@@ -72,42 +76,42 @@ after milliseconds. Divider values are rendered as text.
 
 <dl class="details">
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
         <a href="index.js.html">index.js</a>, <a href="index.js.html#line18">line 18</a>
     </li></ul></dd>
+    
 
+    
 
+    
 
-
-
-
-
+    
 </dl>
 
 
@@ -129,18 +133,18 @@ after milliseconds. Divider values are rendered as text.
 
 
     <h5>Example</h5>
-
+    
     <pre class="prettyprint"><code>&lt;input-duration no-microseconds hours-divider="h " microseconds-divider="ms">&lt;/input-duration></code></pre>
 
 
 
-
+    
     </div>
 
-
+    
         <h3 class="subsection-title">Extends</h3>
 
-
+        
 
 
     <ul>
@@ -148,23 +152,209 @@ after milliseconds. Divider values are rendered as text.
     </ul>
 
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
-
-
-
-
-
-
-
+    
         <h3 class="subsection-title">Members</h3>
 
+        
+            
+<h4 class="name" id="dayFriendlyValue"><span class="type-signature"></span>dayFriendlyValue<span class="type-signature"></span></h4>
 
 
+
+
+<div class="description">
+    Gets a normalized, unit-labeled duration.
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line156">line 156</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="disabled"><span class="type-signature"></span>disabled<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    Whether the control is disabled.
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line223">line 223</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="disabled"><span class="type-signature"></span>disabled<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    Sets whether the control is disabled.
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line232">line 232</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
 <h4 class="name" id="myElement"><span class="type-signature"></span>myElement<span class="type-signature"> :ShadowRoot</span></h4>
 
 
@@ -179,7 +369,7 @@ after milliseconds. Divider values are rendered as text.
     <h5>Type:</h5>
     <ul>
         <li>
-
+            
 <span class="param-type">ShadowRoot</span>
 
 
@@ -192,42 +382,42 @@ after milliseconds. Divider values are rendered as text.
 
 <dl class="details">
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line63">line 63</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line77">line 77</a>
     </li></ul></dd>
+    
 
+    
 
+    
 
-
-
-
-
+    
 </dl>
 
 
@@ -235,8 +425,132 @@ after milliseconds. Divider values are rendered as text.
 
 
 
+        
+            
+<h4 class="name" id="validationMessage"><span class="type-signature"></span>validationMessage<span class="type-signature"></span></h4>
 
 
+
+
+<div class="description">
+    Validation message for the current form state.
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line187">line 187</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="validity"><span class="type-signature"></span>validity<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    Current form validity state.
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line178">line 178</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
 <h4 class="name" id="value"><span class="type-signature"></span>value<span class="type-signature"></span></h4>
 
 
@@ -255,42 +569,42 @@ so in js use var x = document.querySelector("#bobPrepop").value;
 
 <dl class="details">
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line105">line 105</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line132">line 132</a>
     </li></ul></dd>
+    
 
+    
 
+    
 
-
-
-
-
+    
 </dl>
 
 
@@ -298,15 +612,15 @@ so in js use var x = document.querySelector("#bobPrepop").value;
 
 
 
-
-
+        
+            
 <h4 class="name" id="value"><span class="type-signature"></span>value<span class="type-signature"></span></h4>
 
 
 
 
 <div class="description">
-    Sets the duration using the fixed `HH:mm:ss.SSS` format.
+    Sets the duration using `HH:mm:ss.SSS` or `D:HH:mm:ss.SSS` format.
 </div>
 
 
@@ -317,42 +631,42 @@ so in js use var x = document.querySelector("#bobPrepop").value;
 
 <dl class="details">
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line132">line 132</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line244">line 244</a>
     </li></ul></dd>
+    
 
+    
 
+    
 
-
-
-
-
+    
 </dl>
 
 
@@ -360,8 +674,70 @@ so in js use var x = document.querySelector("#bobPrepop").value;
 
 
 
+        
+            
+<h4 class="name" id="willValidate"><span class="type-signature"></span>willValidate<span class="type-signature"></span></h4>
 
 
+
+
+<div class="description">
+    Whether this control participates in constraint validation.
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line196">line 196</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
 <h4 class="name" id=".observedAttributes"><span class="type-signature">(static) </span>observedAttributes<span class="type-signature"></span></h4>
 
 
@@ -379,42 +755,42 @@ so in js use var x = document.querySelector("#bobPrepop").value;
 
 <dl class="details">
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line41">line 41</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line47">line 47</a>
     </li></ul></dd>
+    
 
+    
 
+    
 
-
-
-
-
+    
 </dl>
 
 
@@ -422,22 +798,22 @@ so in js use var x = document.querySelector("#bobPrepop").value;
 
 
 
+        
+    
 
-
-
-
+    
         <h3 class="subsection-title">Methods</h3>
 
+        
+            
 
+    
 
-
-
-
-
+    
     <h4 class="name" id="add0s"><span class="type-signature"></span>add0s<span class="signature">()</span><span class="type-signature"></span></h4>
+    
 
-
-
+    
 
 
 
@@ -460,49 +836,49 @@ the change event of the input
 
 <dl class="details">
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line606">line 606</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line945">line 945</a>
     </li></ul></dd>
+    
 
+    
 
-
-
-
+    
     <dt class="tag-see">See:</dt>
     <dd class="tag-see">
         <ul>
             <li>boot()</li>
         </ul>
     </dd>
+    
 
-
-
+    
 </dl>
 
 
@@ -524,16 +900,16 @@ the change event of the input
 
 
 
+        
+            
 
+    
 
-
-
-
-
+    
     <h4 class="name" id="addArrowKeyInput"><span class="type-signature"></span>addArrowKeyInput<span class="signature">()</span><span class="type-signature"></span></h4>
+    
 
-
-
+    
 
 
 
@@ -556,49 +932,49 @@ the change event of the input
 
 <dl class="details">
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line235">line 235</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line513">line 513</a>
     </li></ul></dd>
+    
 
+    
 
-
-
-
+    
     <dt class="tag-see">See:</dt>
     <dd class="tag-see">
         <ul>
             <li>boot()</li>
         </ul>
     </dd>
+    
 
-
-
+    
 </dl>
 
 
@@ -620,16 +996,16 @@ the change event of the input
 
 
 
+        
+            
 
+    
 
-
-
-
-
+    
     <h4 class="name" id="addClicksToActivate"><span class="type-signature"></span>addClicksToActivate<span class="signature">()</span><span class="type-signature"></span></h4>
+    
 
-
-
+    
 
 
 
@@ -652,49 +1028,49 @@ the click event of the input
 
 <dl class="details">
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line634">line 634</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line973">line 973</a>
     </li></ul></dd>
+    
 
+    
 
-
-
-
+    
     <dt class="tag-see">See:</dt>
     <dd class="tag-see">
         <ul>
             <li>boot()</li>
         </ul>
     </dd>
+    
 
-
-
+    
 </dl>
 
 
@@ -716,16 +1092,122 @@ the click event of the input
 
 
 
+        
+            
+
+    
+
+    
+    <h4 class="name" id="addFormValueSync"><span class="type-signature"></span>addFormValueSync<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Synchronizes form submission after the user edits a duration field.
+</div>
 
 
 
 
 
 
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line395">line 395</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
     <h4 class="name" id="addHTML"><span class="type-signature"></span>addHTML<span class="signature">()</span><span class="type-signature"></span></h4>
+    
 
-
-
+    
 
 
 
@@ -747,49 +1229,49 @@ the click event of the input
 
 <dl class="details">
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line302">line 302</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line582">line 582</a>
     </li></ul></dd>
+    
 
+    
 
-
-
-
+    
     <dt class="tag-see">See:</dt>
     <dd class="tag-see">
         <ul>
             <li>boot()</li>
         </ul>
     </dd>
+    
 
-
-
+    
 </dl>
 
 
@@ -811,16 +1293,16 @@ the click event of the input
 
 
 
+        
+            
 
+    
 
-
-
-
-
+    
     <h4 class="name" id="addNumberLooping"><span class="type-signature"></span>addNumberLooping<span class="signature">()</span><span class="type-signature"></span></h4>
+    
 
-
-
+    
 
 
 
@@ -843,49 +1325,49 @@ the change event of the input
 
 <dl class="details">
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line442">line 442</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line738">line 738</a>
     </li></ul></dd>
+    
 
+    
 
-
-
-
+    
     <dt class="tag-see">See:</dt>
     <dd class="tag-see">
         <ul>
             <li>boot()</li>
         </ul>
     </dd>
+    
 
-
-
+    
 </dl>
 
 
@@ -907,16 +1389,16 @@ the change event of the input
 
 
 
+        
+            
 
+    
 
-
-
-
-
+    
     <h4 class="name" id="addNumericInput"><span class="type-signature"></span>addNumericInput<span class="signature">()</span><span class="type-signature"></span></h4>
+    
 
-
-
+    
 
 
 
@@ -938,49 +1420,49 @@ the change event of the input
 
 <dl class="details">
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line508">line 508</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line825">line 825</a>
     </li></ul></dd>
+    
 
+    
 
-
-
-
+    
     <dt class="tag-see">See:</dt>
     <dd class="tag-see">
         <ul>
             <li>boot()</li>
         </ul>
     </dd>
+    
 
-
-
+    
 </dl>
 
 
@@ -1002,16 +1484,16 @@ the change event of the input
 
 
 
+        
+            
 
+    
 
-
-
-
-
+    
     <h4 class="name" id="attributeChangedCallback"><span class="type-signature"></span>attributeChangedCallback<span class="signature">(name, oldValue<span class="signature-attributes">nullable</span>, newValue<span class="signature-attributes">nullable</span>)</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
 
-
-
+    
 
 
 
@@ -1028,126 +1510,126 @@ the change event of the input
 
 
     <h5>Parameters:</h5>
-
+    
 
 <table class="params">
     <thead>
     <tr>
-
+        
         <th>Name</th>
-
+        
 
         <th>Type</th>
 
-
+        
         <th>Attributes</th>
+        
 
-
-
+        
 
         <th class="last">Description</th>
     </tr>
     </thead>
 
     <tbody>
-
+    
 
         <tr>
-
+            
                 <td class="name"><code>name</code></td>
-
+            
 
             <td class="type">
-
-
+            
+                
 <span class="param-type">string</span>
 
 
-
+            
             </td>
 
-
+            
                 <td class="attributes">
+                
 
+                
 
-
-
-
+                
                 </td>
+            
 
-
-
+            
 
             <td class="description last">Changed attribute name.</td>
         </tr>
 
-
+    
 
         <tr>
-
+            
                 <td class="name"><code>oldValue</code></td>
-
+            
 
             <td class="type">
-
-
+            
+                
 <span class="param-type">string</span>
 
 
-
+            
             </td>
 
-
+            
                 <td class="attributes">
+                
 
-
-
+                
                     &lt;nullable><br>
+                
 
-
-
+                
                 </td>
+            
 
-
-
+            
 
             <td class="description last">Previous attribute value.</td>
         </tr>
 
-
+    
 
         <tr>
-
+            
                 <td class="name"><code>newValue</code></td>
-
+            
 
             <td class="type">
-
-
+            
+                
 <span class="param-type">string</span>
 
 
-
+            
             </td>
 
-
+            
                 <td class="attributes">
+                
 
-
-
+                
                     &lt;nullable><br>
+                
 
-
-
+                
                 </td>
+            
 
-
-
+            
 
             <td class="description last">New attribute value, or null when removed.</td>
         </tr>
 
-
+    
     </tbody>
 </table>
 
@@ -1158,42 +1640,42 @@ the change event of the input
 
 <dl class="details">
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line77">line 77</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line91">line 91</a>
     </li></ul></dd>
+    
 
+    
 
+    
 
-
-
-
-
+    
 </dl>
 
 
@@ -1212,7 +1694,7 @@ the change event of the input
 
 <h5>Returns:</h5>
 
-
+        
 
 
 <dl>
@@ -1220,29 +1702,29 @@ the change event of the input
         Type
     </dt>
     <dd>
-
+        
 <span class="param-type">void</span>
 
 
     </dd>
 </dl>
 
+    
 
 
 
 
 
+        
+            
 
+    
 
-
-
-
-
-
+    
     <h4 class="name" id="boot"><span class="type-signature"></span>boot<span class="signature">()</span><span class="type-signature"></span></h4>
+    
 
-
-
+    
 
 
 
@@ -1264,42 +1746,42 @@ the change event of the input
 
 <dl class="details">
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line212">line 212</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line488">line 488</a>
     </li></ul></dd>
+    
 
+    
 
+    
 
-
-
-
-
+    
 </dl>
 
 
@@ -1321,21 +1803,21 @@ the change event of the input
 
 
 
+        
+            
 
+    
 
+    
+    <h4 class="name" id="checkValidity"><span class="type-signature"></span>checkValidity<span class="signature">()</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+    
 
-
-
-
-    <h4 class="name" id="disable"><span class="type-signature"></span>disable<span class="signature">()</span><span class="type-signature"></span></h4>
-
-
-
+    
 
 
 
 <div class="description">
-    disables entire control => read-only
+    Runs constraint validation and fires an invalid event when needed.
 </div>
 
 
@@ -1352,35 +1834,43 @@ the change event of the input
 
 <dl class="details">
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line690">line 690</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line205">line 205</a>
     </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
 
 
 
@@ -1388,6 +1878,108 @@ the change event of the input
 
 
 
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Whether the control is valid.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="disable"><span class="type-signature"></span>disable<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Disables the entire control and excludes it from form submission.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1029">line 1029</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
 </dl>
 
 
@@ -1409,16 +2001,668 @@ the change event of the input
 
 
 
+        
+            
+
+    
+
+    
+    <h4 class="name" id="enable"><span class="type-signature"></span>enable<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Enables the duration fields.
+</div>
 
 
 
 
 
 
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1039">line 1039</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="formDisabledCallback"><span class="type-signature"></span>formDisabledCallback<span class="signature">(disabled)</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Disables or enables the internal fields when the form disables this control.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>disabled</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Whether the control is disabled.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line412">line 412</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="formResetCallback"><span class="type-signature"></span>formResetCallback<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Restores the initial value when its form is reset.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line423">line 423</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="formStateRestoreCallback"><span class="type-signature"></span>formStateRestoreCallback<span class="signature">(state, mode)</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Restores the duration and required state saved by the browser.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>state</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Serialized duration state.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>mode</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Browser restoration mode.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line439">line 439</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="hideDays"><span class="type-signature"></span>hideDays<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Hides the days field and its adjacent divider.
+Removes the `show-days` attribute.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1199">line 1199</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
     <h4 class="name" id="hideHours"><span class="type-signature"></span>hideHours<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
 
-
-
+    
 
 
 
@@ -1441,42 +2685,42 @@ Sets the `no-hours` attribute.
 
 <dl class="details">
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line707">line 707</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1051">line 1051</a>
     </li></ul></dd>
+    
 
+    
 
+    
 
-
-
-
-
+    
 </dl>
 
 
@@ -1495,7 +2739,7 @@ Sets the `no-hours` attribute.
 
 <h5>Returns:</h5>
 
-
+        
 
 
 <dl>
@@ -1503,29 +2747,29 @@ Sets the `no-hours` attribute.
         Type
     </dt>
     <dd>
-
+        
 <span class="param-type">void</span>
 
 
     </dd>
 </dl>
 
+    
 
 
 
 
 
+        
+            
 
+    
 
-
-
-
-
-
+    
     <h4 class="name" id="hideMicroSeconds"><span class="type-signature"></span>hideMicroSeconds<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
 
-
-
+    
 
 
 
@@ -1548,42 +2792,42 @@ Sets the `no-microseconds` attribute.
 
 <dl class="details">
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line794">line 794</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1138">line 1138</a>
     </li></ul></dd>
+    
 
+    
 
+    
 
-
-
-
-
+    
 </dl>
 
 
@@ -1602,7 +2846,7 @@ Sets the `no-microseconds` attribute.
 
 <h5>Returns:</h5>
 
-
+        
 
 
 <dl>
@@ -1610,29 +2854,29 @@ Sets the `no-microseconds` attribute.
         Type
     </dt>
     <dd>
-
+        
 <span class="param-type">void</span>
 
 
     </dd>
 </dl>
 
+    
 
 
 
 
 
+        
+            
 
+    
 
-
-
-
-
-
+    
     <h4 class="name" id="hideMinutes"><span class="type-signature"></span>hideMinutes<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
 
-
-
+    
 
 
 
@@ -1655,42 +2899,42 @@ Sets the `no-minutes` attribute.
 
 <dl class="details">
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line736">line 736</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1080">line 1080</a>
     </li></ul></dd>
+    
 
+    
 
+    
 
-
-
-
-
+    
 </dl>
 
 
@@ -1709,7 +2953,7 @@ Sets the `no-minutes` attribute.
 
 <h5>Returns:</h5>
 
-
+        
 
 
 <dl>
@@ -1717,29 +2961,29 @@ Sets the `no-minutes` attribute.
         Type
     </dt>
     <dd>
-
+        
 <span class="param-type">void</span>
 
 
     </dd>
 </dl>
 
+    
 
 
 
 
 
+        
+            
 
+    
 
-
-
-
-
-
+    
     <h4 class="name" id="hideSeconds"><span class="type-signature"></span>hideSeconds<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
 
-
-
+    
 
 
 
@@ -1762,42 +3006,42 @@ Sets the `no-seconds` attribute.
 
 <dl class="details">
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line765">line 765</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1109">line 1109</a>
     </li></ul></dd>
+    
 
+    
 
+    
 
-
-
-
-
+    
 </dl>
 
 
@@ -1816,7 +3060,7 @@ Sets the `no-seconds` attribute.
 
 <h5>Returns:</h5>
 
-
+        
 
 
 <dl>
@@ -1824,29 +3068,29 @@ Sets the `no-seconds` attribute.
         Type
     </dt>
     <dd>
-
+        
 <span class="param-type">void</span>
 
 
     </dd>
 </dl>
 
+    
 
 
 
 
 
+        
+            
 
+    
 
-
-
-
-
-
+    
     <h4 class="name" id="isValidValue"><span class="type-signature"></span>isValidValue<span class="signature">(val)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+    
 
-
-
+    
 
 
 
@@ -1863,50 +3107,50 @@ Sets the `no-seconds` attribute.
 
 
     <h5>Parameters:</h5>
-
+    
 
 <table class="params">
     <thead>
     <tr>
-
+        
         <th>Name</th>
-
+        
 
         <th>Type</th>
 
+        
 
-
-
+        
 
         <th class="last">Description</th>
     </tr>
     </thead>
 
     <tbody>
-
+    
 
         <tr>
-
+            
                 <td class="name"><code>val</code></td>
-
+            
 
             <td class="type">
-
-
+            
+                
 <span class="param-type">*</span>
 
 
-
+            
             </td>
 
+            
 
-
-
+            
 
             <td class="description last">Candidate value.</td>
         </tr>
 
-
+    
     </tbody>
 </table>
 
@@ -1917,42 +3161,42 @@ Sets the `no-seconds` attribute.
 
 <dl class="details">
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line159">line 159</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line271">line 271</a>
     </li></ul></dd>
+    
 
+    
 
+    
 
-
-
-
-
+    
 </dl>
 
 
@@ -1971,9 +3215,9 @@ Sets the `no-seconds` attribute.
 
 <h5>Returns:</h5>
 
-
+        
 <div class="param-desc">
-    Whether the value is valid `HH:mm:ss.SSS`.
+    Whether the value follows a supported duration format.
 </div>
 
 
@@ -1983,29 +3227,29 @@ Sets the `no-seconds` attribute.
         Type
     </dt>
     <dd>
-
+        
 <span class="param-type">boolean</span>
 
 
     </dd>
 </dl>
 
+    
 
 
 
 
 
+        
+            
 
+    
 
-
-
-
-
-
+    
     <h4 class="name" id="noHours"><span class="type-signature"></span>noHours<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
 
-
-
+    
 
 
 
@@ -2027,42 +3271,42 @@ Sets the `no-seconds` attribute.
 
 <dl class="details">
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line726">line 726</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1070">line 1070</a>
     </li></ul></dd>
+    
 
+    
 
+    
 
-
-
-
-
+    
 </dl>
 
 
@@ -2081,7 +3325,7 @@ Sets the `no-seconds` attribute.
 
 <h5>Returns:</h5>
 
-
+        
 
 
 <dl>
@@ -2089,29 +3333,29 @@ Sets the `no-seconds` attribute.
         Type
     </dt>
     <dd>
-
+        
 <span class="param-type">void</span>
 
 
     </dd>
 </dl>
 
+    
 
 
 
 
 
+        
+            
 
+    
 
-
-
-
-
-
+    
     <h4 class="name" id="noMicroSeconds"><span class="type-signature"></span>noMicroSeconds<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
 
-
-
+    
 
 
 
@@ -2133,42 +3377,42 @@ Sets the `no-seconds` attribute.
 
 <dl class="details">
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line813">line 813</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1157">line 1157</a>
     </li></ul></dd>
+    
 
+    
 
+    
 
-
-
-
-
+    
 </dl>
 
 
@@ -2187,7 +3431,7 @@ Sets the `no-seconds` attribute.
 
 <h5>Returns:</h5>
 
-
+        
 
 
 <dl>
@@ -2195,29 +3439,29 @@ Sets the `no-seconds` attribute.
         Type
     </dt>
     <dd>
-
+        
 <span class="param-type">void</span>
 
 
     </dd>
 </dl>
 
+    
 
 
 
 
 
+        
+            
 
+    
 
-
-
-
-
-
+    
     <h4 class="name" id="noMinutes"><span class="type-signature"></span>noMinutes<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
 
-
-
+    
 
 
 
@@ -2239,42 +3483,42 @@ Sets the `no-seconds` attribute.
 
 <dl class="details">
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line755">line 755</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1099">line 1099</a>
     </li></ul></dd>
+    
 
+    
 
+    
 
-
-
-
-
+    
 </dl>
 
 
@@ -2293,7 +3537,7 @@ Sets the `no-seconds` attribute.
 
 <h5>Returns:</h5>
 
-
+        
 
 
 <dl>
@@ -2301,29 +3545,29 @@ Sets the `no-seconds` attribute.
         Type
     </dt>
     <dd>
-
+        
 <span class="param-type">void</span>
 
 
     </dd>
 </dl>
 
+    
 
 
 
 
 
+        
+            
 
+    
 
-
-
-
-
-
+    
     <h4 class="name" id="noSeconds"><span class="type-signature"></span>noSeconds<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
 
-
-
+    
 
 
 
@@ -2345,42 +3589,42 @@ Sets the `no-seconds` attribute.
 
 <dl class="details">
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line784">line 784</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1128">line 1128</a>
     </li></ul></dd>
+    
 
+    
 
+    
 
-
-
-
-
+    
 </dl>
 
 
@@ -2399,7 +3643,7 @@ Sets the `no-seconds` attribute.
 
 <h5>Returns:</h5>
 
-
+        
 
 
 <dl>
@@ -2407,29 +3651,29 @@ Sets the `no-seconds` attribute.
         Type
     </dt>
     <dd>
-
+        
 <span class="param-type">void</span>
 
 
     </dd>
 </dl>
 
+    
 
 
 
 
 
+        
+            
 
+    
 
-
-
-
-
-
+    
     <h4 class="name" id="nonNumericBugInHTML"><span class="type-signature"></span>nonNumericBugInHTML<span class="signature">()</span><span class="type-signature"></span></h4>
+    
 
-
-
+    
 
 
 
@@ -2452,49 +3696,49 @@ the keypress event of the input
 
 <dl class="details">
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line647">line 647</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line986">line 986</a>
     </li></ul></dd>
+    
 
+    
 
-
-
-
+    
     <dt class="tag-see">See:</dt>
     <dd class="tag-see">
         <ul>
             <li>boot()</li>
         </ul>
     </dd>
+    
 
-
-
+    
 </dl>
 
 
@@ -2516,21 +3760,21 @@ the keypress event of the input
 
 
 
+        
+            
 
+    
 
-
-
-
-
+    
     <h4 class="name" id="removeEprop"><span class="type-signature"></span>removeEprop<span class="signature">()</span><span class="type-signature"></span></h4>
+    
 
-
-
+    
 
 
 
 <div class="description">
-    Stop event propigation from the timeCase up through the DOM so when keys
+    Stop event propigation from the timeCase up through the DOM so when keys 
 are being used they don't affect other controls (like volume on plyr)
 </div>
 
@@ -2548,42 +3792,42 @@ are being used they don't affect other controls (like volume on plyr)
 
 <dl class="details">
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line669">line 669</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1008">line 1008</a>
     </li></ul></dd>
+    
 
+    
 
+    
 
-
-
-
-
+    
 </dl>
 
 
@@ -2605,16 +3849,126 @@ are being used they don't affect other controls (like volume on plyr)
 
 
 
+        
+            
+
+    
+
+    
+    <h4 class="name" id="reportValidity"><span class="type-signature"></span>reportValidity<span class="signature">()</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Runs constraint validation and asks the browser to report any error.
+</div>
 
 
 
 
 
 
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line214">line 214</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Whether the control is valid.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
     <h4 class="name" id="resetInputs"><span class="type-signature"></span>resetInputs<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
 
-
-
+    
 
 
 
@@ -2636,42 +3990,42 @@ are being used they don't affect other controls (like volume on plyr)
 
 <dl class="details">
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line186">line 186</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line334">line 334</a>
     </li></ul></dd>
+    
 
+    
 
+    
 
-
-
-
-
+    
 </dl>
 
 
@@ -2690,7 +4044,7 @@ are being used they don't affect other controls (like volume on plyr)
 
 <h5>Returns:</h5>
 
-
+        
 
 
 <dl>
@@ -2698,11 +4052,136 @@ are being used they don't affect other controls (like volume on plyr)
         Type
     </dt>
     <dd>
-
+        
 <span class="param-type">void</span>
 
 
     </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="setDaysDivider"><span class="type-signature"></span>setDaysDivider<span class="signature">(text)</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Replaces the day/hour separator.
+Also available through the `days-divider` attribute.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>text</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Divider text to display.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1179">line 1179</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
 </dl>
 
 
@@ -2717,10 +4196,41 @@ are being used they don't affect other controls (like volume on plyr)
 
 
 
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
     <h4 class="name" id="setHoursDivider"><span class="type-signature"></span>setHoursDivider<span class="signature">(text)</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
 
-
-
+    
 
 
 
@@ -2738,50 +4248,50 @@ Also available through the `hours-divider` attribute.
 
 
     <h5>Parameters:</h5>
-
+    
 
 <table class="params">
     <thead>
     <tr>
-
+        
         <th>Name</th>
-
+        
 
         <th>Type</th>
 
+        
 
-
-
+        
 
         <th class="last">Description</th>
     </tr>
     </thead>
 
     <tbody>
-
+    
 
         <tr>
-
+            
                 <td class="name"><code>text</code></td>
-
+            
 
             <td class="type">
-
-
+            
+                
 <span class="param-type">string</span>
 
 
-
+            
             </td>
 
+            
 
-
-
+            
 
             <td class="description last">Divider text to display.</td>
         </tr>
 
-
+    
     </tbody>
 </table>
 
@@ -2792,42 +4302,42 @@ Also available through the `hours-divider` attribute.
 
 <dl class="details">
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line824">line 824</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1168">line 1168</a>
     </li></ul></dd>
+    
 
+    
 
+    
 
-
-
-
-
+    
 </dl>
 
 
@@ -2846,7 +4356,7 @@ Also available through the `hours-divider` attribute.
 
 <h5>Returns:</h5>
 
-
+        
 
 
 <dl>
@@ -2854,34 +4364,34 @@ Also available through the `hours-divider` attribute.
         Type
     </dt>
     <dd>
-
+        
 <span class="param-type">void</span>
 
 
     </dd>
 </dl>
 
+    
 
 
 
 
 
+        
+            
 
+    
 
-
-
-
-
-
+    
     <h4 class="name" id="setInputValues"><span class="type-signature"></span>setInputValues<span class="signature">(val)</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
 
-
-
+    
 
 
 
 <div class="description">
-    Copies a validated duration string into the four shadow inputs.
+    Copies a validated duration string into the shadow inputs.
 </div>
 
 
@@ -2893,50 +4403,50 @@ Also available through the `hours-divider` attribute.
 
 
     <h5>Parameters:</h5>
-
+    
 
 <table class="params">
     <thead>
     <tr>
-
+        
         <th>Name</th>
-
+        
 
         <th>Type</th>
 
+        
 
-
-
+        
 
         <th class="last">Description</th>
     </tr>
     </thead>
 
     <tbody>
-
+    
 
         <tr>
-
+            
                 <td class="name"><code>val</code></td>
-
+            
 
             <td class="type">
-
-
+            
+                
 <span class="param-type">string</span>
 
 
-
+            
             </td>
 
+            
 
-
-
+            
 
             <td class="description last">Valid duration in `HH:mm:ss.SSS` format.</td>
         </tr>
 
-
+    
     </tbody>
 </table>
 
@@ -2947,42 +4457,42 @@ Also available through the `hours-divider` attribute.
 
 <dl class="details">
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line170">line 170</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line300">line 300</a>
     </li></ul></dd>
+    
 
+    
 
+    
 
-
-
-
-
+    
 </dl>
 
 
@@ -3001,7 +4511,7 @@ Also available through the `hours-divider` attribute.
 
 <h5>Returns:</h5>
 
-
+        
 
 
 <dl>
@@ -3009,29 +4519,29 @@ Also available through the `hours-divider` attribute.
         Type
     </dt>
     <dd>
-
+        
 <span class="param-type">void</span>
 
 
     </dd>
 </dl>
 
+    
 
 
 
 
 
+        
+            
 
+    
 
-
-
-
-
-
+    
     <h4 class="name" id="setMicroSecondsDivider"><span class="type-signature"></span>setMicroSecondsDivider<span class="signature">(text)</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
 
-
-
+    
 
 
 
@@ -3049,50 +4559,50 @@ Also available through the `microseconds-divider` attribute.
 
 
     <h5>Parameters:</h5>
-
+    
 
 <table class="params">
     <thead>
     <tr>
-
+        
         <th>Name</th>
-
+        
 
         <th>Type</th>
 
+        
 
-
-
+        
 
         <th class="last">Description</th>
     </tr>
     </thead>
 
     <tbody>
-
+    
 
         <tr>
-
+            
                 <td class="name"><code>text</code></td>
-
+            
 
             <td class="type">
-
-
+            
+                
 <span class="param-type">string</span>
 
 
-
+            
             </td>
 
+            
 
-
-
+            
 
             <td class="description last">Suffix text to display.</td>
         </tr>
 
-
+    
     </tbody>
 </table>
 
@@ -3103,42 +4613,42 @@ Also available through the `microseconds-divider` attribute.
 
 <dl class="details">
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line857">line 857</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1232">line 1232</a>
     </li></ul></dd>
+    
 
+    
 
+    
 
-
-
-
-
+    
 </dl>
 
 
@@ -3157,7 +4667,7 @@ Also available through the `microseconds-divider` attribute.
 
 <h5>Returns:</h5>
 
-
+        
 
 
 <dl>
@@ -3165,29 +4675,29 @@ Also available through the `microseconds-divider` attribute.
         Type
     </dt>
     <dd>
-
+        
 <span class="param-type">void</span>
 
 
     </dd>
 </dl>
 
+    
 
 
 
 
 
+        
+            
 
+    
 
-
-
-
-
-
+    
     <h4 class="name" id="setMinutesDivider"><span class="type-signature"></span>setMinutesDivider<span class="signature">(text)</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
 
-
-
+    
 
 
 
@@ -3205,50 +4715,50 @@ Also available through the `minutes-divider` attribute.
 
 
     <h5>Parameters:</h5>
-
+    
 
 <table class="params">
     <thead>
     <tr>
-
+        
         <th>Name</th>
-
+        
 
         <th>Type</th>
 
+        
 
-
-
+        
 
         <th class="last">Description</th>
     </tr>
     </thead>
 
     <tbody>
-
+    
 
         <tr>
-
+            
                 <td class="name"><code>text</code></td>
-
+            
 
             <td class="type">
-
-
+            
+                
 <span class="param-type">string</span>
 
 
-
+            
             </td>
 
+            
 
-
-
+            
 
             <td class="description last">Divider text to display.</td>
         </tr>
 
-
+    
     </tbody>
 </table>
 
@@ -3259,42 +4769,42 @@ Also available through the `minutes-divider` attribute.
 
 <dl class="details">
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line835">line 835</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1210">line 1210</a>
     </li></ul></dd>
+    
 
+    
 
+    
 
-
-
-
-
+    
 </dl>
 
 
@@ -3313,7 +4823,7 @@ Also available through the `minutes-divider` attribute.
 
 <h5>Returns:</h5>
 
-
+        
 
 
 <dl>
@@ -3321,29 +4831,29 @@ Also available through the `minutes-divider` attribute.
         Type
     </dt>
     <dd>
-
+        
 <span class="param-type">void</span>
 
 
     </dd>
 </dl>
 
+    
 
 
 
 
 
+        
+            
 
+    
 
-
-
-
-
-
+    
     <h4 class="name" id="setSecondsDivider"><span class="type-signature"></span>setSecondsDivider<span class="signature">(text)</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
 
-
-
+    
 
 
 
@@ -3361,50 +4871,50 @@ Also available through the `seconds-divider` attribute.
 
 
     <h5>Parameters:</h5>
-
+    
 
 <table class="params">
     <thead>
     <tr>
-
+        
         <th>Name</th>
-
+        
 
         <th>Type</th>
 
+        
 
-
-
+        
 
         <th class="last">Description</th>
     </tr>
     </thead>
 
     <tbody>
-
+    
 
         <tr>
-
+            
                 <td class="name"><code>text</code></td>
-
+            
 
             <td class="type">
-
-
+            
+                
 <span class="param-type">string</span>
 
 
-
+            
             </td>
 
+            
 
-
-
+            
 
             <td class="description last">Divider text to display.</td>
         </tr>
 
-
+    
     </tbody>
 </table>
 
@@ -3415,42 +4925,42 @@ Also available through the `seconds-divider` attribute.
 
 <dl class="details">
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line846">line 846</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1221">line 1221</a>
     </li></ul></dd>
+    
 
+    
 
+    
 
-
-
-
-
+    
 </dl>
 
 
@@ -3469,7 +4979,7 @@ Also available through the `seconds-divider` attribute.
 
 <h5>Returns:</h5>
 
-
+        
 
 
 <dl>
@@ -3477,11 +4987,87 @@ Also available through the `seconds-divider` attribute.
         Type
     </dt>
     <dd>
-
+        
 <span class="param-type">void</span>
 
 
     </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="showDays"><span class="type-signature"></span>showDays<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Shows the days field and its adjacent divider.
+Sets the `show-days` attribute.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1189">line 1189</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
 </dl>
 
 
@@ -3496,10 +5082,41 @@ Also available through the `seconds-divider` attribute.
 
 
 
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
     <h4 class="name" id="showHours"><span class="type-signature"></span>showHours<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
 
-
-
+    
 
 
 
@@ -3522,42 +5139,42 @@ Removes the `no-hours` attribute.
 
 <dl class="details">
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line717">line 717</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1061">line 1061</a>
     </li></ul></dd>
+    
 
+    
 
+    
 
-
-
-
-
+    
 </dl>
 
 
@@ -3576,7 +5193,7 @@ Removes the `no-hours` attribute.
 
 <h5>Returns:</h5>
 
-
+        
 
 
 <dl>
@@ -3584,29 +5201,29 @@ Removes the `no-hours` attribute.
         Type
     </dt>
     <dd>
-
+        
 <span class="param-type">void</span>
 
 
     </dd>
 </dl>
 
+    
 
 
 
 
 
+        
+            
 
+    
 
-
-
-
-
-
+    
     <h4 class="name" id="showMicroSeconds"><span class="type-signature"></span>showMicroSeconds<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
 
-
-
+    
 
 
 
@@ -3629,42 +5246,42 @@ Removes the `no-microseconds` attribute.
 
 <dl class="details">
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line804">line 804</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1148">line 1148</a>
     </li></ul></dd>
+    
 
+    
 
+    
 
-
-
-
-
+    
 </dl>
 
 
@@ -3683,7 +5300,7 @@ Removes the `no-microseconds` attribute.
 
 <h5>Returns:</h5>
 
-
+        
 
 
 <dl>
@@ -3691,29 +5308,29 @@ Removes the `no-microseconds` attribute.
         Type
     </dt>
     <dd>
-
+        
 <span class="param-type">void</span>
 
 
     </dd>
 </dl>
 
+    
 
 
 
 
 
+        
+            
 
+    
 
-
-
-
-
-
+    
     <h4 class="name" id="showMinutes"><span class="type-signature"></span>showMinutes<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
 
-
-
+    
 
 
 
@@ -3736,42 +5353,42 @@ Removes the `no-minutes` attribute.
 
 <dl class="details">
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line746">line 746</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1090">line 1090</a>
     </li></ul></dd>
+    
 
+    
 
+    
 
-
-
-
-
+    
 </dl>
 
 
@@ -3790,7 +5407,7 @@ Removes the `no-minutes` attribute.
 
 <h5>Returns:</h5>
 
-
+        
 
 
 <dl>
@@ -3798,29 +5415,29 @@ Removes the `no-minutes` attribute.
         Type
     </dt>
     <dd>
-
+        
 <span class="param-type">void</span>
 
 
     </dd>
 </dl>
 
+    
 
 
 
 
 
+        
+            
 
+    
 
-
-
-
-
-
+    
     <h4 class="name" id="showSeconds"><span class="type-signature"></span>showSeconds<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
 
-
-
+    
 
 
 
@@ -3843,42 +5460,42 @@ Removes the `no-seconds` attribute.
 
 <dl class="details">
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line775">line 775</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1119">line 1119</a>
     </li></ul></dd>
+    
 
+    
 
+    
 
-
-
-
-
+    
 </dl>
 
 
@@ -3897,7 +5514,7 @@ Removes the `no-seconds` attribute.
 
 <h5>Returns:</h5>
 
-
+        
 
 
 <dl>
@@ -3905,29 +5522,29 @@ Removes the `no-seconds` attribute.
         Type
     </dt>
     <dd>
-
+        
 <span class="param-type">void</span>
 
 
     </dd>
 </dl>
 
+    
 
 
 
 
 
+        
+            
 
+    
 
-
-
-
-
-
+    
     <h4 class="name" id="updateDividers"><span class="type-signature"></span>updateDividers<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
 
-
-
+    
 
 
 
@@ -3949,42 +5566,42 @@ Removes the `no-seconds` attribute.
 
 <dl class="details">
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line897">line 897</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1283">line 1283</a>
     </li></ul></dd>
+    
 
+    
 
+    
 
-
-
-
-
+    
 </dl>
 
 
@@ -4003,7 +5620,7 @@ Removes the `no-seconds` attribute.
 
 <h5>Returns:</h5>
 
-
+        
 
 
 <dl>
@@ -4011,34 +5628,34 @@ Removes the `no-seconds` attribute.
         Type
     </dt>
     <dd>
-
+        
 <span class="param-type">void</span>
 
 
     </dd>
 </dl>
 
+    
 
 
 
 
 
+        
+            
 
+    
 
+    
+    <h4 class="name" id="updateFormValue"><span class="type-signature"></span>updateFormValue<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
 
-
-
-
-
-    <h4 class="name" id="updateVisibleFields"><span class="type-signature"></span>updateVisibleFields<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
-
-
-
+    
 
 
 
 <div class="description">
-    Synchronizes field and divider visibility with the `no-*` attributes.
+    Keeps the form-associated value synchronized with the displayed duration.
 </div>
 
 
@@ -4055,42 +5672,42 @@ Removes the `no-seconds` attribute.
 
 <dl class="details">
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line866">line 866</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line354">line 354</a>
     </li></ul></dd>
+    
 
+    
 
+    
 
-
-
-
-
+    
 </dl>
 
 
@@ -4109,7 +5726,7 @@ Removes the `no-seconds` attribute.
 
 <h5>Returns:</h5>
 
-
+        
 
 
 <dl>
@@ -4117,11 +5734,87 @@ Removes the `no-seconds` attribute.
         Type
     </dt>
     <dd>
-
+        
 <span class="param-type">void</span>
 
 
     </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="updateVisibleFields"><span class="type-signature"></span>updateVisibleFields<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Synchronizes field and divider visibility with the `no-*` attributes.
+The days field keeps a one-character wider minimum than the other fields.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1242">line 1242</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
 </dl>
 
 
@@ -4136,10 +5829,41 @@ Removes the `no-seconds` attribute.
 
 
 
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
     <h4 class="name" id="warnInvalidValue"><span class="type-signature"></span>warnInvalidValue<span class="signature">(val)</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
 
-
-
+    
 
 
 
@@ -4156,50 +5880,50 @@ Removes the `no-seconds` attribute.
 
 
     <h5>Parameters:</h5>
-
+    
 
 <table class="params">
     <thead>
     <tr>
-
+        
         <th>Name</th>
-
+        
 
         <th>Type</th>
 
+        
 
-
-
+        
 
         <th class="last">Description</th>
     </tr>
     </thead>
 
     <tbody>
-
+    
 
         <tr>
-
+            
                 <td class="name"><code>val</code></td>
-
+            
 
             <td class="type">
-
-
+            
+                
 <span class="param-type">*</span>
 
 
-
+            
             </td>
 
+            
 
-
-
+            
 
             <td class="description last">Rejected value.</td>
         </tr>
 
-
+    
     </tbody>
 </table>
 
@@ -4210,42 +5934,42 @@ Removes the `no-seconds` attribute.
 
 <dl class="details">
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line202">line 202</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line478">line 478</a>
     </li></ul></dd>
+    
 
+    
 
+    
 
-
-
-
-
+    
 </dl>
 
 
@@ -4264,7 +5988,7 @@ Removes the `no-seconds` attribute.
 
 <h5>Returns:</h5>
 
-
+        
 
 
 <dl>
@@ -4272,25 +5996,25 @@ Removes the `no-seconds` attribute.
         Type
     </dt>
     <dd>
-
+        
 <span class="param-type">void</span>
 
 
     </dd>
 </dl>
 
+    
 
 
 
 
 
+        
+    
 
+    
 
-
-
-
-
-
+    
 </article>
 
 </section>
@@ -4307,7 +6031,7 @@ Removes the `no-seconds` attribute.
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Thu Nov 05 2026 14:15:36 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Tue Nov 10 2026 15:33:33 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>

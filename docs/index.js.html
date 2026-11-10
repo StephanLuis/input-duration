@@ -19,25 +19,25 @@
 
     <h1 class="page-title">Source: index.js</h1>
 
+    
 
 
 
-
-
+    
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
  * This is jsdoc 'auto' documentation see https://jsdoc.app/
  * npm install -g jsdoc
  * jsdoc index.js -d ./docs/
- *
- *
+ * 
+ * 
  * @fileoverview INPUT-DURATION
- * @file INPUT-DURATION
+ * @file INPUT-DURATION 
  * @author Stephan Luis
  * @see &lt;a href="https://www.npmjs.com/package/input-duration">NPM input-duration&lt;/a>
  * @see &lt;a href="https://github.com/StephanLuis/input-duration">GitHub input-duration&lt;/a>
- * @copyright MIT License, Copyright (c) 2022
+ * @copyright MIT License, Copyright (c) 2022 
  * @version 2.2.8 (release)
  */
 
@@ -46,11 +46,15 @@
 /**
  * Class for the Input-Duration webcomponent
  *
- * Boolean attributes `no-hours`, `no-minutes`, `no-seconds`, and
- * `no-microseconds` hide their respective fields. String attributes
+ * Boolean attributes `show-days`, `no-hours`, `no-minutes`, `no-seconds`, and
+ * `no-microseconds` control field visibility. String attributes
  * `hours-divider`, `minutes-divider`, `seconds-divider`, and
- * `microseconds-divider` customize the separators; the last adds a suffix
- * after milliseconds. Divider values are rendered as text.
+ * `microseconds-divider` customize the separators; `days-divider` customizes
+ * the day label. Divider values are rendered as text.
+ * The days field is slightly wider than other numeric fields and has extra
+ * spacing before its divider to emphasize the less-common unit.
+ * The element is form-associated in supporting browsers; use `name`,
+ * `required`, and `disabled` attributes for form submission and validation.
  *
  * @example
  * &lt;input-duration no-microseconds hours-divider="h " microseconds-divider="ms">&lt;/input-duration>
@@ -60,19 +64,24 @@
  */
 
 class InputDuration extends HTMLElement {
+    static formAssociated = true;
+
     /**
      * HTML attributes that update the component when changed.
      *
      * @static
-     * @returns {string[]} Observed value, visibility, and divider attributes.
+     * @returns {string[]} Observed value, required, visibility, and divider attributes.
      */
     static get observedAttributes() {
         return [
             'value',
+            'required',
+            'show-days',
             'no-hours',
             'no-minutes',
             'no-seconds',
             'no-microseconds',
+            'days-divider',
             'hours-divider',
             'minutes-divider',
             'seconds-divider',
@@ -83,6 +92,11 @@ class InputDuration extends HTMLElement {
     constructor() {
 
         super();
+
+        this.valueIsSet = false;
+        this.formInternals = typeof this.attachInternals === 'function'
+            ? this.attachInternals()
+            : null;
 
         /**
          * Shadow root containing this component's controls.
@@ -109,8 +123,21 @@ class InputDuration extends HTMLElement {
         }
 
         if (name !== 'value') {
-            this.updateVisibleFields();
-            this.updateDividers();
+            if (name === 'required') {
+                this.updateFormValue();
+            } else if (name === 'show-days') {
+                if (newValue !== null &amp;&amp; Number(this.myElement.querySelector('.sD').value) === 0) {
+                    const hours = Number(this.myElement.querySelector('.sH').value);
+                    this.myElement.querySelector('.sD').value = String(Math.floor(hours / 24));
+                    this.myElement.querySelector('.sH').value = String(hours % 24).padStart(2, '0');
+                }
+                this.updateVisibleFields();
+                this.updateDividers();
+                this.updateFormValue();
+            } else {
+                this.updateVisibleFields();
+                this.updateDividers();
+            }
             return;
         }
 
@@ -126,32 +153,117 @@ class InputDuration extends HTMLElement {
 
     /**
      * get the input-duration value, pulls values from each input
-     * so in js use var x = document.querySelector("#bobPrepop").value;
-     * @returns {?string} Duration in `HH:mm:ss.SSS` format, or null before initialization.
+     * so in js use var x = document.querySelector("#bobPrepop").value; 
+     * @returns {?string} Duration in `HH:mm:ss.SSS` or `D:HH:mm:ss.SSS` format.
      */
 
     get value() {
-
-        // return this.getAttribute('value');
-
-        if (this.myElement.querySelector('input[name="startHours"]') !== null) {
-
-            return this.myElement.querySelector('input[name="startHours"]').value +
-                ':' + this.myElement.querySelector('input[name="startMinutes"]').value +
-                ':' + this.myElement.querySelector('input[name="startSeconds"]').value +
-                '.' + this.myElement.querySelector('input[name="startMilliSecs"]').value;
-
-        }
-        else {
-
+        const hoursInput = this.myElement.querySelector('input[name="startHours"]');
+        if (hoursInput === null) {
             return null;
-
         }
+
+        const days = Number(this.myElement.querySelector('.sD').value) || 0;
+        const hours = hoursInput.value;
+        const minutes = this.myElement.querySelector('input[name="startMinutes"]').value;
+        const seconds = this.myElement.querySelector('input[name="startSeconds"]').value;
+        const milliseconds = this.myElement.querySelector('input[name="startMilliSecs"]').value;
+
+        if (this.hasAttribute('show-days') || days > 0) {
+            return `${days}:${hours}:${minutes}:${seconds}.${milliseconds}`;
+        }
+
+        return `${hours}:${minutes}:${seconds}.${milliseconds}`;
+    }
+
+    /**
+     * Gets a normalized, unit-labeled duration.
+     *
+     * @returns {?string} Duration such as `2d 03h 04m 05.006s`.
+     */
+    get dayFriendlyValue() {
+        if (this.value === null) {
+            return null;
+        }
+
+        const daysInput = Number(this.myElement.querySelector('.sD').value) || 0;
+        const hoursInput = Number(this.myElement.querySelector('.sH').value) || 0;
+        const totalHours = (this.hasAttribute('show-days') || daysInput > 0 ? daysInput * 24 : 0) + hoursInput;
+        const days = Math.floor(totalHours / 24);
+        const hours = totalHours % 24;
+        const minutes = Number(this.myElement.querySelector('.sM').value) || 0;
+        const seconds = Number(this.myElement.querySelector('.sS').value) || 0;
+        const milliseconds = Number(this.myElement.querySelector('.sMS').value) || 0;
+
+        return `${days}d ${String(hours).padStart(2, '0')}h ${String(minutes).padStart(2, '0')}m ${String(seconds).padStart(2, '0')}.${String(milliseconds).padStart(3, '0')}s`;
+    }
+
+    /**
+     * Current form validity state.
+     *
+     * @returns {?ValidityState} The browser-computed validity state.
+     */
+    get validity() {
+        return this.formInternals ? this.formInternals.validity : null;
+    }
+
+    /**
+     * Validation message for the current form state.
+     *
+     * @returns {string} The browser-computed validation message.
+     */
+    get validationMessage() {
+        return this.formInternals ? this.formInternals.validationMessage : '';
+    }
+
+    /**
+     * Whether this control participates in constraint validation.
+     *
+     * @returns {boolean} Whether the control will be validated.
+     */
+    get willValidate() {
+        return this.formInternals ? this.formInternals.willValidate : false;
+    }
+
+    /**
+     * Runs constraint validation and fires an invalid event when needed.
+     *
+     * @returns {boolean} Whether the control is valid.
+     */
+    checkValidity() {
+        return this.formInternals ? this.formInternals.checkValidity() : true;
+    }
+
+    /**
+     * Runs constraint validation and asks the browser to report any error.
+     *
+     * @returns {boolean} Whether the control is valid.
+     */
+    reportValidity() {
+        return this.formInternals ? this.formInternals.reportValidity() : true;
+    }
+
+    /**
+     * Whether the control is disabled.
+     *
+     * @returns {boolean} The value of the `disabled` attribute.
+     */
+    get disabled() {
+        return this.hasAttribute('disabled');
+    }
+
+    /**
+     * Sets whether the control is disabled.
+     *
+     * @param {boolean} value - Whether to disable the control.
+     */
+    set disabled(value) {
+        this.toggleAttribute('disabled', Boolean(value));
     }
 
 
     /**
-    * Sets the duration using the fixed `HH:mm:ss.SSS` format.
+    * Sets the duration using `HH:mm:ss.SSS` or `D:HH:mm:ss.SSS` format.
     *
     * @param {string} val - Duration string, such as `05:05:05.005`.
     * @returns {void}
@@ -182,28 +294,64 @@ class InputDuration extends HTMLElement {
      * Checks whether a value follows the supported duration format and ranges.
      *
      * @param {*} val - Candidate value.
-     * @returns {boolean} Whether the value is valid `HH:mm:ss.SSS`.
+     * @returns {boolean} Whether the value follows a supported duration format.
      */
     isValidValue(val) {
-        return typeof val === 'string' &amp;&amp;
-            /^[0-9]{2}:[0-5][0-9]:[0-5][0-9]\.[0-9]{3}$/.test(val);
+        if (typeof val !== 'string') {
+            return false;
+        }
+
+        const parts = val.split(/[:.]/);
+        if (parts.length === 4) {
+            return /^[0-9]{2}$/.test(parts[0]) &amp;&amp;
+                /^[0-5][0-9]$/.test(parts[1]) &amp;&amp;
+                /^[0-5][0-9]$/.test(parts[2]) &amp;&amp;
+                /^[0-9]{3}$/.test(parts[3]);
+        }
+
+        return parts.length === 5 &amp;&amp;
+            /^[0-9]+$/.test(parts[0]) &amp;&amp;
+            Number.isSafeInteger(Number(parts[0])) &amp;&amp;
+            Number(parts[0]) &lt;= Math.floor(Number.MAX_SAFE_INTEGER / 24) &amp;&amp;
+            /^(?:[01][0-9]|2[0-3])$/.test(parts[1]) &amp;&amp;
+            /^[0-5][0-9]$/.test(parts[2]) &amp;&amp;
+            /^[0-5][0-9]$/.test(parts[3]) &amp;&amp;
+            /^[0-9]{3}$/.test(parts[4]);
     }
 
     /**
-     * Copies a validated duration string into the four shadow inputs.
+     * Copies a validated duration string into the shadow inputs.
      *
      * @param {string} val - Valid duration in `HH:mm:ss.SSS` format.
      * @returns {void}
      */
     setInputValues(val) {
-        const timeArray = val.split(/[.:]+/);
-        const inputNames = ['startHours', 'startMinutes', 'startSeconds', 'startMilliSecs'];
+        this.valueIsSet = true;
+        const parts = val.split(/[:.]/);
+        const hasDays = parts.length === 5;
+        const days = hasDays ? Number(parts[0]) : 0;
+        let hours = Number(parts[hasDays ? 1 : 0]);
+        if (!hasDays &amp;&amp; this.hasAttribute('show-days')) {
+            this.myElement.querySelector('.sD').value = String(Math.floor(hours / 24));
+            hours %= 24;
+        } else {
+            this.myElement.querySelector('.sD').value = String(days);
+        }
+        const daysInput = this.myElement.querySelector('.sD');
+        daysInput.oldValue = daysInput.value;
+        daysInput.style.width = `${Math.max(3, daysInput.value.length)}ch`;
 
+        const values = [String(hours).padStart(2, '0'), parts[hasDays ? 2 : 1], parts[hasDays ? 3 : 2], parts[hasDays ? 4 : 3]];
+        const inputNames = ['startHours', 'startMinutes', 'startSeconds', 'startMilliSecs'];
         inputNames.forEach((name, index) => {
             const input = this.myElement.querySelector(`input[name="${name}"]`);
-            input.value = timeArray[index];
+            input.value = values[index];
             input.oldValue = input.value;
         });
+
+        this.updateVisibleFields();
+        this.updateDividers();
+        this.updateFormValue();
     }
 
     /**
@@ -211,14 +359,142 @@ class InputDuration extends HTMLElement {
      *
      * @returns {void}
      */
-    resetInputs() {
-        const defaults = ['00', '00', '00', '000'];
+    resetInputs(valueIsSet = false) {
+        const defaults = ['0', '00', '00', '00', '000'];
         const inputs = this.myElement.querySelectorAll('.timeCase input');
 
+        this.valueIsSet = valueIsSet;
         inputs.forEach((input, index) => {
             input.value = defaults[index];
             input.oldValue = input.value;
         });
+
+        this.updateVisibleFields();
+        this.updateDividers();
+        this.updateFormValue();
+    }
+
+    /**
+     * Keeps the form-associated value synchronized with the displayed duration.
+     *
+     * @returns {void}
+     */
+    updateFormValue() {
+        if (this.formInternals) {
+            const value = this.value;
+            const isValid = this.isValidValue(value);
+            const valueMissing = this.hasAttribute('required') &amp;&amp; !this.valueIsSet;
+            const validity = {};
+
+            if (valueMissing) {
+                validity.valueMissing = true;
+            } else if (!isValid) {
+                validity.badInput = true;
+            }
+
+            if (Object.keys(validity).length) {
+                const message = valueMissing
+                    ? 'Please enter a duration.'
+                    : 'Enter a duration in HH:mm:ss.SSS or D:HH:mm:ss.SSS format.';
+                const anchor = [...this.myElement.querySelectorAll('.timeCase input')]
+                    .find(input => input.style.display !== 'none' &amp;&amp; !input.disabled);
+                if (anchor) {
+                    this.formInternals.setValidity(validity, message, anchor);
+                } else {
+                    this.formInternals.setValidity(validity, message);
+                }
+            } else {
+                this.formInternals.setValidity({});
+            }
+
+            const state = JSON.stringify({
+                value,
+                valueIsSet: Boolean(this.valueIsSet)
+            });
+            this.formInternals.setFormValue(isValid &amp;&amp; !valueMissing ? value : null, state);
+        }
+    }
+
+    /**
+     * Synchronizes form submission after the user edits a duration field.
+     *
+     * @returns {void}
+     */
+    addFormValueSync() {
+        const control = this.myElement.querySelector('.timeCase');
+        const syncFormValue = () => {
+            this.valueIsSet = true;
+            this.updateFormValue();
+        };
+
+        control.addEventListener('input', syncFormValue);
+        control.addEventListener('change', syncFormValue);
+    }
+
+    /**
+     * Disables or enables the internal fields when the form disables this control.
+     *
+     * @param {boolean} disabled - Whether the control is disabled.
+     * @returns {void}
+     */
+    formDisabledCallback(disabled) {
+        this.myElement.querySelectorAll('.timeCase input').forEach(input => {
+            input.disabled = disabled;
+        });
+    }
+
+    /**
+     * Restores the initial value when its form is reset.
+     *
+     * @returns {void}
+     */
+    formResetCallback() {
+        const defaultValue = this.getAttribute('value');
+        if (defaultValue !== null &amp;&amp; this.isValidValue(defaultValue)) {
+            this.setInputValues(defaultValue);
+        } else {
+            this.resetInputs();
+        }
+    }
+
+    /**
+     * Restores the duration and required state saved by the browser.
+     *
+     * @param {string} state - Serialized duration state.
+     * @param {string} mode - Browser restoration mode.
+     * @returns {void}
+     */
+    formStateRestoreCallback(state, mode) {
+        let restoredState;
+
+        try {
+            restoredState = JSON.parse(state);
+        } catch {
+            if (this.isValidValue(state)) {
+                this.setInputValues(state);
+                this.updateFormValue();
+                return;
+            }
+
+            this.warnInvalidValue(state);
+            this.resetInputs();
+            return;
+        }
+
+        if (
+            !restoredState ||
+            typeof restoredState !== 'object' ||
+            !this.isValidValue(restoredState.value) ||
+            typeof restoredState.valueIsSet !== 'boolean'
+        ) {
+            this.warnInvalidValue(state);
+            this.resetInputs();
+            return;
+        }
+
+        this.setInputValues(restoredState.value);
+        this.valueIsSet = restoredState.valueIsSet;
+        this.updateFormValue();
     }
 
     /**
@@ -228,7 +504,7 @@ class InputDuration extends HTMLElement {
      * @returns {void}
      */
     warnInvalidValue(val) {
-        console.warn(`The specified value ${val} does not conform to the required format.  The format is "HH:mm:ss.SSS" where HH is 00-99, mm is 00-59, ss is 00-59, and SSS is 000-999.`);
+        console.warn(`The specified value ${val} does not conform to a supported duration format: "HH:mm:ss.SSS" (HH 00-99) or "D:HH:mm:ss.SSS" (HH 00-23); minutes and seconds must be 00-59 and milliseconds 000-999.`);
     }
 
 
@@ -249,13 +525,15 @@ class InputDuration extends HTMLElement {
         this.addClicksToActivate();
         this.nonNumericBugInHTML();
         this.removeEprop();
+        this.addFormValueSync();
+        this.updateFormValue();
 
     }
 
 
     /**
      * eventlistener that adds arrow key input of values (up/down) and place toggling (left/right) triggered by
-     * the change event of the input
+     * the change event of the input 
      * @method
      * @see boot()
      */
@@ -264,50 +542,52 @@ class InputDuration extends HTMLElement {
 
         var mE = this.myElement;
 
-        // Left and Right arrow key toggle between HMSmS
-        // this depends on data-attributes ex. data-tp="1" in HTML
-
         this.myElement.querySelector("div.timeCase")
             .addEventListener('keydown', function (event) {
 
                 var et = event.target;
-                var tp_active = mE.activeElement.dataset.tp;
+                const visibleInputs = [...mE.querySelectorAll('.timeCase input')]
+                    .filter(input => input.style.display !== 'none');
+                const activeIndex = visibleInputs.indexOf(mE.activeElement);
 
                 switch (true) {
 
                     case event.key == "ArrowLeft":
-
-                        if (tp_active >= 2) {
-                            tp_active--;
+                        if (activeIndex > 0) {
+                            const nextInput = visibleInputs[activeIndex - 1];
+                            nextInput.focus();
+                            setTimeout(() => nextInput.select(), 5);
                         }
-
-                        et.parentElement.querySelector("[data-tp='" + tp_active + "']").focus();
-                        setTimeout(function () { et.parentElement.querySelector("[data-tp='" + tp_active + "']").select(); }, 5);
-
                         break;
 
                     case event.key == "ArrowRight":
-                        // tp_active = this.myElement.shadowRoot.activeElement.dataset.tp;
-
-                        if (tp_active &lt;= 3) {
-                            tp_active++;
+                        if (activeIndex !== -1 &amp;&amp; activeIndex &lt; visibleInputs.length - 1) {
+                            const nextInput = visibleInputs[activeIndex + 1];
+                            nextInput.focus();
+                            setTimeout(() => nextInput.select(), 5);
                         }
-
-                        et.parentElement.querySelector("[data-tp='" + tp_active + "']").focus();
-                        setTimeout(function () { et.parentElement.querySelector("[data-tp='" + tp_active + "']").select(); }, 5);
-
                         break;
 
                     // these keep the input selected
                     case event.key == "ArrowUp":
-
-                        setTimeout(function () { mE.activeElement.select(); }, 5);
+                        et.suppressAutoAdvance = true;
+                        setTimeout(function () {
+                            et.suppressAutoAdvance = false;
+                            if (mE.activeElement) {
+                                mE.activeElement.select();
+                            }
+                        }, 5);
 
                         break;
 
                     case event.key == "ArrowDown":
-
-                        setTimeout(function () { mE.activeElement.select(); }, 5);
+                        et.suppressAutoAdvance = true;
+                        setTimeout(function () {
+                            et.suppressAutoAdvance = false;
+                            if (mE.activeElement) {
+                                mE.activeElement.select();
+                            }
+                        }, 5);
 
                         break;
 
@@ -337,13 +617,15 @@ class InputDuration extends HTMLElement {
         var template = document.createElement('template');
 
         template.innerHTML = `
-          &lt;input type="number" class="sH D2 ts_digit" part="field field-hours" name="startHours" data-tp="1" min="-1" max="100" value="00" >
+          &lt;input type="number" class="sD ts_digit" part="field field-days" name="startDays" data-tp="1" min="0" step="1" value="0" style="display: none">
+          &lt;span class="bds-d" part="divider divider-days-hours" style="display: none">d &lt;/span>
+          &lt;input type="number" class="sH D2 ts_digit" part="field field-hours" name="startHours" data-tp="2" min="-1" max="100" value="00" >
           &lt;span class="bds-h" part="divider divider-hours-minutes">:&lt;/span>
-          &lt;input type="number" class="sM D2 ts_digit" part="field field-minutes" name="startMinutes" data-tp="2" min="-1" max="60" value="00">
+          &lt;input type="number" class="sM D2 ts_digit" part="field field-minutes" name="startMinutes" data-tp="3" min="-1" max="60" value="00">
           &lt;span class="bds-m" part="divider divider-minutes-seconds">:&lt;/span>
-          &lt;input type="number" class="sS D2 ts_digit" part="field field-seconds" name="startSeconds" data-tp="3" min="-1" max="60" value="00">
+          &lt;input type="number" class="sS D2 ts_digit" part="field field-seconds" name="startSeconds" data-tp="4" min="-1" max="60" value="00">
           &lt;span class="bds-s" part="divider divider-seconds-milliseconds">.&lt;/span>
-          &lt;input type="number" class="sMS D3 ts_digit" part="field field-milliseconds" name="startMilliSecs" data-tp="4" min="-10" max="1010" step="10" value="000">
+          &lt;input type="number" class="sMS D3 ts_digit" part="field field-milliseconds" name="startMilliSecs" data-tp="5" min="-10" max="1010" step="10" value="000">
           &lt;span class="bds-ms" part="divider divider-milliseconds-suffix" style="display: none">&lt;/span>
           &lt;div id="svgContainer" part="icon">
               &lt;svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
@@ -367,6 +649,7 @@ class InputDuration extends HTMLElement {
                     --input-duration-focus-color: #2196f3;
                     --input-duration-focus-outline: 3px solid #2196f3;
                     --input-duration-focus-outline-offset: 2px;
+                    --input-duration-invalid-color: #b42318;
                     --input-duration-divider-color: currentColor;
                     --input-duration-divider-opacity: 0.7;
                     --input-duration-disabled-color: GrayText;
@@ -395,6 +678,10 @@ class InputDuration extends HTMLElement {
                     outline-offset: var(--input-duration-focus-outline-offset);
                 }
 
+                :host(:invalid) .timeCase {
+                    border-color: var(--input-duration-invalid-color);
+                }
+
                 .timeCase input {
                     box-sizing: content-box;
                     width: 2ch;
@@ -417,6 +704,11 @@ class InputDuration extends HTMLElement {
                     min-width: 3ch;
                 }
 
+                .timeCase input.sD {
+                    width: 3ch;
+                    min-width: 3ch;
+                }
+
                 .timeCase input::-webkit-outer-spin-button,
                 .timeCase input::-webkit-inner-spin-button {
                     margin: 0;
@@ -426,6 +718,10 @@ class InputDuration extends HTMLElement {
                 .timeCase span {
                     color: var(--input-duration-divider-color);
                     opacity: var(--input-duration-divider-opacity);
+                }
+
+                .timeCase .bds-d {
+                    margin-left: 0.04em;
                 }
 
                 #svgContainer {
@@ -462,7 +758,7 @@ class InputDuration extends HTMLElement {
 
     /**
      * eventlistener that adds number looping for up and down keys triggered by
-     * the change event of the input
+     * the change event of the input 
      * @method
      * @see boot()
      */
@@ -472,15 +768,36 @@ class InputDuration extends HTMLElement {
         // Numeric Value looping (eventually this can be 'parameterised' refactored)
         // ex. 99 uparrow to 0 hours, 59 uparrow to 0 minutes and seconds, 990 uparrow to 010, downarrow 000 milliseconds
 
+        const sD = this.myElement.querySelector("input.sD");
         const sH = this.myElement.querySelector("input.sH");
-        sH.addEventListener('change', function (event) {
-
-            if (sH.value == 100) {
-                sH.value = '00';
+        sH.addEventListener('change', () => {
+            if (this.hasAttribute('show-days') || Number(sD.value) > 0) {
+                if (Number(sH.value) === 24) {
+                    sH.value = '00';
+                    const nextDay = Number(sD.value) + 1;
+                    if (Number.isSafeInteger(nextDay)) {
+                        sD.value = String(nextDay);
+                    }
+                } else if (Number(sH.value) === -1) {
+                    if (Number(sD.value) > 0) {
+                        sD.value = String(Number(sD.value) - 1);
+                        sH.value = '23';
+                    } else {
+                        sH.value = '00';
+                    }
+                }
+            } else {
+                if (sH.value == 100) {
+                    sH.value = '00';
+                }
+                if (sH.value == -1) {
+                    sH.value = 99;
+                }
             }
-            if (sH.value == -1) {
-                sH.value = 99;
-            }
+            sD.oldValue = sD.value;
+            sH.oldValue = sH.value;
+            sD.style.width = `${Math.max(3, sD.value.length)}ch`;
+            this.updateDividers();
 
         });
 
@@ -536,6 +853,7 @@ class InputDuration extends HTMLElement {
     addNumericInput() {
 
         const mE = this.myElement;
+        const owner = this;
 
         // https://stackoverflow.com/questions/469357/html-text-input-allow-only-numeric-input
         // Digit input 0-9  (typed in by user)
@@ -544,7 +862,7 @@ class InputDuration extends HTMLElement {
             inputElement.oldValue = inputElement.value;
 
             inputElement.addEventListener('input', function () {
-                if (inputFilter(this.value)) {
+                if (inputFilter(this.value, !this.suppressAutoAdvance)) {
                     this.oldValue = this.value;
                 } else {
                     this.value = this.oldValue;
@@ -556,12 +874,14 @@ class InputDuration extends HTMLElement {
 
         var sH = this.myElement.querySelector('input.sH');
 
-        setInputFilter(sH, function (value) {
+        setInputFilter(sH, function (value, shouldAdvance) {
+            const hourPattern = owner.hasAttribute('show-days') ||
+                Number(owner.myElement.querySelector('.sD').value) > 0
+                ? /^(?:[0-9]?|[01][0-9]?|2[0-3]?)$/
+                : /^(?:[0-9]?|[0-9][0-9]?)$/;
+            const newV = hourPattern.test(value);
 
-            var newV = /^([0-9]?|[0-9][0-9]?)$/.test(value);
-
-
-            if (newV &amp;&amp; value.length === 2) {
+            if (shouldAdvance &amp;&amp; newV &amp;&amp; value.length === 2) {
 
                 mE.querySelector('input.sM').focus();
                 mE.querySelector('input.sM').select();
@@ -572,13 +892,32 @@ class InputDuration extends HTMLElement {
 
         });
 
+        const sD = this.myElement.querySelector('input.sD');
+        setInputFilter(sD, function (value) {
+            const valid = /^\d*$/.test(value) &amp;&amp; (value === '' || Number.isSafeInteger(Number(value)));
+            if (valid) {
+                sD.style.width = `${Math.max(3, value.length)}ch`;
+            }
+            return valid;
+        });
+        sD.addEventListener('change', function () {
+            if (this.value === '') {
+                this.value = '0';
+            }
+            this.value = String(Number(this.value));
+            this.oldValue = this.value;
+            this.style.width = `${Math.max(3, this.value.length)}ch`;
+            owner.updateDividers();
+            owner.updateFormValue();
+        });
+
         var sM = this.myElement.querySelector('input.sM');
-        setInputFilter(sM, function (value) {
+        setInputFilter(sM, function (value, shouldAdvance) {
 
 
             var newV = /^([0-9]?|[0-5][0-9]?)$/.test(value);
 
-            if (newV &amp;&amp; (value > 5 || value.length === 2)) {
+            if (shouldAdvance &amp;&amp; newV &amp;&amp; (value > 5 || value.length === 2)) {
 
                 mE.querySelector('input.sS').focus();
                 mE.querySelector('input.sS').select();
@@ -590,11 +929,11 @@ class InputDuration extends HTMLElement {
         });
 
         var sS = this.myElement.querySelector('input.sS');
-        setInputFilter(sS, function (value) {
+        setInputFilter(sS, function (value, shouldAdvance) {
 
             var newV = /^([0-9]?|[0-5][0-9]?)$/.test(value);
 
-            if (newV &amp;&amp; (value > 5 || value.length === 2)) {
+            if (shouldAdvance &amp;&amp; newV &amp;&amp; (value > 5 || value.length === 2)) {
 
                 mE.querySelector('input.sMS').focus();
                 mE.querySelector('input.sMS').select();
@@ -626,7 +965,7 @@ class InputDuration extends HTMLElement {
 
     /**
      * eventlistener that adds 0s to preface numbers less than 10 triggered by
-     * the change event of the input
+     * the change event of the input 
      * @method
      * @see boot()
      */
@@ -634,7 +973,7 @@ class InputDuration extends HTMLElement {
     add0s() {
 
         // input for hours, minutes, seconds
-        this.myElement.querySelectorAll('input').forEach(i => i.addEventListener('change', function () {
+        this.myElement.querySelectorAll('input:not(.sD)').forEach(i => i.addEventListener('change', function () {
             if (!isNaN(this.value) &amp;&amp; this.value.length === 1) {
                 this.value = '0' + this.value;
             }
@@ -650,11 +989,11 @@ class InputDuration extends HTMLElement {
         }));
 
     }
-
+    
 
     /**
      * eventlistener that adds click to activate input of values by the keyboard triggered by
-     * the click event of the input
+     * the click event of the input 
      * @method
      * @see boot()
      */
@@ -667,7 +1006,7 @@ class InputDuration extends HTMLElement {
 
     /**
      * eventlistener that adds key filtering to stop letters (or other non-numerics) from being input triggered by
-     * the keypress event of the input
+     * the keypress event of the input 
      * @method
      * @see boot()
      */
@@ -689,40 +1028,45 @@ class InputDuration extends HTMLElement {
     }
 
     /**
-     * Stop event propigation from the timeCase up through the DOM so when keys
+     * Stop event propigation from the timeCase up through the DOM so when keys 
      * are being used they don't affect other controls (like volume on plyr)
      * @method
      */
 
     removeEprop()   {
-
+        
         var closure = this;
 
         closure.shadowRoot.querySelector('.timeCase')
-        .addEventListener('keydown', function (event) { event.stopPropagation();});
+        .addEventListener('keydown', function (event) { event.stopPropagation();}); 
 
         // document.querySelectorAll('input-duration').forEach(x => x.shadowRoot.querySelector('.timeCase')
-        // .addEventListener('keydown', function (event) { event.stopPropagation();}));
+        // .addEventListener('keydown', function (event) { event.stopPropagation();})); 
 
     }
 
 
-
+    
     // formatting and behaviour options
 
     /**
-     * disables entire control => read-only
-     * @method
+     * Disables the entire control and excludes it from form submission.
+     * @method 
      */
 
     disable() {
+        this.setAttribute('disabled', '');
+        this.formDisabledCallback(true);
+    }
 
-        var closure = this;
-
-        // disable chronly inputs on page
-
-        closure.shadowRoot.querySelectorAll(".timeCase input").forEach(el => el.disabled = 'true')
-
+    /**
+     * Enables the duration fields.
+     *
+     * @returns {void}
+     */
+    enable() {
+        this.removeAttribute('disabled');
+        this.formDisabledCallback(false);
     }
 
 
@@ -854,6 +1198,37 @@ class InputDuration extends HTMLElement {
     }
 
     /**
+     * Replaces the day/hour separator.
+     * Also available through the `days-divider` attribute.
+     *
+     * @param {string} text - Divider text to display.
+     * @returns {void}
+     */
+    setDaysDivider(text) {
+        this.setAttribute('days-divider', text);
+    }
+
+    /**
+     * Shows the days field and its adjacent divider.
+     * Sets the `show-days` attribute.
+     *
+     * @returns {void}
+     */
+    showDays() {
+        this.setAttribute('show-days', '');
+    }
+
+    /**
+     * Hides the days field and its adjacent divider.
+     * Removes the `show-days` attribute.
+     *
+     * @returns {void}
+     */
+    hideDays() {
+        this.removeAttribute('show-days');
+    }
+
+    /**
      * Replaces the minutes/seconds separator.
      * Also available through the `minutes-divider` attribute.
      *
@@ -888,6 +1263,7 @@ class InputDuration extends HTMLElement {
 
     /**
      * Synchronizes field and divider visibility with the `no-*` attributes.
+     * The days field keeps a one-character wider minimum than the other fields.
      *
      * @returns {void}
      */
@@ -910,11 +1286,21 @@ class InputDuration extends HTMLElement {
             field.style.display = this.hasAttribute(attribute) ? 'none' : '';
         }
 
+        const showDays = this.hasAttribute('show-days');
+        const dayField = this.myElement.querySelector('.sD');
+        dayField.style.display = showDays ? '' : 'none';
+        dayField.style.width = `${Math.max(3, dayField.value.length)}ch`;
+        const dayMode = showDays || Number(dayField.value) > 0;
+        this.myElement.querySelector('.sH').max = dayMode ? '24' : '100';
+
         for (const [selector, attributes] of Object.entries(hiddenDividers)) {
             const divider = this.myElement.querySelector(selector);
             const shouldHide = attributes.some(attribute => this.hasAttribute(attribute));
             divider.style.display = shouldHide ? 'none' : '';
         }
+
+        const dayDivider = this.myElement.querySelector('.bds-d');
+        dayDivider.style.display = showDays &amp;&amp; !this.hasAttribute('no-hours') ? '' : 'none';
     }
 
     /**
@@ -923,23 +1309,38 @@ class InputDuration extends HTMLElement {
      * @returns {void}
      */
     updateDividers() {
+        const dayFormat = this.hasAttribute('show-days') ||
+            Number(this.myElement.querySelector('.sD').value) > 0;
         const dividers = {
-            'hours-divider': ['.bds-h', ':'],
-            'minutes-divider': ['.bds-m', ':'],
+            'days-divider': ['.bds-d', 'd '],
+            'hours-divider': ['.bds-h', dayFormat ? 'h ' : ':'],
+            'minutes-divider': ['.bds-m', dayFormat ? 'm ' : ':'],
             'seconds-divider': ['.bds-s', '.'],
-            'microseconds-divider': ['.bds-ms', '']
+            'microseconds-divider': ['.bds-ms', dayFormat ? 's' : '']
         };
 
         for (const [attribute, [selector, defaultText]] of Object.entries(dividers)) {
             const divider = this.myElement.querySelector(selector);
             const text = this.getAttribute(attribute) ?? defaultText;
             divider.textContent = text;
+            if (selector === '.bds-d') {
+                divider.style.display = this.hasAttribute('show-days') &amp;&amp; !this.hasAttribute('no-hours') ? '' : 'none';
+            }
+            if (selector === '.bds-h') {
+                divider.style.display = this.hasAttribute('no-hours') || this.hasAttribute('no-minutes') ? 'none' : '';
+            }
+            if (selector === '.bds-m') {
+                divider.style.display = this.hasAttribute('no-minutes') || this.hasAttribute('no-seconds') ? 'none' : '';
+            }
+            if (selector === '.bds-s') {
+                divider.style.display = this.hasAttribute('no-seconds') || this.hasAttribute('no-microseconds') ? 'none' : '';
+            }
             if (selector === '.bds-ms') {
                 divider.style.display = text &amp;&amp; !this.hasAttribute('no-microseconds') ? '' : 'none';
             }
         }
     }
-}
+} 
 // end class
 
 
@@ -964,7 +1365,7 @@ export default InputDuration;
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Thu Nov 05 2026 14:15:36 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Tue Nov 10 2026 15:33:33 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>

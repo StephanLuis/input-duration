@@ -143,17 +143,17 @@ test('form disabled callback disables and enables all duration fields', () => {
     const fields = [...element.shadowRoot.querySelectorAll('.timeCase input')];
 
     element.formDisabledCallback(true);
-    assert.deepEqual(fields.map(field => field.disabled), [true, true, true, true]);
+    assert.deepEqual(fields.map(field => field.disabled), [true, true, true, true, true]);
 
     element.formDisabledCallback(false);
-    assert.deepEqual(fields.map(field => field.disabled), [false, false, false, false]);
+    assert.deepEqual(fields.map(field => field.disabled), [false, false, false, false, false]);
 
     element.disable();
     assert.equal(element.hasAttribute('disabled'), true);
-    assert.deepEqual(fields.map(field => field.disabled), [true, true, true, true]);
+    assert.deepEqual(fields.map(field => field.disabled), [true, true, true, true, true]);
     element.enable();
     assert.equal(element.hasAttribute('disabled'), false);
-    assert.deepEqual(fields.map(field => field.disabled), [false, false, false, false]);
+    assert.deepEqual(fields.map(field => field.disabled), [false, false, false, false, false]);
 
     element.disabled = true;
     assert.equal(element.disabled, true);
@@ -206,6 +206,14 @@ test('form state restoration restores the duration and required state', () => {
     assert.equal(untouched.value, '00:00:00.000');
     assert.equal(untouched.validity.valueMissing, true);
     assert.equal(formValues.get(untouched), null);
+
+    const daysValue = createInputDuration();
+    daysValue.showDays();
+    daysValue.value = '184:05:10:10.006';
+    const daysState = formStates.get(daysValue).restorationState;
+    daysValue.value = '2:03:04:05.006';
+    daysValue.formStateRestoreCallback(daysState, 'restore');
+    assert.equal(daysValue.value, '184:05:10:10.006');
 });
 
 test('form state restoration accepts a legacy duration string', () => {
@@ -263,6 +271,76 @@ test('unit attributes hide their fields and dividers and can be removed', () => 
     assert.equal(shadow.querySelector('.bds-s').style.display, '');
 });
 
+test('days are opt-in and support extended and friendly duration formats', () => {
+    const element = createInputDuration();
+    const dayField = element.shadowRoot.querySelector('.sD');
+    const dayDivider = element.shadowRoot.querySelector('.bds-d');
+
+    assert.equal(dayField.style.display, 'none');
+    assert.equal(element.value, '00:00:00.000');
+    assert.equal(element.dayFriendlyValue, '0d 00h 00m 00.000s');
+
+    element.value = '99:59:59.999';
+    assert.equal(element.dayFriendlyValue, '4d 03h 59m 59.999s');
+
+    element.showDays();
+    assert.equal(dayField.style.display, '');
+    assert.equal(dayDivider.textContent, 'd ');
+    assert.equal(dayField.value, '4');
+    assert.equal(element.value, '4:03:59:59.999');
+
+    element.value = '184:05:10:10.006';
+    assert.equal(element.value, '184:05:10:10.006');
+    assert.equal(element.dayFriendlyValue, '184d 05h 10m 10.006s');
+    assert.equal(dayField.oldValue, '184');
+    dayField.value = '-1';
+    dayField.dispatchEvent(new window.Event('input', { bubbles: true }));
+    assert.equal(dayField.value, '184');
+
+    element.hideDays();
+    assert.equal(dayField.style.display, 'none');
+    assert.equal(element.value, '184:05:10:10.006');
+    assert.equal(element.dayFriendlyValue, '184d 05h 10m 10.006s');
+});
+
+test('days divider can be customized and extended formats are range-checked', () => {
+    const element = createInputDuration();
+    element.showDays();
+    element.setDaysDivider(' days ');
+
+    assert.equal(element.shadowRoot.querySelector('.bds-d').textContent, ' days ');
+    assert.equal(element.isValidValue('184:05:10:10.006'), true);
+    assert.equal(element.isValidValue('184:24:10:10.006'), false);
+    assert.equal(element.isValidValue('1.5:05:10:10.006'), false);
+    assert.equal(element.isValidValue('375299968947542:00:00:00.000'), false);
+});
+
+test('hours roll over at 24 when the days field is active', () => {
+    const element = createInputDuration();
+    element.showDays();
+    element.value = '2:23:00:00.000';
+    const days = element.shadowRoot.querySelector('.sD');
+    const hours = element.shadowRoot.querySelector('.sH');
+
+    hours.value = '24';
+    hours.dispatchEvent(new window.Event('change', { bubbles: true }));
+    assert.equal(days.value, '3');
+    assert.equal(hours.value, '00');
+    assert.equal(element.value, '3:00:00:00.000');
+
+    hours.value = '-1';
+    hours.dispatchEvent(new window.Event('change', { bubbles: true }));
+    assert.equal(days.value, '2');
+    assert.equal(hours.value, '23');
+    assert.equal(element.value, '2:23:00:00.000');
+
+    days.value = '0';
+    hours.value = '-1';
+    hours.dispatchEvent(new window.Event('change', { bubbles: true }));
+    assert.equal(days.value, '0');
+    assert.equal(hours.value, '00');
+});
+
 test('unit hide and show methods toggle their attributes', () => {
     const element = createInputDuration();
     const units = [
@@ -311,7 +389,7 @@ test('divider attributes customize separators and add an optional milliseconds s
 
     assert.deepEqual(
         [...shadow.querySelectorAll('[part~="divider"]')].map(divider => divider.textContent),
-        ['h', 'm', 's', 'ms']
+        ['d ', 'h', 'm', 's', 'ms']
     );
     assert.equal(shadow.querySelector('.bds-ms').style.display, '');
 
@@ -327,7 +405,7 @@ test('divider attributes customize separators and add an optional milliseconds s
 
     assert.deepEqual(
         [...shadow.querySelectorAll('[part~="divider"]')].map(divider => divider.textContent),
-        [' hrs ', ' min ', ' sec ', ' ms']
+        ['d ', ' hrs ', ' min ', ' sec ', ' ms']
     );
 
     for (const attribute of ['hours-divider', 'minutes-divider', 'seconds-divider', 'microseconds-divider']) {
@@ -336,7 +414,7 @@ test('divider attributes customize separators and add an optional milliseconds s
 
     assert.deepEqual(
         [...shadow.querySelectorAll('[part~="divider"]')].map(divider => divider.textContent),
-        [':', ':', '.', '']
+        ['d ', ':', ':', '.', '']
     );
     assert.equal(shadow.querySelector('.bds-ms').style.display, 'none');
 });
@@ -346,8 +424,8 @@ test('exposes styling parts for the control and its fields', () => {
     const shadow = element.shadowRoot;
 
     assert.equal(shadow.querySelector('[part~="control"]') !== null, true);
-    assert.equal(shadow.querySelectorAll('[part~="field"]').length, 4);
-    assert.equal(shadow.querySelectorAll('[part~="divider"]').length, 4);
+    assert.equal(shadow.querySelectorAll('[part~="field"]').length, 5);
+    assert.equal(shadow.querySelectorAll('[part~="divider"]').length, 5);
     assert.equal(shadow.querySelector('[part~="icon"]') !== null, true);
     assert.match(shadow.querySelector('style').textContent, /--input-duration-border-color:\s*#9aa6b2/);
 });

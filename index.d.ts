@@ -2,6 +2,7 @@ declare class InputDuration extends HTMLElement {
     static readonly formAssociated: boolean;
 
     value: string;
+    readonly dayFriendlyValue: string | null;
     validity: ValidityState | null;
     validationMessage: string;
     willValidate: boolean;
@@ -13,6 +14,8 @@ declare class InputDuration extends HTMLElement {
     enable(): void;
 
     hideHours(): void;
+    showDays(): void;
+    hideDays(): void;
     showHours(): void;
     noHours(): void;
     hideMinutes(): void;
@@ -25,6 +28,7 @@ declare class InputDuration extends HTMLElement {
     showMicroSeconds(): void;
     noMicroSeconds(): void;
 
+    setDaysDivider(text: string): void;
     setHoursDivider(text: string): void;
     setMinutesDivider(text: string): void;
     setSecondsDivider(text: string): void;

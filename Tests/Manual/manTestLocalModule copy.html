@@ -140,6 +140,17 @@
             margin: 0;
         }
 
+        .days-demo {
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid #d2e2f2;
+        }
+
+        h2 {
+            margin: 0 0 8px;
+            font-size: 1.2rem;
+        }
+
         output {
             display: block;
             min-height: 1.5em;
@@ -180,6 +191,14 @@
             </div>
         </form>
         <output id="duration-value" aria-live="polite">The required duration has not been set.</output>
+
+        <section class="days-demo" aria-labelledby="days-heading">
+            <h2 id="days-heading">Optional days field</h2>
+            <label id="long-duration-label" for="long-duration">Long duration</label>
+            <input-duration id="long-duration" show-days aria-labelledby="long-duration-label" value="184:05:10:10.006"></input-duration>
+            <p class="help">Days are fixed at 24 hours. Hours roll over from 23 to 00.</p>
+            <output id="friendly-duration" aria-live="polite">184d 05h 10m 10.006s</output>
+        </section>
     </main>
 
     <script type="module">
@@ -189,6 +208,8 @@
         const form = document.querySelector('#session-form');
         const output = document.querySelector('#duration-value');
         const disabledToggle = document.querySelector('#disable-duration');
+        const longDuration = document.querySelector('#long-duration');
+        const friendlyDuration = document.querySelector('#friendly-duration');
 
         duration.addEventListener('input', () => {
             if (!duration.validity.valid) {
@@ -223,6 +244,10 @@
             output.textContent = disabledToggle.checked
                 ? 'Duration disabled; disabled controls are omitted from form submission.'
                 : 'Duration enabled.';
+        });
+
+        longDuration.addEventListener('input', () => {
+            friendlyDuration.textContent = longDuration.dayFriendlyValue;
         });
     </script>
 </body>
