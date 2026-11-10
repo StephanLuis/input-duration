@@ -23,8 +23,8 @@
  * `hours-divider`, `minutes-divider`, `seconds-divider`, and
  * `microseconds-divider` customize the separators; `days-divider` customizes
  * the day label. Divider values are rendered as text.
- * The days field is slightly wider than other numeric fields and has extra
- * spacing before its divider to emphasize the less-common unit.
+ * The days field grows to fit larger counts and has extra spacing before its
+ * divider to emphasize the less-common unit.
  * User edits update the public value and form state when the field changes,
  * after its intermediate input has been normalized.
  * The element is form-associated in supporting browsers; use `name`,
@@ -325,7 +325,7 @@ class InputDuration extends HTMLElement {
         }
         const daysInput = this.myElement.querySelector('.sD');
         daysInput.oldValue = daysInput.value;
-        daysInput.style.width = `${Math.max(3, daysInput.value.length)}ch`;
+        daysInput.style.width = `${Math.max(2, daysInput.value.length)}ch`;
 
         const values = [String(hours).padStart(2, '0'), parts[hasDays ? 2 : 1], parts[hasDays ? 3 : 2], parts[hasDays ? 4 : 3]];
         const inputNames = ['startHours', 'startMinutes', 'startSeconds', 'startMilliSecs'];
@@ -691,8 +691,8 @@ class InputDuration extends HTMLElement {
                 }
 
                 .timeCase input.sD {
-                    width: 3ch;
-                    min-width: 3ch;
+                    width: 2ch;
+                    min-width: 2ch;
                 }
 
                 .timeCase input::-webkit-outer-spin-button,
@@ -783,7 +783,7 @@ class InputDuration extends HTMLElement {
             }
             sD.oldValue = sD.value;
             sH.oldValue = sH.value;
-            sD.style.width = `${Math.max(3, sD.value.length)}ch`;
+            sD.style.width = `${Math.max(2, sD.value.length)}ch`;
             this.updateDividers();
 
         });
@@ -891,7 +891,7 @@ class InputDuration extends HTMLElement {
         setInputFilter(sD, function (value) {
             const valid = /^\d*$/.test(value) && (value === '' || Number.isSafeInteger(Number(value)));
             if (valid) {
-                sD.style.width = `${Math.max(3, value.length)}ch`;
+                sD.style.width = `${Math.max(2, value.length)}ch`;
             }
             return valid;
         });
@@ -901,7 +901,7 @@ class InputDuration extends HTMLElement {
             }
             this.value = String(Number(this.value));
             this.oldValue = this.value;
-            this.style.width = `${Math.max(3, this.value.length)}ch`;
+            this.style.width = `${Math.max(2, this.value.length)}ch`;
             owner.updateDividers();
         });
 
@@ -1255,7 +1255,7 @@ class InputDuration extends HTMLElement {
 
     /**
      * Synchronizes field and divider visibility with the `no-*` attributes.
-     * The days field keeps a one-character wider minimum than the other fields.
+     * The days field grows for longer values; its minimum matches other fields.
      *
      * @returns {void}
      */
@@ -1266,13 +1266,6 @@ class InputDuration extends HTMLElement {
             'no-seconds': '.sS',
             'no-microseconds': '.sMS'
         };
-        const hiddenDividers = {
-            '.bds-h': ['no-hours', 'no-minutes'],
-            '.bds-m': ['no-seconds'],
-            '.bds-s': ['no-microseconds'],
-            '.bds-ms': ['no-microseconds']
-        };
-
         for (const [attribute, selector] of Object.entries(hiddenFields)) {
             const field = this.myElement.querySelector(selector);
             field.style.display = this.hasAttribute(attribute) ? 'none' : '';
@@ -1281,22 +1274,14 @@ class InputDuration extends HTMLElement {
         const showDays = this.hasAttribute('show-days');
         const dayField = this.myElement.querySelector('.sD');
         dayField.style.display = showDays ? '' : 'none';
-        dayField.style.width = `${Math.max(3, dayField.value.length)}ch`;
+        dayField.style.width = `${Math.max(2, dayField.value.length)}ch`;
         const dayMode = showDays || Number(dayField.value) > 0;
         this.myElement.querySelector('.sH').max = dayMode ? '24' : '100';
-
-        for (const [selector, attributes] of Object.entries(hiddenDividers)) {
-            const divider = this.myElement.querySelector(selector);
-            const shouldHide = attributes.some(attribute => this.hasAttribute(attribute));
-            divider.style.display = shouldHide ? 'none' : '';
-        }
-
-        const dayDivider = this.myElement.querySelector('.bds-d');
-        dayDivider.style.display = showDays && !this.hasAttribute('no-hours') ? '' : 'none';
     }
 
     /**
-     * Synchronizes divider text with the corresponding divider attributes.
+     * Synchronizes divider text and shows one separator between each pair of
+     * visible units, including when intervening units are hidden.
      *
      * @returns {void}
      */
@@ -1315,22 +1300,33 @@ class InputDuration extends HTMLElement {
             const divider = this.myElement.querySelector(selector);
             const text = this.getAttribute(attribute) ?? defaultText;
             divider.textContent = text;
-            if (selector === '.bds-d') {
-                divider.style.display = this.hasAttribute('show-days') && !this.hasAttribute('no-hours') ? '' : 'none';
-            }
-            if (selector === '.bds-h') {
-                divider.style.display = this.hasAttribute('no-hours') || this.hasAttribute('no-minutes') ? 'none' : '';
-            }
-            if (selector === '.bds-m') {
-                divider.style.display = this.hasAttribute('no-minutes') || this.hasAttribute('no-seconds') ? 'none' : '';
-            }
-            if (selector === '.bds-s') {
-                divider.style.display = this.hasAttribute('no-seconds') || this.hasAttribute('no-microseconds') ? 'none' : '';
-            }
-            if (selector === '.bds-ms') {
-                divider.style.display = text && !this.hasAttribute('no-microseconds') ? '' : 'none';
-            }
         }
+
+        const units = [
+            { divider: '.bds-d', visible: this.hasAttribute('show-days') },
+            { divider: '.bds-h', visible: !this.hasAttribute('no-hours') },
+            { divider: '.bds-m', visible: !this.hasAttribute('no-minutes') },
+            { divider: '.bds-s', visible: !this.hasAttribute('no-seconds') },
+            { visible: !this.hasAttribute('no-microseconds') }
+        ];
+
+        units.forEach((unit, index) => {
+            if (!unit.divider) {
+                return;
+            }
+
+            const hasVisibleFollowingUnit = units
+                .slice(index + 1)
+                .some(followingUnit => followingUnit.visible);
+            const divider = this.myElement.querySelector(unit.divider);
+            divider.style.display = unit.visible && hasVisibleFollowingUnit ? '' : 'none';
+        });
+
+        const microsecondsSuffix = this.myElement.querySelector('.bds-ms');
+        const suffixText = this.getAttribute('microseconds-divider') ??
+            (dayFormat ? 's' : '');
+        microsecondsSuffix.style.display =
+            !this.hasAttribute('no-microseconds') && suffixText ? '' : 'none';
     }
 } 
 // end class

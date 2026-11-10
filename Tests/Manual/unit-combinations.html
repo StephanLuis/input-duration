@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light">
+    <title>Input duration unit combinations</title>
+    <script type="importmap">
+        {
+            "imports": {
+                "input-duration": "../../index.js"
+            }
+        }
+    </script>
+    <style>
+        :root {
+            color-scheme: light;
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            color: #172b45;
+            background: #eef6ff;
+            font-synthesis: none;
+            text-rendering: optimizeLegibility;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            min-width: 320px;
+            margin: 0;
+            padding: 24px;
+        }
+
+        main {
+            width: min(100%, 1000px);
+            margin: 0 auto;
+            padding: 32px;
+            border: 1px solid #d2e2f2;
+            border-radius: 18px;
+            background: #fff;
+            box-shadow: 0 12px 32px rgb(35 79 125 / 9%);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: clamp(1.6rem, 5vw, 2rem);
+            letter-spacing: -.04em;
+        }
+
+        h2 {
+            margin: 28px 0 12px;
+            font-size: 1.2rem;
+        }
+
+        .description,
+        .help {
+            color: #536b84;
+            line-height: 1.55;
+        }
+
+        .description {
+            margin: 10px 0 24px;
+        }
+
+        .help {
+            margin: 8px 0 0;
+            font-size: .9rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+            gap: 16px;
+        }
+
+        .case {
+            min-width: 0;
+            padding: 16px;
+            border: 1px solid #d2e2f2;
+            border-radius: 12px;
+        }
+
+        .case label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 650;
+        }
+
+        input-duration {
+            display: block;
+            max-width: 100%;
+            font-size: 1.1rem;
+            --input-duration-border-color: #b8cde2;
+            --input-duration-border-radius: 10px;
+            --input-duration-background: #fff;
+            --input-duration-focus-color: #2563a6;
+            --input-duration-focus-outline: 3px solid rgb(37 99 166 / 25%);
+            --input-duration-focus-outline-offset: 2px;
+        }
+
+        input-duration::part(control) {
+            width: fit-content;
+            max-width: 100%;
+        }
+
+        output {
+            display: block;
+            min-height: 1.5em;
+            margin-top: 8px;
+            color: #2563a6;
+            font-size: .9rem;
+            overflow-wrap: anywhere;
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 16px;
+            }
+
+            main {
+                padding: 24px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <h1>Input duration unit combinations</h1>
+        <p class="description">
+            Test all visibility combinations of hours, minutes, seconds, and milliseconds.
+            Type into a field and move away to commit its value. When a following unit is hidden,
+            completing the current unit should leave the control.
+        </p>
+
+        <section aria-labelledby="units-heading">
+            <h2 id="units-heading">Visible unit combinations</h2>
+            <div class="grid" id="unit-combinations"></div>
+        </section>
+
+        <section aria-labelledby="days-heading">
+            <h2 id="days-heading">Days and friendly value</h2>
+            <div class="grid" id="days-combination"></div>
+        </section>
+    </main>
+
+    <script type="module">
+        import 'input-duration';
+
+        const unitNames = [
+            ['hours', 'no-hours'],
+            ['minutes', 'no-minutes'],
+            ['seconds', 'no-seconds'],
+            ['milliseconds', 'no-microseconds']
+        ];
+        const combinations = document.querySelector('#unit-combinations');
+
+        function addCase(container, labelText, { hidden = [], days = false, value = '12:34:56.789' } = {}) {
+            const card = document.createElement('div');
+            card.className = 'case';
+
+            const id = `duration-${container.id}-${container.children.length}`;
+            const label = document.createElement('label');
+            label.htmlFor = id;
+            label.textContent = labelText;
+
+            const duration = document.createElement('input-duration');
+            duration.id = id;
+            duration.setAttribute('aria-labelledby', `${id}-label`);
+            duration.setAttribute('value', value);
+            for (const [, attribute] of unitNames) {
+                if (hidden.includes(attribute)) {
+                    duration.setAttribute(attribute, '');
+                }
+            }
+            if (days) {
+                duration.setAttribute('show-days', '');
+            }
+
+            const valueOutput = document.createElement('output');
+            valueOutput.setAttribute('aria-live', 'polite');
+            const friendlyOutput = document.createElement('output');
+            friendlyOutput.setAttribute('aria-live', 'polite');
+            valueOutput.textContent = `value: ${duration.value}`;
+            friendlyOutput.textContent = `dayFriendlyValue: ${duration.dayFriendlyValue}`;
+
+            duration.addEventListener('change', () => {
+                valueOutput.textContent = `value: ${duration.value}`;
+                friendlyOutput.textContent = `dayFriendlyValue: ${duration.dayFriendlyValue}`;
+            });
+
+            label.id = `${id}-label`;
+            card.append(label, duration, valueOutput, friendlyOutput);
+            container.append(card);
+        }
+
+        for (let mask = 0; mask < 16; mask += 1) {
+            const hidden = unitNames
+                .filter((_, index) => !(mask & (1 << index)))
+                .map(([, attribute]) => attribute);
+            const visible = unitNames
+                .filter((_, index) => mask & (1 << index))
+                .map(([name]) => name);
+            const label = visible.length ? visible.join(' + ') : 'No visible units';
+            addCase(combinations, label, { hidden });
+        }
+
+        addCase(document.querySelector('#days-combination'), 'Days, hours, minutes, seconds, and milliseconds', {
+            days: true,
+            value: '2:03:04:05.006'
+        });
+    </script>
+</body>
+
+</html>

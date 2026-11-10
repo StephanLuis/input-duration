@@ -82,6 +82,8 @@ TypeScript declarations are included. See the [framework examples](#framework-ex
 ·
   <a href="https://stephanluis.github.io/input-duration/bootstrap.html" target="_blank">Bootstrap Demo</a>
 ·
+  <a href="https://stephanluis.github.io/input-duration/days-demo.html" target="_blank">Days Demo</a>
+·
       <a href="https://codesandbox.io/s/peaceful-waterfall-6mxpg2?file=/index.html" target="_blank">
   Fiddle
 </a> ·
@@ -264,7 +266,7 @@ import id from 'https://cdn.jsdelivr.net/npm/input-duration/+esm'
   
  ```
 
-For manual browser checks, serve the repository root and open the [local package-specifier import demo](Tests/Manual/manTestLocalModule%20copy.html) or the [jsDelivr ESM import demo](Tests/Manual/manTestJSdelivrModule.html). Browsers do not resolve npm package names themselves, so the local demo uses an import map to resolve `input-duration` to the local module; bundlers resolve the package name through `package.json` exports.
+For manual browser checks, serve the repository root and open the [local package-specifier import demo](Tests/Manual/manTestLocalModule%20copy.html), the [jsDelivr ESM import demo](Tests/Manual/manTestJSdelivrModule.html), or the [unit combinations test page](Tests/Manual/unit-combinations.html). The unit test page covers all 16 visible/hidden combinations of hours, minutes, seconds, and milliseconds, plus days mode with `dayFriendlyValue`. The [days display and value demo](https://stephanluis.github.io/input-duration/days-demo.html) is also published on GitHub Pages. Browsers do not resolve npm package names themselves, so the local demos use an import map to resolve `input-duration` to the local module; bundlers resolve the package name through `package.json` exports.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -292,7 +294,7 @@ The read-only `.dayFriendlyValue` property returns a normalized, labeled string 
 
 Use `hideHours()`, `hideMinutes()`, `hideSeconds()`, and `hideMicroSeconds()` to hide fields, and the corresponding `show*()` methods to show them again. The existing `noHours()`, `noMinutes()`, `noSeconds()`, and `noMicroSeconds()` methods remain available as aliases for the `hide*()` methods. Hidden fields do not change the component's value.
 
-Customize the separators with the `days-divider`, `hours-divider`, `minutes-divider`, `seconds-divider`, and `microseconds-divider` attributes. The first four replace the separators between fields; `microseconds-divider` adds an optional suffix after milliseconds. For example:
+Customize the separators with the `days-divider`, `hours-divider`, `minutes-divider`, `seconds-divider`, and `microseconds-divider` attributes. A single separator is shown between each pair of visible units, even if units in between are hidden; the separator associated with the left visible unit is used. The first four attributes customize those separators; `microseconds-divider` adds an optional suffix after milliseconds. For example:
 
 ```html
 <input-duration show-days days-divider="d " hours-divider="h " minutes-divider="m " seconds-divider="." microseconds-divider="s"></input-duration>

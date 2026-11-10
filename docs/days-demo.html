@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light">
+    <title>Input duration days demo</title>
+    <style>
+        :root {
+            color-scheme: light;
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            color: #172b45;
+            background: #eef6ff;
+            font-synthesis: none;
+            text-rendering: optimizeLegibility;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            display: grid;
+            min-width: 320px;
+            min-height: 100vh;
+            margin: 0;
+            padding: 24px;
+            place-items: center;
+        }
+
+        main {
+            width: min(100%, 600px);
+            padding: 32px;
+            border: 1px solid #d2e2f2;
+            border-radius: 18px;
+            background: #fff;
+            box-shadow: 0 12px 32px rgb(35 79 125 / 9%);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: clamp(1.6rem, 5vw, 2rem);
+            letter-spacing: -.04em;
+        }
+
+        p {
+            color: #536b84;
+            line-height: 1.55;
+        }
+
+        label {
+            display: block;
+            margin: 24px 0 8px;
+            font-weight: 650;
+        }
+
+        input-duration {
+            display: block;
+            max-width: 100%;
+            font-size: 1.25rem;
+            --input-duration-border-color: #b8cde2;
+            --input-duration-border-radius: 10px;
+            --input-duration-background: #fff;
+            --input-duration-focus-color: #2563a6;
+            --input-duration-focus-outline: 3px solid rgb(37 99 166 / 25%);
+            --input-duration-focus-outline-offset: 2px;
+        }
+
+        input-duration::part(control) {
+            width: fit-content;
+            max-width: 100%;
+        }
+
+        .values {
+            display: grid;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .value-card {
+            padding: 14px 16px;
+            border: 1px solid #d2e2f2;
+            border-radius: 10px;
+            background: #f7fbff;
+        }
+
+        .value-card strong {
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        output {
+            color: #2563a6;
+            font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+            overflow-wrap: anywhere;
+        }
+
+        .note {
+            margin-bottom: 0;
+            font-size: .9rem;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #2563a6;
+            font-weight: 650;
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 16px;
+            }
+
+            main {
+                padding: 24px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <h1>Long duration with days</h1>
+        <p>
+            Edit the days, hours, minutes, seconds, or milliseconds. The value display updates
+            when an edited field is committed (for example, when you move to another field).
+            Hours roll over at 24.
+        </p>
+
+        <label id="duration-label" for="duration">Duration</label>
+        <input-duration id="duration" show-days aria-labelledby="duration-label" value="2:03:04:05.006"></input-duration>
+
+        <section class="values" aria-label="Duration values">
+            <div class="value-card">
+                <strong>element.value</strong>
+                <output id="duration-value" aria-live="polite"></output>
+            </div>
+            <div class="value-card">
+                <strong>element.dayFriendlyValue</strong>
+                <output id="friendly-value" aria-live="polite"></output>
+            </div>
+        </section>
+
+        <p class="note">
+            `.value` uses `D:HH:mm:ss.SSS` in days mode. `dayFriendlyValue` includes unit labels,
+            such as `2d 03h 04m 05.006s`.
+        </p>
+        <a class="back-link" href="./">Back to API documentation</a>
+    </main>
+
+    <script type="module">
+        import '../index.js';
+
+        const duration = document.querySelector('#duration');
+        const valueOutput = document.querySelector('#duration-value');
+        const friendlyOutput = document.querySelector('#friendly-value');
+
+        function updateValues() {
+            valueOutput.textContent = duration.value;
+            friendlyOutput.textContent = duration.dayFriendlyValue;
+        }
+
+        updateValues();
+        duration.addEventListener('change', updateValues);
+    </script>
+</body>
+
+</html>

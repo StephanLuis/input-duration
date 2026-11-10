@@ -322,6 +322,35 @@ test('unit attributes hide their fields and dividers and can be removed', () => 
     assert.equal(shadow.querySelector('.bds-s').style.display, '');
 });
 
+test('a separator remains between each pair of visible units', () => {
+    const element = createInputDuration();
+    const hiddenAttributes = ['no-hours', 'no-minutes', 'no-seconds', 'no-microseconds'];
+    const fields = ['.sH', '.sM', '.sS', '.sMS'];
+    const dividers = ['.bds-h', '.bds-m', '.bds-s'];
+
+    for (let mask = 0; mask < 16; mask += 1) {
+        hiddenAttributes.forEach((attribute, index) => {
+            element.toggleAttribute(attribute, !(mask & (1 << index)));
+        });
+
+        const visibleCount = fields.filter(selector =>
+            element.shadowRoot.querySelector(selector).style.display !== 'none'
+        ).length;
+        const visibleDividerCount = dividers.filter(selector =>
+            element.shadowRoot.querySelector(selector).style.display !== 'none'
+        ).length;
+
+        assert.equal(visibleDividerCount, Math.max(0, visibleCount - 1), `combination mask ${mask}`);
+    }
+
+    element.setAttribute('no-minutes', '');
+    element.setAttribute('no-seconds', '');
+    assert.equal(element.shadowRoot.querySelector('.bds-h').style.display, '');
+    assert.equal(element.shadowRoot.querySelector('.bds-h').textContent, ':');
+    assert.equal(element.shadowRoot.querySelector('.bds-m').style.display, 'none');
+    assert.equal(element.shadowRoot.querySelector('.bds-s').style.display, 'none');
+});
+
 test('days are opt-in and support extended and friendly duration formats', () => {
     const element = createInputDuration();
     const dayField = element.shadowRoot.querySelector('.sD');
@@ -336,11 +365,13 @@ test('days are opt-in and support extended and friendly duration formats', () =>
 
     element.showDays();
     assert.equal(dayField.style.display, '');
+    assert.equal(dayField.style.width, '2ch');
     assert.equal(dayDivider.textContent, 'd ');
     assert.equal(dayField.value, '4');
     assert.equal(element.value, '4:03:59:59.999');
 
     element.value = '184:05:10:10.006';
+    assert.equal(dayField.style.width, '3ch');
     assert.equal(element.value, '184:05:10:10.006');
     assert.equal(element.dayFriendlyValue, '184d 05h 10m 10.006s');
     assert.equal(dayField.oldValue, '184');
@@ -422,9 +453,10 @@ test('unit hide and show methods toggle their attributes', () => {
     element.hideHours();
     element.hideMinutes();
     element.showHours();
-    assert.equal(element.shadowRoot.querySelector('.bds-h').style.display, 'none');
+    assert.equal(element.shadowRoot.querySelector('.bds-h').style.display, '');
     element.showMinutes();
     assert.equal(element.shadowRoot.querySelector('.bds-h').style.display, '');
+    assert.equal(element.shadowRoot.querySelector('.bds-m').style.display, '');
 });
 
 test('no* methods remain aliases for hiding their corresponding units', () => {
