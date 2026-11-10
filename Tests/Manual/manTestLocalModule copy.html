@@ -6,6 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="color-scheme" content="light">
     <title>Focus session duration</title>
+    <script type="importmap">
+        {
+            "imports": {
+                "input-duration": "../../index.js"
+            }
+        }
+    </script>
     <style>
         :root {
             color-scheme: light;
@@ -176,7 +183,7 @@
     </main>
 
     <script type="module">
-        import '../../index.js';
+        import 'input-duration';
 
         const duration = document.querySelector('#duration');
         const form = document.querySelector('#session-form');

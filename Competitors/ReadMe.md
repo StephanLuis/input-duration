@@ -12,7 +12,7 @@ Prioritize making `input-duration` straightforward to use in existing applicatio
 1. **Framework integration examples (available).** Copy-paste examples for React, Vue, Angular, and Svelte are in the main [README](../README.md#framework-examples). Start with examples rather than separate adapter packages; add adapters only if users encounter framework-specific friction.
 2. **Support native HTML forms.** Named submission, required/validity, disabled state, form reset, and browser-managed state restoration are implemented for browsers that support form-associated custom elements. See the [forms and accessibility roadmap](#forms-and-accessibility-roadmap).
 3. **Strengthen accessibility.** Document and verify labels for individual segments, group semantics, keyboard interaction, and screen-reader behavior. See the [forms and accessibility roadmap](#forms-and-accessibility-roadmap).
-4. **Improve discoverability and onboarding.** Lead the README with short install-and-use instructions for common frameworks, and review package metadata for TypeScript declarations and clear exports.
+4. **Improve discoverability and onboarding (implemented).** The README now leads with a quick start and framework examples; package metadata exposes the ESM entry point and TypeScript declarations, and manual pages exercise local and CDN imports.
 5. **Approach component libraries with focused integrations.** Offer an optional integration example or wrapper that follows each library's conventions before proposing that a specialized duration control be included in its core set.
 
 Keep the component's purpose clear throughout: it supports elapsed-duration entry in a fixed format, including durations over 24 hours; it is not a replacement for time-of-day inputs.

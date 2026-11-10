@@ -55,6 +55,24 @@ The component supplies its own segmented layout instead of the browser's native 
 
 The control's styles are scoped inside its Shadow DOM, so global styles and resets from Tailwind or other CSS libraries do not leak into its internal layout. The control inherits its font and text color from its surrounding page.
 
+## Quick start
+
+Install the package and import it once to register the custom element:
+
+```sh
+npm install input-duration
+```
+
+```js
+import 'input-duration';
+```
+
+```html
+<input-duration value="01:23:45.678"></input-duration>
+```
+
+TypeScript declarations are included. See the [framework examples](#framework-examples) for React, Vue, Angular, and Svelte, or try the [manual import demos](#installation).
+
 <br>
 <p>
 <div>
@@ -137,6 +155,7 @@ Here's why:
 <details>
   <summary>Table of Contents</summary>
   <ol>
+    <li><a href="#quick-start">Quick start</a></li>
     <li>
       <a href="#about-the-project">About The Project</a>
       <ul>
@@ -227,9 +246,10 @@ _This template doesn't rely on any external dependencies or services._
 2. import input-duration in javascript
  ```sh
 
- import id from 'input-duration';
+ import 'input-duration';
 
 ```
+The package includes TypeScript declarations and registers the `<input-duration>` element when imported. Its typed DOM element is available from `document.querySelector('input-duration')`.
   
 Without packaging:
 
@@ -244,6 +264,7 @@ import id from 'https://cdn.jsdelivr.net/npm/input-duration/+esm'
   
  ```
 
+For manual browser checks, serve the repository root and open the [local package-specifier import demo](Tests/Manual/manTestLocalModule%20copy.html) or the [jsDelivr ESM import demo](Tests/Manual/manTestJSdelivrModule.html). Browsers do not resolve npm package names themselves, so the local demo uses an import map to resolve `input-duration` to the local module; bundlers resolve the package name through `package.json` exports.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
