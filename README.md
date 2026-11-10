@@ -74,29 +74,17 @@ import 'input-duration';
 TypeScript declarations are included. See the [framework examples](#framework-examples) for React, Vue, Angular, and Svelte, or try the [manual import demos](#installation).
 
 <br>
-<p>
-<div>
-  </div>
-    <div align="center">
-  <a href="https://stephanluis.github.io/input-duration/" target="_blank">Demo</a>
-·
-  <a href="https://stephanluis.github.io/input-duration/bootstrap.html" target="_blank">Bootstrap Demo</a>
-·
-  <a href="https://stephanluis.github.io/input-duration/days-demo.html" target="_blank">Days Demo</a>
-·
-      <a href="https://codesandbox.io/s/peaceful-waterfall-6mxpg2?file=/index.html" target="_blank">
-  Fiddle
-</a> ·
-      <a href="https://6mxpg2.csb.app/" target="_blank">Fiddle's Output</a>
-    ·
-  <a href="https://stephanluis.github.io/input-duration/InputDuration.html" target="_blank">API Docs</a>
-  ·
-    <a href="https://github.com/StephanLuis/input-duration/issues">Bugs</a>
-    ·
-    <a href="https://github.com/StephanLuis/input-duration/issues">Request Feature</a>
-  </p>
-  </div>
-</div>
+<p align="center">
+  <a href="https://stephanluis.github.io/input-duration/" target="_blank">Demo</a> &middot;
+  <a href="https://stephanluis.github.io/input-duration/bootstrap.html" target="_blank">Bootstrap Demo</a> &middot;
+  <a href="https://stephanluis.github.io/input-duration/days-demo.html" target="_blank">Days Demo</a> &middot;
+  <a href="https://cdn.jsdelivr.net/gh/StephanLuis/input-duration@main/docs/days-demo.html" target="_blank">Days Demo on jsDelivr</a> &middot;
+  <a href="https://codesandbox.io/s/peaceful-waterfall-6mxpg2?file=/index.html" target="_blank">Fiddle</a> &middot;
+  <a href="https://6mxpg2.csb.app/" target="_blank">Fiddle's Output</a> &middot;
+  <a href="https://stephanluis.github.io/input-duration/InputDuration.html" target="_blank">API Docs</a> &middot;
+  <a href="https://github.com/StephanLuis/input-duration/issues">Bugs</a> &middot;
+  <a href="https://github.com/StephanLuis/input-duration/issues">Request Feature</a>
+</p>
 <br/>
 
 <h2>Fixed-format duration input</h2>
@@ -266,7 +254,7 @@ import id from 'https://cdn.jsdelivr.net/npm/input-duration/+esm'
   
  ```
 
-For manual browser checks, serve the repository root and open the [local package-specifier import demo](Tests/Manual/manTestLocalModule%20copy.html), the [jsDelivr ESM import demo](Tests/Manual/manTestJSdelivrModule.html), or the [unit combinations test page](Tests/Manual/unit-combinations.html). The unit test page covers all 16 visible/hidden combinations of hours, minutes, seconds, and milliseconds, plus days mode with `dayFriendlyValue`. The [days display and value demo](https://stephanluis.github.io/input-duration/days-demo.html) is also published on GitHub Pages. Browsers do not resolve npm package names themselves, so the local demos use an import map to resolve `input-duration` to the local module; bundlers resolve the package name through `package.json` exports.
+For manual browser checks, serve the repository root and open the [local package-specifier import demo](Tests/Manual/manTestLocalModule%20copy.html), the [jsDelivr ESM import demo](Tests/Manual/manTestJSdelivrModule.html), or the [unit combinations test page](Tests/Manual/unit-combinations.html). The unit test page covers all 16 visible/hidden combinations of hours, minutes, seconds, and milliseconds, plus days mode with `dayFriendlyValue`. The [days display and value demo](https://stephanluis.github.io/input-duration/days-demo.html) is published on GitHub Pages and loads the package from jsDelivr; the source page is also available [through jsDelivr](https://cdn.jsdelivr.net/gh/StephanLuis/input-duration@main/docs/days-demo.html). Browsers do not resolve npm package names themselves, so the local demos use an import map to resolve `input-duration` to the local module; bundlers resolve the package name through `package.json` exports.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
