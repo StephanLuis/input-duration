@@ -78,7 +78,6 @@ TypeScript declarations are included. See the [framework examples](#framework-ex
   <a href="https://stephanluis.github.io/input-duration/" target="_blank">Demo</a> &middot;
   <a href="https://stephanluis.github.io/input-duration/bootstrap.html" target="_blank">Bootstrap Demo</a> &middot;
   <a href="https://stephanluis.github.io/input-duration/days-demo.html" target="_blank">Days Demo</a> &middot;
-  <a href="https://cdn.jsdelivr.net/gh/StephanLuis/input-duration@main/docs/days-demo.html" target="_blank">Days Demo on jsDelivr</a> &middot;
   <a href="https://codesandbox.io/s/peaceful-waterfall-6mxpg2?file=/index.html" target="_blank">Fiddle</a> &middot;
   <a href="https://6mxpg2.csb.app/" target="_blank">Fiddle's Output</a> &middot;
   <a href="https://stephanluis.github.io/input-duration/InputDuration.html" target="_blank">API Docs</a> &middot;
