@@ -1,29 +1,69 @@
-# Feel free to list or upload a scrape of a control that does the same as <input-duration>:
+# Duration Input Landscape
 
-- Parliament Live TV (js scraped)
-  - drawback is jQ
-- [Input Duration Element (Muan)](https://github.com/muan/input-duration-element/)
-  - one benefit is character separation of units
+This page compares duration-specific controls with adjacent time-of-day and general-purpose inputs. The distinction
+matters: a duration is a time span, whether it describes time already elapsed or time set for a future alarm, timer,
+limit, or other interval. It is not a clock time or calendar date.
+
+## Comparable Controls
+
+### Duration-specific inputs
+
+| Control | Framework and input model | Capabilities and differences |
+| --- | --- | --- |
+| [`input-duration`](../README.md) | Framework-independent Web Component | Separate numeric fields for units, optional days, configurable per-unit dividers, and a fixed duration format. Works in React and other frameworks without a separate framework-specific implementation. |
+| [Input Duration Element](https://github.com/muan/input-duration-element/) | Web Component | Another duration-focused custom element. The existing project notes call out its character separation between units. |
+
+### React ecosystem alternatives
+
+#### React web
+
+| Control | Approach | npm downloads/week* |
+| --- | --- | ---: |
+| [react-duration-input](https://github.com/kennybecerra/react-duration-input) | Formatting hook for a text input; returns milliseconds | 590 |
+| [react-duration-picker](https://github.com/flurmbo/react-duration-picker) | Mobile-style scrolling picker for hours, minutes, and seconds | 329 |
+| [react-duration-input-mask](https://github.com/nijk/react-duration-input-mask) | Masked input for days through seconds | 48 |
+| [react-duration-control](https://github.com/nikkorn/react-duration-control) | Configurable segmented control, including days and milliseconds | Not verified |
+| [react-duration](https://github.com/cloudtion/react-duration) | Duration input with a value in seconds | Not verified |
+| [material-duration-picker](https://github.com/tran-simon/material-duration-picker) | Material-style picker | Not verified |
+
+#### React Native
+
+| Control | Approach | npm downloads/week* |
+| --- | --- | ---: |
+| [react-native-timer-picker](https://github.com/troberts-28/react-native-timer-picker) | Mobile scrolling duration picker for timers and alarms | 49,549 |
+| [React Native Pickers](https://github.com/elik56a/react-native-pickers) | Picker collection including duration; also supports web | 237 |
+
+\* npm figures are for **14–20 November 2026** and include automated installs. The remaining counts were not verified.
+React Native packages target native applications and are not directly usable as browser controls.
+
+### Adjacent controls (not dedicated duration inputs)
+
+| Library | Related controls | Difference from a duration input |
+| --- | --- | --- |
+| [Kendo UI](https://www.telerik.com/kendo-react-ui/components/inputs) | TimePickers and general inputs such as numeric and masked fields across its framework suites | The TimePicker is for clock time, not a time span. I found no dedicated duration input in the official input catalogs reviewed for [React](https://www.telerik.com/kendo-react-ui/components/inputs), [Angular](https://www.telerik.com/kendo-angular-ui/components/inputs), and [Vue](https://www.telerik.com/kendo-vue-ui/components/inputs), or the [jQuery TimePicker documentation](https://www.telerik.com/kendo-jquery-ui/documentation/controls/timepicker/overview). |
+| [jQuery UI](https://jqueryui.com/) | The [Spinner](https://jqueryui.com/spinner/) includes a [Time spinner demo](https://jqueryui.com/resources/demos/spinner/time.html). | The demo formats a time of day (for example, `08:30 PM`) using culture-aware date formatting. Spinner is a general numeric widget, not a duration control. |
+
+The [Parliament Live TV example](https://www.parliamentlive.tv/) was also noted during an earlier scan; it is a site-specific, jQuery-based example rather than a reusable framework-independent control.
 
 ## Roadmap to Broaden Adoption
 
 Prioritize making `input-duration` straightforward to use in existing applications before pursuing inclusion in a larger component library. Its native Web Component implementation provides a framework-independent foundation.
 
-1. **Framework integration examples (available).** Copy-paste examples for React, Vue, Angular, and Svelte are in the main [README](../README.md#framework-examples). Start with examples rather than separate adapter packages; add adapters only if users encounter framework-specific friction.
+1. **Framework integration examples (available).** Copy-paste examples for React, Vue, Angular, and Svelte are in the main [README](../README.md#framework-examples). Make the React example especially easy to find: many developers search specifically for React controls and may not realize a Web Component can be used from React. Explain that this is the same framework-independent component, not a separate React implementation. Add adapters only if users encounter framework-specific friction.
 2. **Support native HTML forms.** Named submission, required/validity, disabled state, form reset, and browser-managed state restoration are implemented for browsers that support form-associated custom elements. See the [forms and accessibility roadmap](#forms-and-accessibility-roadmap).
 3. **Strengthen accessibility.** Document and verify labels for individual segments, group semantics, keyboard interaction, and screen-reader behavior. See the [forms and accessibility roadmap](#forms-and-accessibility-roadmap).
 4. **Improve discoverability and onboarding (implemented).** The README now leads with a quick start and framework examples; package metadata exposes the ESM entry point and TypeScript declarations, and manual pages exercise local and CDN imports.
-5. **Approach component libraries with focused integrations.** Offer an optional integration example or wrapper that follows each library's conventions before proposing that a specialized duration control be included in its core set.
+5. **Approach component libraries with focused integrations.** The open [Web Awesome duration-input PR](https://github.com/shoelace-style/webawesome/pull/3077) is an active proposal, not a shipped integration or confirmed acceptance. Use it to learn what a component library needs, and offer focused examples or wrappers that follow each library's conventions before proposing core inclusion.
 
-Keep the component's purpose clear throughout: it supports elapsed-duration entry in a fixed format, including durations over 24 hours; it is not a replacement for time-of-day inputs.
+Keep the purpose clear in examples and outreach: this control enters a time span for past or future use cases, such as elapsed time, an alarm, a timer, a limit, or a media offset. It does not replace a time-of-day or date input. Its fixed format avoids locale-dependent clock-time presentation, and its optional days field supports spans longer than 24 hours.
 
 ### Potential Integration Prospects
 
-These are possible targets for examples, wrappers, or future contribution proposals—not existing integrations or confirmed partnerships. Start with the framework-independent component libraries, then consider framework-specific ecosystems where users request them.
+These are possible targets for examples, wrappers, or future contribution proposals—not existing integrations or confirmed partnerships. Start with framework-independent component libraries, then consider framework-specific ecosystems where users request them.
 
 #### Web Component libraries
 
-- [Web Awesome](https://webawesome.com/) (formerly Shoelace)
+- [Web Awesome](https://webawesome.com/) (formerly Shoelace; duration-input proposal in [PR #3077](https://github.com/shoelace-style/webawesome/pull/3077))
 - [Vaadin Components](https://vaadin.com/docs/latest/components)
 - [FAST](https://www.fast.design/)
 
