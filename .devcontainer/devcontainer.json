@@ -1,0 +1,5 @@
+{
+  "name": "input-duration",
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  "postCreateCommand": "npx --yes --package=playwright@1.64.1 -c 'sudo -A \"$(command -v node)\" \"$(command -v playwright)\" install-deps chromium && playwright install chromium'"
+}

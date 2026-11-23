@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Duration input with react-timer-hook</title>
+    <link rel="stylesheet" href="./styles/countdown-demo.css">
+    <script type="importmap">
+        {"imports":{"react":"https://esm.sh/react@18.3.1","react-dom/client":"https://esm.sh/react-dom@18.3.1/client?external=react"}}
+    </script>
+</head>
+<body data-timer="hook">
+    <main>
+        <p class="eyebrow">Duration input + React</p>
+        <h1>react-timer-hook</h1>
+        <p>Choose a duration and start a countdown. The hook provides timer logic; this page supplies the digit display.</p>
+        <label id="duration-label" for="duration">Duration</label>
+        <input-duration id="duration" show-days aria-labelledby="duration-label" value="0:00:00:10.000"></input-duration>
+        <p class="hint">Enter days, hours, minutes, seconds, and milliseconds. Choose a duration greater than zero.</p>
+        <button id="start" type="button" disabled>Start countdown</button>
+        <p id="status" role="status">Loading the demo. This page needs an internet connection.</p>
+        <div id="timer" class="timer" role="timer" aria-label="Time remaining"></div>
+        <p><a href="https://github.com/amrlabib/react-timer-hook">About react-timer-hook</a> ·
+            <a href="https://amrlabib.github.io/react-timer-hook/">Original timer demo</a></p>
+        <nav aria-label="Countdown demos">
+            <a href="./styled-timer-demo.html">Matching input and timer demo</a>
+            <a href="./react-countdown-demo.html">React countdown demo</a>
+            <a href="./react-countdown-circle-demo.html">Circle timer demo</a>
+            <a href="./">Input duration demo</a>
+        </nav>
+    </main>
+    <script type="module">
+        import('./scripts/countdown-demo.js').catch(error => {
+            console.error('Unable to load countdown demo:', error);
+            document.querySelector('#status').textContent = 'Could not load the demo. Check your connection and reload.';
+        });
+    </script>
+</body>
+</html>

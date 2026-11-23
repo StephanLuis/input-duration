@@ -73,11 +73,16 @@ import 'input-duration';
 
 TypeScript declarations are included. See the [framework examples](#framework-examples) for React, Vue, Angular, and Svelte, or try the [manual import demos](#installation).
 
+The repository's dev-container setup installs Playwright 1.64.1's Chromium browser and system dependencies when a
+Codespace is created or rebuilt. This version matches the current Web Awesome workspace; update it in
+`.devcontainer/devcontainer.json` if that workspace upgrades Playwright. Setup requires network access and sudo.
+
 <br>
 <p align="center">
   <a href="https://stephanluis.github.io/input-duration/" target="_blank">Demo</a> &middot;
   <a href="https://stephanluis.github.io/input-duration/bootstrap.html" target="_blank">Bootstrap Demo</a> &middot;
   <a href="https://stephanluis.github.io/input-duration/days-demo.html" target="_blank">Days Demo</a> &middot;
+  <a href="https://stephanluis.github.io/input-duration/react-countdown-demo.html" target="_blank">Countdown Demos</a> &middot;
   <a href="https://codesandbox.io/s/peaceful-waterfall-6mxpg2?file=/index.html" target="_blank">Fiddle</a> &middot;
   <a href="https://6mxpg2.csb.app/" target="_blank">Fiddle's Output</a> &middot;
   <a href="https://stephanluis.github.io/input-duration/InputDuration.html" target="_blank">API Docs</a> &middot;

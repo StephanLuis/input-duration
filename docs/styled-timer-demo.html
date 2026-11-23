@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Styled duration input and countdown</title>
+    <style>
+        body {
+            margin: 24px;
+            color: #41474b;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 { font-size: 24px; }
+        h2 { margin: 32px 0 12px; font-size: 18px; }
+        p { line-height: 1.5; }
+        .scroll { max-width: 100%; overflow-x: auto; padding: 4px; }
+
+        .display {
+            --day-width: 40px;
+            width: max-content;
+            font-family: "Courier New", monospace;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .labels {
+            display: grid;
+            grid-template-columns: var(--day-width) 16px 80px 16px 80px 16px 80px 16px 120px;
+            align-items: center;
+            margin-bottom: 5px;
+            font: 12px Arial, sans-serif;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        .labels span:nth-child(1) { grid-column: 1; }
+        .labels span:nth-child(2) { grid-column: 3; }
+        .labels span:nth-child(3) { grid-column: 5; }
+        .labels span:nth-child(4) { grid-column: 7; }
+        .labels span:nth-child(5) { grid-column: 9; }
+
+        input-duration {
+            --input-duration-gap: 0px;
+            --input-duration-padding: 0px;
+            --input-duration-border-color: transparent;
+            --input-duration-focus-color: transparent;
+            --input-duration-divider-color: #41474b;
+            --input-duration-divider-opacity: 1;
+            font: 30px/1.25 "Courier New", monospace;
+        }
+
+        input-duration::part(control) { border: 0; max-width: none; }
+        input-duration::part(icon) { display: none; }
+
+        input-duration::part(field) {
+            box-sizing: border-box;
+            width: 80px;
+            min-width: 0;
+            height: 54px;
+            padding: 8px 0 8px 11px;
+            border: 0;
+            border-radius: 0;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='54'%3E%3Crect width='38' height='54' rx='5' fill='%2341474b'/%3E%3C/svg%3E") repeat-x;
+            color: white;
+            font: 30px/1.25 "Courier New", monospace;
+            letter-spacing: 22px;
+            text-align: left;
+        }
+
+        input-duration::part(field-days) { width: var(--day-width) !important; }
+        input-duration::part(field-milliseconds) { width: 120px; }
+        input-duration::part(field):disabled { color: white; opacity: 1; }
+        input-duration::part(divider) {
+            box-sizing: border-box;
+            width: 16px;
+            margin: 0;
+            color: #41474b;
+            font: bold 30px/1.25 Arial, sans-serif;
+            text-align: center;
+        }
+
+        button { margin: 20px 8px 0 0; padding: 6px 14px; cursor: pointer; }
+        button:disabled { cursor: default; }
+        #status { min-height: 1.5em; }
+        a { color: #225b91; }
+    </style>
+    <script type="importmap">
+        {"imports":{"react":"https://esm.sh/react@18.3.1","react-dom/client":"https://esm.sh/react-dom@18.3.1/client?external=react"}}
+    </script>
+</head>
+<body>
+    <main>
+        <h1>Duration input and countdown</h1>
+        <p>Enter a duration, then press Start. The fields count down and can be edited again when stopped.</p>
+        <h2 id="duration-label">Timer</h2>
+        <div class="scroll">
+            <div class="display" id="input-display">
+                <div class="labels" aria-hidden="true">
+                    <span>Days</span><span>Hours</span><span>Minutes</span><span>Seconds</span><span>Milliseconds</span>
+                </div>
+                <input-duration id="duration" show-days days-divider=":" hours-divider=":" minutes-divider=":"
+                    seconds-divider=":" microseconds-divider=""
+                    aria-labelledby="duration-label" value="0:00:00:10.000"></input-duration>
+            </div>
+        </div>
+        <button id="start" type="button" disabled>Start</button>
+        <p id="status" role="status">Loading the demo. This page needs an internet connection.</p>
+        <div id="timer-engine" hidden></div>
+        <p><a href="./react-timer-hook-demo.html">Other react-timer-hook demo</a> ·
+            <a href="https://amrlabib.github.io/react-timer-hook/">Original react-timer-hook demo</a></p>
+    </main>
+    <script type="module">
+        const duration = document.querySelector('#duration');
+        const start = document.querySelector('#start');
+        const status = document.querySelector('#status');
+        const inputDisplay = document.querySelector('#input-display');
+
+        function resizeDays(value) {
+            inputDisplay.style.setProperty('--day-width', `${Math.max(1, value.length) * 40}px`);
+        }
+
+        duration.addEventListener('input', event => {
+            const field = event.composedPath()[0];
+            if (field.name === 'startDays') resizeDays(field.value);
+        });
+        duration.addEventListener('change', () => resizeDays(duration.value.split(':')[0]));
+
+        try {
+            const [react, reactDom, timerModule] = await Promise.all([
+                import('react'),
+                import('react-dom/client'),
+                import('https://esm.sh/react-timer-hook@4.0.9?external=react&target=es2022'),
+                import('https://cdn.jsdelivr.net/npm/input-duration@3.5.2/+esm'),
+            ]);
+            const React = react.default;
+            const h = React.createElement;
+            const useTimer = timerModule.default?.useTimer;
+            if (typeof useTimer !== 'function') throw new Error('The timer hook is unavailable.');
+            const root = reactDom.createRoot(document.querySelector('#timer-engine'));
+            let active = null;
+            let run = 0;
+
+            function showRemaining(totalMilliseconds) {
+                const seconds = Math.floor(totalMilliseconds / 1000);
+                const days = Math.floor(seconds / 86400);
+                const hours = Math.floor(seconds % 86400 / 3600);
+                const minutes = Math.floor(seconds % 3600 / 60);
+                const remainingSeconds = seconds % 60;
+                const milliseconds = totalMilliseconds % 1000;
+                const pad = (value, width) => String(value).padStart(width, '0');
+                duration.value = `${days}:${pad(hours, 2)}:${pad(minutes, 2)}:${pad(remainingSeconds, 2)}.${pad(milliseconds, 3)}`;
+                resizeDays(String(days));
+            }
+
+            function Timer({ target, id }) {
+                const { totalMilliseconds } = useTimer({
+                    expiryTimestamp: new Date(target),
+                    interval: 10,
+                    onExpire: () => {
+                        if (active?.id !== id) return;
+                        active = null;
+                        showRemaining(0);
+                        duration.disabled = false;
+                        start.textContent = 'Start';
+                        status.textContent = 'Countdown complete. Enter a duration to start again.';
+                    },
+                });
+                React.useEffect(() => {
+                    if (active?.id === id) showRemaining(totalMilliseconds);
+                }, [id, totalMilliseconds]);
+                return null;
+            }
+
+            start.addEventListener('click', () => {
+                if (active) {
+                    const remaining = Math.max(0, active.target - Date.now());
+                    active = null;
+                    root.render(null);
+                    showRemaining(remaining);
+                    duration.disabled = false;
+                    start.textContent = 'Start';
+                    status.textContent = 'Countdown stopped. Edit the remaining time or press Start.';
+                    return;
+                }
+                const match = /^(\d+):(\d{2}):([0-5]\d):([0-5]\d)\.(\d{3})$/.exec(duration.value);
+                if (!duration.checkValidity() || !match) {
+                    status.textContent = 'Enter a complete duration.';
+                    return;
+                }
+                const [, days, hours, minutes, seconds, milliseconds] = match;
+                const total = (((Number(days) * 24 + Number(hours)) * 60 + Number(minutes)) * 60 + Number(seconds)) * 1000 + Number(milliseconds);
+                const target = Date.now() + total;
+                if (!Number.isSafeInteger(total) || total <= 0 || !Number.isFinite(new Date(target).getTime())) {
+                    status.textContent = 'Enter a duration greater than zero and within the supported date range.';
+                    return;
+                }
+                active = { target, id: ++run };
+                duration.disabled = true;
+                start.textContent = 'Stop';
+                status.textContent = 'Countdown running. Press Stop to edit the remaining time.';
+                root.render(h(Timer, { target, id: run, key: run }));
+            });
+            start.disabled = false;
+            status.textContent = 'Ready.';
+        } catch (error) {
+            console.error('Unable to load the timer demo:', error);
+            status.textContent = 'Could not load the demo. Check your connection and reload.';
+        }
+    </script>
+</body>
+</html>

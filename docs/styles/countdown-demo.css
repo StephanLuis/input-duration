@@ -1,0 +1,164 @@
+:root {
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    color: #172b45;
+    background: #eef6ff;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    min-width: 320px;
+    margin: 0;
+    padding: 24px;
+}
+
+main {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 32px;
+    border: 1px solid #d2e2f2;
+    border-radius: 18px;
+    background: white;
+}
+
+h1 {
+    overflow-wrap: anywhere;
+}
+
+p {
+    line-height: 1.5;
+}
+
+.eyebrow, .hint {
+    color: #536b84;
+}
+
+label {
+    display: block;
+    margin: 24px 0 8px;
+    font-weight: 650;
+}
+
+input-duration {
+    display: block;
+    max-width: 100%;
+    font-size: 1.2rem;
+}
+
+button {
+    padding: 10px 16px;
+    border: 0;
+    border-radius: 8px;
+    background: #2563a6;
+    color: white;
+    font: inherit;
+    cursor: pointer;
+}
+
+button:disabled {
+    opacity: .5;
+    cursor: wait;
+}
+
+button:focus-visible, a:focus-visible {
+    outline: 3px solid #2563a6;
+    outline-offset: 3px;
+}
+
+.timer {
+    min-height: 2em;
+    margin: 24px 0;
+    font-size: clamp(1.5rem, 6vw, 2.5rem);
+    font-variant-numeric: tabular-nums;
+    overflow-wrap: anywhere;
+}
+
+.circle {
+    font-size: 1.2rem;
+}
+
+body[data-timer="hook"] .timer {
+    overflow-x: auto;
+}
+
+.hook-display {
+    display: flex;
+    align-items: flex-end;
+    width: max-content;
+    color: #41474b;
+}
+
+.hook-part {
+    text-align: center;
+}
+
+.hook-label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+.hook-digits {
+    display: flex;
+    gap: 2px;
+}
+
+.hook-digit {
+    min-width: 40px;
+    padding: 8px 6px;
+    border-radius: 5px;
+    background: #41474b;
+    color: white;
+    font-size: 30px;
+    line-height: 1.25;
+}
+
+.hook-separator {
+    padding: 0 3px 8px;
+    font-size: 30px;
+    font-weight: bold;
+    line-height: 1.25;
+}
+
+.hook-controls {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.hook-controls button {
+    padding: 6px 12px;
+    border: 1px solid #41474b;
+    border-radius: 3px;
+    background: #eee;
+    color: #41474b;
+    font-size: 13px;
+}
+
+.hook-controls button:disabled {
+    cursor: default;
+}
+
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 24px;
+}
+
+a {
+    color: #2563a6;
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 16px;
+    }
+
+    main {
+        padding: 24px 20px;
+    }
+}

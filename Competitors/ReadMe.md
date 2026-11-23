@@ -45,6 +45,33 @@ React Native packages target native applications and are not directly usable as 
 
 The [Parliament Live TV example](https://www.parliamentlive.tv/) was also noted during an earlier scan; it is a site-specific, jQuery-based example rather than a reusable framework-independent control.
 
+### Countdown displays and timers
+
+These are potential **partners**, not alternatives: `input-duration` lets a user choose a time span; a countdown
+display or timer then tracks the time remaining. Some count down to a target date rather than accepting a duration.
+
+| Project | npm downloads/week* | What it does |
+| --- | ---: | --- |
+| [react-countdown](https://github.com/ndresx/react-countdown) | 472,003 | Customizable React countdown display |
+| [react-timer-hook](https://github.com/amrlabib/react-timer-hook) | 225,262 | React countdown and stopwatch logic |
+| [react-countdown-circle-timer](https://github.com/vydimitrov/react-countdown-circle-timer) | 103,658 | Animated circular React countdown |
+| [GrapesJS Countdown](https://github.com/GrapesJS/components-countdown) | 41,438 | Countdown for a visual website editor |
+| [Vue Countdown](https://github.com/fengyuanchen/vue-countdown) | 34,966 | Vue countdown component |
+| [ngx-countdown](https://github.com/cipchk/ngx-countdown) | 34,866 | Angular countdown component |
+| [React Flip Clock Countdown](https://github.com/sLeeNguyen/react-flip-clock-countdown) | 25,432 | Animated flip-clock countdown |
+| [jQuery Countdown](https://github.com/hilios/jQuery.countdown) | 22,032 | jQuery countdown display |
+| [easytimer.js](https://github.com/albert-gonzalez/easytimer.js) | 17,434 | Framework-independent timer and stopwatch logic |
+| [lgs1920/countdown](https://github.com/lgs1920/countdown) | Not checked | Web Component counting down to a target date, with animated digits; [live demo](https://lgs1920.github.io/countdown/) |
+
+\* npm figures are for **14–20 November 2026**, include automated installs, and are not counts of individual users.
+This is a shortlist from npm search, not an exhaustive ranking. `lgs1920/countdown` was discussed separately and was
+not part of that download comparison.
+
+For a first pairing, compare the [lgs1920/countdown demo](https://lgs1920.github.io/countdown/) and
+`react-countdown-circle-timer` for presentation, `react-timer-hook` for React timer logic, and `easytimer.js` for a
+framework-independent approach. The lgs1920 component uses a target date and Web Awesome dependencies; `easytimer.js`
+provides logic rather than a ready-made visual display.
+
 ## Roadmap to Broaden Adoption
 
 Prioritize making `input-duration` straightforward to use in existing applications before pursuing inclusion in a larger component library. Its native Web Component implementation provides a framework-independent foundation.
@@ -54,6 +81,7 @@ Prioritize making `input-duration` straightforward to use in existing applicatio
 3. **Strengthen accessibility.** Document and verify labels for individual segments, group semantics, keyboard interaction, and screen-reader behavior. See the [forms and accessibility roadmap](#forms-and-accessibility-roadmap).
 4. **Improve discoverability and onboarding (implemented).** The README now leads with a quick start and framework examples; package metadata exposes the ESM entry point and TypeScript declarations, and manual pages exercise local and CDN imports.
 5. **Approach component libraries with focused integrations.** The open [Web Awesome duration-input PR](https://github.com/shoelace-style/webawesome/pull/3077) is an active proposal, not a shipped integration or confirmed acceptance. Use it to learn what a component library needs, and offer focused examples or wrappers that follow each library's conventions before proposing core inclusion.
+6. **Explore a countdown pairing.** Try the [react-countdown](../docs/react-countdown-demo.html), [react-timer-hook](../docs/react-timer-hook-demo.html), and [circle timer](../docs/react-countdown-circle-demo.html) examples. They convert the committed duration, including optional days, to a timer's expected value or target date when the user starts it. Share a working example with the countdown author and ask whether an example or link would be useful to their users. Consider a separate package or repository only if the integration becomes independently reusable; check both projects' licenses and notice requirements before distribution.
 
 Keep the purpose clear in examples and outreach: this control enters a time span for past or future use cases, such as elapsed time, an alarm, a timer, a limit, or a media offset. It does not replace a time-of-day or date input. Its fixed format avoids locale-dependent clock-time presentation, and its optional days field supports spans longer than 24 hours.
 
