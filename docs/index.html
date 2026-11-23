@@ -201,6 +201,28 @@
             color: var(--blue);
         }
 
+        .countdown-demos {
+            margin-top: 32px;
+            padding: 26px;
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            background: #fff;
+        }
+
+        .countdown-demos p {
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        .countdown-demos ul {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px 24px;
+            margin: 0;
+            padding-left: 20px;
+            line-height: 1.5;
+        }
+
         footer {
             margin-top: 28px;
             color: var(--muted);
@@ -221,6 +243,10 @@
             }
 
             .comparison {
+                grid-template-columns: 1fr;
+            }
+
+            .countdown-demos ul {
                 grid-template-columns: 1fr;
             }
 
@@ -263,6 +289,17 @@
                 <input-duration id="duration" role="group" aria-label="Duration in hours, minutes, seconds, and milliseconds" value="30:00:00.042"></input-duration>
                 <p class="result" id="duration-result" aria-live="polite"><strong>30:00:00.042</strong> — 30 hours, 42 milliseconds. No clock math required.</p>
             </article>
+        </section>
+
+        <section class="countdown-demos" aria-labelledby="countdown-heading">
+            <h2 id="countdown-heading">Countdown demos</h2>
+            <p>See how a duration input can work with different countdown timers.</p>
+            <ul>
+                <li><a href="react-countdown-demo.html">React Countdown</a> — click the timer to edit its duration.</li>
+                <li><a href="react-timer-hook-demo.html">React Timer Hook</a> — a countdown with pause and resume.</li>
+                <li><a href="react-countdown-circle-demo.html">Countdown Circle Timer</a> — an animated circular countdown.</li>
+                <li><a href="styled-timer-demo.html">Styled timer</a> — matching duration input and timer display.</li>
+            </ul>
         </section>
 
         <footer>

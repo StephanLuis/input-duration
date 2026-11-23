@@ -13,13 +13,16 @@
     <main>
         <p class="eyebrow">Duration input + React</p>
         <h1>react-countdown</h1>
-        <p>Choose a duration and start a countdown. This example converts your duration into a target time.</p>
-        <label id="duration-label" for="duration">Duration</label>
-        <input-duration id="duration" show-days aria-labelledby="duration-label" value="0:00:00:10.000"></input-duration>
-        <p class="hint">Enter days, hours, minutes, seconds, and milliseconds. The display shows whole seconds; choose a duration greater than zero.</p>
-        <button id="start" type="button" disabled>Start countdown</button>
+        <p>Click a time unit to edit it. Move focus away to start counting down.</p>
+        <div class="countdown-scroll">
+            <button id="timer" class="countdown-display-button" type="button" disabled></button>
+            <div id="editor" class="countdown-editor" hidden>
+                <input-duration id="duration" show-days aria-label="Edit duration"
+                    value="0:00:00:10.000"></input-duration>
+            </div>
+        </div>
+        <p class="hint">Edit days, hours, minutes, seconds, and milliseconds. Choose a duration greater than zero.</p>
         <p id="status" role="status">Loading the demo. This page needs an internet connection.</p>
-        <div id="timer" class="timer" role="timer" aria-label="Time remaining"></div>
         <p><a href="https://github.com/ndresx/react-countdown">About react-countdown</a></p>
         <nav aria-label="Countdown demos">
             <a href="./react-timer-hook-demo.html">Timer hook demo</a>
@@ -28,7 +31,7 @@
         </nav>
     </main>
     <script type="module">
-        import('./scripts/countdown-demo.js').catch(error => {
+        import('./scripts/react-countdown-demo.js').catch(error => {
             console.error('Unable to load countdown demo:', error);
             document.querySelector('#status').textContent = 'Could not load the demo. Check your connection and reload.';
         });

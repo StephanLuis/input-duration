@@ -1,6 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import 'https://cdn.jsdelivr.net/npm/input-duration@3.5.2/+esm';
+import { durationInMilliseconds } from './duration.js';
 
 const h = React.createElement;
 const durationInput = document.querySelector('#duration');
@@ -12,7 +13,6 @@ const timerType = document.body.dataset.timer;
 const modules = {
     countdown: () => import('https://esm.sh/react-countdown@2.3.6?external=react,react-dom'),
     hook: () => import('https://esm.sh/react-timer-hook@4.0.9?external=react&target=es2022'),
-    circle: () => import('https://esm.sh/react-countdown-circle-timer@3.2.1?external=react'),
 };
 
 if (!modules[timerType]) {
@@ -22,26 +22,10 @@ if (!modules[timerType]) {
 const timerModule = await modules[timerType]();
 const useTimer = timerModule.default?.useTimer;
 if ((timerType === 'countdown' && typeof timerModule.default !== 'function')
-    || (timerType === 'hook' && typeof useTimer !== 'function')
-    || (timerType === 'circle' && typeof timerModule.CountdownCircleTimer !== 'function')) {
+    || (timerType === 'hook' && typeof useTimer !== 'function')) {
     throw new Error(`The ${timerType} timer module did not provide the expected component or hook.`);
 }
 let run = 0;
-
-function durationInMilliseconds(value) {
-    const match = /^(?:(\d+):)?(\d{2}):([0-5]\d):([0-5]\d)\.(\d{3})$/.exec(value);
-    if (!match) {
-        throw new Error('Enter a complete duration.');
-    }
-
-    const [, days = '0', hours, minutes, seconds, milliseconds] = match;
-    const total = (((Number(days) * 24 + Number(hours)) * 60 + Number(minutes)) * 60 + Number(seconds)) * 1000
-        + Number(milliseconds);
-    if (!Number.isSafeInteger(total) || total <= 0 || !Number.isFinite(new Date(Date.now() + total).getTime())) {
-        throw new Error('Enter a duration greater than zero and within the supported date range.');
-    }
-    return total;
-}
 
 function formatTime(days, hours, minutes, seconds) {
     const pad = number => String(number).padStart(2, '0');
@@ -104,21 +88,6 @@ function makeTimer(total, target) {
     if (timerType === 'hook') {
         return h(HookTimer, { key: run, target });
     }
-    return h(timerModule.CountdownCircleTimer, {
-        key: run,
-        isPlaying: true,
-        duration: total / 1000,
-        colors: '#2563a6',
-        size: 220,
-        onComplete: finished,
-    }, ({ remainingTime }) => {
-        const remaining = Math.ceil(remainingTime);
-        const days = Math.floor(remaining / 86400);
-        const hours = Math.floor((remaining % 86400) / 3600);
-        const minutes = Math.floor((remaining % 3600) / 60);
-        const seconds = remaining % 60;
-        return h('span', null, formatTime(days, hours, minutes, seconds));
-    });
 }
 
 startButton.addEventListener('click', () => {
