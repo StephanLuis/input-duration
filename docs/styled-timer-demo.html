@@ -17,7 +17,6 @@
         .scroll { max-width: 100%; overflow-x: auto; padding: 4px; }
 
         .display {
-            --day-width: 40px;
             width: max-content;
             font-family: "Courier New", monospace;
             font-variant-numeric: tabular-nums;
@@ -25,7 +24,7 @@
 
         .labels {
             display: grid;
-            grid-template-columns: var(--day-width) 16px 80px 16px 80px 16px 80px 16px 120px;
+            grid-template-columns: 80px 16px 80px 16px 80px 16px 120px;
             align-items: center;
             margin-bottom: 5px;
             font: 12px Arial, sans-serif;
@@ -37,13 +36,13 @@
         .labels span:nth-child(2) { grid-column: 3; }
         .labels span:nth-child(3) { grid-column: 5; }
         .labels span:nth-child(4) { grid-column: 7; }
-        .labels span:nth-child(5) { grid-column: 9; }
 
         input-duration {
             --input-duration-gap: 0px;
             --input-duration-padding: 0px;
             --input-duration-border-color: transparent;
             --input-duration-focus-color: transparent;
+            --input-duration-focus-outline: none;
             --input-duration-divider-color: #41474b;
             --input-duration-divider-opacity: 1;
             font: 30px/1.25 "Courier New", monospace;
@@ -54,21 +53,31 @@
 
         input-duration::part(field) {
             box-sizing: border-box;
-            width: 80px;
+            width: 91px;
             min-width: 0;
             height: 54px;
+            margin-right: -11px;
             padding: 8px 0 8px 11px;
             border: 0;
             border-radius: 0;
-            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='54'%3E%3Crect width='38' height='54' rx='5' fill='%2341474b'/%3E%3C/svg%3E") repeat-x;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='54'%3E%3Crect width='38' height='54' rx='5' fill='%2341474b'/%3E%3Crect x='40' width='38' height='54' rx='5' fill='%2341474b'/%3E%3C/svg%3E") no-repeat;
             color: white;
             font: 30px/1.25 "Courier New", monospace;
             letter-spacing: 22px;
             text-align: left;
         }
 
-        input-duration::part(field-days) { width: var(--day-width) !important; }
-        input-duration::part(field-milliseconds) { width: 120px; }
+        input-duration::part(field-milliseconds) {
+            width: 131px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='54'%3E%3Crect width='38' height='54' rx='5' fill='%2341474b'/%3E%3Crect x='40' width='38' height='54' rx='5' fill='%2341474b'/%3E%3Crect x='80' width='38' height='54' rx='5' fill='%2341474b'/%3E%3C/svg%3E");
+        }
+        input-duration::part(field):focus {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='54'%3E%3Crect width='38' height='54' rx='5' fill='%232563a6'/%3E%3Crect x='40' width='38' height='54' rx='5' fill='%232563a6'/%3E%3C/svg%3E");
+        }
+        input-duration::part(field-milliseconds):focus {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='54'%3E%3Crect width='38' height='54' rx='5' fill='%232563a6'/%3E%3Crect x='40' width='38' height='54' rx='5' fill='%232563a6'/%3E%3Crect x='80' width='38' height='54' rx='5' fill='%232563a6'/%3E%3C/svg%3E");
+        }
+        input-duration::part(field)::selection { background: transparent; color: white; }
         input-duration::part(field):disabled { color: white; opacity: 1; }
         input-duration::part(divider) {
             box-sizing: border-box;
@@ -96,11 +105,11 @@
         <div class="scroll">
             <div class="display" id="input-display">
                 <div class="labels" aria-hidden="true">
-                    <span>Days</span><span>Hours</span><span>Minutes</span><span>Seconds</span><span>Milliseconds</span>
+                    <span>Hours</span><span>Minutes</span><span>Seconds</span><span>Milliseconds</span>
                 </div>
-                <input-duration id="duration" show-days days-divider=":" hours-divider=":" minutes-divider=":"
+                <input-duration id="duration" hours-divider=":" minutes-divider=":"
                     seconds-divider=":" microseconds-divider=""
-                    aria-labelledby="duration-label" value="0:00:00:10.000"></input-duration>
+                    aria-labelledby="duration-label" value="00:00:10.000"></input-duration>
             </div>
         </div>
         <button id="start" type="button" disabled>Start</button>
@@ -113,18 +122,6 @@
         const duration = document.querySelector('#duration');
         const start = document.querySelector('#start');
         const status = document.querySelector('#status');
-        const inputDisplay = document.querySelector('#input-display');
-
-        function resizeDays(value) {
-            inputDisplay.style.setProperty('--day-width', `${Math.max(1, value.length) * 40}px`);
-        }
-
-        duration.addEventListener('input', event => {
-            const field = event.composedPath()[0];
-            if (field.name === 'startDays') resizeDays(field.value);
-        });
-        duration.addEventListener('change', () => resizeDays(duration.value.split(':')[0]));
-
         try {
             const [react, reactDom, timerModule] = await Promise.all([
                 import('react'),
@@ -142,14 +139,12 @@
 
             function showRemaining(totalMilliseconds) {
                 const seconds = Math.floor(totalMilliseconds / 1000);
-                const days = Math.floor(seconds / 86400);
-                const hours = Math.floor(seconds % 86400 / 3600);
+                const hours = Math.floor(seconds / 3600);
                 const minutes = Math.floor(seconds % 3600 / 60);
                 const remainingSeconds = seconds % 60;
                 const milliseconds = totalMilliseconds % 1000;
                 const pad = (value, width) => String(value).padStart(width, '0');
-                duration.value = `${days}:${pad(hours, 2)}:${pad(minutes, 2)}:${pad(remainingSeconds, 2)}.${pad(milliseconds, 3)}`;
-                resizeDays(String(days));
+                duration.value = `${pad(hours, 2)}:${pad(minutes, 2)}:${pad(remainingSeconds, 2)}.${pad(milliseconds, 3)}`;
             }
 
             function Timer({ target, id }) {
@@ -182,13 +177,13 @@
                     status.textContent = 'Countdown stopped. Edit the remaining time or press Start.';
                     return;
                 }
-                const match = /^(\d+):(\d{2}):([0-5]\d):([0-5]\d)\.(\d{3})$/.exec(duration.value);
+                const match = /^(\d{2}):([0-5]\d):([0-5]\d)\.(\d{3})$/.exec(duration.value);
                 if (!duration.checkValidity() || !match) {
                     status.textContent = 'Enter a complete duration.';
                     return;
                 }
-                const [, days, hours, minutes, seconds, milliseconds] = match;
-                const total = (((Number(days) * 24 + Number(hours)) * 60 + Number(minutes)) * 60 + Number(seconds)) * 1000 + Number(milliseconds);
+                const [, hours, minutes, seconds, milliseconds] = match;
+                const total = ((Number(hours) * 60 + Number(minutes)) * 60 + Number(seconds)) * 1000 + Number(milliseconds);
                 const target = Date.now() + total;
                 if (!Number.isSafeInteger(total) || total <= 0 || !Number.isFinite(new Date(target).getTime())) {
                     status.textContent = 'Enter a duration greater than zero and within the supported date range.';
