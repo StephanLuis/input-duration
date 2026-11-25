@@ -380,9 +380,9 @@ Import it once in the app entry point or component file. The module registers th
 
 #### React
 
-An optional React wrapper is being prepared for publication in
-[`packages/react-input-duration`](packages/react-input-duration/README.md). It provides React-friendly
-props, a committed-value `onChange` callback, and TypeScript types.
+The optional [`@stephanluis/react-input-duration` package](https://www.npmjs.com/package/@stephanluis/react-input-duration)
+provides React-friendly props, a committed-value `onChange` callback, and TypeScript types. See the
+[React wrapper documentation](packages/react-input-duration/README.md) for installation and usage.
 You can also use the web component directly:
 
 ```jsx
