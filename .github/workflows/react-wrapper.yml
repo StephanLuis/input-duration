@@ -1,0 +1,39 @@
+name: React wrapper tests
+
+on:
+  push:
+    paths:
+      - 'packages/react-input-duration/**'
+      - '.github/workflows/react-wrapper.yml'
+  pull_request:
+    paths:
+      - 'packages/react-input-duration/**'
+      - '.github/workflows/react-wrapper.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - react: '18.2.0'
+            types: '18'
+          - react: '19'
+            types: '19'
+    defaults:
+      run:
+        working-directory: packages/react-input-duration
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: packages/react-input-duration/package-lock.json
+      - run: npm ci
+      - run: npm install --no-save --package-lock=false react@${{ matrix.react }} react-dom@${{ matrix.react }} @types/react@${{ matrix.types }} @types/react-dom@${{ matrix.types }}
+      - run: npm test

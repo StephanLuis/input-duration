@@ -167,6 +167,7 @@ test('up and down arrows commit single-digit values only after change', () => {
         const hours = element.shadowRoot.querySelector('.sH');
         assert.equal(element.validity.valueMissing, true);
         hours.focus();
+        hours.value = '10';
         hours.dispatchEvent(new window.KeyboardEvent('keydown', {
             key,
             bubbles: true
@@ -405,6 +406,38 @@ test('days divider can be customized and extended formats are range-checked', ()
     assert.equal(element.isValidValue('375299968947542:00:00:00.000'), false);
 });
 
+test('typing zero days advances to hours without interrupting longer day values or arrow keys', () => {
+    const element = createInputDuration();
+    element.showDays();
+    const days = element.shadowRoot.querySelector('.sD');
+    const hours = element.shadowRoot.querySelector('.sH');
+    days.focus();
+    days.value = '0';
+    days.dispatchEvent(new window.Event('input', { bubbles: true }));
+    assert.equal(element.shadowRoot.activeElement, hours);
+
+    days.focus();
+    days.value = '10';
+    days.dispatchEvent(new window.Event('input', { bubbles: true }));
+    assert.equal(element.shadowRoot.activeElement, days);
+
+    days.dispatchEvent(new window.KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true }));
+    days.value = '0';
+    days.dispatchEvent(new window.Event('input', { bubbles: true }));
+    assert.equal(element.shadowRoot.activeElement, days);
+});
+
+test('typing zero days blurs when hours are hidden', () => {
+    const element = createInputDuration();
+    element.showDays();
+    element.hideHours();
+    const days = element.shadowRoot.querySelector('.sD');
+    days.focus();
+    days.value = '0';
+    days.dispatchEvent(new window.Event('input', { bubbles: true }));
+    assert.equal(element.shadowRoot.activeElement, null);
+});
+
 test('hours roll over at 24 when the days field is active', () => {
     const element = createInputDuration();
     element.showDays();
@@ -420,15 +453,109 @@ test('hours roll over at 24 when the days field is active', () => {
 
     hours.value = '-1';
     hours.dispatchEvent(new window.Event('change', { bubbles: true }));
-    assert.equal(days.value, '2');
+    assert.equal(days.value, '3');
     assert.equal(hours.value, '23');
-    assert.equal(element.value, '2:23:00:00.000');
+    assert.equal(element.value, '3:23:00:00.000');
 
     days.value = '0';
     hours.value = '-1';
     hours.dispatchEvent(new window.Event('change', { bubbles: true }));
     assert.equal(days.value, '0');
-    assert.equal(hours.value, '00');
+    assert.equal(hours.value, '23');
+});
+
+test('down arrow at zero wraps each field without borrowing or moving focus', () => {
+    const cases = [
+        ['0:00:00:00.000', true, '.sD', '0:00:00:00.000', 0],
+        ['0:00:00:00.000', true, '.sH', '0:23:00:00.000', 1],
+        ['2:00:00:00.000', true, '.sH', '2:23:00:00.000', 1],
+        ['00:00:00.000', false, '.sH', '99:00:00.000', 1],
+        ['00:00:00.000', false, '.sM', '00:59:00.000', 1],
+        ['00:00:00.000', false, '.sS', '00:00:59.000', 1],
+        ['00:00:00.000', false, '.sMS', '00:00:00.999', 1]
+    ];
+    for (const [initial, showDays, selector, expected, expectedChanges] of cases) {
+        const element = createInputDuration();
+        if (showDays) element.showDays();
+        element.value = initial;
+        const field = element.shadowRoot.querySelector(selector);
+        let changes = 0;
+        element.addEventListener('change', () => { changes += 1; });
+        field.focus();
+        const key = new window.KeyboardEvent('keydown', {
+            key: 'ArrowDown', bubbles: true, cancelable: true
+        });
+        field.dispatchEvent(key);
+        assert.equal(key.defaultPrevented, true);
+        assert.equal(element.value, expected);
+        assert.equal(element.shadowRoot.activeElement, field);
+        assert.equal(changes, expectedChanges);
+    }
+});
+
+test('up arrow wraps minutes, seconds, and hours without days while keeping focus', () => {
+    const cases = [
+        ['12:59:34.567', false, '.sM', '12:00:34.567'],
+        ['12:59:34.567', false, '.sM', '12:00:34.567', true],
+        ['2:12:59:34.567', true, '.sM', '2:12:00:34.567'],
+        ['12:34:59.567', false, '.sS', '12:34:00.567'],
+        ['12:34:59.567', false, '.sS', '12:34:00.567', true],
+        ['99:12:34.567', false, '.sH', '00:12:34.567']
+    ];
+    for (const [initial, showDays, selector, expected, hideMilliseconds] of cases) {
+        const element = createInputDuration();
+        if (showDays) element.showDays();
+        if (hideMilliseconds) element.hideMicroSeconds();
+        element.value = initial;
+        const field = element.shadowRoot.querySelector(selector);
+        let changes = 0;
+        element.addEventListener('change', () => { changes += 1; });
+        field.focus();
+        const key = new window.KeyboardEvent('keydown', {
+            key: 'ArrowUp', bubbles: true, cancelable: true
+        });
+        field.dispatchEvent(key);
+        assert.equal(key.defaultPrevented, true);
+        assert.equal(element.value, expected);
+        assert.equal(element.shadowRoot.activeElement, field);
+        assert.equal(changes, 1);
+        assert.equal(formValues.get(element), expected);
+    }
+});
+
+test('typed hours carry into days and advance to minutes when days are shown', () => {
+    for (const [typed, expected] of [['24', '3:00:00:00.000'], ['25', '3:01:00:00.000'], ['99', '6:03:00:00.000']]) {
+        const element = createInputDuration();
+        element.showDays();
+        element.value = '2:00:00:00.000';
+        const hours = element.shadowRoot.querySelector('.sH');
+        const minutes = element.shadowRoot.querySelector('.sM');
+        hours.focus();
+        hours.value = typed;
+        hours.dispatchEvent(new window.Event('input', { bubbles: true }));
+        assert.equal(element.shadowRoot.activeElement, minutes);
+        hours.dispatchEvent(new window.Event('change', { bubbles: true }));
+        assert.equal(element.value, expected);
+    }
+});
+
+test('hour rollover keeps arrow-key focus and does not exceed the supported days limit', () => {
+    const element = createInputDuration();
+    element.showDays();
+    const hours = element.shadowRoot.querySelector('.sH');
+    element.value = '2:23:00:00.000';
+    hours.focus();
+    hours.dispatchEvent(new window.KeyboardEvent('keydown', { key: 'ArrowUp', bubbles: true }));
+    hours.value = '24';
+    hours.dispatchEvent(new window.Event('input', { bubbles: true }));
+    hours.dispatchEvent(new window.Event('change', { bubbles: true }));
+    assert.equal(element.value, '3:00:00:00.000');
+    assert.equal(element.shadowRoot.activeElement, hours);
+
+    element.value = '375299968947541:23:00:00.000';
+    hours.value = '24';
+    hours.dispatchEvent(new window.Event('change', { bubbles: true }));
+    assert.equal(element.value, '375299968947541:23:00:00.000');
 });
 
 test('unit hide and show methods toggle their attributes', () => {
@@ -606,6 +733,31 @@ test('last visible seconds and hours fields blur after two digits', () => {
     hours.value = '12';
     hours.dispatchEvent(new window.Event('input', { bubbles: true }));
     assert.equal(hoursElement.shadowRoot.activeElement, null);
+});
+
+test('single digits 6 through 9 complete seconds when milliseconds are hidden', () => {
+    for (const digit of ['6', '7', '8', '9']) {
+        const element = createInputDuration();
+        element.setAttribute('no-microseconds', '');
+        const seconds = element.shadowRoot.querySelector('.sS');
+        seconds.focus();
+        seconds.value = digit;
+        seconds.dispatchEvent(new window.Event('input', { bubbles: true }));
+        assert.equal(element.shadowRoot.activeElement, null);
+        seconds.dispatchEvent(new window.Event('change', { bubbles: true }));
+        assert.equal(element.value, `00:00:0${digit}.000`);
+    }
+});
+
+test('arrow adjustments do not blur seconds when milliseconds are hidden', () => {
+    const element = createInputDuration();
+    element.setAttribute('no-microseconds', '');
+    const seconds = element.shadowRoot.querySelector('.sS');
+    seconds.focus();
+    seconds.dispatchEvent(new window.KeyboardEvent('keydown', { key: 'ArrowUp', bubbles: true }));
+    seconds.value = '7';
+    seconds.dispatchEvent(new window.Event('input', { bubbles: true }));
+    assert.equal(element.shadowRoot.activeElement, seconds);
 });
 
 test('up and down arrow adjustments keep focus on the active segment', async () => {

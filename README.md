@@ -95,6 +95,11 @@ Codespace is created or rebuilt. This version matches the current Web Awesome wo
 
 `input-duration` is intended for touch and keyboard use. Typing a complete unit advances to the next unit; if that next unit is hidden, focus leaves the control. The HTML structure and displayed field order are controlled by the component; device-specific input and keyboard behavior remains native to the browser.
 
+When milliseconds are hidden, typing 6–9 in seconds completes the field immediately (for example, 7 becomes 07) and focus leaves the control.
+Pressing Down at zero leaves days at zero; hours wrap to 23 with days enabled or 99 otherwise,
+minutes and seconds wrap to 59, and milliseconds wrap to 999. Downward wrapping does not borrow
+from the preceding field. Pressing Up at 59 minutes or seconds, or 99 hours without days, wraps that field to 00.
+
 <h2>Bob is rescued by INPUT-DURATION!</h2>
 
 The goal is a small JavaScript duration input that gives countdowns and elapsed-time entry a predictable displayed format across browser and locale settings, while retaining native numeric inputs for editing.
@@ -260,6 +265,8 @@ import id from 'https://cdn.jsdelivr.net/npm/input-duration/+esm'
 
 For manual browser checks, serve the repository root and open the [local package-specifier import demo](Tests/Manual/manTestLocalModule%20copy.html), the [jsDelivr ESM import demo](Tests/Manual/manTestJSdelivrModule.html), or the [unit combinations test page](Tests/Manual/unit-combinations.html). The unit test page covers all 16 visible/hidden combinations of hours, minutes, seconds, and milliseconds, plus days mode with `dayFriendlyValue`. The [days display and value demo](https://stephanluis.github.io/input-duration/days-demo.html) is published on GitHub Pages and loads the package from jsDelivr; the source page is also available [through jsDelivr](https://cdn.jsdelivr.net/gh/StephanLuis/input-duration@main/docs/days-demo.html). Browsers do not resolve npm package names themselves, so the local demos use an import map to resolve `input-duration` to the local module; bundlers resolve the package name through `package.json` exports.
 
+When serving the repository root locally, open `/docs/days-demo.html` to test the workspace's `index.js` instead of the published npm version.
+
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
@@ -281,6 +288,10 @@ Individual duration fields can be hidden with boolean attributes:
 ```
 
 The days field is hidden by default. Add `show-days` or call `showDays()` to display it. In days mode, hours range from `00` to `23` and roll over into days; dividers default to `d `, `h `, and `m `, followed by the decimal point and `s` suffix. The `.value` format becomes `D:HH:mm:ss.SSS` in days mode, such as `2:03:04:05.006`; legacy `HH:mm:ss.SSS` values continue to work and are normalized when days are shown. Call `hideDays()` to hide the field. Hiding a nonzero days field preserves its value and extended `.value` representation.
+
+When days are shown, typing `0` in the days field advances to hours. Entering two hours digits of 24 or more carries the extra hours into days
+(for example, 25 becomes 1 day and 01 hour) and advances to minutes if visible. Using the up arrow
+at 23 hours also carries into days, while focus stays on hours.
 
 The read-only `.dayFriendlyValue` property returns a normalized, labeled string such as `2d 03h 04m 05.006s`, including when the days field is hidden.
 
@@ -368,6 +379,11 @@ npm install input-duration
 Import it once in the app entry point or component file. The module registers the `<input-duration>` custom element. Each example reads its value with a framework reference when the button is clicked.
 
 #### React
+
+An optional React wrapper is being prepared for publication in
+[`packages/react-input-duration`](packages/react-input-duration/README.md). It provides React-friendly
+props, a committed-value `onChange` callback, and TypeScript types.
+You can also use the web component directly:
 
 ```jsx
 import { useRef, useState } from 'react';

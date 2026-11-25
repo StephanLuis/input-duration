@@ -531,6 +531,7 @@ class InputDuration extends HTMLElement {
     addArrowKeyInput() {
 
         var mE = this.myElement;
+        const owner = this;
         const keepAdjustedFieldSelected = input => {
             setTimeout(function () {
                 input.suppressAutoAdvance = false;
@@ -538,6 +539,13 @@ class InputDuration extends HTMLElement {
                     mE.activeElement.select();
                 }
             }, 5);
+        };
+        const rollOver = (event, input, value) => {
+            event.preventDefault();
+            input.value = value;
+            const EventConstructor = owner.ownerDocument.defaultView.Event;
+            input.dispatchEvent(new EventConstructor('input', { bubbles: true, composed: true }));
+            input.dispatchEvent(new EventConstructor('change', { bubbles: true }));
         };
 
         this.myElement.querySelector("div.timeCase")
@@ -569,11 +577,31 @@ class InputDuration extends HTMLElement {
                     // these keep the input selected
                     case event.key == "ArrowUp":
                         et.suppressAutoAdvance = true;
+                        if ((['startMinutes', 'startSeconds'].includes(et.name) && Number(et.value) === 59) ||
+                            (et.name === 'startHours' && Number(et.value) === 99 &&
+                                !owner.hasAttribute('show-days') && Number(mE.querySelector('.sD').value) === 0)) {
+                            rollOver(event, et, '00');
+                        }
                         keepAdjustedFieldSelected(et);
                         break;
 
                     case event.key == "ArrowDown":
                         et.suppressAutoAdvance = true;
+                        if (et.value !== '' && Number(et.value) === 0) {
+                            const dayMode = owner.hasAttribute('show-days') ||
+                                Number(mE.querySelector('.sD').value) > 0;
+                            const rolloverValues = {
+                                startHours: dayMode ? '23' : '99',
+                                startMinutes: '59',
+                                startSeconds: '59',
+                                startMilliSecs: '999'
+                            };
+                            if (et.name === 'startDays') {
+                                event.preventDefault();
+                            } else if (Object.hasOwn(rolloverValues, et.name)) {
+                                rollOver(event, et, rolloverValues[et.name]);
+                            }
+                        }
                         keepAdjustedFieldSelected(et);
                         break;
 
@@ -753,25 +781,23 @@ class InputDuration extends HTMLElement {
     addNumberLooping() {
 
         // Numeric Value looping (eventually this can be 'parameterised' refactored)
-        // ex. 99 uparrow to 0 hours, 59 uparrow to 0 minutes and seconds, 990 uparrow to 010, downarrow 000 milliseconds
+        // ex. 99 uparrow to 0 hours, 59 uparrow to 0 minutes and seconds, 990 uparrow to 010
 
         const sD = this.myElement.querySelector("input.sD");
         const sH = this.myElement.querySelector("input.sH");
         sH.addEventListener('change', () => {
             if (this.hasAttribute('show-days') || Number(sD.value) > 0) {
-                if (Number(sH.value) === 24) {
-                    sH.value = '00';
-                    const nextDay = Number(sD.value) + 1;
-                    if (Number.isSafeInteger(nextDay)) {
+                const hours = Number(sH.value);
+                if (hours === 24 || (this.hasAttribute('show-days') && hours > 24)) {
+                    const nextDay = Number(sD.value) + Math.floor(hours / 24);
+                    if (nextDay <= Math.floor(Number.MAX_SAFE_INTEGER / 24)) {
                         sD.value = String(nextDay);
+                        sH.value = String(hours % 24).padStart(2, '0');
+                    } else {
+                        sH.value = this.committedValue.split(/[:.]/)[1];
                     }
                 } else if (Number(sH.value) === -1) {
-                    if (Number(sD.value) > 0) {
-                        sD.value = String(Number(sD.value) - 1);
-                        sH.value = '23';
-                    } else {
-                        sH.value = '00';
-                    }
+                    sH.value = '23';
                 }
             } else {
                 if (sH.value == 100) {
@@ -821,7 +847,7 @@ class InputDuration extends HTMLElement {
             }
 
             if (sMS.value == -10) {
-                sMS.value = 990;
+                sMS.value = 999;
             }
 
             if (sMS.value == 0) {
@@ -873,7 +899,7 @@ class InputDuration extends HTMLElement {
         var sH = this.myElement.querySelector('input.sH');
 
         setInputFilter(sH, function (value, shouldAdvance) {
-            const hourPattern = owner.hasAttribute('show-days') ||
+            const hourPattern = !owner.hasAttribute('show-days') &&
                 Number(owner.myElement.querySelector('.sD').value) > 0
                 ? /^(?:[0-9]?|[01][0-9]?|2[0-3]?)$/
                 : /^(?:[0-9]?|[0-9][0-9]?)$/;
@@ -888,10 +914,13 @@ class InputDuration extends HTMLElement {
         });
 
         const sD = this.myElement.querySelector('input.sD');
-        setInputFilter(sD, function (value) {
+        setInputFilter(sD, function (value, shouldAdvance) {
             const valid = /^\d*$/.test(value) && (value === '' || Number.isSafeInteger(Number(value)));
             if (valid) {
                 sD.style.width = `${Math.max(2, value.length)}ch`;
+                if (shouldAdvance && value === '0' && mE.activeElement === sD) {
+                    moveToNextUnitOrBlur(sD, 'input.sH');
+                }
             }
             return valid;
         });
@@ -926,9 +955,7 @@ class InputDuration extends HTMLElement {
 
             var newV = /^([0-9]?|[0-5][0-9]?)$/.test(value);
 
-            const nextUnitHidden = mE.querySelector('input.sMS').style.display === 'none';
-            if (shouldAdvance && newV &&
-                (nextUnitHidden ? value.length === 2 : value > 5 || value.length === 2)) {
+            if (shouldAdvance && newV && (value > 5 || value.length === 2)) {
                 moveToNextUnitOrBlur(sS, 'input.sMS');
             }
 
@@ -938,12 +965,12 @@ class InputDuration extends HTMLElement {
 
 
         var sMS = this.myElement.querySelector('input.sMS');
-        setInputFilter(sMS, function (value) {
+        setInputFilter(sMS, function (value, shouldAdvance) {
 
             var newV = /^([0-9]?|[0-9][0-9]?|[0-9][0-9][0-9]?)$/.test(value);
 
 
-            if (newV && value.length === 3) {
+            if (shouldAdvance && newV && value.length === 3) {
 
                 mE.querySelector('input.sMS').blur();
 

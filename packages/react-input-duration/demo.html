@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>React input-duration wrapper demo</title>
+    <style>
+        body { margin: 0; padding: 24px; font-family: system-ui, sans-serif; color: #172b45; background: #eef6ff; }
+        main { max-width: 640px; margin: auto; padding: 32px; border: 1px solid #d2e2f2; border-radius: 18px; background: white; }
+        p { line-height: 1.5; }
+        label { display: block; margin: 24px 0 8px; font-weight: 600; }
+        input-duration { max-width: 100%; font-size: 1.2rem; }
+        button { margin: 16px 8px 0 0; padding: 10px 16px; border: 0; border-radius: 8px; background: #2563a6; color: white; font: inherit; cursor: pointer; }
+        button:focus-visible { outline: 3px solid #2563a6; outline-offset: 3px; }
+        output { font-family: monospace; font-size: 1.1rem; }
+        .scroll { overflow-x: auto; padding: 4px; }
+    </style>
+    <script type="importmap">
+        {
+            "imports": {
+                "react": "https://esm.sh/react@18.3.1",
+                "react-dom/client": "https://esm.sh/react-dom@18.3.1/client?external=react",
+                "input-duration": "../../index.js"
+            }
+        }
+    </script>
+</head>
+<body>
+    <main>
+        <h1>React wrapper demo</h1>
+        <p>Edit a segment, then move focus away to commit your change. The value below is held in React state.</p>
+        <div id="app"><p>Loading the demo. This page needs an internet connection for React.</p></div>
+    </main>
+    <script type="module">
+        try {
+            const [react, reactDom, wrapper] = await Promise.all([
+                import('react'),
+                import('react-dom/client'),
+                import('./index.js'),
+            ]);
+            const React = react.default;
+            const h = React.createElement;
+            const InputDuration = wrapper.default;
+
+            class DemoError extends React.Component {
+                constructor(props) {
+                    super(props);
+                    this.state = { failed: false };
+                }
+                static getDerivedStateFromError() { return { failed: true }; }
+                componentDidCatch(error) { console.error('Unable to load the duration input:', error); }
+                render() {
+                    return this.state.failed
+                        ? h('p', { role: 'alert' }, 'Could not load the duration input. Check the console and reload.')
+                        : this.props.children;
+                }
+            }
+
+            function App() {
+                const [value, setValue] = React.useState('1:02:03:04.005');
+                const [disabled, setDisabled] = React.useState(false);
+                return h(React.Fragment, null,
+                    h('label', { id: 'duration-label', htmlFor: 'duration' }, 'Duration'),
+                    h('div', { className: 'scroll' },
+                        h(InputDuration, {
+                            id: 'duration',
+                            'aria-labelledby': 'duration-label',
+                            value,
+                            onChange: setValue,
+                            showDays: true,
+                            disabled,
+                        })),
+                    h('p', null, 'React state: ', h('output', { id: 'value' }, value)),
+                    h('button', { type: 'button', onClick: () => setValue('0:00:00:10.000') }, 'Set 10 seconds'),
+                    h('button', { type: 'button', onClick: () => setDisabled(!disabled) },
+                        disabled ? 'Enable input' : 'Disable input'));
+            }
+
+            reactDom.createRoot(document.querySelector('#app')).render(h(DemoError, null, h(App)));
+        } catch (error) {
+            console.error('Unable to load the React demo:', error);
+            document.querySelector('#app').textContent = 'Could not load the demo. Check your connection and reload.';
+        }
+    </script>
+</body>
+</html>

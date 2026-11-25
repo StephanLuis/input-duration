@@ -1,5 +1,6 @@
 out/
 Tests/
+packages/
 readme/
 .gitpod.Dockerfile
 .gitpod.yml

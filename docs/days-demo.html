@@ -140,6 +140,7 @@
             when an edited field is committed (for example, when you move to another field).
             Hours roll over at 24.
         </p>
+        <p id="module-status" class="note" role="status">Loading the component...</p>
 
         <label id="duration-label" for="duration">Duration</label>
         <input-duration id="duration" show-days aria-labelledby="duration-label" value="2:03:04:05.006"></input-duration>
@@ -172,19 +173,28 @@
     </main>
 
     <script type="module">
-        import 'https://cdn.jsdelivr.net/npm/input-duration/+esm';
+        const status = document.querySelector('#module-status');
+        const localDemo = location.pathname === '/docs/days-demo.html';
 
-        const duration = document.querySelector('#duration');
-        const valueOutput = document.querySelector('#duration-value');
-        const friendlyOutput = document.querySelector('#friendly-value');
+        try {
+            await import(localDemo ? '../index.js' : 'https://cdn.jsdelivr.net/npm/input-duration/+esm');
+            status.textContent = localDemo ? 'Using the local workspace version.' : 'Using the published npm version.';
 
-        function updateValues() {
-            valueOutput.textContent = duration.value;
-            friendlyOutput.textContent = duration.dayFriendlyValue;
+            const duration = document.querySelector('#duration');
+            const valueOutput = document.querySelector('#duration-value');
+            const friendlyOutput = document.querySelector('#friendly-value');
+
+            function updateValues() {
+                valueOutput.textContent = duration.value;
+                friendlyOutput.textContent = duration.dayFriendlyValue;
+            }
+
+            updateValues();
+            duration.addEventListener('change', updateValues);
+        } catch (error) {
+            console.error('Unable to load input-duration:', error);
+            status.textContent = 'Could not load the component. Check the console and reload.';
         }
-
-        updateValues();
-        duration.addEventListener('change', updateValues);
     </script>
 </body>
 
