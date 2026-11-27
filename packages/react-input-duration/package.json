@@ -1,6 +1,6 @@
 {
   "name": "@stephanluis/react-input-duration",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "React wrapper for the input-duration web component.",
   "keywords": [
     "react",
