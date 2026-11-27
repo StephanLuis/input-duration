@@ -1,7 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import Countdown from 'https://esm.sh/react-countdown@2.3.6?external=react,react-dom';
-import 'https://cdn.jsdelivr.net/npm/input-duration@3.5.2/+esm';
+import 'https://cdn.jsdelivr.net/npm/input-duration@4.0.0/+esm';
 import { durationInMilliseconds, durationValue } from './duration.js';
 
 const h = React.createElement;

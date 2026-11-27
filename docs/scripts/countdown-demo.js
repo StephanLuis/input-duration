@@ -1,6 +1,6 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import 'https://cdn.jsdelivr.net/npm/input-duration@3.5.2/+esm';
+import 'https://cdn.jsdelivr.net/npm/input-duration@4.0.0/+esm';
 import { durationInMilliseconds } from './duration.js';
 
 const h = React.createElement;

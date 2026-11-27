@@ -177,7 +177,7 @@
         const localDemo = location.pathname === '/docs/days-demo.html';
 
         try {
-            await import(localDemo ? '../index.js' : 'https://cdn.jsdelivr.net/npm/input-duration/+esm');
+            await import(localDemo ? '../index.js' : 'https://cdn.jsdelivr.net/npm/input-duration@4.0.0/+esm');
             status.textContent = localDemo ? 'Using the local workspace version.' : 'Using the published npm version.';
 
             const duration = document.querySelector('#duration');
