@@ -101,6 +101,13 @@ test('replacing callbacks uses the latest callback', async () => {
     assert.deepEqual(changes, ['08:08:09.010']);
 });
 
+test('tabThrough toggles the tab-through attribute', async () => {
+    const element = await render({ tabThrough: true });
+    assert.equal(element.hasAttribute('tab-through'), true);
+    await render({ tabThrough: false });
+    assert.equal(element.hasAttribute('tab-through'), false);
+});
+
 test('a React state update accepts an edit in controlled mode', async () => {
     function Example() {
         const [value, setValue] = React.useState('01:02:03.004');

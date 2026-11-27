@@ -735,6 +735,48 @@ test('last visible seconds and hours fields blur after two digits', () => {
     assert.equal(hoursElement.shadowRoot.activeElement, null);
 });
 
+test('Enter finishes editing from any visible field', () => {
+    const element = createInputDuration();
+    element.setAttribute('show-days', '');
+    for (const selector of ['.sD', '.sH', '.sM', '.sS', '.sMS']) {
+        const field = element.shadowRoot.querySelector(selector);
+        field.focus();
+        const event = new window.KeyboardEvent('keydown', { key: 'Enter', bubbles: true, cancelable: true });
+        field.dispatchEvent(event);
+        assert.equal(event.defaultPrevented, true);
+        assert.equal(element.shadowRoot.activeElement, null);
+    }
+});
+
+test('Tab finishes only from the last visible field unless tab-through is set', () => {
+    const element = createInputDuration();
+    const hours = element.shadowRoot.querySelector('.sH');
+    const milliseconds = element.shadowRoot.querySelector('.sMS');
+    const tab = (field, options = {}) => {
+        field.focus();
+        const event = new window.KeyboardEvent('keydown', { key: 'Tab', bubbles: true, cancelable: true, ...options });
+        field.dispatchEvent(event);
+        return event;
+    };
+    assert.equal(tab(hours).defaultPrevented, false);
+    assert.equal(tab(milliseconds, { shiftKey: true }).defaultPrevented, false);
+    assert.equal(element.shadowRoot.activeElement, milliseconds);
+    assert.equal(tab(milliseconds).defaultPrevented, true);
+    assert.equal(element.shadowRoot.activeElement, null);
+    element.setAttribute('tab-through', '');
+    assert.equal(tab(milliseconds).defaultPrevented, false);
+    assert.equal(element.shadowRoot.activeElement, milliseconds);
+    const enter = new window.KeyboardEvent('keydown', { key: 'Enter', bubbles: true, cancelable: true });
+    milliseconds.dispatchEvent(enter);
+    assert.equal(enter.defaultPrevented, true);
+    assert.equal(element.shadowRoot.activeElement, null);
+    element.removeAttribute('tab-through');
+    element.setAttribute('no-microseconds', '');
+    const seconds = element.shadowRoot.querySelector('.sS');
+    assert.equal(tab(seconds).defaultPrevented, true);
+    assert.equal(element.shadowRoot.activeElement, null);
+});
+
 test('single digits 6 through 9 complete seconds when milliseconds are hidden', () => {
     for (const digit of ['6', '7', '8', '9']) {
         const element = createInputDuration();

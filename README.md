@@ -95,6 +95,11 @@ Codespace is created or rebuilt. This version matches the current Web Awesome wo
 
 `input-duration` is intended for touch and keyboard use. Typing a complete unit advances to the next unit; if that next unit is hidden, focus leaves the control. The HTML structure and displayed field order are controlled by the component; device-specific input and keyboard behavior remains native to the browser.
 
+Press Enter in any field to finish editing and commit its value without submitting a surrounding form.
+By default, forward Tab from the last visible field also finishes editing and leaves focus on the
+page rather than moving to the next control. Add the boolean `tab-through` attribute to retain
+normal Tab navigation to the next focusable element; Shift+Tab always navigates backward normally.
+
 When milliseconds are hidden, typing 6–9 in seconds completes the field immediately (for example, 7 becomes 07) and focus leaves the control.
 Pressing Down at zero leaves days at zero; hours wrap to 23 with days enabled or 99 otherwise,
 minutes and seconds wrap to 59, and milliseconds wrap to 999. Downward wrapping does not borrow

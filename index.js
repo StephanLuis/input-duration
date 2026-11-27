@@ -25,6 +25,8 @@
  * the day label. Divider values are rendered as text.
  * The days field grows to fit larger counts and has extra spacing before its
  * divider to emphasize the less-common unit.
+ * Enter finishes editing; Tab from the last visible field also finishes unless
+ * `tab-through` is present.
  * User edits update the public value and form state when the field changes,
  * after its intermediate input has been normalized.
  * The element is form-associated in supporting browsers; use `name`,
@@ -511,6 +513,7 @@ class InputDuration extends HTMLElement {
         this.add0s();
         this.addNumberLooping();
         this.addArrowKeyInput();
+        this.addFinishKeys();
         this.addNumericInput();
         this.addClicksToActivate();
         this.nonNumericBugInHTML();
@@ -612,6 +615,27 @@ class InputDuration extends HTMLElement {
 
                 }
             });
+    }
+
+    /**
+     * Finishes editing on Enter or on Tab from the last visible field.
+     * @returns {void}
+     */
+    addFinishKeys() {
+        const control = this.myElement.querySelector('.timeCase');
+        control.addEventListener('keydown', event => {
+            if (event.isComposing || event.shiftKey || event.ctrlKey || event.altKey || event.metaKey) return;
+            const field = event.target;
+            if (field !== this.myElement.activeElement || field.disabled) return;
+            const fields = [...control.querySelectorAll('input')]
+                .filter(input => input.style.display !== 'none' && !input.disabled);
+            const finishesOnTab = event.key === 'Tab' && !this.hasAttribute('tab-through')
+                && field === fields[fields.length - 1];
+            if (event.key === 'Enter' || finishesOnTab) {
+                event.preventDefault();
+                field.blur();
+            }
+        });
     }
 
 

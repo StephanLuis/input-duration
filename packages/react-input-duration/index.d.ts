@@ -13,6 +13,7 @@ export interface InputDurationProps extends Omit<HTMLAttributes<InputDurationEle
     noMinutes?: boolean;
     noSeconds?: boolean;
     noMicroseconds?: boolean;
+    tabThrough?: boolean;
     daysDivider?: string;
     hoursDivider?: string;
     minutesDivider?: string;

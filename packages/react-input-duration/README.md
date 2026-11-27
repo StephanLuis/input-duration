@@ -28,6 +28,9 @@ visible fields. Separator props are `daysDivider`, `hoursDivider`, `minutesDivid
 element, exposing its methods and properties. See the [component documentation](https://github.com/StephanLuis/input-duration#readme)
 for formats, styling, and methods.
 
+Set `tabThrough` to preserve normal Tab navigation from the final field instead of finishing
+editing with focus on the page.
+
 The browser loads and registers the web component after the wrapper mounts. Server-rendered HTML
 contains the custom element but its editable fields appear only after client-side initialization.
 
