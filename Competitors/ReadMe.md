@@ -102,6 +102,19 @@ These are possible targets for examples, wrappers, or future contribution propos
 - [PrimeReact](https://primereact.org/), [PrimeVue](https://primevue.org/), and [PrimeNG](https://primeng.org/) for React, Vue, and Angular
 - [Vuetify](https://vuetifyjs.com/) for Vue
 
+#### Duration libraries and forms
+
+These are potential integrations, not competing duration inputs:
+
+| Candidate | Integration idea | Considerations |
+| --- | --- | --- |
+| [Temporal.Duration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Temporal/Duration) | Edit durations and exchange ISO 8601 values. | Browser support is limited; calendar units, negative values, and sub-millisecond precision need explicit handling because they do not directly match this control. |
+| [Day.js Duration](https://day.js.org/docs/en/plugin/duration) | Convert between the input and Day.js duration objects. | Requires the Duration plugin; define behavior for values outside the input's supported range and precision. |
+| [Luxon Duration](https://moment.github.io/luxon/api-docs/index.html#duration) | Convert between the input and Luxon duration objects. | Define how calendar units and unsupported values are handled. |
+| [React Hook Form](https://react-hook-form.com/docs/usecontroller/controller) | Demonstrate a form integration using the React wrapper and `Controller`. | A form library, not a duration implementation; verify value, validation, focus, and reset behavior. |
+
+Prioritize React Hook Form for adoption, or Temporal.Duration for a duration-focused integration.
+
 ### Forms and Accessibility Roadmap
 
 #### HTML forms
