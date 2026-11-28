@@ -35,6 +35,51 @@ editing with focus on the page.
 The browser loads and registers the web component after the wrapper mounts. Server-rendered HTML
 contains the custom element but its editable fields appear only after client-side initialization.
 
+## React Hook Form
+
+Install `react-hook-form` separately, then use its `Controller` to connect the committed string
+value to the form:
+
+```jsx
+import { Controller, useForm } from 'react-hook-form';
+import InputDuration from '@stephanluis/react-input-duration';
+
+function DurationForm() {
+    const { control, handleSubmit, reset } = useForm({
+        defaultValues: { duration: '00:00:10.000' },
+        shouldFocusError: false,
+    });
+
+    return (
+        <form onSubmit={handleSubmit(data => console.log(data))}>
+            <label htmlFor="duration">Duration</label>
+            <Controller
+                name="duration"
+                control={control}
+                rules={{ validate: value => value !== '00:00:00.000' || 'Choose a duration greater than zero.' }}
+                render={({ field, fieldState }) => (
+                    <>
+                        <InputDuration {...field} id="duration" tabThrough
+                            aria-invalid={fieldState.invalid}
+                            aria-describedby={fieldState.error ? 'duration-error' : undefined} />
+                        {fieldState.error && <p id="duration-error" role="alert">{fieldState.error.message}</p>}
+                    </>
+                )}
+            />
+            <button type="submit">Submit</button>
+            <button type="button" onClick={() => reset()}>Reset</button>
+        </form>
+    );
+}
+```
+
+The value updates when a segment is committed, not on every keystroke. The example uses submit
+validation and disables automatic error focus because the forwarded ref points to the custom
+element, not an individual shadow-DOM field. `onBlur` can fire when focus moves between segments.
+The [React Hook Form demo source](https://github.com/StephanLuis/input-duration/tree/main/packages/react-input-duration)
+includes submission and reset; serve the repository root and open
+`/packages/react-input-duration/react-hook-form-demo.html` to try it locally.
+
 ## Development
 
 From this directory, run `npm ci` followed by `npm test` to test the wrapper and its TypeScript types.

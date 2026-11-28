@@ -397,7 +397,8 @@ Import it once in the app entry point or component file. The module registers th
 
 The optional [`@stephanluis/react-input-duration` package](https://www.npmjs.com/package/@stephanluis/react-input-duration)
 provides React-friendly props, a committed-value `onChange` callback, and TypeScript types. See the
-[React wrapper documentation](packages/react-input-duration/README.md) for installation and usage.
+[React wrapper documentation](packages/react-input-duration/README.md) for installation, usage, and a
+[React Hook Form example](packages/react-input-duration/README.md#react-hook-form).
 You can also use the web component directly:
 
 ```jsx
