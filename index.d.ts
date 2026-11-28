@@ -37,6 +37,8 @@ declare class InputDuration extends HTMLElement {
     isValidValue(value: unknown): boolean;
 }
 
+export declare function durationInMilliseconds(value: string): number;
+
 declare global {
     interface HTMLElementTagNameMap {
         'input-duration': InputDuration;

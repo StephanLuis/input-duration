@@ -1,7 +1,6 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import 'https://cdn.jsdelivr.net/npm/input-duration@4.0.0/+esm';
-import { durationInMilliseconds } from './duration.js';
+import { countdownMilliseconds } from './duration.js';
 
 const h = React.createElement;
 const durationInput = document.querySelector('#duration');
@@ -95,7 +94,7 @@ startButton.addEventListener('click', () => {
         if (!durationInput.checkValidity()) {
             throw new Error('Enter a complete duration.');
         }
-        const total = durationInMilliseconds(durationInput.value);
+        const total = countdownMilliseconds(durationInput.value);
         run += 1;
         status.textContent = 'Countdown running. Press Start again to restart with the current duration.';
         root.render(makeTimer(total, Date.now() + total));

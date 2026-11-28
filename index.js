@@ -1,3 +1,6 @@
+import { isValidDurationValue } from './validate-duration.js';
+export { durationInMilliseconds } from './duration.js';
+
 /**
  * This is jsdoc 'auto' documentation see https://jsdoc.app/
  * npm install -g jsdoc
@@ -285,26 +288,7 @@ class InputDuration extends HTMLElement {
      * @returns {boolean} Whether the value follows a supported duration format.
      */
     isValidValue(val) {
-        if (typeof val !== 'string') {
-            return false;
-        }
-
-        const parts = val.split(/[:.]/);
-        if (parts.length === 4) {
-            return /^[0-9]{2}$/.test(parts[0]) &&
-                /^[0-5][0-9]$/.test(parts[1]) &&
-                /^[0-5][0-9]$/.test(parts[2]) &&
-                /^[0-9]{3}$/.test(parts[3]);
-        }
-
-        return parts.length === 5 &&
-            /^[0-9]+$/.test(parts[0]) &&
-            Number.isSafeInteger(Number(parts[0])) &&
-            Number(parts[0]) <= Math.floor(Number.MAX_SAFE_INTEGER / 24) &&
-            /^(?:[01][0-9]|2[0-3])$/.test(parts[1]) &&
-            /^[0-5][0-9]$/.test(parts[2]) &&
-            /^[0-5][0-9]$/.test(parts[3]) &&
-            /^[0-9]{3}$/.test(parts[4]);
+        return isValidDurationValue(val);
     }
 
     /**

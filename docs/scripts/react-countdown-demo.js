@@ -1,8 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import Countdown from 'https://esm.sh/react-countdown@2.3.6?external=react,react-dom';
-import 'https://cdn.jsdelivr.net/npm/input-duration@4.0.0/+esm';
-import { durationInMilliseconds, durationValue } from './duration.js';
+import { countdownMilliseconds, durationValue } from './duration.js';
 
 const h = React.createElement;
 const duration = document.querySelector('#duration');
@@ -96,7 +95,7 @@ duration.addEventListener('focusout', event => {
     if (event.relatedTarget === duration || duration.shadowRoot.contains(event.relatedTarget)) return;
     try {
         if (!duration.checkValidity()) throw new Error('Enter a complete duration.');
-        const total = durationInMilliseconds(duration.value);
+        const total = countdownMilliseconds(duration.value);
         target = Date.now() + total;
         editor.hidden = true;
         timer.hidden = false;
@@ -108,6 +107,6 @@ duration.addEventListener('focusout', event => {
 });
 
 if (typeof Countdown !== 'function') throw new Error('The countdown component is unavailable.');
-showTimer(durationInMilliseconds(duration.value));
+showTimer(countdownMilliseconds(duration.value));
 timer.disabled = false;
 status.textContent = 'Ready. Click the timer to edit and start.';

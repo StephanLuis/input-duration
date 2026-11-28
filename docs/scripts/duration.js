@@ -1,13 +1,14 @@
-export function durationInMilliseconds(value) {
-    const match = /^(?:(\d+):)?(\d{2}):([0-5]\d):([0-5]\d)\.(\d{3})$/.exec(value);
-    if (!match) {
-        throw new Error('Enter a complete duration.');
-    }
+import { durationInMilliseconds } from 'https://cdn.jsdelivr.net/npm/input-duration@4.1.0/+esm';
 
-    const [, days = '0', hours, minutes, seconds, milliseconds] = match;
-    const total = (((Number(days) * 24 + Number(hours)) * 60 + Number(minutes)) * 60 + Number(seconds)) * 1000
-        + Number(milliseconds);
-    if (!Number.isSafeInteger(total) || total <= 0 || !Number.isFinite(new Date(Date.now() + total).getTime())) {
+export function countdownMilliseconds(value) {
+    let total;
+    try {
+        total = durationInMilliseconds(value);
+    } catch (error) {
+        if (!(error instanceof RangeError)) throw error;
+        throw new Error('Enter a duration greater than zero and within the supported date range.');
+    }
+    if (total <= 0 || !Number.isFinite(new Date(Date.now() + total).getTime())) {
         throw new Error('Enter a duration greater than zero and within the supported date range.');
     }
     return total;

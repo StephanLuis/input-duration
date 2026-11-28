@@ -123,11 +123,11 @@
         const start = document.querySelector('#start');
         const status = document.querySelector('#status');
         try {
-            const [react, reactDom, timerModule] = await Promise.all([
+            const [react, reactDom, timerModule, { countdownMilliseconds }] = await Promise.all([
                 import('react'),
                 import('react-dom/client'),
                 import('https://esm.sh/react-timer-hook@4.0.9?external=react&target=es2022'),
-                import('https://cdn.jsdelivr.net/npm/input-duration@4.0.0/+esm'),
+                import('./scripts/duration.js'),
             ]);
             const React = react.default;
             const h = React.createElement;
@@ -177,18 +177,18 @@
                     status.textContent = 'Countdown stopped. Edit the remaining time or press Start.';
                     return;
                 }
-                const match = /^(\d{2}):([0-5]\d):([0-5]\d)\.(\d{3})$/.exec(duration.value);
-                if (!duration.checkValidity() || !match) {
+                if (!duration.checkValidity()) {
                     status.textContent = 'Enter a complete duration.';
                     return;
                 }
-                const [, hours, minutes, seconds, milliseconds] = match;
-                const total = ((Number(hours) * 60 + Number(minutes)) * 60 + Number(seconds)) * 1000 + Number(milliseconds);
-                const target = Date.now() + total;
-                if (!Number.isSafeInteger(total) || total <= 0 || !Number.isFinite(new Date(target).getTime())) {
-                    status.textContent = 'Enter a duration greater than zero and within the supported date range.';
+                let total;
+                try {
+                    total = countdownMilliseconds(duration.value);
+                } catch (error) {
+                    status.textContent = error.message;
                     return;
                 }
+                const target = Date.now() + total;
                 active = { target, id: ++run };
                 duration.disabled = true;
                 start.textContent = 'Stop';
