@@ -95,7 +95,7 @@ duration.addEventListener('focusout', event => {
     if (event.relatedTarget === duration || duration.shadowRoot.contains(event.relatedTarget)) return;
     try {
         if (!duration.checkValidity()) throw new Error('Enter a complete duration.');
-        const total = countdownMilliseconds(duration.value);
+        const total = countdownMilliseconds(duration);
         target = Date.now() + total;
         editor.hidden = true;
         timer.hidden = false;
@@ -107,6 +107,6 @@ duration.addEventListener('focusout', event => {
 });
 
 if (typeof Countdown !== 'function') throw new Error('The countdown component is unavailable.');
-showTimer(countdownMilliseconds(duration.value));
+showTimer(countdownMilliseconds(duration));
 timer.disabled = false;
 status.textContent = 'Ready. Click the timer to edit and start.';

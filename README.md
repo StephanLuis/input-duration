@@ -300,18 +300,15 @@ at 23 hours also carries into days, while focus stays on hours.
 
 The read-only `.dayFriendlyValue` property returns a normalized, labeled string such as `2d 03h 04m 05.006s`, including when the days field is hidden.
 
-To convert a duration string to milliseconds:
+Read the committed duration in milliseconds:
 
 ```js
-import { durationInMilliseconds } from 'input-duration';
-
-const milliseconds = durationInMilliseconds(document.querySelector('input-duration').value);
+const milliseconds = document.querySelector('input-duration').valueAsMilliseconds;
 ```
 
-Both `HH:mm:ss.SSS` and `D:HH:mm:ss.SSS` are supported, including zero. Invalid strings throw
-`TypeError`; durations exceeding `Number.MAX_SAFE_INTEGER` milliseconds throw `RangeError`.
-For code that does not need to register the web component, import the same function from
-`input-duration/duration` instead.
+This read-only property supports both value formats, including zero, and like `.value` retains the
+last committed value while a field is being edited. Durations exceeding `Number.MAX_SAFE_INTEGER`
+milliseconds throw `RangeError`. Check validity separately when the input is required.
 
 Use `hideHours()`, `hideMinutes()`, `hideSeconds()`, and `hideMicroSeconds()` to hide fields, and the corresponding `show*()` methods to show them again. The existing `noHours()`, `noMinutes()`, `noSeconds()`, and `noMicroSeconds()` methods remain available as aliases for the `hide*()` methods. Hidden fields do not change the component's value.
 

@@ -183,7 +183,7 @@
                 }
                 let total;
                 try {
-                    total = countdownMilliseconds(duration.value);
+                    total = countdownMilliseconds(duration);
                 } catch (error) {
                     status.textContent = error.message;
                     return;

@@ -2,6 +2,7 @@ declare class InputDuration extends HTMLElement {
     static readonly formAssociated: boolean;
 
     value: string;
+    readonly valueAsMilliseconds: number;
     readonly dayFriendlyValue: string | null;
     validity: ValidityState | null;
     validationMessage: string;
@@ -36,8 +37,6 @@ declare class InputDuration extends HTMLElement {
 
     isValidValue(value: unknown): boolean;
 }
-
-export declare function durationInMilliseconds(value: string): number;
 
 declare global {
     interface HTMLElementTagNameMap {

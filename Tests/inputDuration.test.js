@@ -53,7 +53,7 @@ Object.defineProperty(HTMLElement.prototype, 'attachInternals', {
     }
 });
 
-const { default: InputDuration, durationInMilliseconds } = await import('../index.js');
+const { default: InputDuration } = await import('../index.js');
 
 before(() => {
     assert.equal(customElements.get('input-duration'), InputDuration);
@@ -74,18 +74,30 @@ test('exports and registers the custom element class', () => {
     assert.equal(customElements.get('input-duration'), InputDuration);
 });
 
-test('converts valid duration strings to exact milliseconds', () => {
-    assert.equal(durationInMilliseconds('00:00:00.000'), 0);
-    assert.equal(durationInMilliseconds('99:59:59.999'), 359999999);
-    assert.equal(durationInMilliseconds('2:03:04:05.123'), 183845123);
-    assert.equal(durationInMilliseconds('104249991:08:59:00.991'), Number.MAX_SAFE_INTEGER);
+test('exposes the committed value as exact milliseconds', () => {
+    const element = createInputDuration();
+    for (const [value, expected] of [
+        ['00:00:00.000', 0],
+        ['99:59:59.999', 359999999],
+        ['2:03:04:05.123', 183845123],
+        ['104249991:08:59:00.991', Number.MAX_SAFE_INTEGER],
+    ]) {
+        element.value = value;
+        assert.equal(element.valueAsMilliseconds, expected);
+    }
+    element.value = '104249991:08:59:00.992';
+    assert.throws(() => element.valueAsMilliseconds, RangeError);
 });
 
-test('rejects invalid formats and durations too large for exact milliseconds', () => {
-    for (const value of ['1:02:03', '0:24:00:00.000', '00:60:00.000', '', null]) {
-        assert.throws(() => durationInMilliseconds(value), TypeError);
-    }
-    assert.throws(() => durationInMilliseconds('104249991:08:59:00.992'), RangeError);
+test('millisecond value reflects committed, not in-progress, edits', () => {
+    const element = createInputDuration();
+    element.value = '00:00:05.000';
+    const seconds = element.shadowRoot.querySelector('.sS');
+    seconds.value = '8';
+    seconds.dispatchEvent(new window.Event('input', { bubbles: true }));
+    assert.equal(element.valueAsMilliseconds, 5000);
+    seconds.dispatchEvent(new window.Event('change', { bubbles: true }));
+    assert.equal(element.valueAsMilliseconds, 8000);
 });
 
 test('setting value updates the controls synchronously', () => {

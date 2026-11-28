@@ -1,5 +1,4 @@
 import { isValidDurationValue } from './validate-duration.js';
-export { durationInMilliseconds } from './duration.js';
 
 /**
  * This is jsdoc 'auto' documentation see https://jsdoc.app/
@@ -138,6 +137,24 @@ class InputDuration extends HTMLElement {
 
     get value() {
         return this.committedValue ?? this.readInputValue();
+    }
+
+    /**
+     * Gets the committed duration as an exact number of milliseconds.
+     * @returns {number} Duration in milliseconds.
+     */
+    get valueAsMilliseconds() {
+        const value = this.value;
+        if (!this.isValidValue(value)) throw new TypeError('Enter a complete duration.');
+        const parts = value.split(/[:.]/);
+        const [days, hours, minutes, seconds, milliseconds] = parts.length === 5
+            ? parts.map(Number)
+            : [0, ...parts.map(Number)];
+        const total = (((days * 24 + hours) * 60 + minutes) * 60 + seconds) * 1000 + milliseconds;
+        if (!Number.isSafeInteger(total)) {
+            throw new RangeError('Duration exceeds the safe integer range in milliseconds.');
+        }
+        return total;
     }
 
     /**

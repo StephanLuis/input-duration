@@ -94,7 +94,7 @@ startButton.addEventListener('click', () => {
         if (!durationInput.checkValidity()) {
             throw new Error('Enter a complete duration.');
         }
-        const total = countdownMilliseconds(durationInput.value);
+        const total = countdownMilliseconds(durationInput);
         run += 1;
         status.textContent = 'Countdown running. Press Start again to restart with the current duration.';
         root.render(makeTimer(total, Date.now() + total));

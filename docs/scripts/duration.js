@@ -1,9 +1,9 @@
-import { durationInMilliseconds } from 'https://cdn.jsdelivr.net/npm/input-duration@4.1.0/+esm';
+import 'https://cdn.jsdelivr.net/npm/input-duration@5.0.0/+esm';
 
-export function countdownMilliseconds(value) {
+export function countdownMilliseconds(element) {
     let total;
     try {
-        total = durationInMilliseconds(value);
+        total = element.valueAsMilliseconds;
     } catch (error) {
         if (!(error instanceof RangeError)) throw error;
         throw new Error('Enter a duration greater than zero and within the supported date range.');

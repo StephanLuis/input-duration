@@ -80,7 +80,7 @@ duration.addEventListener('focusout', event => {
     if (event.relatedTarget === duration || duration.shadowRoot.contains(event.relatedTarget)) return;
     try {
         if (!duration.checkValidity()) throw new Error('Enter a complete duration.');
-        const total = countdownMilliseconds(duration.value);
+        const total = countdownMilliseconds(duration);
         editor.hidden = true;
         display.classList.remove('editing');
         edit.hidden = false;
@@ -93,7 +93,7 @@ duration.addEventListener('focusout', event => {
 });
 
 if (typeof CountdownCircleTimer !== 'function') throw new Error('The circle timer component is unavailable.');
-const total = countdownMilliseconds(duration.value);
+const total = countdownMilliseconds(duration);
 current = { id: ++run, total, remaining: total, playing: false };
 showTimer();
 edit.disabled = false;
