@@ -65,11 +65,13 @@ test('uncontrolled edits report committed values and preserve them across render
     });
     assert.equal(ref.current, element);
     assert.equal(element.value, '0:01:02:03.004');
+    assert.equal(ref.current.valueAsMilliseconds, 3723004);
     assert.equal(element.getAttribute('minutes-divider'), '/');
     assert.equal(element.getAttribute('name'), 'duration');
     assert.equal(element.getAttribute('aria-label'), 'Duration');
     await editHours(element, '05');
     assert.deepEqual(changes, ['0:05:02:03.004']);
+    assert.equal(ref.current.valueAsMilliseconds, 18123004);
     await render({ defaultValue: '01:02:03.004', showDays: true });
     assert.equal(element.value, '0:05:02:03.004');
 });

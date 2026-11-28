@@ -27,6 +27,7 @@ visible fields. Separator props are `daysDivider`, `hoursDivider`, `minutesDivid
 `disabled`, `className`, and `aria-label` are supported. A ref points to the underlying custom
 element, exposing its methods and properties. See the [component documentation](https://github.com/StephanLuis/input-duration#readme)
 for formats, styling, and methods.
+Read `ref.current.valueAsMilliseconds` for the committed duration as a number of milliseconds.
 
 Set `tabThrough` to preserve normal Tab navigation from the final field instead of finishing
 editing with focus on the page.

@@ -1,6 +1,6 @@
 {
   "name": "@stephanluis/react-input-duration",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "React wrapper for the input-duration web component.",
   "keywords": [
     "react",
@@ -34,7 +34,7 @@
     "test": "node --test test/*.test.js && tsc --noEmit -p test/tsconfig.json"
   },
   "dependencies": {
-    "input-duration": "^4.0.0"
+    "input-duration": "^5.0.0"
   },
   "peerDependencies": {
     "react": "^18.2.0 || ^19.0.0"
